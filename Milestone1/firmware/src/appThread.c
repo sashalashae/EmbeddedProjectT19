@@ -62,23 +62,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 // *****************************************************************************
-/* Application Data
-
-  Summary:
-    Holds application data
-
-  Description:
-    This structure holds the application's data.
-
-  Remarks:
-    This structure should be initialized by the APP_Initialize function.
-    
-    Application strings and buffers are be defined outside this structure.
-*/
-
-APPTHREAD_DATA appthreadData;
-
-// *****************************************************************************
 // *****************************************************************************
 // Section: Application Callback Functions
 // *****************************************************************************
@@ -114,13 +97,6 @@ APPTHREAD_DATA appthreadData;
 
 void APPTHREAD_Initialize ( void )
 {
-    /* Place the App state machine in its initial state. */
-    appthreadData.state = APPTHREAD_STATE_INIT;
-
-    
-    /* TODO: Initialize your application's state machine and other
-     * parameters.
-     */
 }
 
 
@@ -134,43 +110,11 @@ void APPTHREAD_Initialize ( void )
 
 void APPTHREAD_Tasks ( void )
 {
-
-    /* Check the application's current state. */
-    switch ( appthreadData.state )
+    while(1)
     {
-        /* Application's initial state. */
-        case APPTHREAD_STATE_INIT:
-        {
-            bool appInitialized = true;
-       
         
-            if (appInitialized)
-            {
-            
-                appthreadData.state = APPTHREAD_STATE_SERVICE_TASKS;
-            }
-            break;
-        }
-
-        case APPTHREAD_STATE_SERVICE_TASKS:
-        {
-        
-            break;
-        }
-
-        /* TODO: implement your application state machine.*/
-        
-
-        /* The default state should never be executed. */
-        default:
-        {
-            /* TODO: Handle error in application's state machine. */
-            break;
-        }
     }
 }
-
- 
 
 /*******************************************************************************
  End of File
