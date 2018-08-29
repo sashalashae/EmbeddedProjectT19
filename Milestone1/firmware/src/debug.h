@@ -9,6 +9,7 @@
 #define _DEBUG_H
 
 #include <stdint.h>
+#include "system_config.h"
 
 /*
  * Function Headers
