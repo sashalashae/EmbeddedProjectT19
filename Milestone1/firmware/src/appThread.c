@@ -54,8 +54,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 #include "appthread.h"
-#include "sensor_state.h"
-#include "sensor_queue.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -119,10 +117,11 @@ void APPTHREAD_Tasks ( void )
     //Variable initialization for the task
     SensorState currentState = Sample0;
     SensorState nextState;
+    QueueData currentData;
+    uint32_t dataAverage;
     
-    //Start the ADC
+    //Initialize the ADC
     DRV_ADC_Open();
-    DRV_ADC_Start();
     
     //Start the timer
     DRV_TMR0_Start();
@@ -130,6 +129,13 @@ void APPTHREAD_Tasks ( void )
     //Loop
     while(1)
     {
+        //Wait for data to be available in the queue
+        
+        currentData.sensorData = 123;
+        //Send queue data to the state machine function
+        sensor_state_machine(currentState, &nextState, currentData, &dataAverage);
+        //Update the current state
+        currentState = nextState;
     }
 }
 

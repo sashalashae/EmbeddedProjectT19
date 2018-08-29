@@ -18,6 +18,12 @@
                 <logicalFolder name="f2" displayName="tmr" projectFiles="true">
                   <itemPath>../src/system_config/default/framework/driver/tmr/drv_tmr_static.h</itemPath>
                 </logicalFolder>
+                <logicalFolder name="f3" displayName="usart" projectFiles="true">
+                  <logicalFolder name="f1" displayName="src" projectFiles="true">
+                    <itemPath>../src/system_config/default/framework/driver/usart/src/drv_usart_static_local.h</itemPath>
+                  </logicalFolder>
+                  <itemPath>../src/system_config/default/framework/driver/usart/drv_usart_static.h</itemPath>
+                </logicalFolder>
               </logicalFolder>
               <logicalFolder name="f2" displayName="system" projectFiles="true">
                 <logicalFolder name="f1" displayName="devcon" projectFiles="true">
@@ -46,38 +52,49 @@
             <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/driver/tmr/drv_tmr_compatibility.h</itemPath>
             <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/driver/tmr/tmr_definitions_pic32m.h</itemPath>
           </logicalFolder>
+          <logicalFolder name="f2" displayName="usart" projectFiles="true">
+            <logicalFolder name="f1" displayName="src" projectFiles="true">
+              <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/driver/usart/src/drv_usart_variant_mapping.h</itemPath>
+            </logicalFolder>
+            <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/driver/usart/drv_usart.h</itemPath>
+            <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/driver/usart/drv_usart_definitions.h</itemPath>
+          </logicalFolder>
           <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/driver/driver.h</itemPath>
           <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/driver/driver_common.h</itemPath>
         </logicalFolder>
-        <logicalFolder name="f2" displayName="osal" projectFiles="true">
+        <logicalFolder name="f3" displayName="osal" projectFiles="true">
           <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/osal/osal.h</itemPath>
           <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/osal/osal_definitions.h</itemPath>
           <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/osal/osal_freertos.h</itemPath>
           <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/osal/osal_impl_basic.h</itemPath>
         </logicalFolder>
-        <logicalFolder name="f3" displayName="system" projectFiles="true">
-          <logicalFolder name="f2" displayName="clk" projectFiles="true">
+        <logicalFolder name="f2" displayName="system" projectFiles="true">
+          <logicalFolder name="f4" displayName="clk" projectFiles="true">
             <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/system/clk/sys_clk.h</itemPath>
             <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/system/clk/sys_clk_compatibility.h</itemPath>
             <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/system/clk/sys_clk_mapping.h</itemPath>
           </logicalFolder>
-          <logicalFolder name="f1" displayName="common" projectFiles="true">
+          <logicalFolder name="f3" displayName="common" projectFiles="true">
             <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_common.h</itemPath>
             <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_module.h</itemPath>
             <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_buffer.h</itemPath>
             <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_queue.h</itemPath>
           </logicalFolder>
-          <logicalFolder name="f4" displayName="debug" projectFiles="true">
+          <logicalFolder name="f6" displayName="debug" projectFiles="true">
             <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/system/debug/sys_debug.h</itemPath>
           </logicalFolder>
-          <logicalFolder name="f5" displayName="int" projectFiles="true">
+          <logicalFolder name="f1" displayName="dma" projectFiles="true">
+            <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/system/dma/sys_dma.h</itemPath>
+            <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/system/dma/sys_dma_definitions.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="f2" displayName="int" projectFiles="true">
             <logicalFolder name="f1" displayName="src" projectFiles="true">
               <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/system/int/src/sys_int_private.h</itemPath>
             </logicalFolder>
             <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/system/int/sys_int.h</itemPath>
             <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/system/int/sys_int_mapping.h</itemPath>
           </logicalFolder>
-          <logicalFolder name="f3" displayName="ports" projectFiles="true">
+          <logicalFolder name="f5" displayName="ports" projectFiles="true">
             <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports.h</itemPath>
             <itemPath>../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports_definitions.h</itemPath>
           </logicalFolder>
@@ -138,6 +155,13 @@
                   <logicalFolder name="f1" displayName="src" projectFiles="true">
                     <itemPath>../src/system_config/default/framework/driver/tmr/src/drv_tmr_static.c</itemPath>
                     <itemPath>../src/system_config/default/framework/driver/tmr/src/drv_tmr_mapping.c</itemPath>
+                  </logicalFolder>
+                </logicalFolder>
+                <logicalFolder name="f3" displayName="usart" projectFiles="true">
+                  <logicalFolder name="f1" displayName="src" projectFiles="true">
+                    <itemPath>../src/system_config/default/framework/driver/usart/src/drv_usart_mapping.c</itemPath>
+                    <itemPath>../src/system_config/default/framework/driver/usart/src/drv_usart_static.c</itemPath>
+                    <itemPath>../src/system_config/default/framework/driver/usart/src/drv_usart_static_byte_model.c</itemPath>
                   </logicalFolder>
                 </logicalFolder>
               </logicalFolder>
@@ -277,7 +301,7 @@
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
         <property key="make-warnings-into-errors" value="false"/>
-        <property key="optimization-level" value=""/>
+        <property key="optimization-level" value="-O1"/>
         <property key="place-data-into-section" value="false"/>
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
@@ -444,6 +468,7 @@
         <property key="UART6" value="true"/>
         <property key="USB" value="true"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>

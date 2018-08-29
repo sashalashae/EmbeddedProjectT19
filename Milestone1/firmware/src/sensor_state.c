@@ -1,7 +1,3 @@
-
-#include "sensor_queue.h"
-#include "sensor_state.h"
-
 /* ************************************************************************** */
 // Filename:    sensor_state.c 
 // Date:        8/27/2018 
@@ -9,6 +5,8 @@
 // Description: Implements a state machine to read sensor data from the ADC and 
 //              average that data over five polling cycles.
 /* ************************************************************************** */
+
+#include "sensor_state.h"
 
 void sensor_state_machine(SensorState currentState, SensorState *nextState, QueueData currentData, uint32_t *runningAverage)
 {
