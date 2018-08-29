@@ -61,7 +61,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 // *****************************************************************************
 
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Callback Functions
@@ -98,6 +97,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 void APPTHREAD_Initialize ( void )
 {
+    //Configure LED pin to act as output
+    SYS_PORTS_PinDirectionSelect(PORTS_ID_0, SYS_PORTS_DIRECTION_OUTPUT, PORT_CHANNEL_A, PORTS_BIT_POS_3);
+    //Set USER LED on
+    SYS_PORTS_PinSet(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
 }
 
 
@@ -111,6 +114,12 @@ void APPTHREAD_Initialize ( void )
 
 void APPTHREAD_Tasks ( void )
 {
+    //Start the timer
+    DRV_TMR0_Start();
+    while(1)
+    {
+        
+    }
 }
 
 /*******************************************************************************

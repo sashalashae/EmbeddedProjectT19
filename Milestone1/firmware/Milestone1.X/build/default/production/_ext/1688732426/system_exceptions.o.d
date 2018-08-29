@@ -117,6 +117,62 @@ build/default/production/_ext/1688732426/system_exceptions.o:  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/int/processor/../templates/int_VariableOffset_Unsupported.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/int/processor/../templates/int_SoftwareNMI_Unsupported.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/int/sys_int_mapping.h  \
+ ../src/system_config/default/framework/driver/adc/drv_adc_static.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/plib_adc.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/adc_processor.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/adc_p32xxxx.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/adc_p32mx795f512l.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_EnableControl_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_registers.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_StopInIdle_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_CalibrationControl_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_MuxInputScanSelect_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_MuxInputScanSelectExtended_Unsupported.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_VoltageReference_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_MuxChannel0PositiveInput_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_MuxChannel0NegativeInput_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_MuxInputScanControl_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_SamplingModeControl_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_SamplesPerInterruptSelect_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_SamplingAutoStart_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_SamplingControl_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_SamplingAcquisitionTime_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_SamplingStatus_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_ConversionControl_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_ConversionClock_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_ConversionClockSource_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_ConversionTriggerSource_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_ConversionStopSequenceControl_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_ConversionStatus_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_ResultFormat_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_ResultBufferMode_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_ResultBufferFillStatus_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/adc/processor/../templates/adc_ResultGetByIndex_Default.h  \
+ ../src/system_config/default/framework/driver/tmr/drv_tmr_static.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/driver/tmr/drv_tmr.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/driver/driver_common.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/plib_tmr.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/tmr_processor.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/tmr_p32xxxx.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/tmr_p32mx795f512l.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_GatedTimeAccumulation_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_registers.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_ClockSource_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_Prescale_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_ClockSourceSync_Inverted.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_Mode16Bit_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_Mode32Bit_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_EnableControl_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_StopInIdle_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_Counter16Bit_In16BitRegister.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_Counter32Bit_In16BitRegister.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_Period16Bit_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_Period32Bit_In16BitRegister_pic32.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_CounterAsyncWriteControl_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_CounterAsyncWriteInProgress_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_TimerOperationMode_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/driver/tmr/tmr_definitions_pic32m.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/driver/tmr/drv_tmr_compatibility.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports_definitions.h  \
  ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/FreeRTOS.h  \
