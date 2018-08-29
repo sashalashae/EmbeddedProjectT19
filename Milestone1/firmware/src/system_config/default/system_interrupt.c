@@ -72,7 +72,11 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 void IntHandlerDrvTmrInstance0(void)
 {
-    SYS_PORTS_PinToggle(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
+    uint32_t sensorValue;
+    char unitString[32] = "Units\0";
+    //Read value in from the ADC
+    sensorValue = DRV_ADC_SamplesRead(0);
+    //Add to message queue
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_2);
 }
  /*******************************************************************************
