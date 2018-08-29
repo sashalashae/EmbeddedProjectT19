@@ -74,6 +74,10 @@ void IntHandlerDrvTmrInstance0(void)
     uint32_t sensorValue;
     char *unitString = "cm\0";
     QueueData newSample;
+    
+    //Send ISR start message over GPIO
+    dbgOutputLoc(DLOC_TIMER_ISR_START);
+    
     //start a new sample
     DRV_ADC_Start();
     //Wait for ADC value to be available
@@ -94,6 +98,9 @@ void IntHandlerDrvTmrInstance0(void)
     //Add to message queue
     //Clear interrupt flag
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_2);
+    
+    //Send ISR end message over GPIO
+    dbgOutputLoc(DLOC_TIMER_ISR_END);
 }
  /*******************************************************************************
  End of File

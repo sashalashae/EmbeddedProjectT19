@@ -292,4 +292,5 @@ build/default/debug/_ext/1688732426/system_tasks.o:  \
  ../src/appthread.h  \
 ../src/system_config/default/system_definitions.h  \
  ../src/sensor_state.h  \
-../src/sensor_queue.h 
+../src/sensor_queue.h  \
+../src/debug.h 

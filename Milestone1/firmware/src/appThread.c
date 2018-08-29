@@ -167,7 +167,7 @@ void APPTHREAD_Tasks ( void )
     {
         //Wait for data to be available in the queue
         
-        currentData.sensorData = 123;
+        currentData.sensorData = 10;
         //Send queue data to the state machine function
         sensor_state_machine(currentState, &nextState, currentData, &dataAverage);
         //Update the current state

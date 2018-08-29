@@ -42,7 +42,7 @@ void dbgOutputLoc(uint32_t outVal)
     
     //Toggle pin 53
     SYS_PORTS_PinToggle(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_9);
-    //Write values to rest of pins in output value group
+    //Write values to rest of pins in output location group
     SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_8, ((outVal & 0x40) >> 6));
     SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, PORTS_BIT_POS_11, ((outVal & 0x20) >> 5));
     SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, PORTS_BIT_POS_6, ((outVal & 0x10) >> 4));
