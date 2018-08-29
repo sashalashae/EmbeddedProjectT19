@@ -118,6 +118,11 @@ void APPTHREAD_Tasks ( void )
 {
     //Variable initialization for the task
     SensorState currentState = Sample0;
+    SensorState nextState;
+    
+    //Start the ADC
+    DRV_ADC_Open();
+    DRV_ADC_Start();
     
     //Start the timer
     DRV_TMR0_Start();

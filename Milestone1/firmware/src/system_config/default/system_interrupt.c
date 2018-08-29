@@ -73,10 +73,13 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 void IntHandlerDrvTmrInstance0(void)
 {
     uint32_t sensorValue;
-    char unitString[32] = "Units\0";
-    //Read value in from the ADC
+    char unitString[32] = "Units";
+    //Wait for ADC value to be available
+    while(!DRV_ADC_SamplesAvailable());
+    //Read in value from the ADC
     sensorValue = DRV_ADC_SamplesRead(0);
     //Add to message queue
+    //Clear interrupt flag
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_2);
 }
  /*******************************************************************************

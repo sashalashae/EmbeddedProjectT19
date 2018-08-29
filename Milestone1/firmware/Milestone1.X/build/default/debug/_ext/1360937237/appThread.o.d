@@ -184,4 +184,6 @@ build/default/debug/_ext/1360937237/appThread.o:  \
  ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
  ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/list.h  \
- ../src/appthread.h 
+ ../src/appthread.h  \
+../src/sensor_state.h  \
+../src/sensor_queue.h 
