@@ -14,6 +14,7 @@ void sensor_state_machine(SensorState currentState, SensorState *nextState, Queu
     {
         case Sample0:
             //Print message over GPIO
+            dbgOutputVal(currentData.sensorData);
             //Update running average counter
             (*runningAverage) = currentData.sensorData;
             //Move to next state
@@ -22,6 +23,7 @@ void sensor_state_machine(SensorState currentState, SensorState *nextState, Queu
         
         case Sample1:
             //Print message over GPIO
+            dbgOutputVal(currentData.sensorData);
             //Update running average counter
             (*runningAverage) += currentData.sensorData;
             //Move to next state
@@ -30,6 +32,7 @@ void sensor_state_machine(SensorState currentState, SensorState *nextState, Queu
         
         case Sample2:
             //Print message over GPIO
+            dbgOutputVal(currentData.sensorData);
             //Update running average counter
             (*runningAverage) += currentData.sensorData;
             //Move to next state
@@ -38,6 +41,7 @@ void sensor_state_machine(SensorState currentState, SensorState *nextState, Queu
             
         case Sample3:
             //Print message over GPIO
+            dbgOutputVal(currentData.sensorData);
             //Update running average counter
             (*runningAverage) += currentData.sensorData;
             //Move to next state
@@ -46,10 +50,12 @@ void sensor_state_machine(SensorState currentState, SensorState *nextState, Queu
             
         case Sample4:
             //Print message over GPIO
+            dbgOutputVal(currentData.sensorData);
             //Calculate average for all five samples
             (*runningAverage) += currentData.sensorData;
             (*runningAverage) = (*runningAverage) / 5;
             //Print average over UART
+            UARTWriteByte((*runningAverage));
             //Move to next state
             (*nextState) = Sample0;
             break;
