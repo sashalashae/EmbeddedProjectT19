@@ -54,7 +54,7 @@ void dbgOutputVal(uint32_t outVal)
   Precondition:
 
   Parameters:
-    None.
+    unsigned char outVal: The value to send over UART
 
   Returns:
     None.
