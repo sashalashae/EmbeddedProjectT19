@@ -155,6 +155,7 @@ void APPTHREAD_Tasks ( void )
     SensorState nextState;
     QueueData currentData;
     uint32_t dataAverage;
+    uint8_t loopCounter;
     
     //Initialize the ADC
     DRV_ADC_Open();
@@ -163,6 +164,7 @@ void APPTHREAD_Tasks ( void )
     DRV_TMR0_Start();
    
     //Loop
+    loopCounter = 0;
     while(1)
     {
         //Wait for data to be available in the queue
@@ -172,6 +174,11 @@ void APPTHREAD_Tasks ( void )
         sensor_state_machine(currentState, &nextState, currentData, &dataAverage);
         //Update the current state
         currentState = nextState;
+        
+        while(PLIB_USART_TransmitterBufferIsFull(_UART1B_BASE_ADDRESS));
+        /* Send one byte */
+        PLIB_USART_TransmitterByteSend(_UART1B_BASE_ADDRESS, loopCounter);
+        loopCounter++;
     }
 }
 

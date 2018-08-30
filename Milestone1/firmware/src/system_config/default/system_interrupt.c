@@ -70,7 +70,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 void IntHandlerDrvTmrInstance0(void)
-{
+{   
     uint32_t sensorValue;
     char *unitString = "cm\0";
     QueueData newSample;

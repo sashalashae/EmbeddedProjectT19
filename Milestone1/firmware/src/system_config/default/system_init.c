@@ -99,8 +99,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // Section: Driver Initialization Data
 // *****************************************************************************
 // *****************************************************************************
-// <editor-fold defaultstate="collapsed" desc="DRV_USART Initialization Data">
-// </editor-fold>
 
 // *****************************************************************************
 // *****************************************************************************
@@ -128,6 +126,24 @@ SYSTEM_OBJECTS sysObj;
 // Section: System Initialization
 // *****************************************************************************
 // *****************************************************************************
+
+void UARTInitialize()
+{
+    uint32_t clockFreq;
+    
+    //Initially disable UART module
+    USART_Disable_Default(_UART1B_BASE_ADDRESS);
+    //Initialize
+    USART_InitializeModeGeneral_Default(_UART1B_BASE_ADDRESS, false, false, false, false, false);
+    //Set line control
+    USART_LineControlModeSelect_RXandTXCombined(_UART1B_BASE_ADDRESS, USART_8N1);
+    //Get the system clock frequency
+    clockFreq = SYS_CLK_PeripheralFrequencyGet(CLK_BUS_PERIPHERAL_1);
+    //Set the baud rate
+    USART_BaudSetAndEnable_Default(_UART1B_BASE_ADDRESS, clockFreq, 9600);
+    //Init UART
+    USART_Enable_Default(_UART1B_BASE_ADDRESS);
+}
 
 /*******************************************************************************
   Function:
@@ -158,8 +174,9 @@ void SYS_Initialize ( void* data )
 
     /*Initialize TMR0 */
     DRV_TMR0_Initialize();
- 
-     sysObj.drvUsart0 = DRV_USART_Initialize(DRV_USART_INDEX_0, (SYS_MODULE_INIT *)NULL);
+
+    /*Initialize UART1B */
+    UARTInitialize();
 
     /* Initialize System Services */
     SYS_PORTS_Initialize();
@@ -172,7 +189,6 @@ void SYS_Initialize ( void* data )
     /* Initialize the Application */
     APPTHREAD_Initialize();
 }
-
 
 /*******************************************************************************
  End of File
