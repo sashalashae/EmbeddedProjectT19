@@ -10,6 +10,7 @@
 
 #include <stdint.h>
 #include "system_config.h"
+#include "user_drivers.h"
 
 /*
  * Function Headers

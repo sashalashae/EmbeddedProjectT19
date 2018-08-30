@@ -174,10 +174,6 @@ void APPTHREAD_Tasks ( void )
         sensor_state_machine(currentState, &nextState, currentData, &dataAverage);
         //Update the current state
         currentState = nextState;
-        
-        while(PLIB_USART_TransmitterBufferIsFull(_UART1B_BASE_ADDRESS));
-        /* Send one byte */
-        PLIB_USART_TransmitterByteSend(_UART1B_BASE_ADDRESS, loopCounter);
         loopCounter++;
     }
 }

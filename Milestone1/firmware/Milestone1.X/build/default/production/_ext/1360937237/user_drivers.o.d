@@ -1,7 +1,7 @@
-build/default/production/_ext/1360937237/debug.o:  \
-../src/debug.c  \
- ../src/debug.h  \
-../src/system_config/default/system_config.h  \
+build/default/production/_ext/1360937237/user_drivers.o:  \
+ ../src/user_drivers.c  \
+../src/user_drivers.h  \
+ ../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/ports_processor.h  \
@@ -34,8 +34,7 @@ build/default/production/_ext/1360937237/debug.o:  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Unsupported.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports_compatibility.h  \
- ../src/user_drivers.h  \
-../src/system_config/default/system_definitions.h  \
+ ../src/system_config/default/system_definitions.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_common.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_module.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/devcon/sys_devcon.h  \
@@ -292,4 +291,5 @@ build/default/production/_ext/1360937237/debug.o:  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports_definitions.h  \
  ../src/appthread.h  \
 ../src/sensor_state.h  \
-../src/sensor_queue.h 
+../src/sensor_queue.h  \
+ ../src/debug.h 

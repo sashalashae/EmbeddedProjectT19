@@ -291,4 +291,5 @@ build/default/production/_ext/327000265/drv_usart_mapping.o:  \
  ../src/appthread.h  \
 ../src/sensor_state.h  \
 ../src/sensor_queue.h  \
- ../src/debug.h 
+ ../src/debug.h  \
+../src/user_drivers.h 

@@ -130,6 +130,7 @@
       <itemPath>../src/debug.h</itemPath>
       <itemPath>../src/sensor_queue.h</itemPath>
       <itemPath>../src/sensor_state.h</itemPath>
+      <itemPath>../src/user_drivers.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -232,6 +233,7 @@
       <itemPath>../src/debug.c</itemPath>
       <itemPath>../src/sensor_queue.c</itemPath>
       <itemPath>../src/sensor_state.c</itemPath>
+      <itemPath>../src/user_drivers.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

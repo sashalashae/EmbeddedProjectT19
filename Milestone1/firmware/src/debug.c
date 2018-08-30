@@ -29,7 +29,7 @@ void dbgOutputVal(uint32_t outVal)
 
 void dbgUARTVal(unsigned char outVal)
 {
-    DRV_USART0_WriteByte(outVal);
+    UARTWriteByte(outVal);
 }
 
 void dbgOutputLoc(uint32_t outVal)

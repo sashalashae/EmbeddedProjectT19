@@ -127,24 +127,6 @@ SYSTEM_OBJECTS sysObj;
 // *****************************************************************************
 // *****************************************************************************
 
-void UARTInitialize()
-{
-    uint32_t clockFreq;
-    
-    //Initially disable UART module
-    USART_Disable_Default(_UART1B_BASE_ADDRESS);
-    //Initialize
-    USART_InitializeModeGeneral_Default(_UART1B_BASE_ADDRESS, false, false, false, false, false);
-    //Set line control
-    USART_LineControlModeSelect_RXandTXCombined(_UART1B_BASE_ADDRESS, USART_8N1);
-    //Get the system clock frequency
-    clockFreq = SYS_CLK_PeripheralFrequencyGet(CLK_BUS_PERIPHERAL_1);
-    //Set the baud rate
-    USART_BaudSetAndEnable_Default(_UART1B_BASE_ADDRESS, clockFreq, 9600);
-    //Init UART
-    USART_Enable_Default(_UART1B_BASE_ADDRESS);
-}
-
 /*******************************************************************************
   Function:
     void SYS_Initialize ( void *data )
