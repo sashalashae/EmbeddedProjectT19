@@ -7,6 +7,22 @@
 
 #include "debug.h"
 
+/*******************************************************************************
+  Function:
+    void dbgOutputVal(uint32_t outVal)
+
+  Summary:
+
+  Description:
+
+  Precondition:
+
+  Parameters:
+    outVal: The value to output to the GPIO
+
+  Returns:
+    None.
+*/
 void dbgOutputVal(uint32_t outVal)
 {
     //If outval is out of range return
@@ -27,11 +43,43 @@ void dbgOutputVal(uint32_t outVal)
     SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_C, PORTS_BIT_POS_3, (outVal & 0x1));
 }
 
+/*******************************************************************************
+  Function:
+    void dbgUARTVal(unsigned char outVal)
+
+  Summary:
+
+  Description:
+
+  Precondition:
+
+  Parameters:
+    None.
+
+  Returns:
+    None.
+*/
 void dbgUARTVal(unsigned char outVal)
 {
     UARTWriteByte(outVal);
 }
 
+/*******************************************************************************
+  Function:
+    void dbgOutputLoc(uint32_t outVal)
+
+  Summary:
+
+  Description:
+
+  Precondition:
+
+  Parameters:
+    None.
+
+  Returns:
+    None.
+*/
 void dbgOutputLoc(uint32_t outVal)
 {
     //If outval is out of range return
@@ -50,4 +98,25 @@ void dbgOutputLoc(uint32_t outVal)
     SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_8, ((outVal & 0x4) >> 2));
     SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_B, PORTS_BIT_POS_13, ((outVal & 0x2) >> 1));
     SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, PORTS_BIT_POS_5, (outVal & 0x1));
+}
+
+/*******************************************************************************
+  Function:
+    void dbgErrorHandler(uint32_t errorCode)
+
+  Summary:
+
+  Description:
+
+  Precondition:
+
+  Parameters:
+    None.
+
+  Returns:
+    None.
+*/
+void dbgErrorHandler(uint32_t errorCode)
+{
+    
 }

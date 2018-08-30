@@ -22,7 +22,7 @@ void dbgUARTVal(unsigned char outVal);
 
 void dbgOutputLoc(uint32_t outVal);
 
-void dbgErrorHandler(); 
+void dbgErrorHandler(uint32_t errorCode); 
 
 /*
  * Defines for code locations
@@ -32,5 +32,11 @@ void dbgErrorHandler();
 #define DLOC_TIMER_ISR_END              1
 #define DLOC_ISR_QUEUE_START            2
 #define DLOC_ISR_QUEUE_END              3
+
+/*
+ * Defines for error codes
+ */
+
+#define ERROR_UNKNOWN                   0
 
 #endif

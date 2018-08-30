@@ -931,6 +931,8 @@ Discarded input sections
                 0x00000000       0xc4 build/default/production/_ext/1360937237/debug.o
  .text.dbgUARTVal
                 0x00000000       0x1c build/default/production/_ext/1360937237/debug.o
+ .text.dbgErrorHandler
+                0x00000000        0x8 build/default/production/_ext/1360937237/debug.o
  .text          0x00000000        0x0 build/default/production/_ext/1360937237/sensor_queue.o
  .data          0x00000000        0x0 build/default/production/_ext/1360937237/sensor_queue.o
  .bss           0x00000000        0x0 build/default/production/_ext/1360937237/sensor_queue.o
@@ -1994,7 +1996,7 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0xd80
+.debug_aranges  0x00000000      0xd88
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x68 build/default/production/_ext/74298950/bsp.o
@@ -2059,26 +2061,26 @@ END GROUP
  .debug_aranges
                 0x00000bb8       0xb0 build/default/production/_ext/1755465438/stream_buffer.o
  .debug_aranges
-                0x00000c68       0x30 build/default/production/_ext/1360937237/debug.o
+                0x00000c68       0x38 build/default/production/_ext/1360937237/debug.o
  .debug_aranges
-                0x00000c98       0x18 build/default/production/_ext/1360937237/sensor_queue.o
+                0x00000ca0       0x18 build/default/production/_ext/1360937237/sensor_queue.o
  .debug_aranges
-                0x00000cb0       0x20 build/default/production/_ext/1360937237/sensor_state.o
+                0x00000cb8       0x20 build/default/production/_ext/1360937237/sensor_state.o
  .debug_aranges
-                0x00000cd0       0x30 build/default/production/_ext/1360937237/user_drivers.o
+                0x00000cd8       0x30 build/default/production/_ext/1360937237/user_drivers.o
  .debug_aranges
-                0x00000d00       0x20 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
+                0x00000d08       0x20 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
  .debug_aranges
-                0x00000d20       0x20 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
+                0x00000d28       0x20 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
  .debug_aranges
-                0x00000d40       0x20 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
+                0x00000d48       0x20 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
  .debug_aranges
-                0x00000d60       0x20 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(defaultinterrupt.o)
+                0x00000d68       0x20 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(defaultinterrupt.o)
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000    0x2cc5b
+.debug_info     0x00000000    0x2cc93
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000     0x125e build/default/production/_ext/74298950/bsp.o
  .debug_info    0x0000125e     0x2e11 build/default/production/_ext/1361460060/drv_adc_static.o
@@ -2111,16 +2113,16 @@ END GROUP
  .debug_info    0x00027a43      0x1a0 build/default/production/_ext/1755465438/timers.o
  .debug_info    0x00027be3      0xd78 build/default/production/_ext/1755465438/event_groups.o
  .debug_info    0x0002895b     0x171e build/default/production/_ext/1755465438/stream_buffer.o
- .debug_info    0x0002a079      0xe9f build/default/production/_ext/1360937237/debug.o
- .debug_info    0x0002af18      0x12f build/default/production/_ext/1360937237/sensor_queue.o
- .debug_info    0x0002b047      0x272 build/default/production/_ext/1360937237/sensor_state.o
- .debug_info    0x0002b2b9     0x162d build/default/production/_ext/1360937237/user_drivers.o
- .debug_info    0x0002c8e6       0xf2 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
- .debug_info    0x0002c9d8       0xcb c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
- .debug_info    0x0002caa3       0xd3 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
- .debug_info    0x0002cb76       0xe5 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(defaultinterrupt.o)
+ .debug_info    0x0002a079      0xed7 build/default/production/_ext/1360937237/debug.o
+ .debug_info    0x0002af50      0x12f build/default/production/_ext/1360937237/sensor_queue.o
+ .debug_info    0x0002b07f      0x272 build/default/production/_ext/1360937237/sensor_state.o
+ .debug_info    0x0002b2f1     0x162d build/default/production/_ext/1360937237/user_drivers.o
+ .debug_info    0x0002c91e       0xf2 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
+ .debug_info    0x0002ca10       0xcb c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
+ .debug_info    0x0002cadb       0xd3 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
+ .debug_info    0x0002cbae       0xe5 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(defaultinterrupt.o)
 
-.debug_abbrev   0x00000000     0x421e
+.debug_abbrev   0x00000000     0x422d
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x28a build/default/production/_ext/74298950/bsp.o
  .debug_abbrev  0x0000028a      0x254 build/default/production/_ext/1361460060/drv_adc_static.o
@@ -2153,16 +2155,16 @@ END GROUP
  .debug_abbrev  0x0000376c       0x1b build/default/production/_ext/1755465438/timers.o
  .debug_abbrev  0x00003787      0x27d build/default/production/_ext/1755465438/event_groups.o
  .debug_abbrev  0x00003a04      0x2dd build/default/production/_ext/1755465438/stream_buffer.o
- .debug_abbrev  0x00003ce1      0x136 build/default/production/_ext/1360937237/debug.o
- .debug_abbrev  0x00003e17       0x1b build/default/production/_ext/1360937237/sensor_queue.o
- .debug_abbrev  0x00003e32       0xa1 build/default/production/_ext/1360937237/sensor_state.o
- .debug_abbrev  0x00003ed3      0x2ab build/default/production/_ext/1360937237/user_drivers.o
- .debug_abbrev  0x0000417e       0x28 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
- .debug_abbrev  0x000041a6       0x28 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
- .debug_abbrev  0x000041ce       0x28 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
- .debug_abbrev  0x000041f6       0x28 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(defaultinterrupt.o)
+ .debug_abbrev  0x00003ce1      0x145 build/default/production/_ext/1360937237/debug.o
+ .debug_abbrev  0x00003e26       0x1b build/default/production/_ext/1360937237/sensor_queue.o
+ .debug_abbrev  0x00003e41       0xa1 build/default/production/_ext/1360937237/sensor_state.o
+ .debug_abbrev  0x00003ee2      0x2ab build/default/production/_ext/1360937237/user_drivers.o
+ .debug_abbrev  0x0000418d       0x28 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
+ .debug_abbrev  0x000041b5       0x28 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
+ .debug_abbrev  0x000041dd       0x28 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
+ .debug_abbrev  0x00004205       0x28 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(defaultinterrupt.o)
 
-.debug_line     0x00000000     0x7c7c
+.debug_line     0x00000000     0x7c8d
  *(.debug_line)
  .debug_line    0x00000000      0x3af build/default/production/_ext/74298950/bsp.o
  .debug_line    0x000003af      0x633 build/default/production/_ext/1361460060/drv_adc_static.o
@@ -2195,16 +2197,16 @@ END GROUP
  .debug_line    0x00006c3b       0x1d build/default/production/_ext/1755465438/timers.o
  .debug_line    0x00006c58      0x323 build/default/production/_ext/1755465438/event_groups.o
  .debug_line    0x00006f7b      0x416 build/default/production/_ext/1755465438/stream_buffer.o
- .debug_line    0x00007391      0x217 build/default/production/_ext/1360937237/debug.o
- .debug_line    0x000075a8       0x1d build/default/production/_ext/1360937237/sensor_queue.o
- .debug_line    0x000075c5      0x113 build/default/production/_ext/1360937237/sensor_state.o
- .debug_line    0x000076d8      0x337 build/default/production/_ext/1360937237/user_drivers.o
- .debug_line    0x00007a0f       0xa4 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
- .debug_line    0x00007ab3       0x91 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
- .debug_line    0x00007b44       0x95 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
- .debug_line    0x00007bd9       0xa3 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(defaultinterrupt.o)
+ .debug_line    0x00007391      0x228 build/default/production/_ext/1360937237/debug.o
+ .debug_line    0x000075b9       0x1d build/default/production/_ext/1360937237/sensor_queue.o
+ .debug_line    0x000075d6      0x113 build/default/production/_ext/1360937237/sensor_state.o
+ .debug_line    0x000076e9      0x337 build/default/production/_ext/1360937237/user_drivers.o
+ .debug_line    0x00007a20       0xa4 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
+ .debug_line    0x00007ac4       0x91 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
+ .debug_line    0x00007b55       0x95 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
+ .debug_line    0x00007bea       0xa3 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(defaultinterrupt.o)
 
-.debug_frame    0x00000000     0x1cf0
+.debug_frame    0x00000000     0x1d00
  *(.debug_frame)
  .debug_frame   0x00000000       0xb8 build/default/production/_ext/74298950/bsp.o
  .debug_frame   0x000000b8       0xd0 build/default/production/_ext/1361460060/drv_adc_static.o
@@ -2233,13 +2235,13 @@ END GROUP
  .debug_frame   0x000013f8      0x48c build/default/production/_ext/1755465438/tasks.o
  .debug_frame   0x00001884      0x108 build/default/production/_ext/1755465438/event_groups.o
  .debug_frame   0x0000198c      0x218 build/default/production/_ext/1755465438/stream_buffer.o
- .debug_frame   0x00001ba4       0x58 build/default/production/_ext/1360937237/debug.o
- .debug_frame   0x00001bfc       0x20 build/default/production/_ext/1360937237/sensor_state.o
- .debug_frame   0x00001c1c       0x48 build/default/production/_ext/1360937237/user_drivers.o
- .debug_frame   0x00001c64       0x2c c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
- .debug_frame   0x00001c90       0x20 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
- .debug_frame   0x00001cb0       0x20 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
- .debug_frame   0x00001cd0       0x20 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(defaultinterrupt.o)
+ .debug_frame   0x00001ba4       0x68 build/default/production/_ext/1360937237/debug.o
+ .debug_frame   0x00001c0c       0x20 build/default/production/_ext/1360937237/sensor_state.o
+ .debug_frame   0x00001c2c       0x48 build/default/production/_ext/1360937237/user_drivers.o
+ .debug_frame   0x00001c74       0x2c c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
+ .debug_frame   0x00001ca0       0x20 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
+ .debug_frame   0x00001cc0       0x20 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
+ .debug_frame   0x00001ce0       0x20 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(defaultinterrupt.o)
 
 .debug_str      0x00000000      0x8a2
  *(.debug_str)
@@ -2330,7 +2332,7 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0xd60
+.debug_ranges   0x00000000      0xd68
  *(.debug_ranges)
  .debug_ranges  0x00000000      0x100 build/default/production/_ext/74298950/bsp.o
  .debug_ranges  0x00000100       0x68 build/default/production/_ext/1361460060/drv_adc_static.o
@@ -2360,13 +2362,13 @@ END GROUP
  .debug_ranges  0x00000990      0x1d8 build/default/production/_ext/1755465438/tasks.o
  .debug_ranges  0x00000b68       0x98 build/default/production/_ext/1755465438/event_groups.o
  .debug_ranges  0x00000c00       0xb8 build/default/production/_ext/1755465438/stream_buffer.o
- .debug_ranges  0x00000cb8       0x20 build/default/production/_ext/1360937237/debug.o
- .debug_ranges  0x00000cd8       0x10 build/default/production/_ext/1360937237/sensor_state.o
- .debug_ranges  0x00000ce8       0x38 build/default/production/_ext/1360937237/user_drivers.o
- .debug_ranges  0x00000d20       0x10 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
- .debug_ranges  0x00000d30       0x10 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
- .debug_ranges  0x00000d40       0x10 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
- .debug_ranges  0x00000d50       0x10 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(defaultinterrupt.o)
+ .debug_ranges  0x00000cb8       0x28 build/default/production/_ext/1360937237/debug.o
+ .debug_ranges  0x00000ce0       0x10 build/default/production/_ext/1360937237/sensor_state.o
+ .debug_ranges  0x00000cf0       0x38 build/default/production/_ext/1360937237/user_drivers.o
+ .debug_ranges  0x00000d28       0x10 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
+ .debug_ranges  0x00000d38       0x10 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
+ .debug_ranges  0x00000d48       0x10 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
+ .debug_ranges  0x00000d58       0x10 c:/program files (x86)/microchip/xc32/v2.10/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(defaultinterrupt.o)
 
 .gnu.attributes
                 0x00000000       0x10
