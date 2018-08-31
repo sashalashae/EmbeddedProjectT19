@@ -35,5 +35,10 @@ void UARTWriteByte(uint8_t data)
 
 uint32_t ReadADCData(uint8_t bufNum)
 {
-    
+    //start a new sample
+    DRV_ADC_Start();
+    //Wait for ADC value to be available
+    while(!DRV_ADC_SamplesAvailable());
+    //Read in value from the ADC
+    return DRV_ADC_SamplesRead(bufNum);
 }

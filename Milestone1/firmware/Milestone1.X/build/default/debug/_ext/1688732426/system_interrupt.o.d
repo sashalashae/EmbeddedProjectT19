@@ -292,4 +292,5 @@ build/default/debug/_ext/1688732426/system_interrupt.o:  \
  ../src/sensor_state.h  \
 ../src/sensor_queue.h  \
 ../src/debug.h  \
- ../src/system_config/default/system_definitions.h 
+ ../src/user_drivers.h  \
+../src/system_config/default/system_definitions.h 

@@ -1,6 +1,7 @@
-build/default/debug/_ext/639803181/sys_clk_pic32mx.o:  \
- ../src/system_config/default/framework/system/clk/src/sys_clk_pic32mx.c  \
- ../src/system_config/default/system_config.h  \
+build/default/debug/_ext/1360937237/user_drivers.o:  \
+../src/user_drivers.c  \
+ ../src/user_drivers.h  \
+../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/ports_processor.h  \
@@ -291,5 +292,4 @@ build/default/debug/_ext/639803181/sys_clk_pic32mx.o:  \
  ../src/appthread.h  \
 ../src/sensor_state.h  \
 ../src/sensor_queue.h  \
- ../src/debug.h  \
-../src/user_drivers.h 
+ ../src/debug.h 

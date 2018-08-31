@@ -77,13 +77,9 @@ void IntHandlerDrvTmrInstance0(void)
     
     //Send ISR start message over GPIO
     dbgOutputLoc(DLOC_TIMER_ISR_START);
-    
-    //start a new sample
-    DRV_ADC_Start();
-    //Wait for ADC value to be available
-    while(!DRV_ADC_SamplesAvailable());
+  
     //Read in value from the ADC
-    sensorValue = DRV_ADC_SamplesRead(0);
+    sensorValue = ReadADCData(0);
     if(sensorValue > 10)
     {
         SYS_PORTS_PinSet(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);

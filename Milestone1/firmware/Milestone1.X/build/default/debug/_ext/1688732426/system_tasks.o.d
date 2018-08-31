@@ -293,4 +293,5 @@ build/default/debug/_ext/1688732426/system_tasks.o:  \
 ../src/system_config/default/system_definitions.h  \
  ../src/sensor_state.h  \
 ../src/sensor_queue.h  \
-../src/debug.h 
+../src/debug.h  \
+ ../src/user_drivers.h 
