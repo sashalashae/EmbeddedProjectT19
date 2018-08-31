@@ -27,18 +27,22 @@ void UARTInitialize()
 
 void UARTWriteByte(uint8_t data)
 {
+    dbgOutputLoc(DLOC_UART_WRITE_START);
     //Wait until UART buffer is not full
     while(PLIB_USART_TransmitterBufferIsFull(_UART1B_BASE_ADDRESS));
     /* Send one byte */
     PLIB_USART_TransmitterByteSend(_UART1B_BASE_ADDRESS, data);
+    dbgOutputLoc(DLOC_UART_WRITE_END);
 }
 
 uint32_t ReadADCData(uint8_t bufNum)
 {
     //start a new sample
+    dbgOutputLoc(DLOC_ADC_START);
     DRV_ADC_Start();
     //Wait for ADC value to be available
     while(!DRV_ADC_SamplesAvailable());
     //Read in value from the ADC
+    dbgOutputLoc(DLOC_ADC_READ);
     return DRV_ADC_SamplesRead(bufNum);
 }

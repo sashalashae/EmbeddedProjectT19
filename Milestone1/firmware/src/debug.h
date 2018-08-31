@@ -30,8 +30,13 @@ void dbgErrorHandler(uint32_t errorCode);
 
 #define DLOC_TIMER_ISR_START            0
 #define DLOC_TIMER_ISR_END              1
-#define DLOC_ISR_QUEUE_START            2
-#define DLOC_ISR_QUEUE_END              3
+#define DLOC_ISR_QUEUE_SEND             2
+#define DLOC_QUEUE_RECEIVE_WAITING      3
+#define DLOC_QUEUE_RECEIVE_FINISHED     4
+#define DLOC_ADC_START                  5
+#define DLOC_ADC_READ                   6
+#define DLOC_UART_WRITE_START           7
+#define DLOC_UART_WRITE_END             8
 
 /*
  * Defines for error codes
