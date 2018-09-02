@@ -17,4 +17,6 @@ void UARTWriteByte(uint8_t data);
 
 uint32_t ReadADCData(uint8_t bufNum);
 
+uint32_t ScaleADCData(uint16_t tableNum);
+
 #endif

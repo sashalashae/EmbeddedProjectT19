@@ -46,3 +46,8 @@ uint32_t ReadADCData(uint8_t bufNum)
     dbgOutputLoc(DLOC_ADC_READ);
     return DRV_ADC_SamplesRead(bufNum);
 }
+
+uint32_t ScaleADCData(uint16_t tableNum)
+{
+    
+}
