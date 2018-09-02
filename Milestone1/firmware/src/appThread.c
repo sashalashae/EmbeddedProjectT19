@@ -137,6 +137,8 @@ void APPTHREAD_Initialize ( void )
     SYS_PORTS_PinDirectionSelect(PORTS_ID_0, SYS_PORTS_DIRECTION_OUTPUT, PORT_CHANNEL_F, PORTS_BIT_POS_3);
     //Pin 23 (LSB)
     SYS_PORTS_PinDirectionSelect(PORTS_ID_0, SYS_PORTS_DIRECTION_OUTPUT, PORT_CHANNEL_C, PORTS_BIT_POS_3);
+    
+    SensorQueue_Initialize(100);
 }
 
 
@@ -168,8 +170,9 @@ void APPTHREAD_Tasks ( void )
     while(1)
     {
         //Wait for data to be available in the queue
-        
-        currentData.sensorData = 10;
+        dbgOutputLoc(DLOC_QUEUE_RECEIVE_WAITING);
+        currentData = SensorQueue_ReceiveMsg();
+        dbgOutputLoc(DLOC_QUEUE_RECEIVE_FINISHED);
         //Send queue data to the state machine function
         sensor_state_machine(currentState, &nextState, currentData, &dataAverage);
         //Update the current state
