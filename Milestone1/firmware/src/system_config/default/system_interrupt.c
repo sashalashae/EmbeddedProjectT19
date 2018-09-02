@@ -92,6 +92,8 @@ void IntHandlerDrvTmrInstance0(void)
     newSample.units = unitString;
     newSample.sensorData = sensorValue;
     //Add to message queue
+    dbgOutputLoc(DLOC_ISR_QUEUE_SEND);
+    SensorQueue_SendMsgISR(newSample);
     //Clear interrupt flag
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_2);
     
