@@ -55,7 +55,7 @@ uint32_t ScaleADCData(uint32_t value, uint16_t tableNum)
             return table0[value];
             break;
         case 1:
-            break
+            break;
         case 2:
             break;
         case 3:
