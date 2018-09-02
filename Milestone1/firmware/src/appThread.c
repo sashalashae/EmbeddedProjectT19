@@ -123,6 +123,7 @@ void APPTHREAD_Initialize ( void )
     //Configure digital output pins (output Val)
     SYS_PORTS_DirectionSelect(PORTS_ID_0, SYS_PORTS_DIRECTION_OUTPUT, PORT_CHANNEL_E, 0xFF);
     
+    //Initialize the sensor queue
     SensorQueue_Initialize(100);
 }
 
@@ -142,7 +143,6 @@ void APPTHREAD_Tasks ( void )
     SensorState nextState;
     QueueData currentData;
     uint32_t dataAverage;
-    uint8_t loopCounter;
     
     //Initialize the ADC
     DRV_ADC_Open();
@@ -150,8 +150,7 @@ void APPTHREAD_Tasks ( void )
     //Start the timer
     DRV_TMR0_Start();
    
-    //Loop
-    loopCounter = 0;
+    //Loop forever
     while(1)
     {
         //Wait for data to be available in the queue
@@ -162,7 +161,6 @@ void APPTHREAD_Tasks ( void )
         sensor_state_machine(currentState, &nextState, currentData, &dataAverage);
         //Update the current state
         currentState = nextState;
-        loopCounter++;
     }
 }
 

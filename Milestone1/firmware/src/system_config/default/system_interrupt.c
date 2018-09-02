@@ -72,7 +72,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 void IntHandlerDrvTmrInstance0(void)
 {   
     uint32_t sensorValue;
-    char *unitString = "cm\0";
     QueueData newSample;
     
     //Send ISR start message over GPIO
@@ -80,20 +79,15 @@ void IntHandlerDrvTmrInstance0(void)
   
     //Read in value from the ADC
     sensorValue = ReadADCData(0);
-    if(sensorValue > 10)
-    {
-        SYS_PORTS_PinSet(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
-    }
-    else
-    {
-        SYS_PORTS_PinClear(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
-    }
+    
     //Build the queuedata
-    newSample.units = unitString;
+    newSample.units = "centimeters/0";
     newSample.sensorData = sensorValue;
+    
     //Add to message queue
     dbgOutputLoc(DLOC_ISR_QUEUE_SEND);
     SensorQueue_SendMsgISR(newSample);
+    
     //Clear interrupt flag
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_2);
     
