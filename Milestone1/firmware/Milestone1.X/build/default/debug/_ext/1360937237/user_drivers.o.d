@@ -292,4 +292,5 @@ build/default/debug/_ext/1360937237/user_drivers.o:  \
  ../src/appthread.h  \
 ../src/sensor_state.h  \
 ../src/sensor_queue.h  \
- ../src/debug.h 
+ ../src/debug.h  \
+../src/user_tables.h 
