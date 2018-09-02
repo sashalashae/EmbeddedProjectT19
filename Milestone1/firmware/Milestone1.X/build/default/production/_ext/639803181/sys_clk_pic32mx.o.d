@@ -292,4 +292,5 @@ build/default/production/_ext/639803181/sys_clk_pic32mx.o:  \
 ../src/sensor_state.h  \
 ../src/sensor_queue.h  \
  ../src/debug.h  \
-../src/user_drivers.h 
+../src/user_drivers.h  \
+../src/user_tables.h 
