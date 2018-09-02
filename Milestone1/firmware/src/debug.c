@@ -31,16 +31,11 @@ void dbgOutputVal(uint32_t outVal)
         return;
     }
     
-    //Toggle pin 37
-    SYS_PORTS_PinToggle(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_0);
-    //Write values to rest of pins in output value group
-    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_2, ((outVal & 0x40) >> 6));
-    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_4, ((outVal & 0x20) >> 5));
-    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_6, ((outVal & 0x10) >> 4));
-    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_7, ((outVal & 0x8) >> 3));
-    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_2, ((outVal & 0x4) >> 2));
-    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_F, PORTS_BIT_POS_3, ((outVal & 0x2) >> 1));
-    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_C, PORTS_BIT_POS_3, (outVal & 0x1));
+    //Toggle pin 30
+    SYS_PORTS_PinToggle(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_7);
+    //Write values to rest of pins in output value group (31 - 37)
+    //Pin 31 = MSB, Pin 37 = LSB
+    SYS_PORTS_Set(PORTS_ID_0, PORT_CHANNEL_E, outVal, 0x7F);
 }
 
 /*******************************************************************************
@@ -88,16 +83,16 @@ void dbgOutputLoc(uint32_t outVal)
         return;
     }
     
-    //Toggle pin 53
-    SYS_PORTS_PinToggle(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_9);
-    //Write values to rest of pins in output location group
-    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_8, ((outVal & 0x40) >> 6));
-    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, PORTS_BIT_POS_11, ((outVal & 0x20) >> 5));
-    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, PORTS_BIT_POS_6, ((outVal & 0x10) >> 4));
-    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_F, PORTS_BIT_POS_0, ((outVal & 0x8) >> 3));
+    //Toggle pin 38
+    SYS_PORTS_PinToggle(PORTS_ID_0, PORT_CHANNEL_D, PORTS_BIT_POS_10);
+    //Write values to rest of pins in output location group (39 - 45)
+    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, PORTS_BIT_POS_5, ((outVal & 0x40) >> 6));
+    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_B, PORTS_BIT_POS_11, ((outVal & 0x20) >> 5));
+    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_B, PORTS_BIT_POS_13, ((outVal & 0x10) >> 4));
+    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_B, PORTS_BIT_POS_12, ((outVal & 0x8) >> 3));
     SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_8, ((outVal & 0x4) >> 2));
-    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_B, PORTS_BIT_POS_13, ((outVal & 0x2) >> 1));
-    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, PORTS_BIT_POS_5, (outVal & 0x1));
+    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_10, ((outVal & 0x2) >> 1));
+    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_F, PORTS_BIT_POS_0, (outVal & 0x1));
 }
 
 /*******************************************************************************

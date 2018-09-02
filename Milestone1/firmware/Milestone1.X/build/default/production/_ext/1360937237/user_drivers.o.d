@@ -1,5 +1,6 @@
-build/default/debug/_ext/1688732426/system_tasks.o:  \
- ../src/system_config/default/system_tasks.c  \
+build/default/production/_ext/1360937237/user_drivers.o:  \
+ ../src/user_drivers.c  \
+../src/user_drivers.h  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports.h  \
@@ -39,7 +40,6 @@ build/default/debug/_ext/1688732426/system_tasks.o:  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/devcon/sys_devcon.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/system.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/clk/sys_clk.h  \
- ../src/system_config/default/system_config.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/plib_osc.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/osc_processor.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/osc_p32xxxx.h  \
@@ -290,9 +290,7 @@ build/default/debug/_ext/1688732426/system_tasks.o:  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports_definitions.h  \
  ../src/appthread.h  \
-../src/system_config/default/system_definitions.h  \
- ../src/sensor_state.h  \
+../src/sensor_state.h  \
 ../src/sensor_queue.h  \
-../src/debug.h  \
- ../src/user_drivers.h  \
+ ../src/debug.h  \
 ../src/user_tables.h 
