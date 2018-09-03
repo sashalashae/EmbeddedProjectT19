@@ -32,6 +32,7 @@ void dbgOutputVal(uint32_t outVal)
         dbgErrorHandler(ERROR_BOUNDS);
     }
     
+    dbgOutputLoc(DLOC_GPIO_WRITE_START);
     //Toggle pin 30
     SYS_PORTS_PinToggle(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_7);
     
@@ -44,6 +45,7 @@ void dbgOutputVal(uint32_t outVal)
     SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_2, ((outVal & 0x4) >> 2));
     SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_1, ((outVal & 0x2) >> 1));
     SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_0, (outVal & 0x1));
+    dbgOutputLoc(DLOC_GPIO_WRITE_END);
 }
 
 /*******************************************************************************

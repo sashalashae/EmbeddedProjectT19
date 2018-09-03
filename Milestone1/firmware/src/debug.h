@@ -37,6 +37,8 @@ void dbgErrorHandler(uint32_t errorCode);
 #define DLOC_ADC_READ                   6
 #define DLOC_UART_WRITE_START           7
 #define DLOC_UART_WRITE_END             8
+#define DLOC_GPIO_WRITE_START           9
+#define DLOC_GPIO_WRITE_END             10
 
 /*
  * Defines for error codes
