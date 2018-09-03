@@ -49,8 +49,8 @@ uint32_t ReadADCData(uint8_t bufNum)
 
 uint32_t ScaleADCData(uint32_t value, uint16_t tableNum)
 {
-    int i = 0;
-    int j = 0;
+    uint32_t i = 0;
+    uint32_t j = 0;
     switch(tableNum)
     {
         case 0:
