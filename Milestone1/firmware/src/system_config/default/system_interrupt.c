@@ -84,7 +84,7 @@ void IntHandlerDrvTmrInstance0(void)
     sensorValue = ScaleADCData(sensorValue, 0);
     
     //Build the queuedata
-    newSample.units = "centimeters/0";
+    newSample.units = "centimeters\0";
     newSample.sensorData = sensorValue;
     
     //Add to message queue
