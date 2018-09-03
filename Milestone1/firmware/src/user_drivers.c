@@ -49,6 +49,8 @@ uint32_t ReadADCData(uint8_t bufNum)
 
 uint32_t ScaleADCData(uint32_t value, uint16_t tableNum)
 {
+    int i = 0;
+    int j = 0;
     switch(tableNum)
     {
         case 0:
@@ -62,9 +64,9 @@ uint32_t ScaleADCData(uint32_t value, uint16_t tableNum)
             }
             break;
         case 1:
-            for(int j = 0; j < 56; j++)
+            for(j = 0; j < 56; j++)
             {
-               if((value >= table1[j] && table[j+1] <= upper) || value == table1[j])
+               if((value >= table1[j] && value <= table1[j+1]) || value == table1[j])
                {
                    return j;
                }
