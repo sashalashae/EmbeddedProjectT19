@@ -55,18 +55,12 @@ uint32_t ScaleADCData(uint32_t value, uint16_t tableNum)
     {
         case 0:
             //return table0[value];
-            for (i=0; i < 30; i++)
-            {
-                if(value > table0[i] )
-                {
-                    return i+4;
-                }
-            }
+            return table0[value];
             break;
         case 1:
             for(j = 0; j < 56; j++)
             {
-               if((value >= table1[j] && value <= table1[j+1]) || value == table1[j])
+               if(value >= table1[j] && value <= table1[j+1])
                {
                    return j;
                }
