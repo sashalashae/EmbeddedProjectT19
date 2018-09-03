@@ -80,6 +80,9 @@ void IntHandlerDrvTmrInstance0(void)
     //Read in value from the ADC
     sensorValue = ReadADCData(0);
     
+    //Convert to centimeters
+    sensorValue = ScaleADCData(sensorValue, 0);
+    
     //Build the queuedata
     newSample.units = "centimeters/0";
     newSample.sensorData = sensorValue;
