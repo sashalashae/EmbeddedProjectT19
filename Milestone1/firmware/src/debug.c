@@ -37,7 +37,13 @@ void dbgOutputVal(uint32_t outVal)
     
     //Write values to rest of pins in output value group (31 - 37)
     //Pin 31 = MSB, Pin 37 = LSB
-    SYS_PORTS_Set(PORTS_ID_0, PORT_CHANNEL_E, outVal, 0x7F);
+    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_6, ((outVal & 0x40) >> 6));
+    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_5, ((outVal & 0x20) >> 5));
+    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_4, ((outVal & 0x10) >> 4));
+    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_3, ((outVal & 0x8) >> 3));
+    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_2, ((outVal & 0x4) >> 2));
+    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_1, ((outVal & 0x2) >> 1));
+    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_0, (outVal & 0x1));
 }
 
 /*******************************************************************************
