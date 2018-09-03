@@ -124,5 +124,6 @@ void dbgErrorHandler(uint32_t errorCode)
     SYS_PORTS_PinSet(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
     dbgOutputLoc(errorCode);
     vTaskSuspendAll();
+    
     while(1);
 }
