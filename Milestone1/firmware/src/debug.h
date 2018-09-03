@@ -43,5 +43,7 @@ void dbgErrorHandler(uint32_t errorCode);
  */
 
 #define ERROR_UNKNOWN                   0
+#define ERROR_BOUNDS                    1
+
 
 #endif
