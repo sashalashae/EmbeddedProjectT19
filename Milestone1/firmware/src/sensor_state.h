@@ -9,6 +9,7 @@
 #define _SENSORSTATE_H
 
 #include "sensor_queue.h"
+#include "system_config.h"
 
 //Enum for possible sensor sampling states
 typedef enum

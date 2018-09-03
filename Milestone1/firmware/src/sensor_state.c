@@ -49,6 +49,8 @@ void sensor_state_machine(SensorState currentState, SensorState *nextState, Queu
             break;
             
         case Sample4:
+            //toggle LED
+            SYS_PORTS_PinToggle(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
             //Print message over GPIO
             dbgOutputVal(currentData.sensorData);
             //Calculate average for all five samples

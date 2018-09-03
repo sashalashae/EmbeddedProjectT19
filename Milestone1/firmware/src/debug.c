@@ -116,16 +116,21 @@ void dbgOutputLoc(uint32_t outVal)
   Precondition:
 
   Parameters:
-    None.
+ uint32_t errorCode: a defined code for the error location
 
   Returns:
     None.
 */
 void dbgErrorHandler(uint32_t errorCode)
 {
+    //Set LED on
     SYS_PORTS_PinSet(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
+    //Send location over GPIO
     dbgOutputLoc(errorCode);
+    //Stop timer ISR
+    DRV_TMR0_Stop();
+    //Suspend threads
     vTaskSuspendAll();
-    
+    //Wait forever
     while(1);
 }

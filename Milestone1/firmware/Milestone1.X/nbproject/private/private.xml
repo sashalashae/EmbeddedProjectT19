@@ -5,8 +5,10 @@
         <group>
             <file>file:/C:/Users/nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone1/firmware/src/user_drivers.c</file>
             <file>file:/C:/Users/nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone1/firmware/src/system_config/default/system_interrupt.c</file>
+            <file>file:/C:/Users/nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone1/firmware/src/system_config/default/framework/driver/tmr/src/drv_tmr_static.c</file>
             <file>file:/C:/Users/nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone1/firmware/src/system_config/default/system_tasks.c</file>
-            <file>file:/C:/Users/nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone1/firmware/src/appThread.c</file>
+            <file>file:/C:/Users/nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone1/firmware/src/debug.c</file>
+            <file>file:/C:/Users/nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone1/firmware/src/debug.h</file>
         </group>
     </open-files>
 </project-private>
