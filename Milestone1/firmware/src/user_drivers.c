@@ -53,8 +53,22 @@ uint32_t ScaleADCData(uint32_t value, uint16_t tableNum)
     {
         case 0:
             //return table0[value];
+            for (i=0; i < 30; i++)
+            {
+                if(value > table0[i] )
+                {
+                    return i+4;
+                }
+            }
             break;
         case 1:
+            for(int j = 0; j < 56; j++)
+            {
+               if((value >= table1[j] && table[j+1] <= upper) || value == table1[j])
+               {
+                   return j;
+               }
+            }
             break;
         case 2:
             break;
@@ -65,3 +79,19 @@ uint32_t ScaleADCData(uint32_t value, uint16_t tableNum)
             break;
     }
 }
+/*
+uint32_t ADCConversion(uint32_t value){
+    while(tim == 1)
+    {
+        if(value >= lower && value <= upper)
+        {
+            retcenti = centi;
+        }
+        else{
+            lower = upper
+                    
+        }
+        
+    }
+}
+ **/
