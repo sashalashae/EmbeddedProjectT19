@@ -33,6 +33,7 @@ void dbgOutputVal(uint32_t outVal)
     
     //Toggle pin 30
     SYS_PORTS_PinToggle(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_7);
+    
     //Write values to rest of pins in output value group (31 - 37)
     //Pin 31 = MSB, Pin 37 = LSB
     SYS_PORTS_Set(PORTS_ID_0, PORT_CHANNEL_E, outVal, 0x7F);
