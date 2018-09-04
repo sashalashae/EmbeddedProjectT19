@@ -25,7 +25,7 @@ typedef struct{
 void SensorQueue_Initialize(uint32_t size);
 
 // Sends message onto the sensor queue
-BaseType_t SensorQueue_SendMsgISR(QueueData msg);
+BaseType_t SensorQueue_SendMsgISR(QueueData msg, BaseType_t *pxHigherPriorityTaskWoken);
 
 // Receives message from the sensor queue
 QueueData SensorQueue_ReceiveMsg();

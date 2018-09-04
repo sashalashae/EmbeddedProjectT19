@@ -71,6 +71,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 void IntHandlerDrvTmrInstance0(void)
 {   
+    BaseType_t pxHigherPriorityTaskWoken = pdFALSE;
+    
     uint32_t sensorValue;
     QueueData newSample;
     
@@ -88,7 +90,7 @@ void IntHandlerDrvTmrInstance0(void)
     newSample.sensorData = sensorValue;
     
     //Add to message queue
-    SensorQueue_SendMsgISR(newSample);
+    SensorQueue_SendMsgISR(newSample, &pxHigherPriorityTaskWoken);
     dbgOutputLoc(DLOC_ISR_QUEUE_SEND);
     
     //Clear interrupt flag
@@ -96,6 +98,8 @@ void IntHandlerDrvTmrInstance0(void)
     
     //Send ISR end message over GPIO
     dbgOutputLoc(DLOC_TIMER_ISR_END);
+    
+    portEND_SWITCHING_ISR(pxHigherPriorityTaskWoken);
 }
  /*******************************************************************************
  End of File

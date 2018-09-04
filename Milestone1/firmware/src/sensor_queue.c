@@ -14,9 +14,9 @@ void SensorQueue_Initialize(uint32_t size)
     SensorQueue = xQueueCreate(size, sizeof(QueueData));
 }
 
-BaseType_t SensorQueue_SendMsgISR(QueueData msg)
+BaseType_t SensorQueue_SendMsgISR(QueueData msg, BaseType_t *pxHigherPriorityTaskWoken)
 {
-    BaseType_t status = xQueueSendFromISR(SensorQueue, &msg, 0);
+    BaseType_t status = xQueueSendFromISR(SensorQueue, &msg, pxHigherPriorityTaskWoken);
     return status;
 }
 
