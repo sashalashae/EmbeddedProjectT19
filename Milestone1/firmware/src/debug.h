@@ -44,8 +44,8 @@ void dbgErrorHandler(uint32_t errorCode);
  * Defines for error codes
  */
 
-#define ERROR_UNKNOWN                   0
-#define ERROR_BOUNDS                    1
+#define ERROR_UNKNOWN                   11
+#define ERROR_BOUNDS                    12
 
 
 #endif
