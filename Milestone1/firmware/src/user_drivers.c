@@ -60,6 +60,7 @@ uint32_t ScaleADCData(uint32_t value, uint16_t tableNum)
             return table1[value];
             break;
         case 2:
+            return table2[value];
             break;
         case 3:
             break;
@@ -68,6 +69,7 @@ uint32_t ScaleADCData(uint32_t value, uint16_t tableNum)
             break;
     }
 }
+
 /*
 uint32_t ADCConversion(uint32_t value){
     while(tim == 1)
