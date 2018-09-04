@@ -33,9 +33,7 @@ void dbgOutputVal(uint32_t outVal)
     }
     
     dbgOutputLoc(DLOC_GPIO_WRITE_START);
-    //Toggle pin 30
-    SYS_PORTS_PinToggle(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_7);
-    
+        
     //Write values to rest of pins in output value group (31 - 37)
     //Pin 31 = MSB, Pin 37 = LSB
     SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_6, ((outVal & 0x40) >> 6));
@@ -46,6 +44,8 @@ void dbgOutputVal(uint32_t outVal)
     SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_1, ((outVal & 0x2) >> 1));
     SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_0, (outVal & 0x1));
     dbgOutputLoc(DLOC_GPIO_WRITE_END);
+    //Toggle pin 30
+    SYS_PORTS_PinToggle(PORTS_ID_0, PORT_CHANNEL_E, PORTS_BIT_POS_7);
 }
 
 /*******************************************************************************
@@ -93,8 +93,7 @@ void dbgOutputLoc(uint32_t outVal)
         dbgErrorHandler(ERROR_BOUNDS);
     }
     
-    //Toggle pin 38
-    SYS_PORTS_PinToggle(PORTS_ID_0, PORT_CHANNEL_D, PORTS_BIT_POS_10);
+    
     //Write values to rest of pins in output location group (39 - 45)
     SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, PORTS_BIT_POS_5, ((outVal & 0x40) >> 6));
     SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_B, PORTS_BIT_POS_11, ((outVal & 0x20) >> 5));
@@ -103,6 +102,8 @@ void dbgOutputLoc(uint32_t outVal)
     SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_8, ((outVal & 0x4) >> 2));
     SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_10, ((outVal & 0x2) >> 1));
     SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_F, PORTS_BIT_POS_0, (outVal & 0x1));
+    //Toggle pin 38
+    SYS_PORTS_PinToggle(PORTS_ID_0, PORT_CHANNEL_D, PORTS_BIT_POS_10);
 }
 
 /*******************************************************************************
