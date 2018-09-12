@@ -60,7 +60,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 #include "system/common/sys_common.h"
-#include "appthread.h"
+#include "app.h"
 #include "system_definitions.h"
 
 // *****************************************************************************
@@ -69,38 +69,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 // *****************************************************************************
 
-void IntHandlerDrvTmrInstance0(void)
-{   
-    BaseType_t pxHigherPriorityTaskWoken = pdFALSE;
-    
-    uint32_t sensorValue;
-    QueueData newSample;
-    
-    //Send ISR start message over GPIO
-    dbgOutputLoc(DLOC_TIMER_ISR_START);
-  
-    //Read in value from the ADC
-    sensorValue = ReadADCData(0);
-    
-    //Convert to centimeters
-    sensorValue = ScaleADCData(sensorValue, 1);
-    
-    //Build the queuedata
-    newSample.units = "centimeters\0";
-    newSample.sensorData = sensorValue;
-    
-    //Add to message queue
-    SensorQueue_SendMsgISR(newSample, &pxHigherPriorityTaskWoken);
-    dbgOutputLoc(DLOC_ISR_QUEUE_SEND);
-    
-    //Clear interrupt flag
-    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_2);
-    
-    //Send ISR end message over GPIO
-    dbgOutputLoc(DLOC_TIMER_ISR_END);
-    
-    portEND_SWITCHING_ISR(pxHigherPriorityTaskWoken);
-}
- /*******************************************************************************
+ 
+/*******************************************************************************
  End of File
 */

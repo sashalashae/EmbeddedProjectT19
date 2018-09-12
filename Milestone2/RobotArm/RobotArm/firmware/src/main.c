@@ -1,38 +1,33 @@
 /*******************************************************************************
- System Interrupts File
+  MPLAB Harmony Project Main Source File
 
+  Company:
+    Microchip Technology Inc.
+  
   File Name:
-    system_interrupt.c
+    main.c
 
   Summary:
-    Raw ISR definitions.
+    This file contains the "main" function for an MPLAB Harmony project.
 
   Description:
-    This file contains a definitions of the raw ISRs required to support the
-    interrupt sub-system.
-
-  Summary:
-    This file contains source code for the interrupt vector functions in the
-    system.
-
-  Description:
-    This file contains source code for the interrupt vector functions in the
-    system.  It implements the system and part specific vector "stub" functions
-    from which the individual "Tasks" functions are called for any modules
-    executing interrupt-driven in the MPLAB Harmony system.
-
-  Remarks:
-    This file requires access to the systemObjects global data structure that
-    contains the object handles to all MPLAB Harmony module objects executing
-    interrupt-driven in the system.  These handles are passed into the individual
-    module "Tasks" functions to identify the instance of the module to maintain.
+    This file contains the "main" function for an MPLAB Harmony project.  The
+    "main" function calls the "SYS_Initialize" function to initialize the state 
+    machines of all MPLAB Harmony modules in the system and it calls the 
+    "SYS_Tasks" function from within a system-wide "super" loop to maintain 
+    their correct operation. These two functions are implemented in 
+    configuration-specific files (usually "system_init.c" and "system_tasks.c")
+    in a configuration-specific folder under the "src/system_config" folder 
+    within this project's top-level folder.  An MPLAB Harmony project may have
+    more than one configuration, each contained within it's own folder under
+    the "system_config" folder.
  *******************************************************************************/
 
 // DOM-IGNORE-BEGIN
 /*******************************************************************************
-Copyright (c) 2011-2014 released Microchip Technology Inc.  All rights reserved.
+Copyright (c) 2013-2014 released Microchip Technology Inc.  All rights reserved.
 
-Microchip licenses to you the right to use, modify, copy and distribute
+//Microchip licenses to you the right to use, modify, copy and distribute
 Software only when embedded on a Microchip microcontroller or digital signal
 controller that is integrated into your product or third party product
 (pursuant to the sublicense terms in the accompanying license agreement).
@@ -53,54 +48,45 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
  *******************************************************************************/
 // DOM-IGNORE-END
 
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
 
-#include "system/common/sys_common.h"
-#include "appthread.h"
-#include "system_definitions.h"
+#include <stddef.h>                     // Defines NULL
+#include <stdbool.h>                    // Defines true
+#include <stdlib.h>                     // Defines EXIT_FAILURE
+#include "system/common/sys_module.h"   // SYS function prototypes
+
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: System Interrupt Vector Functions
+// Section: Main Entry Point
 // *****************************************************************************
 // *****************************************************************************
 
-void IntHandlerDrvTmrInstance0(void)
-{   
-    BaseType_t pxHigherPriorityTaskWoken = pdFALSE;
-    
-    uint32_t sensorValue;
-    QueueData newSample;
-    
-    //Send ISR start message over GPIO
-    dbgOutputLoc(DLOC_TIMER_ISR_START);
-  
-    //Read in value from the ADC
-    sensorValue = ReadADCData(0);
-    
-    //Convert to centimeters
-    sensorValue = ScaleADCData(sensorValue, 1);
-    
-    //Build the queuedata
-    newSample.units = "centimeters\0";
-    newSample.sensorData = sensorValue;
-    
-    //Add to message queue
-    SensorQueue_SendMsgISR(newSample, &pxHigherPriorityTaskWoken);
-    dbgOutputLoc(DLOC_ISR_QUEUE_SEND);
-    
-    //Clear interrupt flag
-    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_2);
-    
-    //Send ISR end message over GPIO
-    dbgOutputLoc(DLOC_TIMER_ISR_END);
-    
-    portEND_SWITCHING_ISR(pxHigherPriorityTaskWoken);
+int main ( void )
+{
+    /* Initialize all MPLAB Harmony modules, including application(s). */
+    SYS_Initialize ( NULL );
+
+
+    while ( true )
+    {
+        /* Maintain state machines of all polled MPLAB Harmony modules. */
+        SYS_Tasks ( );
+
+    }
+
+    /* Execution should not come here during normal operation */
+
+    return ( EXIT_FAILURE );
 }
- /*******************************************************************************
+
+
+/*******************************************************************************
  End of File
 */
+
