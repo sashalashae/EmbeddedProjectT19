@@ -1,5 +1,5 @@
-build/default/debug/_ext/1688732426/system_init.o:  \
- ../src/system_config/default/system_init.c  \
+build/default/production/_ext/1688732426/system_tasks.o:  \
+ ../src/system_config/default/system_tasks.c  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports.h  \

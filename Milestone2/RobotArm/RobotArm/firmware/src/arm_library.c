@@ -59,18 +59,118 @@ void initializeArmControl()
 /*
  * Function: setArmPosition
  * 
- * Description: Sets the arm to a known, predefined position. 
+ * Description: Sets the arm to a known, predefined position, at a given speed. 
  * 
  * @param position: A data structure containing the servo angles for each of 
  * the three arm servos. Corresponds to a single known arm position.
  * 
  * Returns: void
  */
-void setArmPosition(ArmPosition position)
+void setArmPosition(ArmMovement movement)
 {
-    setServoAngle(1, position.baseServo);
-    setServoAngle(2, position.lowerJoint);
-    setServoAngle(3, position.upperJoint);
+    bool movementDone, baseDone, lowerDone, upperDone;
+    movementDone = false;
+    //check if each servo motion is needed
+    baseDone = (movement.baseSpeed == 0);
+    lowerDone = (movement.lowerJointSpeed == 0);
+    upperDone = (movement.upperJointSpeed == 0);
+    //loop until arm motion is done
+    while(!movementDone)
+    {
+        //update movement for base
+        if(!baseDone)
+        {
+            if(OC1RS < movement.destination.baseServo)
+            {
+                //current reg value is smaller than desired position
+                if((OC1RS + movement.baseSpeed) > movement.destination.baseServo)
+                {
+                    OC1RS = movement.destination.baseServo;
+                    baseDone = true;
+                }
+                else
+                {
+                    OC1RS += movement.baseSpeed;
+                }
+            }
+            else if(OC1RS > movement.destination.baseServo)
+            {
+                //current reg value is greater than desired position
+                if((OC1RS - movement.baseSpeed) < movement.destination.baseServo)
+                {
+                    OC1RS = movement.destination.baseServo;
+                    baseDone = true;
+                }
+                else
+                {
+                    OC1RS -= movement.baseSpeed;
+                }
+            }
+        }
+        //update movement for lower joint
+        if(!lowerDone)
+        {
+            if(OC2RS < movement.destination.lowerJoint)
+            {
+                //current reg value is smaller than desired position
+                if((OC2RS + movement.lowerJointSpeed) > movement.destination.lowerJoint)
+                {
+                    OC2RS = movement.destination.lowerJoint;
+                    lowerDone = true;
+                }
+                else
+                {
+                    OC2RS += movement.lowerJointSpeed;
+                }
+            }
+            else if(OC2RS > movement.destination.lowerJoint)
+            {
+                //current reg value is greater than desired position
+                if((OC2RS - movement.lowerJointSpeed) < movement.destination.lowerJoint)
+                {
+                    OC2RS = movement.destination.lowerJoint;
+                    lowerDone = true;
+                }
+                else
+                {
+                    OC2RS -= movement.lowerJointSpeed;
+                }
+            }
+        }
+        //update movement for upper joint
+        if(!upperDone)
+        {
+            if(OC3RS < movement.destination.upperJoint)
+            {
+                //current reg value is smaller than desired position
+                if((OC3RS + movement.upperJointSpeed) > movement.destination.upperJoint)
+                {
+                    OC3RS = movement.destination.upperJoint;
+                    upperDone = true;
+                }
+                else
+                {
+                    OC3RS += movement.upperJointSpeed;
+                }
+            }
+            else if(OC3RS > movement.destination.upperJoint)
+            {
+                //current reg value is greater than desired position
+                if((OC3RS - movement.upperJointSpeed) < movement.destination.upperJoint)
+                {
+                    OC3RS = movement.destination.upperJoint;
+                    upperDone = true;
+                }
+                else
+                {
+                    OC3RS -= movement.upperJointSpeed;
+                }
+            }
+        }
+        movementDone = (baseDone && lowerDone && upperDone);
+        //Sleep function for 40ms
+        vTaskDelay(40/portTICK_PERIOD_MS);
+    }
 }
 
 /*

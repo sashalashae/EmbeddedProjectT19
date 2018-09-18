@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <project>                                  
-  <executable name="dist/default/debug/RobotArm.X.debug.elf">                 
+  <executable name="dist/default/production/RobotArm.X.production.elf">                 
     <memory name="program">                 
       <units>bytes</units>                 
       <length>531968</length>                 
-      <used>9112</used>                     
-      <free>522856</free>                     
+      <used>8832</used>                     
+      <free>523136</free>                     
     </memory>                              
     <memory name="data">              
       <units>bytes</units>                 
-      <length>131584</length>                 
-      <used>13160</used>                     
-      <free>118424</free>                     
+      <length>131072</length>                 
+      <used>12136</used>                     
+      <free>118936</free>                     
     </memory>                              
   </executable>                            
 </project>                                 

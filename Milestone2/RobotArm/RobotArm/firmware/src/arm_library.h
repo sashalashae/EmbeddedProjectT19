@@ -16,10 +16,21 @@
 //Data structure which stores servo angles for a given arm position
 typedef struct
 {
+    //The compare register value for the base servo
     int16_t baseServo;
+    //The compare register value for the lower joint servo
     int16_t lowerJoint;
+    //The compare register value for the upper join servo
     int16_t upperJoint;
 }ArmPosition;
+
+typedef struct
+{
+    ArmPosition destination;
+    uint16_t baseSpeed;
+    uint16_t lowerJointSpeed;
+    uint16_t upperJointSpeed;
+}ArmMovement;
 
 //Defines
 #define BIT0                (1<<0)
@@ -44,6 +55,6 @@ void initializeArmControl();
 uint16_t AngleToCompareVal(int16_t servoAngle);
 void setCompareVal(uint8_t compareModule, uint16_t compareValue);
 void setServoAngle(uint8_t compareModule, int16_t servoAngle);
-void setArmPosition(ArmPosition position);
+void setArmPosition(ArmMovement movement);
 
 #endif

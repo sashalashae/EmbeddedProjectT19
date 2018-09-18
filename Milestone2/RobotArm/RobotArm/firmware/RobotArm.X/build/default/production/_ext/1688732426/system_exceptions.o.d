@@ -1,5 +1,5 @@
-build/default/debug/_ext/1688732426/system_tasks.o:  \
- ../src/system_config/default/system_tasks.c  \
+build/default/production/_ext/1688732426/system_exceptions.o:  \
+ ../src/system_config/default/system_exceptions.c  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports.h  \
@@ -130,4 +130,5 @@ build/default/debug/_ext/1688732426/system_tasks.o:  \
  ../../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/list.h  \
  ../src/appthread.h  \
 ../src/system_config/default/system_definitions.h  \
- ../src/arm_library.h 
+ ../src/arm_library.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/system/debug/sys_debug.h 
