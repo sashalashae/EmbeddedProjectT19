@@ -8,6 +8,14 @@
 
 #include "arm_library.h"
 
+/*
+ * Function: initializeArmControl
+ * 
+ * Description: Initializes output compare modules 1 - 3 to act as PWM outputs.
+ * Also initializes timer 2 to run at 50Hz (20ms PWM period).
+ * 
+ * Returns: void
+ */
 void initializeArmControl()
 {
     //Initially disable all output compare modules
@@ -42,12 +50,41 @@ void initializeArmControl()
     //Enable timer 2
     T2CONSET = BIT15;
     
-    //Enable output compare modu;es
+    //Enable output compare modules
     OC1CONSET = BIT15;
     OC2CONSET = BIT15;
     OC3CONSET = BIT15;
 }
 
+/*
+ * Function: setArmPosition
+ * 
+ * Description: Sets the arm to a known, predefined position. 
+ * 
+ * @param position: A data structure containing the servo angles for each of 
+ * the three arm servos. Corresponds to a single known arm position.
+ * 
+ * Returns: void
+ */
+void setArmPosition(ArmPosition position)
+{
+    setServoAngle(1, position.baseServo);
+    setServoAngle(2, position.lowerJoint);
+    setServoAngle(3, position.upperJoint);
+}
+
+/*
+ * Function: setServoAngle
+ * 
+ * Description: Sets the angle for the servo attached to the specified
+ * compare module.
+ * 
+ * @param compareModule: The module number to set the value for (1 - 3)
+ * 
+ * @param servoAngle: The servo angle for the specified module.
+ * 
+ * Returns: void
+ */
 void setServoAngle(uint8_t compareModule, int16_t servoAngle)
 {
     switch(compareModule)
@@ -61,12 +98,6 @@ void setServoAngle(uint8_t compareModule, int16_t servoAngle)
         case 3:
             OC3RS = AngleToCompareVal(servoAngle);
             break;
-        case 4:
-            OC4RS = AngleToCompareVal(servoAngle);
-            break;
-        case 5:
-            OC5RS = AngleToCompareVal(servoAngle);
-            break;
         default:
             //Invalid compare module ID
             return;
@@ -74,6 +105,18 @@ void setServoAngle(uint8_t compareModule, int16_t servoAngle)
     }
 }
 
+/*
+ * Function: AngleToCompareVal
+ * 
+ * Description: Converts a desired servo angle to a control value for the 
+ * compare module threshold register.
+ * 
+ * @param servoAngle: The angle to set the servo to. Valid values are in the 
+ * range of -90 degrees to 90 degrees.
+ * 
+ * Returns: a 16 bit unsigned integer containing the value to write to the 
+ * OCxRS register to achieve the desired servo angle.
+ */
 uint16_t AngleToCompareVal(int16_t servoAngle)
 {
     uint32_t OCxRSVal;

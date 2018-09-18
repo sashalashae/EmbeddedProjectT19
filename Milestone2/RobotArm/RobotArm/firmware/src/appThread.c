@@ -126,13 +126,13 @@ void APPTHREAD_Tasks ( void )
         {
             servoAngle++;
             setServoAngle(1, servoAngle);
-            vTaskDelay(100/portTICK_PERIOD_MS);
+            vTaskDelay(50/portTICK_PERIOD_MS);
         }
         while(servoAngle > -90)
         {
             servoAngle--;
             setServoAngle(1, servoAngle);
-            vTaskDelay(100/portTICK_PERIOD_MS);
+            vTaskDelay(50/portTICK_PERIOD_MS);
         }
     }
 }

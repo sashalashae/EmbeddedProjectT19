@@ -13,11 +13,13 @@
 #include "C:\Program Files (x86)\Microchip\xc32\v2.10\pic32mx\include\proc\p32mx795f512l.h"
 #include "system_definitions.h"
 
-//Function Prototypes
-void initializeArmControl();
-uint16_t AngleToCompareVal(int16_t servoAngle);
-void setCompareVal(uint8_t compareModule, uint16_t compareValue);
-void setServoAngle(uint8_t compareModule, int16_t servoAngle);
+//Data structure which stores servo angles for a given arm position
+typedef struct
+{
+    int16_t baseServo;
+    int16_t lowerJoint;
+    int16_t upperJoint;
+}ArmPosition;
 
 //Defines
 #define BIT0                (1<<0)
@@ -36,5 +38,12 @@ void setServoAngle(uint8_t compareModule, int16_t servoAngle);
 #define BIT13               (1<<13)
 #define BIT14               (1<<14)
 #define BIT15               (1<<15)
+
+//Function Prototypes
+void initializeArmControl();
+uint16_t AngleToCompareVal(int16_t servoAngle);
+void setCompareVal(uint8_t compareModule, uint16_t compareValue);
+void setServoAngle(uint8_t compareModule, int16_t servoAngle);
+void setArmPosition(ArmPosition position);
 
 #endif
