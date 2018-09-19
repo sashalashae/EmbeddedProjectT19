@@ -70,6 +70,12 @@ void setArmPosition(ArmMovement movement)
 {
     bool movementDone, baseDone, lowerDone, upperDone;
     movementDone = false;
+    //Tick counter for VTaskDelayUntil
+    TickType_t LastWakeTime;
+    //Set the period
+    const TickType_t period = 100 / portTICK_PERIOD_MS;
+    //Set last wake time to function start time
+    LastWakeTime = xTaskGetTickCount();
     //check if each servo motion is needed
     baseDone = (movement.baseSpeed == 0);
     lowerDone = (movement.lowerJointSpeed == 0);
@@ -106,6 +112,10 @@ void setArmPosition(ArmMovement movement)
                     OC1RS -= movement.baseSpeed;
                 }
             }
+            else
+            {
+                baseDone = true;
+            }
         }
         //update movement for lower joint
         if(!lowerDone)
@@ -135,6 +145,10 @@ void setArmPosition(ArmMovement movement)
                 {
                     OC2RS -= movement.lowerJointSpeed;
                 }
+            }
+            else
+            {
+                lowerDone = true;
             }
         }
         //update movement for upper joint
@@ -166,10 +180,14 @@ void setArmPosition(ArmMovement movement)
                     OC3RS -= movement.upperJointSpeed;
                 }
             }
+            else
+            {
+                upperDone = true;
+            }
         }
         movementDone = (baseDone && lowerDone && upperDone);
-        //Sleep function for 40ms
-        vTaskDelay(40/portTICK_PERIOD_MS);
+        //Sleep function for 100ms
+        vTaskDelayUntil(&LastWakeTime, period);
     }
 }
 

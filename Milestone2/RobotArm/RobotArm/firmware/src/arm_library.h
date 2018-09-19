@@ -26,13 +26,20 @@ typedef struct
 
 typedef struct
 {
+    //Destination to move to
     ArmPosition destination;
+    //Base Speed (OC1RS ticks per 40ms) 1 degree = 6.94 ticks
     uint16_t baseSpeed;
+    //Lower joint Speed (OC2RS ticks per 40ms) 1 degree = 6.94 ticks
     uint16_t lowerJointSpeed;
+    //Upper joint Speed (OC2RS ticks per 40ms) 1 degree = 6.94 ticks
     uint16_t upperJointSpeed;
 }ArmMovement;
 
-//Defines
+//Control defines
+#define MAXSPEED            (1250)
+
+//Bit defines
 #define BIT0                (1<<0)
 #define BIT1                (1<<1)
 #define BIT2                (1<<2)
