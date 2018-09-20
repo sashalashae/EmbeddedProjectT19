@@ -98,13 +98,11 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 void APPTHREAD_Initialize ( void )
 {
-    //Configure LED pin to act as output
-    SYS_PORTS_PinDirectionSelect(PORTS_ID_0, SYS_PORTS_DIRECTION_OUTPUT, PORT_CHANNEL_A, PORTS_BIT_POS_3);
-    //Set USER LED off initially
-    SYS_PORTS_PinClear(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
+    //Initialize arm control
+    armInit();
     
-    //Pin 38 as output
-    SYS_PORTS_PinDirectionSelect(PORTS_ID_0, SYS_PORTS_DIRECTION_OUTPUT, PORT_CHANNEL_D, PORTS_BIT_POS_10);
+    //Initialize debug control
+    dbgInit();
 }
 
 
@@ -115,9 +113,8 @@ void APPTHREAD_Initialize ( void )
   Remarks:
     See prototype in appthread.h.
  */
-
 void APPTHREAD_Tasks ( void )
-{
+{    
     //define positions
     ArmPosition defaultPosition;
     defaultPosition.baseServo = AngleToCompareVal(-63);
@@ -141,7 +138,6 @@ void APPTHREAD_Tasks ( void )
     returnToDefault.baseSpeed = 5;
     returnToDefault.lowerJointSpeed = 5;
     returnToDefault.upperJointSpeed = 5;
-    initializeArmControl();
     
     ArmMovement startXLeftDraw, finishXLeftDraw;
     startXLeftDraw.destination = startXLeft;
@@ -153,9 +149,6 @@ void APPTHREAD_Tasks ( void )
     finishXLeftDraw.baseSpeed = MAXSPEED;
     finishXLeftDraw.lowerJointSpeed = 6;
     finishXLeftDraw.upperJointSpeed = 3;
-    
-    //Initialize PWM modules
-    initializeArmControl();
     
     while(1)
     {

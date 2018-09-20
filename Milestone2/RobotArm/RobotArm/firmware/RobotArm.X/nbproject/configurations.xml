@@ -90,6 +90,7 @@
         <itemPath>../../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/message_buffer.h</itemPath>
       </logicalFolder>
       <itemPath>../src/arm_library.h</itemPath>
+      <itemPath>../src/debug.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -170,6 +171,7 @@
         <itemPath>../../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/stream_buffer.c</itemPath>
       </logicalFolder>
       <itemPath>../src/arm_library.c</itemPath>
+      <itemPath>../src/debug.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

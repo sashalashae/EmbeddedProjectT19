@@ -9,14 +9,14 @@
 #include "arm_library.h"
 
 /*
- * Function: initializeArmControl
+ * Function: armInit
  * 
  * Description: Initializes output compare modules 1 - 3 to act as PWM outputs.
  * Also initializes timer 2 to run at 50Hz (20ms PWM period).
  * 
  * Returns: void
  */
-void initializeArmControl()
+void armInit()
 {
     //Initially disable all output compare modules
     OC1CON = 0;

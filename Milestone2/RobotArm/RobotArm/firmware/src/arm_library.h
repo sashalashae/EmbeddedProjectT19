@@ -58,7 +58,7 @@ typedef struct
 #define BIT15               (1<<15)
 
 //Function Prototypes
-void initializeArmControl();
+void armInit();
 uint16_t AngleToCompareVal(int16_t servoAngle);
 void setCompareVal(uint8_t compareModule, uint16_t compareValue);
 void setServoAngle(uint8_t compareModule, int16_t servoAngle);
