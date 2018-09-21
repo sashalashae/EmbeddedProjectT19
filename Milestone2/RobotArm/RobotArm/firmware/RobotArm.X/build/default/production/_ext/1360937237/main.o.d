@@ -128,4 +128,5 @@ build/default/production/_ext/1360937237/main.o:  \
  ../../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/list.h  \
  ../src/appthread.h  \
-../src/arm_library.h 
+../src/arm_library.h  \
+../src/helper_functions.h 

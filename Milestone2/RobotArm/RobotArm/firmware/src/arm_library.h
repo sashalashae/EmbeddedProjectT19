@@ -39,6 +39,10 @@ typedef struct
 //Control defines
 #define MAXSPEED            (1250)
 
+#define MOVEMENT_PERIOD_MS  (60)
+
+#define TICKS_PER_180       (1250)
+
 //Bit defines
 #define BIT0                (1<<0)
 #define BIT1                (1<<1)
@@ -57,11 +61,21 @@ typedef struct
 #define BIT14               (1<<14)
 #define BIT15               (1<<15)
 
-//Function Prototypes
+//Configuration Functions
 void armInit();
+
+//Helper Functions
 uint16_t AngleToCompareVal(int16_t servoAngle);
+uint16_t degreesPerSecToMoveSpeed(uint16_t degreesPerSecond);
+
+//Lower Level Functions
 void setCompareVal(uint8_t compareModule, uint16_t compareValue);
 void setServoAngle(uint8_t compareModule, int16_t servoAngle);
 void setArmPosition(ArmMovement movement);
+
+//Higher Level action functions
+void drawX();
+void drawO();
+void resetArm();
 
 #endif

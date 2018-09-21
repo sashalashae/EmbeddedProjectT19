@@ -130,4 +130,5 @@ build/default/production/_ext/1688732426/system_init.o:  \
  ../../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/list.h  \
  ../src/appthread.h  \
 ../src/system_config/default/system_definitions.h  \
- ../src/arm_library.h 
+ ../src/arm_library.h  \
+../src/helper_functions.h 

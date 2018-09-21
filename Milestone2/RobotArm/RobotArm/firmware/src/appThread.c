@@ -115,46 +115,10 @@ void APPTHREAD_Initialize ( void )
  */
 void APPTHREAD_Tasks ( void )
 {    
-    //define positions
-    ArmPosition defaultPosition;
-    defaultPosition.baseServo = AngleToCompareVal(-63);
-    defaultPosition.lowerJoint = AngleToCompareVal(28);
-    defaultPosition.upperJoint = AngleToCompareVal(27);
-    
-    ArmPosition startXLeft, endXLeft;
-    startXLeft.baseServo = AngleToCompareVal(-20);
-    startXLeft.lowerJoint = AngleToCompareVal(80);
-    startXLeft.upperJoint = AngleToCompareVal(30);
-    
-    endXLeft.baseServo = AngleToCompareVal(-20);
-    endXLeft.lowerJoint = AngleToCompareVal(-15);
-    endXLeft.upperJoint = AngleToCompareVal(5);
-    
-    ArmPosition startXRight, endXRight;
-    
-    //define movements
-    ArmMovement returnToDefault;
-    returnToDefault.destination = defaultPosition;
-    returnToDefault.baseSpeed = 5;
-    returnToDefault.lowerJointSpeed = 5;
-    returnToDefault.upperJointSpeed = 5;
-    
-    ArmMovement startXLeftDraw, finishXLeftDraw;
-    startXLeftDraw.destination = startXLeft;
-    startXLeftDraw.baseSpeed = MAXSPEED;
-    startXLeftDraw.lowerJointSpeed = 3;
-    startXLeftDraw.upperJointSpeed = 3;
-    
-    finishXLeftDraw.destination = endXLeft;
-    finishXLeftDraw.baseSpeed = MAXSPEED;
-    finishXLeftDraw.lowerJointSpeed = 6;
-    finishXLeftDraw.upperJointSpeed = 3;
-    
     while(1)
     {
-        setArmPosition(returnToDefault);
-        setArmPosition(startXLeftDraw);
-        setArmPosition(finishXLeftDraw);
+        drawX();
+        sleep(3000);
     }
 }
 

@@ -91,6 +91,7 @@
       </logicalFolder>
       <itemPath>../src/arm_library.h</itemPath>
       <itemPath>../src/debug.h</itemPath>
+      <itemPath>../src/helper_functions.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -172,6 +173,7 @@
       </logicalFolder>
       <itemPath>../src/arm_library.c</itemPath>
       <itemPath>../src/debug.c</itemPath>
+      <itemPath>../src/helper_functions.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -360,6 +362,7 @@
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
         <property key="UART1" value="true"/>
         <property key="UART2" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>
