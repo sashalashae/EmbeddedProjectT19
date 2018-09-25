@@ -10,6 +10,8 @@
 #define ARM_QUEUE
 
 #include "system_definitions.h"
+#include "FreeRTOS.h"
+#include "queue.h"
 
 //type definitions
 
@@ -26,10 +28,14 @@ typedef enum
 
 typedef struct
 {
-    MessageType message;
-    uint32_t value;
+    MessageType msgType;
+    uint32_t msgValue;
 }ArmMessage;
 
 //function prototypes
+void ArmQueue_Initialize(uint32_t size);
+ArmMessage ArmQueue_ReceiveMsg();
+BaseType_t ArmQueue_SendMsg();
 
 #endif
+        

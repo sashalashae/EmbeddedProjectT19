@@ -15,8 +15,13 @@ void ARMTHREAD_Initialize ( void )
 
 void ARMTHREAD_Tasks ( void )
 {
+    ArmMessage currentMessage;
     while(1)
     {
-        
+        currentMessage = ArmQueue_ReceiveMsg();
+        //state machine for the message type
+        switch(currentMessage.msgType)
+        {
+        }
     }
 }
