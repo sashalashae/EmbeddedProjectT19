@@ -142,7 +142,7 @@ void APP_Tasks ( void )
     
     uint16_t FSRs;
     
-    position_tracker(FSRs, &pd);
+    navigation_test_bench(pd);
     
 }
 

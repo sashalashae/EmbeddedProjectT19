@@ -131,4 +131,6 @@ build/default/production/_ext/1688732426/system_tasks.o:  \
  ../src/app.h  \
 ../src/system_config/default/system_definitions.h  \
  ../src/navigation_thread.h  \
-../src/debug.h 
+../src/debug.h  \
+../src/pdStruct.h  \
+ ../src/sleep.h 
