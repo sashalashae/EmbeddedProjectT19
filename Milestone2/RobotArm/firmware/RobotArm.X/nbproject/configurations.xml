@@ -92,6 +92,7 @@
       <itemPath>../src/arm_library.h</itemPath>
       <itemPath>../src/debug.h</itemPath>
       <itemPath>../src/helper_functions.h</itemPath>
+      <itemPath>../src/test_cases.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -174,6 +175,7 @@
       <itemPath>../src/arm_library.c</itemPath>
       <itemPath>../src/debug.c</itemPath>
       <itemPath>../src/helper_functions.c</itemPath>
+      <itemPath>../src/test_cases.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
