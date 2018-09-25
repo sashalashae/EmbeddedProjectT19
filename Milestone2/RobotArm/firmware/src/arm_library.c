@@ -72,8 +72,8 @@ void setArmPosition(ArmMovement movement)
     movementDone = false;
     //Tick counter for VTaskDelayUntil
     TickType_t LastWakeTime;
-    //Set the period (60MS)
-    const TickType_t period = 60 / portTICK_PERIOD_MS;
+    //Set the period (MOVEMENT_PERIOD_MS)
+    const TickType_t period = MOVEMENT_PERIOD_MS / portTICK_PERIOD_MS;
     //Set last wake time to function start time
     LastWakeTime = xTaskGetTickCount();
     //check if each servo motion is needed
@@ -268,7 +268,16 @@ uint16_t degreesPerSecToMoveSpeed(uint16_t degreesPerSecond)
     retValue = retValue * TICKS_PER_180;
     retValue = retValue * MOVEMENT_PERIOD_MS;
     retValue = retValue / (180 * 1000);
-    return retValue;
+    //check if it exceeds max/min allowed value
+    if(retValue > MAXSPEED)
+    {
+        retValue = MAXSPEED;
+    }
+    else if(retValue < 1 && degreesPerSecond)
+    {
+        retValue = 1;
+    }
+    return (retValue & 0xFFFF);
 }
 
 /*
@@ -280,29 +289,38 @@ uint16_t degreesPerSecToMoveSpeed(uint16_t degreesPerSecond)
  */
 void drawX()
 {
+    //Print debug location
+    dbgOutputLoc(LOC_DRAW_X_START);
+    
     //Starting position for left half of X
     ArmPosition startXLeft;
-    startXLeft.baseServo = AngleToCompareVal(-20);
-    startXLeft.lowerJoint = AngleToCompareVal(90);
-    startXLeft.upperJoint = AngleToCompareVal(20);
+    startXLeft.baseServo = AngleToCompareVal(-40);
+    startXLeft.lowerJoint = AngleToCompareVal(80);
+    startXLeft.upperJoint = AngleToCompareVal(10);
+    
+    //position for middle of the left X
+    ArmPosition middleXLeft;
+    middleXLeft.baseServo = AngleToCompareVal(-40);
+    middleXLeft.lowerJoint = AngleToCompareVal(30);
+    middleXLeft.upperJoint = AngleToCompareVal(-13);
     
     //Ending position for left half of X
     ArmPosition endXLeft;
-    endXLeft.baseServo = AngleToCompareVal(-20);
+    endXLeft.baseServo = AngleToCompareVal(-40);
     endXLeft.lowerJoint = AngleToCompareVal(-25);
-    endXLeft.upperJoint = AngleToCompareVal(0);
+    endXLeft.upperJoint = AngleToCompareVal(-9);
     
     //Starting position for right half of X
     ArmPosition startXRight;
-    startXRight.baseServo = AngleToCompareVal(-90);
+    startXRight.baseServo = AngleToCompareVal(-65);
     startXRight.lowerJoint = AngleToCompareVal(35);
-    startXRight.upperJoint = AngleToCompareVal(-5);
+    startXRight.upperJoint = AngleToCompareVal(-13);
     
     //Ending position for right half of X
     ArmPosition endXRight; 
-    endXRight.baseServo = AngleToCompareVal(20);
+    endXRight.baseServo = AngleToCompareVal(-15);
     endXRight.lowerJoint = AngleToCompareVal(35);
-    endXRight.upperJoint = AngleToCompareVal(-5);
+    endXRight.upperJoint = AngleToCompareVal(-13);
     
     //Movement profile to reach start X left
     ArmMovement startXLeftDraw;
@@ -311,12 +329,19 @@ void drawX()
     startXLeftDraw.lowerJointSpeed = degreesPerSecToMoveSpeed(15);
     startXLeftDraw.upperJointSpeed = degreesPerSecToMoveSpeed(15);
     
-    //Movement profile to actually draw X left
+    //movement profile to draw first half of X left
+    ArmMovement middleXLeftDraw;
+    middleXLeftDraw.destination = middleXLeft;
+    middleXLeftDraw.baseSpeed = 0;
+    middleXLeftDraw.lowerJointSpeed = degreesPerSecToMoveSpeed(25);
+    middleXLeftDraw.upperJointSpeed = degreesPerSecToMoveSpeed(18);
+    
+    //Movement profile to actually second first half of X left
     ArmMovement finishXLeftDraw;
     finishXLeftDraw.destination = endXLeft;
     finishXLeftDraw.baseSpeed = 0;
-    finishXLeftDraw.lowerJointSpeed = degreesPerSecToMoveSpeed(25);
-    finishXLeftDraw.upperJointSpeed = degreesPerSecToMoveSpeed(19);
+    finishXLeftDraw.lowerJointSpeed = degreesPerSecToMoveSpeed(30);
+    finishXLeftDraw.upperJointSpeed = degreesPerSecToMoveSpeed(12);
     
     //Movement profile to reach start X right
     ArmMovement startXRightDraw;
@@ -337,6 +362,7 @@ void drawX()
     
     //Perform left line draw
     setArmPosition(startXLeftDraw);
+    setArmPosition(middleXLeftDraw);
     setArmPosition(finishXLeftDraw);
     
     //Reset to default
@@ -348,6 +374,9 @@ void drawX()
     
     //Reset arm after motion profile is complete
     resetArm();
+    
+    //indicate that X is done
+    dbgOutputLoc(LOC_DRAW_X_END);
 }
 
 /*
@@ -359,33 +388,103 @@ void drawX()
  */
 void drawO()
 {
-    ArmPosition startRight;
+    //send the debug location
+    dbgOutputLoc(LOC_DRAW_O_START);
     
-    ArmPosition endRight;
+    //define all arm positions for O
+    
+    ArmPosition startRight;
+    startRight.baseServo = AngleToCompareVal(-88);
+    startRight.lowerJoint = AngleToCompareVal(80);
+    startRight.upperJoint = AngleToCompareVal(10);
     
     ArmPosition startLeft;
+    startLeft.baseServo = AngleToCompareVal(-25);
+    startLeft.lowerJoint = AngleToCompareVal(28);
+    startLeft.upperJoint = AngleToCompareVal(-13);
     
     ArmPosition endLeft;
+    endLeft.baseServo = AngleToCompareVal(-28);
+    endLeft.lowerJoint = AngleToCompareVal(85);
+    endLeft.upperJoint = AngleToCompareVal(12);
     
     ArmPosition startTop;
+    startTop.baseServo = AngleToCompareVal(-35);
+    startTop.lowerJoint = AngleToCompareVal(85);
+    startTop.upperJoint = AngleToCompareVal(12);
     
     ArmPosition endTop;
+    endTop.baseServo = AngleToCompareVal(-85);
+    endTop.lowerJoint = AngleToCompareVal(85);
+    endTop.upperJoint = AngleToCompareVal(12);
     
-    ArmMovement beginRight;
+    ArmPosition startBottom;
+    startBottom.baseServo = AngleToCompareVal(-90);
+    startBottom.lowerJoint = AngleToCompareVal(25);
+    startBottom.upperJoint = AngleToCompareVal(-15);
     
-    ArmMovement finishRight;
+    ArmPosition endBottom;
+    endBottom.baseServo = AngleToCompareVal(-30);
+    endBottom.lowerJoint = AngleToCompareVal(25);
+    endBottom.upperJoint = AngleToCompareVal(-15);
     
-    ArmMovement beginLeft;
+    //define all arm movements for O
     
-    ArmMovement finishLeft;
-    
-    ArmMovement beginTop;
-    
-    ArmMovement finishTop;
-    
+    //lower right hand corner
     ArmMovement beginBottom;
+    beginBottom.destination = startBottom;
+    beginBottom.baseSpeed = degreesPerSecToMoveSpeed(60);
+    beginBottom.lowerJointSpeed = degreesPerSecToMoveSpeed(15);
+    beginBottom.upperJointSpeed = degreesPerSecToMoveSpeed(15);
     
+    //lower left hand corner
     ArmMovement finishBottom;
+    finishBottom.destination = endBottom;
+    finishBottom.baseSpeed = degreesPerSecToMoveSpeed(25);
+    finishBottom.lowerJointSpeed = 0;
+    finishBottom.upperJointSpeed = 0;
+    
+    //lower left
+    ArmMovement beginLeft;
+    beginLeft.destination = startLeft;
+    beginLeft.baseSpeed = degreesPerSecToMoveSpeed(10);
+    beginLeft.lowerJointSpeed = degreesPerSecToMoveSpeed(10);
+    beginLeft.upperJointSpeed = degreesPerSecToMoveSpeed(5);
+    
+    //upper left
+    ArmMovement finishLeft;
+    finishLeft.destination = endLeft;
+    finishLeft.baseSpeed = degreesPerSecToMoveSpeed(10);
+    finishLeft.lowerJointSpeed = degreesPerSecToMoveSpeed(30);
+    finishLeft.upperJointSpeed = degreesPerSecToMoveSpeed(12);
+    
+    //upper left
+    ArmMovement beginTop;
+    beginTop.destination = startTop;
+    beginTop.baseSpeed = degreesPerSecToMoveSpeed(60);
+    beginTop.lowerJointSpeed = degreesPerSecToMoveSpeed(15);
+    beginTop.upperJointSpeed = degreesPerSecToMoveSpeed(15);
+    
+    //upper right
+    ArmMovement finishTop;
+    finishTop.destination = endTop;
+    finishTop.baseSpeed = degreesPerSecToMoveSpeed(25);
+    finishTop.lowerJointSpeed = 0;
+    finishTop.upperJointSpeed = 0;
+    
+    //upper right
+    ArmMovement beginRight;
+    beginRight.destination = startRight;
+    beginRight.baseSpeed = degreesPerSecToMoveSpeed(5);
+    beginRight.lowerJointSpeed = degreesPerSecToMoveSpeed(15);
+    beginRight.upperJointSpeed = degreesPerSecToMoveSpeed(5);
+    
+    //lower right (back at start)
+    ArmMovement finishRight;
+    finishRight.destination = startBottom;
+    finishRight.baseSpeed = degreesPerSecToMoveSpeed(5);
+    finishRight.lowerJointSpeed = degreesPerSecToMoveSpeed(30);
+    finishRight.upperJointSpeed = degreesPerSecToMoveSpeed(12);
     
     //Reset arm to default position before beginning motion path
     resetArm();
@@ -394,15 +493,23 @@ void drawO()
     setArmPosition(beginBottom);
     setArmPosition(finishBottom);
     
-    //reset to default position
-    resetArm();
+    //draw left
+    setArmPosition(beginLeft);
+    setArmPosition(finishLeft);
     
     //draw top
-    
-    //draw left
+    setArmPosition(beginTop);
+    setArmPosition(finishTop);
     
     //draw right
+    setArmPosition(beginRight);
+    setArmPosition(finishRight);
     
+    //Reset arm to default position at end
+    resetArm();
+ 
+    //indicate that the O is done
+    dbgOutputLoc(LOC_DRAW_O_END);
 }
 
 /*
@@ -423,7 +530,7 @@ void resetArm()
     //define movement
     ArmMovement returnToDefault;
     returnToDefault.destination = defaultPosition;
-    returnToDefault.baseSpeed = degreesPerSecToMoveSpeed(15);
+    returnToDefault.baseSpeed = degreesPerSecToMoveSpeed(25);
     returnToDefault.lowerJointSpeed = degreesPerSecToMoveSpeed(30);
     returnToDefault.upperJointSpeed = degreesPerSecToMoveSpeed(30);
     

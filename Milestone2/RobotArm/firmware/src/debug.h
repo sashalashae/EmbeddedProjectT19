@@ -26,7 +26,12 @@ void dbgInit();
  * Defines for code locations
  */
 #define LOC_ENTER_THREAD                1
-#define LOC_ARM_MOVEMENT                2
+#define LOC_DRAW_X_START                2
+#define LOC_DRAW_X_END                  3
+#define LOC_DRAW_O_START                4
+#define LOC_DRAW_O_END                  5
+#define LOC_SLEEP_START                 6
+#define LOC_SLEEP_END                   7
 
 /*
  * Defines for error codes

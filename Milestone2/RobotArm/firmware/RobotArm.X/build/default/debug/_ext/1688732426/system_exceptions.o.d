@@ -131,5 +131,6 @@ build/default/debug/_ext/1688732426/system_exceptions.o:  \
  ../src/appthread.h  \
 ../src/system_config/default/system_definitions.h  \
  ../src/arm_library.h  \
+../src/debug.h  \
 ../src/helper_functions.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/system/debug/sys_debug.h 

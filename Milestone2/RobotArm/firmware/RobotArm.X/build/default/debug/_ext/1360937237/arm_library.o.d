@@ -129,4 +129,5 @@ build/default/debug/_ext/1360937237/arm_library.o:  \
  ../../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/list.h  \
  ../src/appthread.h  \
-../src/helper_functions.h 
+../src/helper_functions.h  \
+../src/debug.h 

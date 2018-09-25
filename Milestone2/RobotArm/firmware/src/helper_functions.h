@@ -12,6 +12,7 @@
 
 //External includes
 #include "system_definitions.h"
+#include "debug.h"
 
 //Function declarations
 void sleep(int16_t milliseconds);

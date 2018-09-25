@@ -20,9 +20,12 @@
  */
 void sleep(int16_t milliseconds)
 {
+    dbgOutputLoc(LOC_SLEEP_START);
+    //return if the sleep is too short
     if(milliseconds < portTICK_PERIOD_MS)
     {
         return;
     }
     vTaskDelay(milliseconds/portTICK_PERIOD_MS);
+    dbgOutputLoc(LOC_SLEEP_END);
 }

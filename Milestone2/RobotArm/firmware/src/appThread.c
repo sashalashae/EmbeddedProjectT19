@@ -117,6 +117,8 @@ void APPTHREAD_Tasks ( void )
 {    
     while(1)
     {
+        drawO();
+        sleep(3000);
         drawX();
         sleep(3000);
     }

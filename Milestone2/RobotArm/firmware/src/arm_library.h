@@ -12,6 +12,7 @@
 //External Includes
 #include "C:\Program Files (x86)\Microchip\xc32\v2.10\pic32mx\include\proc\p32mx795f512l.h"
 #include "system_definitions.h"
+#include "debug.h"
 
 //Data structure which stores servo angles for a given arm position
 typedef struct
