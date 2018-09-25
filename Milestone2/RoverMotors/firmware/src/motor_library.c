@@ -19,14 +19,10 @@
 
 void motors_initialize()
 {
-    //Configure left direction pin to act as output
-    SYS_PORTS_PinDirectionSelect(PORTS_ID_0, SYS_PORTS_DIRECTION_OUTPUT, PORT_CHANNEL_G, PORTS_BIT_POS_1);
     //Set left direction pin off initially
-    SYS_PORTS_PinClear(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_1);
-    //Configure right direction pin to act as output
-    SYS_PORTS_PinDirectionSelect(PORTS_ID_0, SYS_PORTS_DIRECTION_OUTPUT, PORT_CHANNEL_C, PORTS_BIT_POS_14);
+    SYS_PORTS_PinClear(PORT_ID, MOTOR_PORT_LEFT, MOTOR_PIN_LEFT);
     //Set right direction pin off initially
-    SYS_PORTS_PinClear(PORTS_ID_0, PORT_CHANNEL_C, PORTS_BIT_POS_14);
+    SYS_PORTS_PinClear(PORT_ID, MOTOR_PORT_RIGHT, MOTOR_PIN_RIGHT);
     
     //Initially disable all output compare modules
     OC1CON = 0;
@@ -57,28 +53,57 @@ void motors_initialize()
     OC2CONSET = BIT15;
 }
 
-void motors_stop()
+void motor_right(direction_t direction, uint8_t duty_cycle)
 {
-    OC1RS = 0;
-    OC2RS = 0;
+    //check for duty cycle that is too high
+    if(duty_cycle > 100)
+    {
+        duty_cycle = 100;
+    }
+    SYS_PORTS_PinWrite(PORT_ID, MOTOR_PORT_RIGHT, MOTOR_PIN_RIGHT, direction);
+    OC1RS = duty_cycle*DUTY_CYCLE_COEFFICIENT;
+}
+
+void motor_left(direction_t direction, uint8_t duty_cycle)
+{
+    //check for duty cycle that is too high
+    if(duty_cycle > 100)
+    {
+        duty_cycle = 100;
+    }
+    SYS_PORTS_PinWrite(PORT_ID, MOTOR_PORT_LEFT, MOTOR_PIN_LEFT, direction);
+    OC2RS = duty_cycle*DUTY_CYCLE_COEFFICIENT;
 }
 
 void motors_forward(uint8_t duty_cycle)
 {
-    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_1, false);
-    OC1RS = duty_cycle*250;
-    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_C, PORTS_BIT_POS_14, false);
-    OC2RS = duty_cycle*250;
+    motor_right(FORWARD, duty_cycle);
+    motor_left(FORWARD, duty_cycle);
 }
 
 void motors_reverse(uint8_t duty_cycle)
 {
-    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_1, true);
-    OC1RS = duty_cycle*250;
-    SYS_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_C, PORTS_BIT_POS_14, true);
-    OC2RS = duty_cycle*250;
+    motor_right(REVERSE, duty_cycle);
+    motor_left(REVERSE, duty_cycle);
 }
 
+void motors_stop()
+{
+    motor_right(FORWARD, 0);
+    motor_left(FORWARD, 0);
+}
+
+void motors_turn_right()
+{
+    motor_right(FORWARD, 0);
+    motor_left(FORWARD, 50);
+}
+
+void motors_turn_left()
+{
+    motor_left(FORWARD, 0);
+    motor_right(FORWARD, 50);
+}
 
 /* *****************************************************************************
  End of File

@@ -92,11 +92,13 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 void APP_THREAD_Initialize ( void )
 {
-    //Configure LED pin to act as output
-    SYS_PORTS_PinDirectionSelect(PORTS_ID_0, SYS_PORTS_DIRECTION_OUTPUT, PORT_CHANNEL_A, PORTS_BIT_POS_3);
     //Set USER LED off initially
     SYS_PORTS_PinClear(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
+    //Enable timer interrupt
+    PLIB_INT_SourceEnable(INT_ID_0,INT_SOURCE_TIMER_4);
+    //PLIB_INT_SourceEnable(INT_ID_0,INT_SOURCE_TIMER_5);
     motors_initialize();
+    motors_forward(50);
 }
 
 
@@ -110,8 +112,12 @@ void APP_THREAD_Initialize ( void )
 
 void APP_THREAD_Tasks ( void )
 {
-    SYS_PORTS_PinSet(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
-    motors_forward(50);
+    //Start the timers
+    DRV_TMR0_Start();
+    //DRV_TMR1_Start();
+    
+    //turn on LED
+    //SYS_PORTS_PinSet(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
 }
 
  

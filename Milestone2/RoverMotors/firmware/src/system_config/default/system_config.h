@@ -91,7 +91,7 @@ extern "C" {
 #define SYS_PORT_AD1PCFG        ~0xffff
 #define SYS_PORT_CNPUE          0x0
 #define SYS_PORT_CNEN           0x0
-#define SYS_PORT_A_TRIS         0xFFFF
+#define SYS_PORT_A_TRIS         0xFFF7
 #define SYS_PORT_A_LAT          0x0000
 #define SYS_PORT_A_ODC          0x0000
 
@@ -115,7 +115,7 @@ extern "C" {
 #define SYS_PORT_F_LAT          0x0000
 #define SYS_PORT_F_ODC          0x0000
 
-#define SYS_PORT_G_TRIS         0xFFFF
+#define SYS_PORT_G_TRIS         0xFFFD
 #define SYS_PORT_G_LAT          0x0000
 #define SYS_PORT_G_ODC          0x0000
 
@@ -128,7 +128,36 @@ extern "C" {
 // Section: Driver Configuration
 // *****************************************************************************
 // *****************************************************************************
+/*** Timer Driver Configuration ***/
+#define DRV_TMR_INTERRUPT_MODE             true
 
+/*** Timer Driver 0 Configuration ***/
+#define DRV_TMR_PERIPHERAL_ID_IDX0          TMR_ID_4
+#define DRV_TMR_INTERRUPT_SOURCE_IDX0       INT_SOURCE_TIMER_4
+#define DRV_TMR_INTERRUPT_VECTOR_IDX0       INT_VECTOR_T4
+#define DRV_TMR_ISR_VECTOR_IDX0             _TIMER_4_VECTOR
+#define DRV_TMR_INTERRUPT_PRIORITY_IDX0     INT_PRIORITY_LEVEL1
+#define DRV_TMR_INTERRUPT_SUB_PRIORITY_IDX0 INT_SUBPRIORITY_LEVEL0
+#define DRV_TMR_CLOCK_SOURCE_IDX0           DRV_TMR_CLKSOURCE_EXTERNAL_SYNCHRONOUS
+#define DRV_TMR_PRESCALE_IDX0               TMR_PRESCALE_VALUE_1
+#define DRV_TMR_OPERATION_MODE_IDX0         DRV_TMR_OPERATION_MODE_16_BIT
+#define DRV_TMR_ASYNC_WRITE_ENABLE_IDX0     false
+#define DRV_TMR_POWER_STATE_IDX0            
+
+#define DRV_TMR_PERIPHERAL_ID_IDX1          TMR_ID_5
+#define DRV_TMR_INTERRUPT_SOURCE_IDX1       INT_SOURCE_TIMER_5
+#define DRV_TMR_INTERRUPT_VECTOR_IDX1       INT_VECTOR_T5
+#define DRV_TMR_ISR_VECTOR_IDX1             _TIMER_5_VECTOR
+#define DRV_TMR_INTERRUPT_PRIORITY_IDX1     INT_PRIORITY_LEVEL1
+#define DRV_TMR_INTERRUPT_SUB_PRIORITY_IDX1 INT_SUBPRIORITY_LEVEL0
+#define DRV_TMR_CLOCK_SOURCE_IDX1           DRV_TMR_CLKSOURCE_EXTERNAL_SYNCHRONOUS
+#define DRV_TMR_PRESCALE_IDX1               TMR_PRESCALE_VALUE_1
+#define DRV_TMR_OPERATION_MODE_IDX1         DRV_TMR_OPERATION_MODE_16_BIT
+
+#define DRV_TMR_ASYNC_WRITE_ENABLE_IDX1     false
+#define DRV_TMR_POWER_STATE_IDX1            
+
+ 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Middleware & Other Library Configuration

@@ -62,6 +62,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system/common/sys_common.h"
 #include "app_thread.h"
 #include "system_definitions.h"
+#include "motor_library.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -70,6 +71,57 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
  
-/*******************************************************************************
+
+void __ISR(_TIMER_4_VECTOR, ipl1AUTO) IntHandlerDrvTmrInstance0(void)
+{
+    //stop the motors
+    motors_stop();
+    
+    //check current timer period
+    uint32_t period = DRV_TMR0_PeriodValueGet();
+    
+    if(period == TURN_90_DEGREE_TRANSITION)
+    {
+        DRV_TMR0_PeriodValueSet(5*ONE_CM_TRANSITION);
+        motors_reverse(50);
+    }
+    else if(period == 10*ONE_CM_TRANSITION)
+    {
+        DRV_TMR0_PeriodValueSet(TURN_90_DEGREE_TRANSITION);
+        motors_turn_right();
+    }
+    else if(period == 5*ONE_CM_TRANSITION)
+    {
+        DRV_TMR0_PeriodValueSet(15*ONE_CM_TRANSITION);
+        motors_forward(50);
+    }
+    else if(period == 15*ONE_CM_TRANSITION)
+    {
+        //motors_stop();
+        PLIB_INT_SourceEnable(INT_ID_0,INT_SOURCE_TIMER_5);
+        DRV_TMR1_Start();
+        DRV_TMR1_PeriodValueSet(TURN_90_DEGREE_TRANSITION);
+        motors_turn_left();        
+    }
+    
+    //toggle on-board LED
+    //SYS_PORTS_PinToggle(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
+    
+    //Clear Interrupt Flag
+    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_4);
+}
+
+void __ISR(_TIMER_5_VECTOR, ipl1AUTO) IntHandlerDrvTmrInstance1(void)
+{
+    motors_stop();
+    
+    //toggle on-board LED
+    SYS_PORTS_PinToggle(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
+    
+    //Clear Interrupt Flag
+    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_5);
+}
+
+ /*******************************************************************************
  End of File
 */

@@ -128,4 +128,5 @@ build/default/production/_ext/340578644/sys_devcon_pic32mx.o:  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/../templates/bmx_DataRAMPartition_Default.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/../templates/bmx_ProgramFlashMemorySize_Default.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/../templates/bmx_DataRAMSize_Default.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/../templates/bmx_ProgramFlashBootSize_Default.h 
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/../templates/bmx_ProgramFlashBootSize_Default.h  \
+

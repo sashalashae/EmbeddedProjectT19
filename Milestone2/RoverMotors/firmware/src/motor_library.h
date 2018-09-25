@@ -26,13 +26,38 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-    
-#define BIT15 (1<<15)
 
+#define PORT_ID                     PORTS_ID_0
+#define MOTOR_PORT_LEFT             PORT_CHANNEL_C
+#define MOTOR_PIN_LEFT              PORTS_BIT_POS_14
+#define MOTOR_PORT_RIGHT            PORT_CHANNEL_G
+#define MOTOR_PIN_RIGHT             PORTS_BIT_POS_1
+//#define ENCODER_PORT_LEFT
+//#define ENCODER_PIN_LEFT
+//#define ENCODER_PORT_RIGHT
+//#define ENCODER_PIN_RIGHT
+    
+#define BIT15                       (1<<15)
+
+#define DUTY_CYCLE_COEFFICIENT      250
+#define ONE_CM_TRANSITION           150
+#define TURN_90_DEGREE_TRANSITION   1275
+    
+// Enum type to define motor direction
+typedef enum direction
+{
+    FORWARD = false,
+    REVERSE = true,
+} direction_t;
+    
 void motors_initialize();
-void motors_stop();
+void motor_left(direction_t direction, uint8_t duty_cycle);
+void motor_right(direction_t direction, uint8_t duty_cycle);
 void motors_forward(uint8_t duty_cycle);
 void motors_reverse(uint8_t duty_cycle);
+void motors_stop();
+void motors_turn_right();
+void motors_turn_left();
 
     /* Provide C++ Compatibility */
 #ifdef __cplusplus
