@@ -129,4 +129,6 @@ build/default/production/_ext/1360937237/navigation_thread.o:  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/list.h  \
- ../src/app.h 
+ ../src/app.h  \
+../src/sleep.h  \
+../src/pdStruct.h 

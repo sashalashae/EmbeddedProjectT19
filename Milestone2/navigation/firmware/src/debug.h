@@ -11,9 +11,12 @@
 #include <stdint.h>
 #include "system_config.h"
 #include "system_definitions.h"
+#include "navigation_thread.h"
+#include "pdStruct.h"
 
 void dbgOutputLoc(uint32_t outLoc);
 void dbgErrorHandler(uint32_t errorCode); 
+void navigation_test_bench(Position_Data pd);
 
 /*
  * Defines for code locations
@@ -36,14 +39,18 @@ void dbgErrorHandler(uint32_t errorCode);
 #define DLOC_TRUE_LEFT              14
 #define DLOC_LEFT_BOTTOM            15
 #define DLOC_OFF_TRACK              16
+#define DLOC_SLEEP_START            17
+#define DLOC_SLEEP_END              18
 
 /*
  * Defines for error codes
  */
 
-#define ERROR_UNKNOWN               17
-#define ERROR_BOUNDS                18
-#define ERROR_DEFAULT_CASE          19
+#define ERROR_UNKNOWN               19
+#define ERROR_BOUNDS                20
+#define ERROR_DEFAULT_CASE          21
+
+
 
 #endif	/* DEBUG_H */
 

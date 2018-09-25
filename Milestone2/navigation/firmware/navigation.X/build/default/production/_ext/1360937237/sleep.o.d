@@ -1,5 +1,7 @@
-build/default/production/_ext/1688732426/system_init.o:  \
- ../src/system_config/default/system_init.c  \
+build/default/production/_ext/1360937237/sleep.o:  \
+../src/sleep.c  \
+ ../src/sleep.h  \
+../src/debug.h  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../../../framework/peripheral/ports/plib_ports.h  \
@@ -39,7 +41,6 @@ build/default/production/_ext/1688732426/system_init.o:  \
  ../../../../../../framework/system/devcon/sys_devcon.h  \
  ../../../../../../framework/system/system.h  \
  ../../../../../../framework/system/clk/sys_clk.h  \
- ../src/system_config/default/system_config.h  \
  ../../../../../../framework/peripheral/osc/plib_osc.h  \
  ../../../../../../framework/peripheral/osc/processor/osc_processor.h  \
  ../../../../../../framework/peripheral/osc/processor/osc_p32xxxx.h  \
@@ -129,8 +130,5 @@ build/default/production/_ext/1688732426/system_init.o:  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/list.h  \
  ../src/app.h  \
-../src/system_config/default/system_definitions.h  \
- ../src/navigation_thread.h  \
-../src/debug.h  \
-../src/pdStruct.h  \
- ../src/sleep.h 
+../src/navigation_thread.h  \
+../src/pdStruct.h 

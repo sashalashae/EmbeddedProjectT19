@@ -61,6 +61,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 //User defined includes
 #include "navigation_thread.h"
+#include "sleep.h"
+#include "debug.h"
+#include "pdStruct.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility

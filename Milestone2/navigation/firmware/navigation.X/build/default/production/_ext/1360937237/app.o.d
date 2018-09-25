@@ -130,4 +130,6 @@ build/default/production/_ext/1360937237/app.o:  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/list.h  \
  ../src/app.h  \
 ../src/navigation_thread.h  \
-../src/debug.h 
+../src/debug.h  \
+../src/pdStruct.h  \
+ ../src/sleep.h 
