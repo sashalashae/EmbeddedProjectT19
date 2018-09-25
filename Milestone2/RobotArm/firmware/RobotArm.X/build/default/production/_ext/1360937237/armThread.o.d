@@ -1,6 +1,7 @@
-build/default/production/_ext/1688732426/system_tasks.o:  \
- ../src/system_config/default/system_tasks.c  \
- ../src/system_config/default/system_config.h  \
+build/default/production/_ext/1360937237/armThread.o:  \
+../src/armThread.c  \
+ ../src/armThread.h  \
+../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/ports_processor.h  \
@@ -39,7 +40,6 @@ build/default/production/_ext/1688732426/system_tasks.o:  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/system/devcon/sys_devcon.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/system/system.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/system/clk/sys_clk.h  \
- ../src/system_config/default/system_config.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/plib_osc.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/osc_processor.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/osc_p32xxxx.h  \
@@ -129,7 +129,6 @@ build/default/production/_ext/1688732426/system_tasks.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/list.h  \
  ../src/testthread.h  \
-../src/system_config/default/system_definitions.h  \
- ../src/armthread.h  \
+../src/armthread.h  \
 ../src/arm_library.h  \
-../src/debug.h 
+ ../src/debug.h 

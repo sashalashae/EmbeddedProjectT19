@@ -54,7 +54,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include "system_config.h"
 #include "system_definitions.h"
-#include "appthread.h"
+#include "testthread.h"
+#include "armthread.h"
 
 
 // *****************************************************************************
@@ -68,7 +69,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 static void _SYS_Tasks ( void );
  
  
-static void _APPTHREAD_Tasks(void);
+static void _TESTTHREAD_Tasks(void);
+static void _ARMTHREAD_Tasks(void);
 
 
 // *****************************************************************************
@@ -92,12 +94,15 @@ void SYS_Tasks ( void )
                 "Sys Tasks",
                 1024, NULL, 0, NULL);
 
- 
- 
-    /* Create OS Thread for APPTHREAD Tasks. */
-    xTaskCreate((TaskFunction_t) _APPTHREAD_Tasks,
-                "APPTHREAD Tasks",
+    /* Create OS Thread for TESTTHREAD Tasks. */
+    xTaskCreate((TaskFunction_t) _TESTTHREAD_Tasks,
+                "TESTTHREAD Tasks",
                 1024, NULL, 1, NULL);
+
+    /* Create OS Thread for ARMTHREAD Tasks. */
+    xTaskCreate((TaskFunction_t) _ARMTHREAD_Tasks,
+                "ARMTHREAD Tasks",
+                1024, NULL, 2, NULL);
 
     /**************
      * Start RTOS * 
@@ -134,17 +139,34 @@ static void _SYS_Tasks ( void)
 
 /*******************************************************************************
   Function:
-    void _APPTHREAD_Tasks ( void )
+    void _TESTTHREAD_Tasks ( void )
 
   Summary:
-    Maintains state machine of APPTHREAD.
+    Maintains state machine of TESTTHREAD.
 */
 
-static void _APPTHREAD_Tasks(void)
+static void _TESTTHREAD_Tasks(void)
 {
     while(1)
     {
-        APPTHREAD_Tasks();
+        TESTTHREAD_Tasks();
+    }
+}
+
+
+/*******************************************************************************
+  Function:
+    void _ARMTHREAD_Tasks ( void )
+
+  Summary:
+    Maintains state machine of ARMTHREAD.
+*/
+
+static void _ARMTHREAD_Tasks(void)
+{
+    while(1)
+    {
+        ARMTHREAD_Tasks();
     }
 }
 

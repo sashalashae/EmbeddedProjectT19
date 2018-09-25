@@ -1,7 +1,7 @@
 build/default/production/_ext/1688732426/system_interrupt.o:  \
  ../src/system_config/default/system_interrupt.c  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_common.h  \
- ../src/appthread.h  \
+ ../src/testthread.h  \
 ../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports.h  \
@@ -119,16 +119,16 @@ build/default/production/_ext/1688732426/system_interrupt.o:  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/system/int/sys_int_mapping.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports_definitions.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/FreeRTOS.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/FreeRTOS.h  \
  ../src/system_config/default/FreeRTOSConfig.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/projdefs.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/portable.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/deprecated_definitions.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX/portmacro.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/list.h  \
- ../src/arm_library.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/projdefs.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/portable.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/deprecated_definitions.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX/portmacro.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/list.h  \
+ ../src/armthread.h  \
+../src/arm_library.h  \
 ../src/debug.h  \
-../src/helper_functions.h  \
  ../src/system_config/default/system_definitions.h 

@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone2/RobotArm/firmware/src/appThread.c</file>
-            <file>file:/C:/Users/Nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone2/RobotArm/firmware/src/helper_functions.c</file>
-            <file>file:/C:/Users/Nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone2/RobotArm/firmware/src/arm_library.h</file>
-            <file>file:/C:/Users/Nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone2/RobotArm/firmware/src/debug.h</file>
-            <file>file:/C:/Users/Nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone2/RobotArm/firmware/src/helper_functions.h</file>
-            <file>file:/C:/Users/Nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone2/RobotArm/firmware/src/system_config/default/system_tasks.c</file>
-            <file>file:/C:/Users/Nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone2/RobotArm/firmware/src/debug.c</file>
-            <file>file:/C:/Users/Nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone2/RobotArm/firmware/src/arm_library.c</file>
+            <file>file:/C:/Users/nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone2/RobotArm/firmware/src/debug.c</file>
+            <file>file:/C:/Users/nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone2/RobotArm/firmware/src/armThread.h</file>
+            <file>file:/C:/Users/nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone2/RobotArm/firmware/src/arm_library.h</file>
+            <file>file:/C:/Users/nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone2/RobotArm/firmware/src/arm_queue.c</file>
+            <file>file:/C:/Users/nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone2/RobotArm/firmware/src/testThread.c</file>
+            <file>file:/C:/Users/nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone2/RobotArm/firmware/src/testThread.h</file>
+            <file>file:/C:/Users/nolan/OneDrive/ECE4534/EmbeddedProjectT19/Milestone2/RobotArm/firmware/src/arm_queue.h</file>
         </group>
     </open-files>
 </project-private>

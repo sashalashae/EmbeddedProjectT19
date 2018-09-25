@@ -1,18 +1,27 @@
 /*******************************************************************************
-  System Definitions
-
+  MPLAB Harmony Application Source File
+  
+  Company:
+    Microchip Technology Inc.
+  
   File Name:
-    system_definitions.h
+    testthread.c
 
   Summary:
-    MPLAB Harmony project system definitions.
+    This file contains the source code for the MPLAB Harmony application.
 
   Description:
-    This file contains the system-wide prototypes and definitions for an MPLAB
-    Harmony project.
+    This file contains the source code for the MPLAB Harmony application.  It 
+    implements the logic of the application's state machine and it may call 
+    API routines of other MPLAB Harmony modules in the system, such as drivers,
+    system services, and middleware.  However, it does not call any of the
+    system interfaces (such as the "Initialize" and "Tasks" functions) of any of
+    the modules in the system or make any assumptions about when those functions
+    are called.  That is the responsibility of the configuration-specific system
+    files.
  *******************************************************************************/
 
-//DOM-IGNORE-BEGIN
+// DOM-IGNORE-BEGIN
 /*******************************************************************************
 Copyright (c) 2013-2014 released Microchip Technology Inc.  All rights reserved.
 
@@ -24,7 +33,7 @@ controller that is integrated into your product or third party product
 You should refer to the license agreement accompanying this Software for
 additional information regarding your rights and obligations.
 
-SOFTWARE AND DOCUMENTATION ARE PROVIDED AS IS WITHOUT WARRANTY OF ANY KIND,
+SOFTWARE AND DOCUMENTATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
 EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF
 MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
 IN NO EVENT SHALL MICROCHIP OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER
@@ -35,81 +44,85 @@ CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT OF
 SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
  *******************************************************************************/
-//DOM-IGNORE-END
-#ifndef _SYS_DEFINITIONS_H
-#define _SYS_DEFINITIONS_H
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Included Files
-// *****************************************************************************
-// *****************************************************************************
-#include <stdint.h>
-#include <stddef.h>
-#include <stdbool.h>
-#include "system/common/sys_common.h"
-#include "system/common/sys_module.h"
-#include "system/devcon/sys_devcon.h"
-#include "system/clk/sys_clk.h"
-#include "system/int/sys_int.h"
-#include "system/ports/sys_ports.h"
-#include "FreeRTOS.h"
-#include "task.h"
-#include "testthread.h"
-#include "armthread.h"
-
-
-// DOM-IGNORE-BEGIN
-#ifdef __cplusplus  // Provide C++ Compatibility
-
-extern "C" {
-
-#endif
 // DOM-IGNORE-END
 
+
 // *****************************************************************************
 // *****************************************************************************
-// Section: Type Definitions
+// Section: Included Files 
+// *****************************************************************************
+// *****************************************************************************
+
+#include "testthread.h"
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Global Data Definitions
 // *****************************************************************************
 // *****************************************************************************
 
 // *****************************************************************************
-/* System Objects
+// *****************************************************************************
+// Section: Application Callback Functions
+// *****************************************************************************
+// *****************************************************************************
 
-  Summary:
-    Structure holding the system's object handles
+/* TODO:  Add any necessary callback functions.
+*/
 
-  Description:
-    This structure contains the object handles for all objects in the
-    MPLAB Harmony project's system configuration.
+// *****************************************************************************
+// *****************************************************************************
+// Section: Application Local Functions
+// *****************************************************************************
+// *****************************************************************************
+
+
+/* TODO:  Add any necessary local functions.
+*/
+
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Application Initialization and State Machine Functions
+// *****************************************************************************
+// *****************************************************************************
+
+/*******************************************************************************
+  Function:
+    void TESTTHREAD_Initialize ( void )
 
   Remarks:
-    These handles are returned from the "Initialize" functions for each module
-    and must be passed into the "Tasks" function for each module.
-*/
+    See prototype in testthread.h.
+ */
 
-typedef struct
+void TESTTHREAD_Initialize ( void )
 {
-
-
-} SYSTEM_OBJECTS;
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: extern declarations
-// *****************************************************************************
-// *****************************************************************************
-
-extern SYSTEM_OBJECTS sysObj;
-
-//DOM-IGNORE-BEGIN
-#ifdef __cplusplus
+    //initialize debug
+    dbgInit();
 }
-#endif
-//DOM-IGNORE-END
 
-#endif /* _SYS_DEFINITIONS_H */
+
+/******************************************************************************
+  Function:
+    void TESTTHREAD_Tasks ( void )
+
+  Remarks:
+    See prototype in testthread.h.
+ */
+
+void TESTTHREAD_Tasks ( void )
+{
+    while(1)
+    {
+        testCase01();
+        sleep(5000);
+        testCase02();
+        sleep(5000);
+    }
+}
+
+ 
+
 /*******************************************************************************
  End of File
-*/
-
+ */

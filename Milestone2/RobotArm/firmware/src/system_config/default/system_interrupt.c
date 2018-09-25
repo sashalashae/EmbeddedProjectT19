@@ -60,7 +60,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 #include "system/common/sys_common.h"
-#include "appthread.h"
+#include "testthread.h"
+#include "armthread.h"
 #include "system_definitions.h"
 
 // *****************************************************************************

@@ -160,7 +160,8 @@ void SYS_Initialize ( void* data )
     /* Initialize Middleware */
 
     /* Initialize the Application */
-    APPTHREAD_Initialize();
+    TESTTHREAD_Initialize();
+    ARMTHREAD_Initialize();
 }
 
 
