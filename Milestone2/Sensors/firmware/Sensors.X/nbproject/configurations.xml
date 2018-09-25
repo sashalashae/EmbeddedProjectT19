@@ -127,9 +127,8 @@
         <itemPath>../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/stream_buffer.h</itemPath>
         <itemPath>../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/message_buffer.h</itemPath>
       </logicalFolder>
-      <itemPath>../../Milestone1/firmware/src/debug.h</itemPath>
-      <itemPath>../../Milestone1/firmware/src/sensor_queue.h</itemPath>
-      <itemPath>../../Milestone1/firmware/src/user_drivers.h</itemPath>
+      <itemPath>../../Milestone1/firmware/src/sensor.h</itemPath>
+      <itemPath>../../Milestone1/firmware/src/sensor_debug.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -229,15 +228,16 @@
         <itemPath>../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/event_groups.c</itemPath>
         <itemPath>../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/stream_buffer.c</itemPath>
       </logicalFolder>
-      <itemPath>../../Milestone1/firmware/src/debug.c</itemPath>
-      <itemPath>../../Milestone1/firmware/src/sensor_queue.c</itemPath>
-      <itemPath>../../Milestone1/firmware/src/user_drivers.c</itemPath>
+      <itemPath>../../Milestone1/firmware/src/sensor.c</itemPath>
+      <itemPath>../../Milestone1/firmware/src/sensor_debug.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
                    projectFiles="false">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
+    <itemPath>../../Milestone1/firmware/src/sensor_drivers.c</itemPath>
+    <itemPath>../../Milestone1/firmware/src/sensor_drivers.h</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>../src</Elem>
@@ -257,7 +257,7 @@
         <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>XC32</languageToolchain>
         <languageToolchainVersion>2.10</languageToolchainVersion>
-        <platform>3</platform>
+        <platform>4</platform>
       </toolsSet>
       <packs>
         <pack name="PIC32MX_DFP" vendor="Microchip" version="1.0.23"/>
