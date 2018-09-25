@@ -290,7 +290,7 @@ void drawX()
     ArmPosition endXLeft;
     endXLeft.baseServo = AngleToCompareVal(-20);
     endXLeft.lowerJoint = AngleToCompareVal(-25);
-    endXLeft.upperJoint = AngleToCompareVal(5);
+    endXLeft.upperJoint = AngleToCompareVal(0);
     
     //Starting position for right half of X
     ArmPosition startXRight;
@@ -300,7 +300,7 @@ void drawX()
     
     //Ending position for right half of X
     ArmPosition endXRight; 
-    endXRight.baseServo = AngleToCompareVal(25);
+    endXRight.baseServo = AngleToCompareVal(20);
     endXRight.lowerJoint = AngleToCompareVal(35);
     endXRight.upperJoint = AngleToCompareVal(-5);
     
@@ -359,6 +359,49 @@ void drawX()
  */
 void drawO()
 {
+    ArmPosition startRight;
+    
+    ArmPosition endRight;
+    
+    ArmPosition startLeft;
+    
+    ArmPosition endLeft;
+    
+    ArmPosition startTop;
+    
+    ArmPosition endTop;
+    
+    ArmMovement beginRight;
+    
+    ArmMovement finishRight;
+    
+    ArmMovement beginLeft;
+    
+    ArmMovement finishLeft;
+    
+    ArmMovement beginTop;
+    
+    ArmMovement finishTop;
+    
+    ArmMovement beginBottom;
+    
+    ArmMovement finishBottom;
+    
+    //Reset arm to default position before beginning motion path
+    resetArm();
+    
+    //draw bottom
+    setArmPosition(beginBottom);
+    setArmPosition(finishBottom);
+    
+    //reset to default position
+    resetArm();
+    
+    //draw top
+    
+    //draw left
+    
+    //draw right
     
 }
 
@@ -381,8 +424,8 @@ void resetArm()
     ArmMovement returnToDefault;
     returnToDefault.destination = defaultPosition;
     returnToDefault.baseSpeed = degreesPerSecToMoveSpeed(15);
-    returnToDefault.lowerJointSpeed = degreesPerSecToMoveSpeed(25);
-    returnToDefault.upperJointSpeed = degreesPerSecToMoveSpeed(25);
+    returnToDefault.lowerJointSpeed = degreesPerSecToMoveSpeed(30);
+    returnToDefault.upperJointSpeed = degreesPerSecToMoveSpeed(30);
     
     //Move arm to default position
     setArmPosition(returnToDefault);
