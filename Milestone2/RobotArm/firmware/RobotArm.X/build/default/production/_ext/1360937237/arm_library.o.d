@@ -129,5 +129,9 @@ build/default/production/_ext/1360937237/arm_library.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/list.h  \
  ../src/testthread.h  \
-../src/armthread.h  \
-../src/debug.h 
+../src/arm_queue.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/queue.h  \
+ ../src/test_cases.h  \
+../src/helper_functions.h  \
+../src/debug.h  \
+ ../src/armthread.h 

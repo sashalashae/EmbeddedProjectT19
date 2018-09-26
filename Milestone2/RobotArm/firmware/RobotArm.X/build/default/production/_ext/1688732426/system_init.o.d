@@ -130,6 +130,10 @@ build/default/production/_ext/1688732426/system_init.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/list.h  \
  ../src/testthread.h  \
 ../src/system_config/default/system_definitions.h  \
- ../src/armthread.h  \
+ ../src/arm_queue.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/queue.h  \
+ ../src/test_cases.h  \
 ../src/arm_library.h  \
-../src/debug.h 
+../src/debug.h  \
+ ../src/helper_functions.h  \
+../src/armthread.h 

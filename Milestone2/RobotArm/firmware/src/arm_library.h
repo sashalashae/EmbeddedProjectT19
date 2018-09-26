@@ -64,6 +64,7 @@ typedef struct
 
 //Configuration Functions
 void armInit();
+void armCalibrate();
 
 //Helper Functions
 uint16_t AngleToCompareVal(int16_t servoAngle);

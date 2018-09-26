@@ -20,7 +20,7 @@ typedef enum
     TimerTick = 0,
     ResetArm,
     DrawX,
-    Draw0,
+    DrawO,
     SetServoAngle,
     CalibrateArm
             
@@ -36,6 +36,7 @@ typedef struct
 void ArmQueue_Initialize(uint32_t size);
 ArmMessage ArmQueue_ReceiveMsg();
 BaseType_t ArmQueue_SendMsg();
+void Arm_SendAck();
 
 #endif
         

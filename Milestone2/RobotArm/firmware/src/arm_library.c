@@ -192,6 +192,19 @@ void setArmPosition(ArmMovement movement)
 }
 
 /*
+ * Function: armCalibrate
+ * 
+ * Description: Runs a calibration routine for the arm, to find the min and max
+ *              PWM widths for each servo.
+ * 
+ * Returns: void
+ */
+void armCalibrate()
+{
+    
+}
+
+/*
  * Function: setServoAngle
  * 
  * Description: Sets the angle for the servo attached to the specified

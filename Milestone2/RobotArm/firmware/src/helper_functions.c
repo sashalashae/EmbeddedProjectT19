@@ -24,11 +24,10 @@ void sleep(int16_t milliseconds)
     //turn on LED, indicating a sleep
     SYS_PORTS_PinSet(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
     //return if the sleep is too short
-    if(milliseconds < portTICK_PERIOD_MS)
+    if(milliseconds >= portTICK_PERIOD_MS)
     {
-        return;
+        vTaskDelay(milliseconds/portTICK_PERIOD_MS);
     }
-    vTaskDelay(milliseconds/portTICK_PERIOD_MS);
     //turn off LED    //Set LED on
     SYS_PORTS_PinClear(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
     dbgOutputLoc(LOC_SLEEP_END);

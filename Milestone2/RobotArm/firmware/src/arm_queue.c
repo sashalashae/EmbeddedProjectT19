@@ -18,3 +18,8 @@ ArmMessage ArmQueue_ReceiveMsg()
 {
     
 }
+
+void Arm_SendAck()
+{
+    
+}

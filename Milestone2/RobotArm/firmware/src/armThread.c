@@ -22,6 +22,30 @@ void ARMTHREAD_Tasks ( void )
         //state machine for the message type
         switch(currentMessage.msgType)
         {
+            case DrawX:
+                drawX();
+                Arm_SendAck();
+                break;
+            case DrawO:
+                drawO();
+                Arm_SendAck();
+                break;
+            case ResetArm:
+                resetArm();
+                Arm_SendAck();
+                break;
+            case SetServoAngle:
+                setServoAngle((currentMessage.msgValue & 0xF00) >> 16, (currentMessage.msgValue & 0xFF));
+                Arm_SendAck();
+                break;
+            case TimerTick:
+                break;
+            case CalibrateArm:
+                armCalibrate();
+                Arm_SendAck();
+                break;
+            default:
+                break;
         }
     }
 }
