@@ -16,7 +16,14 @@ void ArmQueue_Initialize(uint32_t size)
 
 ArmMessage ArmQueue_ReceiveMsg()
 {
-    
+    ArmMessage data;
+    BaseType_t status = xQueueReceive(ArmQueue, &data, portMAX_DELAY);
+    return data;
+}
+
+BaseType_t ArmQueue_SendMsg(ArmMessage msg)
+{
+    return xQueueOverwrite(ArmQueue, &msg);
 }
 
 void Arm_SendAck()

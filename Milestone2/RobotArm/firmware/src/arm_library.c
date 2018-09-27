@@ -8,6 +8,10 @@
 
 #include "arm_library.h"
 
+//Variable to track base calibration
+uint16_t BASE_MAX;
+uint16_t BASE_MIN;
+
 /*
  * Function: armInit
  * 
@@ -229,9 +233,46 @@ void setServoAngle(uint8_t compareModule, int16_t servoAngle)
         case 3:
             OC3RS = AngleToCompareVal(servoAngle);
             break;
+        case 4:
+            OC4RS = AngleToCompareVal(servoAngle);
+        case 5:
+            OC5RS = AngleToCompareVal(servoAngle);
         default:
             //Invalid compare module ID
-            return;
+            break;
+    }
+}
+
+/*
+ * Function: setCompareVal
+ * 
+ * Description: Sets the OCxRS value for a specified compare module, x
+ * 
+ * @param compareModule: The module number to set the value for (1 - 5)
+ * 
+ * @param compareValue: The value to set OCxRS to.
+ * 
+ * Returns: void
+ */
+void setCompareVal(uint8_t compareModule, uint16_t compareValue)
+{
+    switch(compareModule)
+    {
+        case 1:
+            OC1RS = compareValue;
+            break;
+        case 2:
+            OC2RS = compareValue;
+            break;
+        case 3:
+            OC3RS = compareValue;
+            break;
+        case 4:
+            OC4RS = compareValue;
+        case 5:
+            OC5RS = compareValue;
+        default:
+            //Invalid compare module ID
             break;
     }
 }

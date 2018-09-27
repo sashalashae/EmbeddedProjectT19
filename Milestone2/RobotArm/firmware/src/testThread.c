@@ -112,12 +112,12 @@ void TESTTHREAD_Initialize ( void )
 
 void TESTTHREAD_Tasks ( void )
 {
+    ArmMessage command;
     while(1)
     {
-        testCase01();
-        sleep(5000);
-        testCase02();
-        sleep(5000);
+        command.msgType = DrawX;
+        ArmQueue_SendMsg(command);
+        sleep(10000);
     }
 }
 

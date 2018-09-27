@@ -11,6 +11,8 @@ void ARMTHREAD_Initialize ( void )
 {
     //Initialize arm control
     armInit();
+    //Initialize command queue
+    ArmQueue_Initialize(1);
 }
 
 void ARMTHREAD_Tasks ( void )
@@ -18,6 +20,7 @@ void ARMTHREAD_Tasks ( void )
     ArmMessage currentMessage;
     while(1)
     {
+        //receive a command message
         currentMessage = ArmQueue_ReceiveMsg();
         //state machine for the message type
         switch(currentMessage.msgType)
