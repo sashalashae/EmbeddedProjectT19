@@ -17,7 +17,8 @@
 
 typedef enum 
 {
-    TimerTick = 0,
+    Null = 0,
+    TimerTick,
     ResetArm,
     DrawX,
     DrawO,

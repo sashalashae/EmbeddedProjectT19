@@ -14,6 +14,38 @@
 #include "system_definitions.h"
 #include "debug.h"
 
+//Maximum movement speed for servo
+#define MAXSPEED            (1250)
+
+//Period of one MS in movement function
+#define MOVEMENT_PERIOD_MS  (60)
+
+//Number of compare register ticks per 180 degrees
+#define TICKS_PER_180       (1250)
+
+//defines for servo output compare module mappings
+#define BASE_SERVO          1
+#define LOWER_JOINT_SERVO   2
+#define UPPER_JOINT_SERVO   3
+
+//Bit defines
+#define BIT0                (1<<0)
+#define BIT1                (1<<1)
+#define BIT2                (1<<2)
+#define BIT3                (1<<3)
+#define BIT4                (1<<4)
+#define BIT5                (1<<5)
+#define BIT6                (1<<6)
+#define BIT7                (1<<7)
+#define BIT8                (1<<8)
+#define BIT9                (1<<9)
+#define BIT10               (1<<10)
+#define BIT11               (1<<11)
+#define BIT12               (1<<12)
+#define BIT13               (1<<13)
+#define BIT14               (1<<14)
+#define BIT15               (1<<15)
+
 //Data structure which stores servo angles for a given arm position
 typedef struct
 {
@@ -37,47 +69,48 @@ typedef struct
     uint16_t upperJointSpeed;
 }ArmMovement;
 
-//Control defines
-#define MAXSPEED            (1250)
+typedef struct
+{
+    uint16_t BaseMin;
+    uint16_t BaseMax;
+    uint16_t LowerMin;
+    uint16_t LowerMax;
+    uint16_t UpperMin;
+    uint16_t UpperMax;
+}ArmCalibration;
 
-#define MOVEMENT_PERIOD_MS  (60)
+typedef enum
+{
+    BaseMin = 0,
+    BaseMax,
+    LowerMin,
+    LowerMax,
+    UpperMin,
+    UpperMax
+}CalibrateMode;
 
-#define TICKS_PER_180       (1250)
-
-//Bit defines
-#define BIT0                (1<<0)
-#define BIT1                (1<<1)
-#define BIT2                (1<<2)
-#define BIT3                (1<<3)
-#define BIT4                (1<<4)
-#define BIT5                (1<<5)
-#define BIT6                (1<<6)
-#define BIT7                (1<<7)
-#define BIT8                (1<<8)
-#define BIT9                (1<<9)
-#define BIT10               (1<<10)
-#define BIT11               (1<<11)
-#define BIT12               (1<<12)
-#define BIT13               (1<<13)
-#define BIT14               (1<<14)
-#define BIT15               (1<<15)
+typedef enum
+{
+    BaseServo = BASE_SERVO,
+    LowerServo = LOWER_JOINT_SERVO,
+    UpperServo = UPPER_JOINT_SERVO
+}ArmServo;
 
 //Configuration Functions
 void armInit();
-void armCalibrate();
 
 //Helper Functions
-uint16_t AngleToCompareVal(int16_t servoAngle);
-uint16_t degreesPerSecToMoveSpeed(uint16_t degreesPerSecond);
+uint16_t AngleToCompareVal(ArmCalibration cal, ArmServo servo, int16_t servoAngle);
+uint16_t degreesPerSecToMoveSpeed(ArmCalibration cal, ArmServo servo, uint16_t degreesPerSecond);
 
 //Lower Level Functions
 void setCompareVal(uint8_t compareModule, uint16_t compareValue);
-void setServoAngle(uint8_t compareModule, int16_t servoAngle);
+void setServoAngle(ArmCalibration cal, ArmServo servo, int16_t servoAngle);
 void setArmPosition(ArmMovement movement);
 
 //Higher Level action functions
-void drawX();
-void drawO();
-void resetArm();
+void drawX(ArmCalibration cal);
+void drawO(ArmCalibration cal);
+void resetArm(ArmCalibration cal);
 
 #endif

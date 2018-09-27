@@ -17,7 +17,19 @@ void ARMTHREAD_Initialize ( void )
 
 void ARMTHREAD_Tasks ( void )
 {
+    uint16_t calValue;
+    CalibrateMode calMode;
+    ArmCalibration cal;
     ArmMessage currentMessage;
+    
+    //Set the default calibration values
+    cal.BaseMin = 1250;
+    cal.LowerMin = 1250;
+    cal.UpperMin = 1250;
+    cal.BaseMax = 2500;
+    cal.LowerMax = 2500;
+    cal.UpperMax = 2500;
+    
     while(1)
     {
         //receive a command message
@@ -26,26 +38,65 @@ void ARMTHREAD_Tasks ( void )
         switch(currentMessage.msgType)
         {
             case DrawX:
-                drawX();
+                //send control flow to drawX function
+                drawX(cal);
+                //Acknowledge that operation is done
                 Arm_SendAck();
                 break;
             case DrawO:
-                drawO();
+                //send control flow to drawO function
+                drawO(cal);
+                //Acknowledge that operation is done
                 Arm_SendAck();
                 break;
             case ResetArm:
-                resetArm();
+                //send control flow to resetArm function
+                resetArm(cal);
+                //Acknowledge that operation is done
                 Arm_SendAck();
                 break;
             case SetServoAngle:
-                setServoAngle((currentMessage.msgValue & 0xF00) >> 16, (currentMessage.msgValue & 0xFF));
+                //Set the desired servo to the desired angle
+                setServoAngle(cal, (ArmServo) ((currentMessage.msgValue & 0xFFFF0000) >> 16), (currentMessage.msgValue & 0xFFFF));
+                //Acknowledge that operation is done
                 Arm_SendAck();
                 break;
             case TimerTick:
+                //Ignore timer ticks in idle state
                 break;
             case CalibrateArm:
-                armCalibrate();
-                Arm_SendAck();
+                //calibrate arm works by updating the calibration values to the most recently received value
+                calMode = (CalibrateMode) ((currentMessage.msgValue & 0xFF00) >> 16);
+                calValue = (currentMessage.msgValue & 0xFFFF);
+                switch(calMode)
+                {
+                    case BaseMin:
+                        cal.BaseMin = calValue;
+                        setCompareVal(BASE_SERVO, calValue);
+                        break;
+                    case BaseMax:
+                        cal.BaseMax = calValue;
+                        setCompareVal(BASE_SERVO, calValue);
+                        break;
+                    case LowerMin:
+                        cal.LowerMin = calValue;
+                        setCompareVal(LOWER_JOINT_SERVO, calValue);
+                        break;
+                    case LowerMax:
+                        cal.LowerMax = calValue;
+                        setCompareVal(LOWER_JOINT_SERVO, calValue);
+                        break;
+                    case UpperMin:
+                        cal.UpperMin = calValue;
+                        setCompareVal(UPPER_JOINT_SERVO, calValue);
+                        break;
+                    case UpperMax:
+                        cal.UpperMax = calValue;
+                        setCompareVal(UPPER_JOINT_SERVO, calValue);
+                        break;
+                    default:
+                        break;
+                }
                 break;
             default:
                 break;
