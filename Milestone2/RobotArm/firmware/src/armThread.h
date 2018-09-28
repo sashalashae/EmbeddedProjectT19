@@ -60,79 +60,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system_definitions.h"
 #include "arm_library.h"
 
-// DOM-IGNORE-BEGIN
-#ifdef __cplusplus  // Provide C++ Compatibility
-
-extern "C" {
-
-#endif
-// DOM-IGNORE-END 
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Type Definitions
-// *****************************************************************************
-// *****************************************************************************
-
-// *****************************************************************************
-/* Application states
-
-  Summary:
-    Application states enumeration
-
-  Description:
-    This enumeration defines the valid application states.  These states
-    determine the behavior of the application at various times.
-*/
-
-typedef enum
-{
-	/* Application's state machine's initial state. */
-	ARMTHREAD_STATE_INIT=0,
-	ARMTHREAD_STATE_SERVICE_TASKS,
-
-	/* TODO: Define states used by the application state machine. */
-
-} ARMTHREAD_STATES;
-
-
-// *****************************************************************************
-/* Application Data
-
-  Summary:
-    Holds application data
-
-  Description:
-    This structure holds the application's data.
-
-  Remarks:
-    Application strings and buffers are be defined outside this structure.
- */
-
-typedef struct
-{
-    /* The application's current state */
-    ARMTHREAD_STATES state;
-
-    /* TODO: Define any additional data used by the application. */
-
-} ARMTHREAD_DATA;
-
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Application Callback Routines
-// *****************************************************************************
-// *****************************************************************************
-/* These routines are called by drivers when certain events occur.
-*/
-	
-// *****************************************************************************
-// *****************************************************************************
-// Section: Application Initialization and State Machine Functions
-// *****************************************************************************
-// *****************************************************************************
-
 /*******************************************************************************
   Function:
     void ARMTHREAD_Initialize ( void )
@@ -201,12 +128,6 @@ void ARMTHREAD_Tasks( void );
 
 
 #endif /* _ARMTHREAD_H */
-
-//DOM-IGNORE-BEGIN
-#ifdef __cplusplus
-}
-#endif
-//DOM-IGNORE-END
 
 /*******************************************************************************
  End of File

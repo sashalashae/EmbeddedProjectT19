@@ -261,7 +261,8 @@ void setCompareVal(uint8_t compareModule, uint16_t compareValue)
  * Function: AngleToCompareVal
  * 
  * Description: Converts a desired servo angle to a control value for the 
- * compare module threshold register.
+ * compare module threshold register. Assumes that the min and max values set in
+ * cal correspond to -90 degrees and 90 degrees, respectively.
  * 
  * @param servoAngle: The angle to set the servo to. Valid values are in the 
  * range of -90 degrees to 90 degrees.
@@ -272,34 +273,66 @@ void setCompareVal(uint8_t compareModule, uint16_t compareValue)
 uint16_t AngleToCompareVal(ArmCalibration cal, ArmServo servo, int16_t servoAngle)
 {
     uint32_t OCxRSVal;
-    //-90 degrees corresponds to 1ms positive width
-    //For 1ms positive width, OCxRS = 1250
-    //90 degrees corresponds to 2ms positive width
-    //For 2ms positive width, OCxRS = 2500
-    // 1250 - 625 = 625 over 180 degrees
+    uint16_t minVal, maxVal, range;
+    switch(servo)
+    {
+        case BaseServo:
+            minVal = cal.BaseMin;
+            maxVal = cal.BaseMax;
+            break;
+        case LowerServo:
+            minVal = cal.LowerMin;
+            maxVal = cal.LowerMax;
+            break;
+        case UpperServo:
+            minVal = cal.UpperMin;
+            maxVal = cal.UpperMax;
+            break;
+        default:
+            minVal = TICKS_PER_180;
+            maxVal = 2 * TICKS_PER_180;
+            break;
+    }
+    range = maxVal - minVal;
     if(servoAngle > 90)
     {
-        return 2 * TICKS_PER_180;
+        return maxVal;
     }
     if(servoAngle < -90)
     {
-        return TICKS_PER_180;
+        return minVal;
     }
-    //Add the 90 degree offset (min value of 0, max of 180)
+    //zero the angle
     OCxRSVal = servoAngle + 90;
-    //scale from degrees to OCxRS value
-    OCxRSVal = OCxRSVal * TICKS_PER_180;
+    //scale to ticks
+    OCxRSVal = OCxRSVal * range;
     OCxRSVal = OCxRSVal / 180;
-    //Add minimum offset (for -90 degrees)
-    OCxRSVal = OCxRSVal + TICKS_PER_180;
+    //add minimum offset
+    OCxRSVal = OCxRSVal + minVal;
     return (OCxRSVal & 0xFFFF);
 }
 
 uint16_t degreesPerSecToMoveSpeed(ArmCalibration cal, ArmServo servo, uint16_t degreesPerSecond)
 {
     uint32_t retValue = degreesPerSecond;
+    uint16_t ticksPer180;
+    switch(servo)
+    {
+        case BaseServo:
+            ticksPer180 = cal.BaseMax - cal.BaseMin;
+            break;
+        case LowerServo:
+            ticksPer180 = cal.LowerMax - cal.LowerMin;
+            break;
+        case UpperServo:
+            ticksPer180 = cal.UpperMax - cal.UpperMin;
+            break;
+        default:
+            ticksPer180 = TICKS_PER_180;
+            break;
+    }
     //Convert degrees per second to ticks per movement period
-    retValue = retValue * TICKS_PER_180;
+    retValue = retValue * ticksPer180;
     retValue = retValue * MOVEMENT_PERIOD_MS;
     retValue = retValue / (180 * 1000);
     //check if it exceeds max/min allowed value

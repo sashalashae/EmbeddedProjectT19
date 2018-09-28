@@ -272,12 +272,13 @@
       <Template dnOrder="13">
         <Name dnOrder="0">FreeRTOSConfig.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">4388AF19B6D72A9938A12ECEDF54C6AF</Checksum>
+        <Checksum dnOrder="2">D933519B604E4B10EFEC7952FA7AD2E9</Checksum>
       </Template>
       <Template dnOrder="14">
         <Name dnOrder="0">system_tasks.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">2A945FD25BC786A3C7ACFC839B880276</Checksum>
+        <Checksum dnOrder="2">291D59193EC728B45659AEC36474003E</Checksum>
+        <ProjectFileChecksum dnOrder="3">2BD28539A23E2FDC96809740F5757DD8</ProjectFileChecksum>
       </Template>
       <Template dnOrder="15">
         <Name dnOrder="0">sys_devcon_pic32mx.c</Name>
@@ -320,11 +321,11 @@
         <Include dnOrder="2" value="../src/system_config/default"/>
       </C32-AS>
       <C32 dnOrder="1">
-        <Include dnOrder="0" value="C:\Users\nolan\OneDrive\ECE4534\EmbeddedProjectT19\Milestone2\RobotArm\firmware\src"/>
-        <Include dnOrder="1" value="C:\Users\nolan\OneDrive\ECE4534\EmbeddedProjectT19\Milestone2\RobotArm\firmware\src\system_config\default"/>
-        <Include dnOrder="2" value="C:\Users\nolan\OneDrive\ECE4534\EmbeddedProjectT19\Milestone2\RobotArm\firmware\src\default"/>
+        <Include dnOrder="0" value="C:\Users\Nolan\OneDrive\ECE4534\EmbeddedProjectT19\Milestone2\RobotArm\firmware\src"/>
+        <Include dnOrder="1" value="C:\Users\Nolan\OneDrive\ECE4534\EmbeddedProjectT19\Milestone2\RobotArm\firmware\src\system_config\default"/>
+        <Include dnOrder="2" value="C:\Users\Nolan\OneDrive\ECE4534\EmbeddedProjectT19\Milestone2\RobotArm\firmware\src\default"/>
         <Include dnOrder="3" value="C:\microchip\harmony\v2_06\framework"/>
-        <Include dnOrder="4" value="C:\Users\nolan\OneDrive\ECE4534\EmbeddedProjectT19\Milestone2\RobotArm\firmware\src\system_config\default\framework"/>
+        <Include dnOrder="4" value="C:\Users\Nolan\OneDrive\ECE4534\EmbeddedProjectT19\Milestone2\RobotArm\firmware\src\system_config\default\framework"/>
         <Include dnOrder="5" value="../src/system_config/default/bsp"/>
         <Include dnOrder="6" value="../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include"/>
         <Include dnOrder="7" value="../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX"/>

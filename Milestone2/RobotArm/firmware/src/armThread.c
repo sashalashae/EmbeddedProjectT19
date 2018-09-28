@@ -12,7 +12,7 @@ void ARMTHREAD_Initialize ( void )
     //Initialize arm control
     armInit();
     //Initialize command queue
-    ArmQueue_Initialize(1);
+    ArmQueue_Initialize(10);
 }
 
 void ARMTHREAD_Tasks ( void )

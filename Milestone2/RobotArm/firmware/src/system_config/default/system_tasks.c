@@ -94,15 +94,15 @@ void SYS_Tasks ( void )
                 "Sys Tasks",
                 1024, NULL, 0, NULL);
 
-    /* Create OS Thread for TESTTHREAD Tasks. */
-    xTaskCreate((TaskFunction_t) _TESTTHREAD_Tasks,
-                "TESTTHREAD Tasks",
-                1024, NULL, 1, NULL);
-
     /* Create OS Thread for ARMTHREAD Tasks. */
     xTaskCreate((TaskFunction_t) _ARMTHREAD_Tasks,
                 "ARMTHREAD Tasks",
-                1024, NULL, 2, NULL);
+                2048, NULL, 1, NULL);
+    
+    /* Create OS Thread for TESTTHREAD Tasks. */
+    xTaskCreate((TaskFunction_t) _TESTTHREAD_Tasks,
+                "TESTTHREAD Tasks",
+                2048, NULL, 2, NULL);
 
     /**************
      * Start RTOS * 

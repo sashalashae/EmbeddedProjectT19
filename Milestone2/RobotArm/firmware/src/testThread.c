@@ -99,6 +99,9 @@ void TESTTHREAD_Initialize ( void )
 {
     //initialize debug
     dbgInit();
+    
+    //initialize queue
+    TestQueue_Initialize(10);
 }
 
 
@@ -113,11 +116,13 @@ void TESTTHREAD_Initialize ( void )
 void TESTTHREAD_Tasks ( void )
 {
     ArmMessage command;
+    TestMessage AckMessage;
     while(1)
     {
         command.msgType = DrawX;
+        command.msgValue = 0;
         ArmQueue_SendMsg(command);
-        sleep(10000);
+        AckMessage = TestQueue_ReceiveMsg();
     }
 }
 
