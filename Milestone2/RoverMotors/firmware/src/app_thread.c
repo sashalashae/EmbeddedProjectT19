@@ -76,6 +76,28 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     Application strings and buffers are be defined outside this structure.
 */
 
+APP_THREAD_DATA app_threadData;
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Application Callback Functions
+// *****************************************************************************
+// *****************************************************************************
+
+/* TODO:  Add any necessary callback functions.
+*/
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Application Local Functions
+// *****************************************************************************
+// *****************************************************************************
+
+
+/* TODO:  Add any necessary local functions.
+*/
+
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Initialization and State Machine Functions
@@ -92,13 +114,13 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 void APP_THREAD_Initialize ( void )
 {
-    //Set USER LED off initially
-    SYS_PORTS_PinClear(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
-    //Enable timer interrupt
-    PLIB_INT_SourceEnable(INT_ID_0,INT_SOURCE_TIMER_4);
-    //PLIB_INT_SourceEnable(INT_ID_0,INT_SOURCE_TIMER_5);
-    motors_initialize();
-    motors_forward(50);
+    /* Place the App state machine in its initial state. */
+    app_threadData.state = APP_THREAD_STATE_INIT;
+
+    
+    /* TODO: Initialize your application's state machine and other
+     * parameters.
+     */
 }
 
 
@@ -112,12 +134,40 @@ void APP_THREAD_Initialize ( void )
 
 void APP_THREAD_Tasks ( void )
 {
-    //Start the timers
-    DRV_TMR0_Start();
-    //DRV_TMR1_Start();
-    
-    //turn on LED
-    //SYS_PORTS_PinSet(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
+
+    /* Check the application's current state. */
+    switch ( app_threadData.state )
+    {
+        /* Application's initial state. */
+        case APP_THREAD_STATE_INIT:
+        {
+            bool appInitialized = true;
+       
+        
+            if (appInitialized)
+            {
+            
+                app_threadData.state = APP_THREAD_STATE_SERVICE_TASKS;
+            }
+            break;
+        }
+
+        case APP_THREAD_STATE_SERVICE_TASKS:
+        {
+        
+            break;
+        }
+
+        /* TODO: implement your application state machine.*/
+        
+
+        /* The default state should never be executed. */
+        default:
+        {
+            /* TODO: Handle error in application's state machine. */
+            break;
+        }
+    }
 }
 
  

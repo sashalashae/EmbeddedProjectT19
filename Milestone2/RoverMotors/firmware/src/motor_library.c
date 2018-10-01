@@ -24,6 +24,10 @@ void motors_initialize()
     //Set right direction pin off initially
     SYS_PORTS_PinClear(PORT_ID, MOTOR_PORT_RIGHT, MOTOR_PIN_RIGHT);
     
+    //Disable timer interrupts on encoders
+    PLIB_INT_SourceDisable(INT_ID_0,INT_SOURCE_TIMER_4);
+    PLIB_INT_SourceDisable(INT_ID_0,INT_SOURCE_TIMER_5);
+    
     //Initially disable all output compare modules
     OC1CON = 0;
     OC2CON = 0;
@@ -93,16 +97,16 @@ void motors_stop()
     motor_left(FORWARD, 0);
 }
 
-void motors_turn_right()
+void motors_turn_right(direction_t direction, uint8_t duty_cycle)
 {
-    motor_right(FORWARD, 0);
-    motor_left(FORWARD, 50);
+    motor_right(direction, 0);
+    motor_left(direction, duty_cycle);
 }
 
-void motors_turn_left()
+void motors_turn_left(direction_t direction, uint8_t duty_cycle)
 {
-    motor_left(FORWARD, 0);
-    motor_right(FORWARD, 50);
+    motor_left(direction, 0);
+    motor_right(direction, duty_cycle);
 }
 
 /* *****************************************************************************

@@ -56,8 +56,8 @@ void motor_right(direction_t direction, uint8_t duty_cycle);
 void motors_forward(uint8_t duty_cycle);
 void motors_reverse(uint8_t duty_cycle);
 void motors_stop();
-void motors_turn_right();
-void motors_turn_left();
+void motors_turn_right(direction_t direction, uint8_t duty_cycle);
+void motors_turn_left(direction_t direction, uint8_t duty_cycle);
 
     /* Provide C++ Compatibility */
 #ifdef __cplusplus

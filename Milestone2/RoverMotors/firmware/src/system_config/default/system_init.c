@@ -151,6 +151,8 @@ void SYS_Initialize ( void* data )
     DRV_TMR0_Initialize();
     /*Initialize TMR1 */
     DRV_TMR1_Initialize();
+    /*Initialize TMR2 */
+    DRV_TMR2_Initialize();
  
  
     /* Initialize System Services */
@@ -161,11 +163,9 @@ void SYS_Initialize ( void* data )
 
     /* Initialize Middleware */
 
-    /* Enable Global Interrupts */
-    SYS_INT_Enable();
-
     /* Initialize the Application */
-    APP_THREAD_Initialize();
+    MOTOR_THREAD_Initialize();
+    TEST_THREAD_Initialize();
 }
 
 
