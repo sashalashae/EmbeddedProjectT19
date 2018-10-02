@@ -74,9 +74,15 @@ typedef enum
     INIT,
     TEST1,
     TEST2,
-    END,
-    FOREVER
+    TEST3,
+    TEST4,
+    TEST5,
+    TEST6,
+    END
 } test_state_t;
+
+#define ONE_CM_TRANSITION           150
+#define TURN_90_DEGREE_TRANSITION   1100
     
 // *****************************************************************************
 // *****************************************************************************

@@ -94,6 +94,7 @@ void MOTOR_THREAD_Tasks ( void )
     while(true)
     {
         MotorQueueData_t msg = MotorQueue_ReceiveMsg();
+        motors_stop();
         DRV_TMR0_CounterClear();
         DRV_TMR1_CounterClear();
         switch(msg.movement)
@@ -105,16 +106,16 @@ void MOTOR_THREAD_Tasks ( void )
                 motors_reverse(msg.duty_cycle);
                 break;
             case FORWARD_RIGHT:
-                //motors_turn_right(FORWARD, msg.duty_cycle);
+                motors_turn_right(FORWARD, msg.duty_cycle);
                 break;
             case FORWARD_LEFT:
-                //motors_turn_left(FORWARD, msg.duty_cycle);
+                motors_turn_left(FORWARD, msg.duty_cycle);
                 break;
             case REVERSE_RIGHT:
-                //motors_turn_right(REVERSE, msg.duty_cycle);
+                motors_turn_right(REVERSE, msg.duty_cycle);
                 break;
             case REVERSE_LEFT:
-                //motors_turn_left(REVERSE, msg.duty_cycle);
+                motors_turn_left(REVERSE, msg.duty_cycle);
                 break;
             case STOP:
                 motors_stop();

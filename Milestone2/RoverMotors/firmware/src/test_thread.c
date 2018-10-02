@@ -116,7 +116,7 @@ void TEST_THREAD_Tasks ( void )
                     MotorQueue_SendMsg(msg);
                     prev_state = state;
                 }
-                else if(right >= 1000 || left >= 1000) 
+                else if(right >= 10*ONE_CM_TRANSITION || left >= 10*ONE_CM_TRANSITION) 
                 {
                     state = TEST2;
                 }
@@ -124,18 +124,70 @@ void TEST_THREAD_Tasks ( void )
             case TEST2:
                 if(prev_state == TEST1)
                 {
+                    msg.movement = FORWARD_RIGHT;
+                    msg.duty_cycle = 50;
+                    MotorQueue_SendMsg(msg);
+                    prev_state = state;
+                }
+                else if(left >= TURN_90_DEGREE_TRANSITION) 
+                {
+                    state = TEST3;
+                }
+                break;
+            case TEST3:
+                if(prev_state == TEST2)
+                {
+                    msg.movement = FORWARD_LEFT;
+                    msg.duty_cycle = 50;
+                    MotorQueue_SendMsg(msg);
+                    prev_state = state;
+                }
+                else if(right >= TURN_90_DEGREE_TRANSITION)
+                {
+                    state = TEST4;
+                }
+                break;
+            case TEST4:
+                if(prev_state == TEST3)
+                {
                     msg.movement = REVERSE_BOTH;
                     msg.duty_cycle = 50;
                     MotorQueue_SendMsg(msg);
                     prev_state = state;
                 }
-                else if(right >= 1000 || left >= 1000) 
+                else if(right >= 10*ONE_CM_TRANSITION || left >= 10*ONE_CM_TRANSITION)
+                {
+                    state = TEST5;
+                }
+                break;
+            case TEST5:
+                if(prev_state == TEST4)
+                {
+                    msg.movement = REVERSE_LEFT;
+                    msg.duty_cycle = 50;
+                    MotorQueue_SendMsg(msg);
+                    prev_state = state;
+                }
+                else if(right >= TURN_90_DEGREE_TRANSITION)
+                {
+                    state = TEST6;
+                }
+                break;
+            case TEST6:
+                if(prev_state == TEST5)
+                {
+                    msg.movement = REVERSE_RIGHT;
+                    msg.duty_cycle = 50;
+                    MotorQueue_SendMsg(msg);
+                    prev_state = state;
+                }
+                else if(left >= TURN_90_DEGREE_TRANSITION)
                 {
                     state = END;
                 }
                 break;
             case END:
-                if(prev_state == TEST2)
+                if(prev_state == TEST6)
                 {
                     msg.movement = STOP;
                     msg.duty_cycle = 0;
