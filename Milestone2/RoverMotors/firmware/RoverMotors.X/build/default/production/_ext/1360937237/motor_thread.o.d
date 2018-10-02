@@ -1,6 +1,6 @@
-build/default/production/_ext/1360937237/app_thread.o:  \
- ../src/app_thread.c  \
-../src/app_thread.h  \
+build/default/production/_ext/1360937237/motor_thread.o:  \
+ ../src/motor_thread.c  \
+../src/motor_thread.h  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/system_definitions.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_common.h  \
@@ -143,4 +143,19 @@ build/default/production/_ext/1360937237/app_thread.o:  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Unsupported.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports_compatibility.h  \
- ../src/app_thread.h 
+ ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/FreeRTOS.h  \
+ ../src/system_config/default/FreeRTOSConfig.h  \
+ ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/projdefs.h  \
+ ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/portable.h  \
+ ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/deprecated_definitions.h  \
+ ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX/portmacro.h  \
+ ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
+ ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
+ ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/list.h  \
+ ../src/motor_thread.h  \
+../src/test_thread.h  \
+../src/test_queue.h  \
+ ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/queue.h  \
+ ../src/debug.h  \
+../src/motor_queue.h  \
+../src/motor_library.h 

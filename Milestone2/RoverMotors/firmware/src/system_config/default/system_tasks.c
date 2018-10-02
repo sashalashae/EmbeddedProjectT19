@@ -11,7 +11,7 @@
   Description:
     This file contains source code necessary to maintain system's polled state
     machines.  It implements the "SYS_Tasks" function that calls the individual
-    "Tasks" functions for all polled MPLAB Harmony modules in the system.
+    "Tasks" functions for all the MPLAB Harmony modules in the system.
 
   Remarks:
     This file requires access to the systemObjects global data structure that
@@ -45,6 +45,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
  *******************************************************************************/
 // DOM-IGNORE-END
 
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Included Files
@@ -53,6 +54,23 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include "system_config.h"
 #include "system_definitions.h"
+#include "motor_thread.h"
+#include "test_thread.h"
+
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Local Prototypes
+// *****************************************************************************
+// *****************************************************************************
+
+
+ 
+static void _SYS_Tasks ( void );
+ 
+ 
+static void _MOTOR_THREAD_Tasks(void);
+static void _TEST_THREAD_Tasks(void);
 
 
 // *****************************************************************************
@@ -71,18 +89,93 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 void SYS_Tasks ( void )
 {
-    /* Maintain system services */
+    /* Create OS Thread for Sys Tasks. */
+    xTaskCreate((TaskFunction_t) _SYS_Tasks,
+                "Sys Tasks",
+                1024, NULL, 1, NULL);
 
-    /* Maintain Device Drivers */
+ 
+ 
+    /* Create OS Thread for MOTOR_THREAD Tasks. */
+    xTaskCreate((TaskFunction_t) _MOTOR_THREAD_Tasks,
+                "MOTOR_THREAD Tasks",
+                1024, NULL, 1, NULL);
 
-    /* Maintain Middleware & Other Libraries */
+    /* Create OS Thread for TEST_THREAD Tasks. */
+    xTaskCreate((TaskFunction_t) _TEST_THREAD_Tasks,
+                "TEST_THREAD Tasks",
+                1024, NULL, 1, NULL);
 
-    /* Maintain the application's state machine. */
-    APP_THREAD_Tasks();
+    /**************
+     * Start RTOS * 
+     **************/
+    vTaskStartScheduler(); /* This function never returns. */
+}
+
+
+/*******************************************************************************
+  Function:
+    void _SYS_Tasks ( void )
+
+  Summary:
+    Maintains state machines of system modules.
+*/
+static void _SYS_Tasks ( void)
+{
+    while(1)
+    {
+        /* Maintain system services */
+
+        /* Maintain Device Drivers */
+ 
+ 
+
+        /* Maintain Middleware */
+
+        /* Task Delay */
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
+}
+
+ 
+ 
+
+/*******************************************************************************
+  Function:
+    void _MOTOR_THREAD_Tasks ( void )
+
+  Summary:
+    Maintains state machine of MOTOR_THREAD.
+*/
+
+static void _MOTOR_THREAD_Tasks(void)
+{
+    while(1)
+    {
+        MOTOR_THREAD_Tasks();
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
+}
+
+
+/*******************************************************************************
+  Function:
+    void _TEST_THREAD_Tasks ( void )
+
+  Summary:
+    Maintains state machine of TEST_THREAD.
+*/
+
+static void _TEST_THREAD_Tasks(void)
+{
+    while(1)
+    {
+        TEST_THREAD_Tasks();
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
 }
 
 
 /*******************************************************************************
  End of File
  */
-

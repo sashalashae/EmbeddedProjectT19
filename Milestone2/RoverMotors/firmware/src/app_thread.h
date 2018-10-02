@@ -65,7 +65,67 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 extern "C" {
 
 #endif
+// DOM-IGNORE-END 
 
+// *****************************************************************************
+// *****************************************************************************
+// Section: Type Definitions
+// *****************************************************************************
+// *****************************************************************************
+
+// *****************************************************************************
+/* Application states
+
+  Summary:
+    Application states enumeration
+
+  Description:
+    This enumeration defines the valid application states.  These states
+    determine the behavior of the application at various times.
+*/
+
+typedef enum
+{
+	/* Application's state machine's initial state. */
+	APP_THREAD_STATE_INIT=0,
+	APP_THREAD_STATE_SERVICE_TASKS,
+
+	/* TODO: Define states used by the application state machine. */
+
+} APP_THREAD_STATES;
+
+
+// *****************************************************************************
+/* Application Data
+
+  Summary:
+    Holds application data
+
+  Description:
+    This structure holds the application's data.
+
+  Remarks:
+    Application strings and buffers are be defined outside this structure.
+ */
+
+typedef struct
+{
+    /* The application's current state */
+    APP_THREAD_STATES state;
+
+    /* TODO: Define any additional data used by the application. */
+
+} APP_THREAD_DATA;
+
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Application Callback Routines
+// *****************************************************************************
+// *****************************************************************************
+/* These routines are called by drivers when certain events occur.
+*/
+	
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Initialization and State Machine Functions
