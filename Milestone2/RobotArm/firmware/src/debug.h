@@ -32,6 +32,7 @@ void dbgInit();
 #define LOC_DRAW_O_END                  5
 #define LOC_SLEEP_START                 6
 #define LOC_SLEEP_END                   7
+#define LOC_ACK_SEND                    8
 
 /*
  * Defines for error codes

@@ -136,4 +136,5 @@ build/default/production/_ext/1360937237/test_queue.o:  \
 ../src/helper_functions.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
- ../src/armthread.h 
+ ../src/armthread.h  \
+

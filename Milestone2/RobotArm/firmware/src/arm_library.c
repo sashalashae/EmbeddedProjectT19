@@ -70,8 +70,10 @@ void armCalibrate()
     CalibrateMode mode = 0;
     ArmMessage calMessage;
     calMessage.msgType = CalibrateArm;
-    while(mode < 2)
+    while(mode < NumCalModes)
     {
+        //wait for pin to be low again
+        while(SYS_PORTS_PinRead(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_6));
         //want 1.5ms period for starting pulse
         calValue = 1875;
         pinValue = false;
@@ -103,8 +105,6 @@ void armCalibrate()
         }
         //switch to next mode
         mode++;
-        //wait for pin to be low again
-        while(SYS_PORTS_PinRead(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_6));
     }
 }
 
@@ -431,13 +431,13 @@ void drawX(ArmCalibration cal)
     
     //Starting position for right half of X
     ArmPosition startXRight;
-    startXRight.baseServo = AngleToCompareVal(cal, BaseServo, -46);
+    startXRight.baseServo = AngleToCompareVal(cal, BaseServo, -36);
     startXRight.lowerJoint = AngleToCompareVal(cal, LowerServo, 35);
     startXRight.upperJoint = AngleToCompareVal(cal, UpperServo, -13);
     
     //Ending position for right half of X
     ArmPosition endXRight; 
-    endXRight.baseServo = AngleToCompareVal(cal, BaseServo, 4);
+    endXRight.baseServo = AngleToCompareVal(cal, BaseServo, 0);
     endXRight.lowerJoint = AngleToCompareVal(cal, LowerServo, 35);
     endXRight.upperJoint = AngleToCompareVal(cal, UpperServo, -13);
     
@@ -513,39 +513,39 @@ void drawO(ArmCalibration cal)
     //define all arm positions for O
     
     ArmPosition startRight;
-    startRight.baseServo = AngleToCompareVal(cal, BaseServo, -48);
+    startRight.baseServo = AngleToCompareVal(cal, BaseServo, -35);
     startRight.lowerJoint = AngleToCompareVal(cal, LowerServo, 80);
     startRight.upperJoint = AngleToCompareVal(cal, UpperServo, 10);
     
     ArmPosition startLeft;
-    startLeft.baseServo = AngleToCompareVal(cal, BaseServo, 65);
-    startLeft.lowerJoint = AngleToCompareVal(cal, LowerServo, 28);
-    startLeft.upperJoint = AngleToCompareVal(cal, UpperServo, -13);
+    startLeft.baseServo = AngleToCompareVal(cal, BaseServo, 5);
+    startLeft.lowerJoint = AngleToCompareVal(cal, LowerServo, 30);
+    startLeft.upperJoint = AngleToCompareVal(cal, UpperServo, -12);
     
     ArmPosition endLeft;
-    endLeft.baseServo = AngleToCompareVal(cal, BaseServo, 12);
-    endLeft.lowerJoint = AngleToCompareVal(cal, LowerServo, 85);
-    endLeft.upperJoint = AngleToCompareVal(cal, UpperServo, 12);
+    endLeft.baseServo = AngleToCompareVal(cal, BaseServo, 0);
+    endLeft.lowerJoint = AngleToCompareVal(cal, LowerServo, 75);
+    endLeft.upperJoint = AngleToCompareVal(cal, UpperServo, 8);
     
     ArmPosition startTop;
-    startTop.baseServo = AngleToCompareVal(cal, BaseServo, 5);
+    startTop.baseServo = AngleToCompareVal(cal, BaseServo, -3);
     startTop.lowerJoint = AngleToCompareVal(cal, LowerServo, 85);
     startTop.upperJoint = AngleToCompareVal(cal, UpperServo, 12);
     
     ArmPosition endTop;
-    endTop.baseServo = AngleToCompareVal(cal, BaseServo, -45);
+    endTop.baseServo = AngleToCompareVal(cal, BaseServo, -25);
     endTop.lowerJoint = AngleToCompareVal(cal, LowerServo, 85);
     endTop.upperJoint = AngleToCompareVal(cal, UpperServo, 12);
     
     ArmPosition startBottom;
-    startBottom.baseServo = AngleToCompareVal(cal, BaseServo, -50);
-    startBottom.lowerJoint = AngleToCompareVal(cal, LowerServo, 25);
-    startBottom.upperJoint = AngleToCompareVal(cal, UpperServo, -15);
+    startBottom.baseServo = AngleToCompareVal(cal, BaseServo, -30);
+    startBottom.lowerJoint = AngleToCompareVal(cal, LowerServo, 20);
+    startBottom.upperJoint = AngleToCompareVal(cal, UpperServo, -18);
     
     ArmPosition endBottom;
-    endBottom.baseServo = AngleToCompareVal(cal, BaseServo, 10);
-    endBottom.lowerJoint = AngleToCompareVal(cal, LowerServo, 25);
-    endBottom.upperJoint = AngleToCompareVal(cal, UpperServo, -15);
+    endBottom.baseServo = AngleToCompareVal(cal, BaseServo, 0);
+    endBottom.lowerJoint = AngleToCompareVal(cal, LowerServo, 20);
+    endBottom.upperJoint = AngleToCompareVal(cal, UpperServo, -18);
     
     //define all arm movements for O
     

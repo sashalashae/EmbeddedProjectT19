@@ -150,11 +150,27 @@ void TESTTHREAD_Tasks ( void )
     }
     
     //Test motion on lower joint
-    
+    angle = 0;
+    while(angle <= 90)
+    {
+        msg.msgValue = (LowerServo << 16) | (angle & 0xFFFF);
+        ArmQueue_SendMsg(msg);
+        ackMsg = TestQueue_ReceiveMsg();
+        angle += 30;
+        sleep(2000);
+    }
     
     //Test motion on upper joint
-    
-    
+    angle = -30;
+    while(angle <= 15)
+    {
+        msg.msgValue = (UpperServo << 16) | (angle & 0xFFFF);
+        ArmQueue_SendMsg(msg);
+        ackMsg = TestQueue_ReceiveMsg();
+        angle += 30;
+        sleep(2000);
+    }
+
     //demo the reset command
     msg.msgType = ResetArm;
     ArmQueue_SendMsg(msg);
@@ -167,7 +183,7 @@ void TESTTHREAD_Tasks ( void )
     ackMsg = TestQueue_ReceiveMsg();
     sleep(5000);
     
-    //test draw0
+    //demo draw0
     msg.msgType = DrawO;
     ArmQueue_SendMsg(msg);
     ackMsg = TestQueue_ReceiveMsg();
