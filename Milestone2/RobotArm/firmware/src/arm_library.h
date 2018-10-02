@@ -13,6 +13,7 @@
 #include "C:\Program Files (x86)\Microchip\xc32\v2.10\pic32mx\include\proc\p32mx795f512l.h"
 #include "system_definitions.h"
 #include "debug.h"
+#include "helper_functions.h"
 
 //Maximum movement speed for servo
 #define MAXSPEED            (1250)
@@ -86,7 +87,8 @@ typedef enum
     LowerMin,
     LowerMax,
     UpperMin,
-    UpperMax
+    UpperMax,
+    NumCalModes
 }CalibrateMode;
 
 typedef enum
@@ -98,6 +100,9 @@ typedef enum
 
 //Configuration Functions
 void armInit();
+
+//Calibration function
+void armCalibrate();
 
 //Helper Functions
 uint16_t AngleToCompareVal(ArmCalibration cal, ArmServo servo, int16_t servoAngle);

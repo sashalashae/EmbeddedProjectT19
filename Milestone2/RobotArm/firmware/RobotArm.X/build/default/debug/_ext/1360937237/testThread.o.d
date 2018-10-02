@@ -132,10 +132,9 @@ build/default/debug/_ext/1360937237/testThread.o:  \
 ../src/armthread.h  \
 ../src/arm_library.h  \
  ../src/debug.h  \
+../src/helper_functions.h  \
 ../src/arm_queue.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/queue.h  \
  ../src/test_queue.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h  \
- ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
- ../src/test_cases.h  \
-../src/helper_functions.h 
+ ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h 

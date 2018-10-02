@@ -102,6 +102,9 @@ void TESTTHREAD_Initialize ( void )
     
     //initialize queue
     TestQueue_Initialize(10);
+    
+    //configure pin 52 for digital in (for calibrate)
+    SYS_PORTS_PinDirectionSelect(PORTS_ID_0, SYS_PORTS_DIRECTION_INPUT, PORT_CHANNEL_G, PORTS_BIT_POS_6);
 }
 
 
@@ -115,18 +118,63 @@ void TESTTHREAD_Initialize ( void )
 
 void TESTTHREAD_Tasks ( void )
 {
-    ArmMessage command;
-    TestMessage AckMessage;
-    while(1)
+    //Command messages to be sent
+    ArmMessage msg;
+    
+    //angle to set
+    int16_t angle;
+    
+    //Ack message for receiving done notificaions
+    TestMessage ackMsg;
+    
+    //set upper and lower joints
+    msg.msgType = SetServoAngle;
+    angle = 25;
+    msg.msgValue = (LowerServo << 16) | (angle & 0xFFFF);
+    ArmQueue_SendMsg(msg);
+    ackMsg = TestQueue_ReceiveMsg();
+    angle = 31;
+    msg.msgValue = (UpperServo << 16) | (angle & 0xFFFF);
+    ArmQueue_SendMsg(msg);
+    ackMsg = TestQueue_ReceiveMsg();
+    
+    //Test sweeping across motion range on base
+    angle = -90;
+    while(angle <= 90)
     {
-        command.msgType = DrawX;
-        command.msgValue = 0;
-        ArmQueue_SendMsg(command);
-        AckMessage = TestQueue_ReceiveMsg();
+        msg.msgValue = (BaseServo << 16) | (angle & 0xFFFF);
+        ArmQueue_SendMsg(msg);
+        ackMsg = TestQueue_ReceiveMsg();
+        angle += 30;
+        sleep(2000);
     }
+    
+    //Test motion on lower joint
+    
+    
+    //Test motion on upper joint
+    
+    
+    //demo the reset command
+    msg.msgType = ResetArm;
+    ArmQueue_SendMsg(msg);
+    ackMsg = TestQueue_ReceiveMsg();
+    sleep(5000);
+    
+    //demo drawX
+    msg.msgType = DrawX;
+    ArmQueue_SendMsg(msg);
+    ackMsg = TestQueue_ReceiveMsg();
+    sleep(5000);
+    
+    //test draw0
+    msg.msgType = DrawO;
+    ArmQueue_SendMsg(msg);
+    ackMsg = TestQueue_ReceiveMsg();
+    sleep(5000);
+    
+    //test calibration routine
 }
-
- 
 
 /*******************************************************************************
  End of File

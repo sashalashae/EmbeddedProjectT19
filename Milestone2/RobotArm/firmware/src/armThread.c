@@ -23,10 +23,10 @@ void ARMTHREAD_Tasks ( void )
     ArmMessage currentMessage;
     
     //Set the default calibration values
-    cal.BaseMin = 1250;
+    cal.BaseMin = 750;
     cal.LowerMin = 1250;
     cal.UpperMin = 1250;
-    cal.BaseMax = 2500;
+    cal.BaseMax = 2600;
     cal.LowerMax = 2500;
     cal.UpperMax = 2500;
     
@@ -66,7 +66,7 @@ void ARMTHREAD_Tasks ( void )
                 break;
             case CalibrateArm:
                 //calibrate arm works by updating the calibration values to the most recently received value
-                calMode = (CalibrateMode) ((currentMessage.msgValue & 0xFF00) >> 16);
+                calMode = (CalibrateMode) ((currentMessage.msgValue & 0xFFFF0000) >> 16);
                 calValue = (currentMessage.msgValue & 0xFFFF);
                 switch(calMode)
                 {

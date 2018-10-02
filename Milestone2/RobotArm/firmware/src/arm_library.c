@@ -57,6 +57,58 @@ void armInit()
 }
 
 /*
+ * Function: armCalibrate
+ * 
+ * Description: calibrates the arm 
+ * 
+ * Returns: void
+ */
+void armCalibrate()
+{
+    bool pinValue;
+    uint16_t calValue;
+    CalibrateMode mode = 0;
+    ArmMessage calMessage;
+    calMessage.msgType = CalibrateArm;
+    while(mode < 2)
+    {
+        //want 1.5ms period for starting pulse
+        calValue = 1875;
+        pinValue = false;
+        while(!pinValue)
+        {
+            switch(mode)
+            {
+                case BaseMin:
+                case LowerMin:
+                case UpperMin:
+                    calValue = calValue - 5;
+                    break;
+                case BaseMax:
+                case LowerMax:
+                case UpperMax:
+                    calValue = calValue + 5;
+                    break;
+                default:
+                    break;
+            }
+            calMessage.msgValue = (mode << 16) + calValue;
+            ArmQueue_SendMsg(calMessage);
+            //poll GPIO
+            if(SYS_PORTS_PinRead(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_6))
+            {
+                pinValue = true;
+            }
+            sleep(50);
+        }
+        //switch to next mode
+        mode++;
+        //wait for pin to be low again
+        while(SYS_PORTS_PinRead(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_6));
+    }
+}
+
+/*
  * Function: setArmPosition
  * 
  * Description: Sets the arm to a known, predefined position, at a given speed. 
@@ -361,31 +413,31 @@ void drawX(ArmCalibration cal)
     
     //Starting position for left half of X
     ArmPosition startXLeft;
-    startXLeft.baseServo = AngleToCompareVal(cal, BaseServo, -40);
+    startXLeft.baseServo = AngleToCompareVal(cal, BaseServo, -21);
     startXLeft.lowerJoint = AngleToCompareVal(cal, LowerServo, 80);
     startXLeft.upperJoint = AngleToCompareVal(cal, UpperServo, 10);
     
     //position for middle of the left X
     ArmPosition middleXLeft;
-    middleXLeft.baseServo = AngleToCompareVal(cal, BaseServo, -40);
+    middleXLeft.baseServo = AngleToCompareVal(cal, BaseServo, -21);
     middleXLeft.lowerJoint = AngleToCompareVal(cal, LowerServo, 30);
     middleXLeft.upperJoint = AngleToCompareVal(cal, UpperServo, -13);
     
     //Ending position for left half of X
     ArmPosition endXLeft;
-    endXLeft.baseServo = AngleToCompareVal(cal, BaseServo, -40);
+    endXLeft.baseServo = AngleToCompareVal(cal, BaseServo, -21);
     endXLeft.lowerJoint = AngleToCompareVal(cal, LowerServo, -25);
     endXLeft.upperJoint = AngleToCompareVal(cal, UpperServo, -9);
     
     //Starting position for right half of X
     ArmPosition startXRight;
-    startXRight.baseServo = AngleToCompareVal(cal, BaseServo, -65);
+    startXRight.baseServo = AngleToCompareVal(cal, BaseServo, -46);
     startXRight.lowerJoint = AngleToCompareVal(cal, LowerServo, 35);
     startXRight.upperJoint = AngleToCompareVal(cal, UpperServo, -13);
     
     //Ending position for right half of X
     ArmPosition endXRight; 
-    endXRight.baseServo = AngleToCompareVal(cal, BaseServo, -15);
+    endXRight.baseServo = AngleToCompareVal(cal, BaseServo, 4);
     endXRight.lowerJoint = AngleToCompareVal(cal, LowerServo, 35);
     endXRight.upperJoint = AngleToCompareVal(cal, UpperServo, -13);
     
@@ -461,37 +513,37 @@ void drawO(ArmCalibration cal)
     //define all arm positions for O
     
     ArmPosition startRight;
-    startRight.baseServo = AngleToCompareVal(cal, BaseServo, -88);
+    startRight.baseServo = AngleToCompareVal(cal, BaseServo, -48);
     startRight.lowerJoint = AngleToCompareVal(cal, LowerServo, 80);
     startRight.upperJoint = AngleToCompareVal(cal, UpperServo, 10);
     
     ArmPosition startLeft;
-    startLeft.baseServo = AngleToCompareVal(cal, BaseServo, 25);
+    startLeft.baseServo = AngleToCompareVal(cal, BaseServo, 65);
     startLeft.lowerJoint = AngleToCompareVal(cal, LowerServo, 28);
     startLeft.upperJoint = AngleToCompareVal(cal, UpperServo, -13);
     
     ArmPosition endLeft;
-    endLeft.baseServo = AngleToCompareVal(cal, BaseServo, -28);
+    endLeft.baseServo = AngleToCompareVal(cal, BaseServo, 12);
     endLeft.lowerJoint = AngleToCompareVal(cal, LowerServo, 85);
     endLeft.upperJoint = AngleToCompareVal(cal, UpperServo, 12);
     
     ArmPosition startTop;
-    startTop.baseServo = AngleToCompareVal(cal, BaseServo, -35);
+    startTop.baseServo = AngleToCompareVal(cal, BaseServo, 5);
     startTop.lowerJoint = AngleToCompareVal(cal, LowerServo, 85);
     startTop.upperJoint = AngleToCompareVal(cal, UpperServo, 12);
     
     ArmPosition endTop;
-    endTop.baseServo = AngleToCompareVal(cal, BaseServo, -85);
+    endTop.baseServo = AngleToCompareVal(cal, BaseServo, -45);
     endTop.lowerJoint = AngleToCompareVal(cal, LowerServo, 85);
     endTop.upperJoint = AngleToCompareVal(cal, UpperServo, 12);
     
     ArmPosition startBottom;
-    startBottom.baseServo = AngleToCompareVal(cal, BaseServo, -90);
+    startBottom.baseServo = AngleToCompareVal(cal, BaseServo, -50);
     startBottom.lowerJoint = AngleToCompareVal(cal, LowerServo, 25);
     startBottom.upperJoint = AngleToCompareVal(cal, UpperServo, -15);
     
     ArmPosition endBottom;
-    endBottom.baseServo = AngleToCompareVal(cal, BaseServo, -30);
+    endBottom.baseServo = AngleToCompareVal(cal, BaseServo, 10);
     endBottom.lowerJoint = AngleToCompareVal(cal, LowerServo, 25);
     endBottom.upperJoint = AngleToCompareVal(cal, UpperServo, -15);
     
@@ -590,9 +642,9 @@ void resetArm(ArmCalibration cal)
 {
     //define position
     ArmPosition defaultPosition;
-    defaultPosition.baseServo = AngleToCompareVal(cal, BaseServo, -63);
-    defaultPosition.lowerJoint = AngleToCompareVal(cal, LowerServo, 28);
-    defaultPosition.upperJoint = AngleToCompareVal(cal, UpperServo, 27);
+    defaultPosition.baseServo = AngleToCompareVal(cal, BaseServo, -21);
+    defaultPosition.lowerJoint = AngleToCompareVal(cal, LowerServo, 25);
+    defaultPosition.upperJoint = AngleToCompareVal(cal, UpperServo, 31);
     
     //define movement
     ArmMovement returnToDefault;

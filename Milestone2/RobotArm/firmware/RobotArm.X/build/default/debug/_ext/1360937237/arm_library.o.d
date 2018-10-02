@@ -134,7 +134,6 @@ build/default/debug/_ext/1360937237/arm_library.o:  \
  ../src/test_queue.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
- ../src/test_cases.h  \
-../src/helper_functions.h  \
+ ../src/helper_functions.h  \
 ../src/debug.h  \
- ../src/armthread.h 
+../src/armthread.h 
