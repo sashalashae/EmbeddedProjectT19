@@ -102,7 +102,7 @@ typedef enum
 void armInit();
 
 //Calibration function
-void armCalibrate();
+void armCalibrate(CalibrateMode calFrom, CalibrateMode calTo);
 
 //Helper Functions
 uint16_t AngleToCompareVal(ArmCalibration cal, ArmServo servo, int16_t servoAngle);

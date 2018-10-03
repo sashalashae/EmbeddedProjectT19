@@ -124,7 +124,7 @@ void TESTTHREAD_Tasks ( void )
     //angle to set
     int16_t angle;
     
-    //Ack message for receiving done notificaions
+    //Ack message for receiving done notifications
     TestMessage ackMsg;
     
     //set upper and lower joints
@@ -146,7 +146,7 @@ void TESTTHREAD_Tasks ( void )
         ArmQueue_SendMsg(msg);
         ackMsg = TestQueue_ReceiveMsg();
         angle += 30;
-        sleep(2000);
+        sleep(3000);
     }
     
     //Test motion on lower joint
@@ -156,8 +156,8 @@ void TESTTHREAD_Tasks ( void )
         msg.msgValue = (LowerServo << 16) | (angle & 0xFFFF);
         ArmQueue_SendMsg(msg);
         ackMsg = TestQueue_ReceiveMsg();
-        angle += 30;
-        sleep(2000);
+        angle += 15;
+        sleep(3000);
     }
     
     //Test motion on upper joint
@@ -167,8 +167,8 @@ void TESTTHREAD_Tasks ( void )
         msg.msgValue = (UpperServo << 16) | (angle & 0xFFFF);
         ArmQueue_SendMsg(msg);
         ackMsg = TestQueue_ReceiveMsg();
-        angle += 30;
-        sleep(2000);
+        angle += 15;
+        sleep(3000);
     }
 
     //demo the reset command
@@ -190,6 +190,24 @@ void TESTTHREAD_Tasks ( void )
     sleep(5000);
     
     //test calibration routine
+    armCalibrate(BaseMin, BaseMax);
+    
+    //set to -90 degrees
+    msg.msgType = SetServoAngle;
+    angle = -90;
+    msg.msgValue = (BaseServo << 16) | (angle & 0xFFFF);
+    ArmQueue_SendMsg(msg);
+    ackMsg = TestQueue_ReceiveMsg();
+    
+    sleep(5000);
+    
+    //set to 90 degrees
+    angle = 90;
+    msg.msgValue = (BaseServo << 16) | (angle & 0xFFFF);
+    ArmQueue_SendMsg(msg);
+    ackMsg = TestQueue_ReceiveMsg();
+    //block forever
+    ackMsg = TestQueue_ReceiveMsg();
 }
 
 /*******************************************************************************

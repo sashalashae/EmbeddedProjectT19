@@ -59,6 +59,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system_config.h"
 #include "system_definitions.h"
 #include "arm_queue.h"
+#include "arm_library.h"
 #include "helper_functions.h"
 #include "test_queue.h"
 

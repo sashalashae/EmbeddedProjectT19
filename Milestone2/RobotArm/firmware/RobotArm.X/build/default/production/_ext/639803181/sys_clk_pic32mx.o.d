@@ -136,5 +136,4 @@ build/default/production/_ext/639803181/sys_clk_pic32mx.o:  \
  ../src/test_queue.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
- ../src/armthread.h  \
-
+ ../src/armthread.h 

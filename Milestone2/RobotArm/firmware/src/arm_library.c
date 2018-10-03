@@ -63,14 +63,14 @@ void armInit()
  * 
  * Returns: void
  */
-void armCalibrate()
+void armCalibrate(CalibrateMode calFrom, CalibrateMode calTo)
 {
     bool pinValue;
     uint16_t calValue;
-    CalibrateMode mode = 0;
+    CalibrateMode mode = calFrom;
     ArmMessage calMessage;
     calMessage.msgType = CalibrateArm;
-    while(mode < NumCalModes)
+    while(mode <= calTo)
     {
         //wait for pin to be low again
         while(SYS_PORTS_PinRead(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_6));
