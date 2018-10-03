@@ -27,7 +27,8 @@ typedef enum
     DrawX,
     DrawO,
     SetServoAngle,
-    CalibrateArm
+    CalibrateArm,
+    CancelMovement
 }MessageType;
 
 //struct to hold each message

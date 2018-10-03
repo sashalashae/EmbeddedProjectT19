@@ -238,6 +238,11 @@ void setArmPosition(ArmMovement movement)
         while(tickMessage.msgType != TimerTick)
         {
             tickMessage = ArmQueue_ReceiveMsg();
+            //handle cancel commands
+            if(tickMessage.msgType == CancelMovement)
+            {
+                return;
+            }
         }
     }
 }
