@@ -74,19 +74,27 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 // *****************************************************************************
 void IntHandlerDrvUsartInstance0(void)
-{
+{    
     BaseType_t pxHigherPriorityTaskWoken = pdFALSE;
     //UART interrupt handler
     
     //Check for Tx interrupts
     if(SYS_INT_SourceStatusGet(INT_SOURCE_USART_1_TRANSMIT))
-    {
-        //initially disable
+    {   
+        //initially disable interrupt source
         SYS_INT_SourceDisable(INT_SOURCE_USART_1_TRANSMIT);
         
         //fill the transmit buffer from the TxISRQueue
+        while(!PLIB_USART_TransmitterBufferIsFull(USART_ID_1) && TxISRQueue_Count() != 0)
+        {
+            PLIB_USART_TransmitterByteSend(USART_ID_1, TxISRQueue_Receive());
+        }
         
         //if the TxISRQueue count != 0, renable the interrupt
+        if(TxISRQueue_Count() != 0)
+        {
+            SYS_INT_SourceEnable(INT_SOURCE_USART_1_TRANSMIT);
+        }
 
         //clear the interrupt flag
         SYS_INT_SourceStatusClear(INT_SOURCE_USART_1_TRANSMIT);
@@ -94,14 +102,24 @@ void IntHandlerDrvUsartInstance0(void)
     
     //Check for Rx Interrupts
     if(SYS_INT_SourceStatusGet(INT_SOURCE_USART_1_RECEIVE))
-    {
+    {   
+        //initially disable recieve interrupt source
+        SYS_INT_SourceDisable(INT_SOURCE_USART_1_RECEIVE);
+        
         //read the data into the RxISRQueue
+        while(PLIB_USART_ReceiverDataIsAvailable(USART_ID_1))
+        {
+            RxISRQueue_Send(PLIB_USART_ReceiverByteReceive(USART_ID_1), &pxHigherPriorityTaskWoken);
+        }
         
         //clear the interrupt flag
         SYS_INT_SourceStatusClear(INT_SOURCE_USART_1_RECEIVE);
         
         //Tell scheduler that ISR is done
         portEND_SWITCHING_ISR(pxHigherPriorityTaskWoken);
+        
+        //re-enable the receive interrupts
+        SYS_INT_SourceEnable(INT_SOURCE_USART_1_RECEIVE);
     }
 }
  

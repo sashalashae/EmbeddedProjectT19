@@ -32,6 +32,7 @@
 
 void RXTHREAD_Initialize ( void )
 {
+    RxISRQueue_Init(256);
 }
 
 
@@ -47,7 +48,7 @@ void RXTHREAD_Tasks ( void )
 {
     //receive data from the RxISRQueue
     //parse the data into JSON messages
-    //Forward each meesage to the appropriate handling thread
+    //Forward each message to the appropriate handling thread
 }
 
 /*******************************************************************************

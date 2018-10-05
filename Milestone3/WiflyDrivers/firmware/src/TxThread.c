@@ -40,6 +40,8 @@
 
 void TXTHREAD_Initialize ( void )
 {
+    TxThreadQueue_Init(10);
+    TxISRQueue_Init(256);
 }
 
 
@@ -53,11 +55,16 @@ void TXTHREAD_Initialize ( void )
 
 void TXTHREAD_Tasks ( void )
 {
-    //receive a JSON message to transmit
-    
-    //begin filling the TxISRQueue
-    
-    //Enable TX interrupts
+    cJSON msg;
+    while(1)
+    {
+        //receive a JSON message to transmit
+        msg = TxThreadQueue_Receive();
+        
+        //begin filling the TxISRQueue
+        
+        //Enable TX interrupts
+    }
 }
 
  

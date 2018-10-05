@@ -237,4 +237,8 @@ build/default/production/_ext/1360937237/TxThread.o:  \
  ../src/wiflydriver.h  \
 ../src/testthread.h  \
 ../src/txthread.h  \
- ../src/rxthread.h 
+ ../src/rxthread.h  \
+../src/RxISRQueue.h  \
+../src/TxISRQueue.h  \
+ ../src/TxThreadQueue.h  \
+../src/cJSON.h 

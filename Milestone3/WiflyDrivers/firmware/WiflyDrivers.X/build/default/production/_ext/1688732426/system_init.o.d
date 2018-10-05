@@ -238,4 +238,8 @@ build/default/production/_ext/1688732426/system_init.o:  \
 ../src/system_config/default/system_definitions.h  \
  ../src/testthread.h  \
 ../src/txthread.h  \
-../src/rxthread.h 
+../src/TxISRQueue.h  \
+ ../src/TxThreadQueue.h  \
+../src/cJSON.h  \
+../src/rxthread.h  \
+ ../src/RxISRQueue.h 

@@ -236,4 +236,8 @@ build/default/production/_ext/327000265/drv_usart_static.o:  \
  ../src/wiflydriver.h  \
 ../src/testthread.h  \
 ../src/txthread.h  \
- ../src/rxthread.h 
+ ../src/TxISRQueue.h  \
+../src/TxThreadQueue.h  \
+../src/cJSON.h  \
+ ../src/rxthread.h  \
+../src/RxISRQueue.h 
