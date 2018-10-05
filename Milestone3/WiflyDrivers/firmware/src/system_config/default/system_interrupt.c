@@ -62,7 +62,11 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system/common/sys_common.h"
 #include "wiflydriver.h"
 #include "testthread.h"
+#include "txthread.h"
+#include "rxthread.h"
 #include "system_definitions.h"
+#include "portmacro.h"
+#include "osal/osal.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -71,24 +75,35 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 void IntHandlerDrvUsartInstance0(void)
 {
-    DRV_USART_TasksTransmit(sysObj.drvUsart0);
-    DRV_USART_TasksError(sysObj.drvUsart0);
-    DRV_USART_TasksReceive(sysObj.drvUsart0);
+    BaseType_t pxHigherPriorityTaskWoken = pdFALSE;
+    //UART interrupt handler
+    
+    //Check for Tx interrupts
+    if(SYS_INT_SourceStatusGet(INT_SOURCE_USART_1_TRANSMIT))
+    {
+        //initially disable
+        SYS_INT_SourceDisable(INT_SOURCE_USART_1_TRANSMIT);
+        
+        //fill the transmit buffer from the TxISRQueue
+        
+        //if the TxISRQueue count != 0, renable the interrupt
+
+        //clear the interrupt flag
+        SYS_INT_SourceStatusClear(INT_SOURCE_USART_1_TRANSMIT);
+    }
+    
+    //Check for Rx Interrupts
+    if(SYS_INT_SourceStatusGet(INT_SOURCE_USART_1_RECEIVE))
+    {
+        //read the data into the RxISRQueue
+        
+        //clear the interrupt flag
+        SYS_INT_SourceStatusClear(INT_SOURCE_USART_1_RECEIVE);
+        
+        //Tell scheduler that ISR is done
+        portEND_SWITCHING_ISR(pxHigherPriorityTaskWoken);
+    }
 }
- 
- 
- 
-
- 
-
- 
-
- 
-
- 
-
- 
- 
  
 /*******************************************************************************
  End of File

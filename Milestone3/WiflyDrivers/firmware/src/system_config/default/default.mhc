@@ -6,9 +6,9 @@
 #     Harmony version: 2.06
 #
 #
-# from C:\Users\nolan\OneDrive\ECE4534\EmbeddedProjectT19\Milestone3\WiflyDrivers\firmware\WiflyDrivers.hconfig
+# from C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\Milestone3\WiflyDrivers\firmware\WiflyDrivers.hconfig
 #
-CONFIG_APP_INSTANCES=2
+CONFIG_APP_INSTANCES=4
 #
 # from $HARMONY_VERSION_PATH\utilities\mhc\config\app_name_idx_gencode.ftl
 #
@@ -24,8 +24,20 @@ CONFIG_APP_AUTO_GENERATE_CODE1=n
 CONFIG_APP_TASK_SIZE_IDX1=1024
 CONFIG_APP_TASK_PRIORITY_IDX1=2
 CONFIG_APP_TASK_USE_DELAY_IDX1=n
+CONFIG_APP_MENU_IDX2=y
+CONFIG_APP_NAME_2="TxThread"
+CONFIG_APP_AUTO_GENERATE_CODE2=n
+CONFIG_APP_TASK_SIZE_IDX2=1024
+CONFIG_APP_TASK_PRIORITY_IDX2=3
+CONFIG_APP_TASK_USE_DELAY_IDX2=n
+CONFIG_APP_MENU_IDX3=y
+CONFIG_APP_NAME_3="RxThread"
+CONFIG_APP_AUTO_GENERATE_CODE3=n
+CONFIG_APP_TASK_SIZE_IDX3=1024
+CONFIG_APP_TASK_PRIORITY_IDX3=3
+CONFIG_APP_TASK_USE_DELAY_IDX3=n
 #
-# from C:\Users\nolan\OneDrive\ECE4534\EmbeddedProjectT19\Milestone3\WiflyDrivers\firmware\WiflyDrivers.hconfig
+# from C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\Milestone3\WiflyDrivers\firmware\WiflyDrivers.hconfig
 #
 CONFIG_USE_EXCEPTION_HANDLER=y
 CONFIG_EXCEPTION_USE_SYS_DEBUG=y

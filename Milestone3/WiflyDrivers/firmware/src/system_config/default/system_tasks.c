@@ -56,6 +56,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system_definitions.h"
 #include "wiflydriver.h"
 #include "testthread.h"
+#include "txthread.h"
+#include "rxthread.h"
 
 
 // *****************************************************************************
@@ -71,6 +73,8 @@ static void _SYS_Tasks ( void );
  
 static void _WIFLYDRIVER_Tasks(void);
 static void _TESTTHREAD_Tasks(void);
+static void _TXTHREAD_Tasks(void);
+static void _RXTHREAD_Tasks(void);
 
 
 // *****************************************************************************
@@ -105,6 +109,16 @@ void SYS_Tasks ( void )
     xTaskCreate((TaskFunction_t) _TESTTHREAD_Tasks,
                 "TESTTHREAD Tasks",
                 1024, NULL, 2, NULL);
+
+    /* Create OS Thread for TXTHREAD Tasks. */
+    xTaskCreate((TaskFunction_t) _TXTHREAD_Tasks,
+                "TXTHREAD Tasks",
+                1024, NULL, 3, NULL);
+
+    /* Create OS Thread for RXTHREAD Tasks. */
+    xTaskCreate((TaskFunction_t) _RXTHREAD_Tasks,
+                "RXTHREAD Tasks",
+                1024, NULL, 3, NULL);
 
     /**************
      * Start RTOS * 
@@ -169,6 +183,40 @@ static void _TESTTHREAD_Tasks(void)
     while(1)
     {
         TESTTHREAD_Tasks();
+    }
+}
+
+
+/*******************************************************************************
+  Function:
+    void _TXTHREAD_Tasks ( void )
+
+  Summary:
+    Maintains state machine of TXTHREAD.
+*/
+
+static void _TXTHREAD_Tasks(void)
+{
+    while(1)
+    {
+        TXTHREAD_Tasks();
+    }
+}
+
+
+/*******************************************************************************
+  Function:
+    void _RXTHREAD_Tasks ( void )
+
+  Summary:
+    Maintains state machine of RXTHREAD.
+*/
+
+static void _RXTHREAD_Tasks(void)
+{
+    while(1)
+    {
+        RXTHREAD_Tasks();
     }
 }
 

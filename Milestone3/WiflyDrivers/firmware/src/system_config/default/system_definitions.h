@@ -58,6 +58,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "task.h"
 #include "wiflydriver.h"
 #include "testthread.h"
+#include "txthread.h"
+#include "rxthread.h"
 
 
 // DOM-IGNORE-BEGIN

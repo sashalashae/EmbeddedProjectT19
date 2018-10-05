@@ -119,8 +119,8 @@ SYS_MODULE_OBJ DRV_USART0_Initialize(void)
     SYS_INT_SourceStatusClear(INT_SOURCE_USART_1_RECEIVE);
     SYS_INT_SourceStatusClear(INT_SOURCE_USART_1_ERROR);
 
-    /* Enable the error interrupt source */
-    SYS_INT_SourceEnable(INT_SOURCE_USART_1_ERROR);
+    /* Enable the Transmit interrupt source */
+    SYS_INT_SourceEnable(INT_SOURCE_USART_1_TRANSMIT);
 
     /* Enable the Receive interrupt source */
     SYS_INT_SourceEnable(INT_SOURCE_USART_1_RECEIVE);
@@ -165,6 +165,11 @@ SYS_STATUS DRV_USART0_Status(void)
 
 void DRV_USART0_TasksTransmit(void)
 {
+    //In the UART driver thread, push bytes into a transmit queue
+    //once all bytes are in queue, enable TX interrupt
+    //in the TX ISR, if there is data in queue, fill the transmit buffer from
+    //the queue. If there is not data disable TX interrupt.
+    
     /* This is the USART Driver Transmit tasks routine.
        In this function, the driver checks if a transmit
        interrupt is active and performs respective action*/
@@ -182,9 +187,7 @@ void DRV_USART0_TasksTransmit(void)
 
 void DRV_USART0_TasksReceive(void)
 {
-    /* This is the USART Driver Receive tasks routine. If the receive
-       interrupt flag is set, the tasks routines are executed.
-     */
+    // When you receive an RX interrupt, take the byte and push into the queue
 
     /* Reading the receive interrupt flag */
     if(SYS_INT_SourceStatusGet(INT_SOURCE_USART_1_RECEIVE))
