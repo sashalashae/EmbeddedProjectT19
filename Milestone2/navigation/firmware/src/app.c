@@ -121,6 +121,8 @@ void APP_Initialize ( void )
     
     //Configure digital output pins (output Val)
     SYS_PORTS_DirectionSelect(PORTS_ID_0, SYS_PORTS_DIRECTION_OUTPUT, PORT_CHANNEL_E, 0xFF);
+    
+    NavQueue_Initialize(10);
 }
 
 
@@ -135,14 +137,30 @@ void APP_Initialize ( void )
 void APP_Tasks ( void )
 {
     //Initialize the struct
-    Position_Data pd;
-    pd.current_position = bottom_left;
-    pd.check = 0;
-    pd.dir = stop;
+    //navigation_test_bench();
+    dbgOutputLoc(DLOC_APP_TASKS_START);
+    
+    testData td;
     
     uint16_t FSRs;
-    
-    navigation_test_bench(pd);
+    Position_Data pd;
+    pd.current_position = bottom_left_corner;
+    pd.check = 0;
+    pd.dir = forwards;
+    pd.prevDbg = bottom_left_corner;
+    //int i = 0;
+    while(1)
+    {
+        dbgOutputLoc(DLOC_QUEUE_WAITING);
+        td = NavQueue_ReceiveMsg();
+        FSRs = td.FSRs;
+        pd.dir = td.dir;
+        pd = position_tracker(FSRs, pd);
+        //i++;
+        //if( i == 26 )
+            //i = 0;
+        //RetQueue_SendIndex(i);
+    }
     
 }
 

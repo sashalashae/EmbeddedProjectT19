@@ -12,7 +12,7 @@
 #include "debug.h"
 #include "pdStruct.h"
 
-void position_tracker(uint16_t FSRs, Position_Data pd);
+Position_Data position_tracker(uint16_t FSRs, Position_Data pd);
 
 #endif	/* NAVIGATION_THREAD_H */
 

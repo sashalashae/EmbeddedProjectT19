@@ -1,5 +1,12 @@
-build/default/production/_ext/639803181/sys_clk_pic32mx.o:  \
- ../src/system_config/default/framework/system/clk/src/sys_clk_pic32mx.c  \
+build/default/production/_ext/1360937237/navQueue.o:  \
+../src/navQueue.c  \
+ ../src/navQueue.h  \
+../src/system_config/default/system_definitions.h  \
+ ../../../../../../framework/system/common/sys_common.h  \
+ ../../../../../../framework/system/common/sys_module.h  \
+ ../../../../../../framework/system/devcon/sys_devcon.h  \
+ ../../../../../../framework/system/system.h  \
+ ../../../../../../framework/system/clk/sys_clk.h  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../../../framework/peripheral/ports/plib_ports.h  \
@@ -33,12 +40,6 @@ build/default/production/_ext/639803181/sys_clk_pic32mx.o:  \
  ../../../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Unsupported.h  \
  ../../../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h  \
  ../../../../../../framework/peripheral/ports/plib_ports_compatibility.h  \
- ../src/system_config/default/system_definitions.h  \
- ../../../../../../framework/system/common/sys_common.h  \
- ../../../../../../framework/system/common/sys_module.h  \
- ../../../../../../framework/system/devcon/sys_devcon.h  \
- ../../../../../../framework/system/system.h  \
- ../../../../../../framework/system/clk/sys_clk.h  \
  ../../../../../../framework/peripheral/osc/plib_osc.h  \
  ../../../../../../framework/peripheral/osc/processor/osc_processor.h  \
  ../../../../../../framework/peripheral/osc/processor/osc_p32xxxx.h  \
@@ -132,7 +133,6 @@ build/default/production/_ext/639803181/sys_clk_pic32mx.o:  \
 ../src/debug.h  \
 ../src/pdStruct.h  \
  ../src/sleep.h  \
-../src/navQueue.h  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/queue.h  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/task.h 

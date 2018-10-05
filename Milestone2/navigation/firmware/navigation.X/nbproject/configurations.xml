@@ -93,6 +93,7 @@
       <itemPath>../src/debug.h</itemPath>
       <itemPath>../src/sleep.h</itemPath>
       <itemPath>../src/pdStruct.h</itemPath>
+      <itemPath>../src/navQueue.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -175,6 +176,7 @@
       <itemPath>../src/navigation_thread.c</itemPath>
       <itemPath>../src/debug.c</itemPath>
       <itemPath>../src/sleep.c</itemPath>
+      <itemPath>../src/navQueue.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -363,6 +365,7 @@
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
         <property key="UART1" value="true"/>
         <property key="UART2" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>

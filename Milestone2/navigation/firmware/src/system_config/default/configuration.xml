@@ -268,7 +268,7 @@
       <Template dnOrder="12">
         <Name dnOrder="0">FreeRTOSConfig.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">4388AF19B6D72A9938A12ECEDF54C6AF</Checksum>
+        <Checksum dnOrder="2">DA34CEF047F2D4E2FCA217C985089BDB</Checksum>
       </Template>
       <Template dnOrder="13">
         <Name dnOrder="0">system_tasks.c</Name>
@@ -297,7 +297,7 @@
       <Template dnOrder="18">
         <Name dnOrder="0">rtos_hooks.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">FA52743264536E5207D2ADBE57B48D05</Checksum>
+        <Checksum dnOrder="2">4CCD139F1A5261EA8C673C1CBD351067</Checksum>
       </Template>
       <Template dnOrder="19">
         <Name dnOrder="0">sys_clk_pic32mx.c</Name>

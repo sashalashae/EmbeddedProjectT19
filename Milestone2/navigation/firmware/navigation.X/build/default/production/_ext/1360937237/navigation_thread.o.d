@@ -131,4 +131,8 @@ build/default/production/_ext/1360937237/navigation_thread.o:  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/list.h  \
  ../src/app.h  \
 ../src/sleep.h  \
-../src/pdStruct.h 
+../src/pdStruct.h  \
+../src/navQueue.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/queue.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/timers.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/task.h 
