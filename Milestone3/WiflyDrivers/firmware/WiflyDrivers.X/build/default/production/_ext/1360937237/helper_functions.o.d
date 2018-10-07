@@ -240,5 +240,6 @@ build/default/production/_ext/1360937237/helper_functions.o:  \
 ../src/debug.h  \
  ../src/txthread.h  \
 ../src/TxThreadQueue.h  \
-../src/rxthread.h  \
- ../src/RxISRQueue.h 
+../src/UART_Defines.h  \
+ ../src/rxthread.h  \
+../src/RxISRQueue.h 

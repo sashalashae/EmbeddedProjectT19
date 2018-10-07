@@ -240,5 +240,6 @@ build/default/production/_ext/327000265/drv_usart_mapping.o:  \
 ../src/TxISRQueue.h  \
 ../src/txthread.h  \
  ../src/TxThreadQueue.h  \
+../src/UART_Defines.h  \
 ../src/rxthread.h  \
-../src/RxISRQueue.h 
+ ../src/RxISRQueue.h 

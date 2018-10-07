@@ -32,11 +32,7 @@
 
 void RXTHREAD_Initialize ( void )
 {
-<<<<<<< Updated upstream
     RxISRQueue_Init(MAX_MESSAGE_SIZE);
-=======
-    RxISRQueue_Init(256);
->>>>>>> Stashed changes
 }
 
 
@@ -51,7 +47,6 @@ void RXTHREAD_Initialize ( void )
 void RXTHREAD_Tasks ( void )
 {
     uint8_t data;
-<<<<<<< Updated upstream
     uint8_t check_gen = 0xff;
     uint8_t check_recv;
     int count;
@@ -104,7 +99,7 @@ void RXTHREAD_Tasks ( void )
                 }
             }
         }
-=======
+    }
     while(1)
     {
         //receive current byte
@@ -112,7 +107,6 @@ void RXTHREAD_Tasks ( void )
         //parse the data into JSON messages
         //Forward each message to the appropriate handling thread
         //test
->>>>>>> Stashed changes
     }
 }
 

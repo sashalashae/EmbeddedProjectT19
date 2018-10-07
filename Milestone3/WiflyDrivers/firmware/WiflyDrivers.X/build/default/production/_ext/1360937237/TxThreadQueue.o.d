@@ -240,5 +240,6 @@ build/default/production/_ext/1360937237/TxThreadQueue.o:  \
 ../src/helper_functions.h  \
 ../src/TxISRQueue.h  \
  ../src/txthread.h  \
+../src/UART_Defines.h  \
 ../src/rxthread.h  \
-../src/RxISRQueue.h 
+ ../src/RxISRQueue.h 
