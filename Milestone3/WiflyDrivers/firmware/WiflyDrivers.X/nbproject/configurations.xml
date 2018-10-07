@@ -33,7 +33,6 @@
             <itemPath>../src/system_config/default/system_definitions.h</itemPath>
           </logicalFolder>
         </logicalFolder>
-        <itemPath>../src/WiFlyDriver.h</itemPath>
         <itemPath>../src/testThread.h</itemPath>
         <itemPath>../src/TxThread.h</itemPath>
         <itemPath>../src/RxThread.h</itemPath>
@@ -120,6 +119,8 @@
       <itemPath>../src/RxISRQueue.h</itemPath>
       <itemPath>../src/TxThreadQueue.h</itemPath>
       <itemPath>../src/cJSON.h</itemPath>
+      <itemPath>../src/debug.h</itemPath>
+      <itemPath>../src/helper_functions.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -171,7 +172,6 @@
             <itemPath>../src/system_config/default/rtos_hooks.c</itemPath>
           </logicalFolder>
         </logicalFolder>
-        <itemPath>../src/WiFlyDriver.c</itemPath>
         <itemPath>../src/testThread.c</itemPath>
         <itemPath>../src/main.c</itemPath>
         <itemPath>../src/TxThread.c</itemPath>
@@ -216,6 +216,8 @@
       <itemPath>../src/RxISRQueue.c</itemPath>
       <itemPath>../src/TxThreadQueue.c</itemPath>
       <itemPath>../src/cJSON.c</itemPath>
+      <itemPath>../src/debug.c</itemPath>
+      <itemPath>../src/helper_functions.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -404,6 +406,7 @@
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
         <property key="UART1" value="true"/>
         <property key="UART2" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>

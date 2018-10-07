@@ -1,6 +1,5 @@
-build/default/production/_ext/1360937237/WiFlyDriver.o:  \
- ../src/WiFlyDriver.c  \
-../src/wiflydriver.h  \
+build/default/debug/_ext/327000265/drv_usart_mapping.o:  \
+ ../src/system_config/default/framework/driver/usart/src/drv_usart_mapping.c  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports.h  \
@@ -234,11 +233,12 @@ build/default/production/_ext/1360937237/WiFlyDriver.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/system/debug/sys_debug.h  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports.h  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports_definitions.h  \
- ../src/wiflydriver.h  \
-../src/testthread.h  \
-../src/txthread.h  \
- ../src/TxISRQueue.h  \
-../src/TxThreadQueue.h  \
+ ../src/testthread.h  \
 ../src/cJSON.h  \
- ../src/rxthread.h  \
+../src/helper_functions.h  \
+ ../src/debug.h  \
+../src/txthread.h  \
+../src/TxISRQueue.h  \
+ ../src/TxThreadQueue.h  \
+../src/rxthread.h  \
 ../src/RxISRQueue.h 

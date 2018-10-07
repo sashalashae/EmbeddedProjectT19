@@ -71,13 +71,10 @@ void TXTHREAD_Tasks ( void )
         //begin filling the TxISRQueue in increments of 8 bytes
         while(count < sizeof(msg))
         {
-            for(index = 0; index<8; index++)
-            {
-                currentByte = *msgPtr;
-                TxISRQueue_Send(currentByte);
-                msgPtr++;
-                count++;
-            }
+            currentByte = *msgPtr;
+            TxISRQueue_Send(currentByte);
+            msgPtr++;
+            count++;
             //Enable TX interrupts
             SYS_INT_SourceEnable(INT_SOURCE_USART_1_TRANSMIT);
         }

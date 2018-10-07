@@ -165,7 +165,6 @@ void SYS_Initialize ( void* data )
     /* Initialize Middleware */
 
     /* Initialize the Application */
-    WIFLYDRIVER_Initialize();
     TESTTHREAD_Initialize();
     TXTHREAD_Initialize();
     RXTHREAD_Initialize();

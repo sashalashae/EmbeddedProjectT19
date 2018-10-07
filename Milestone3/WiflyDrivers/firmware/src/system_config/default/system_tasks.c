@@ -54,7 +54,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include "system_config.h"
 #include "system_definitions.h"
-#include "wiflydriver.h"
 #include "testthread.h"
 #include "txthread.h"
 #include "rxthread.h"
@@ -98,13 +97,6 @@ void SYS_Tasks ( void )
                 "Sys Tasks",
                 1024, NULL, 0, NULL);
 
- 
- 
-    /* Create OS Thread for WIFLYDRIVER Tasks. */
-    xTaskCreate((TaskFunction_t) _WIFLYDRIVER_Tasks,
-                "WIFLYDRIVER Tasks",
-                1024, NULL, 1, NULL);
-
     /* Create OS Thread for TESTTHREAD Tasks. */
     xTaskCreate((TaskFunction_t) _TESTTHREAD_Tasks,
                 "TESTTHREAD Tasks",
@@ -147,25 +139,6 @@ static void _SYS_Tasks ( void)
         /* Maintain Middleware */
 
         /* Task Delay */
-    }
-}
-
- 
- 
-
-/*******************************************************************************
-  Function:
-    void _WIFLYDRIVER_Tasks ( void )
-
-  Summary:
-    Maintains state machine of WIFLYDRIVER.
-*/
-
-static void _WIFLYDRIVER_Tasks(void)
-{
-    while(1)
-    {
-        WIFLYDRIVER_Tasks();
     }
 }
 

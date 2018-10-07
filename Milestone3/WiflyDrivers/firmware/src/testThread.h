@@ -58,6 +58,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include <stdlib.h>
 #include "system_config.h"
 #include "system_definitions.h"
+#include "cJSON.h"
+#include "helper_functions.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
@@ -82,17 +84,7 @@ extern "C" {
   Description:
     This enumeration defines the valid application states.  These states
     determine the behavior of the application at various times.
-*/
-
-typedef enum
-{
-	/* Application's state machine's initial state. */
-	TESTTHREAD_STATE_INIT=0,
-	TESTTHREAD_STATE_SERVICE_TASKS,
-
-	/* TODO: Define states used by the application state machine. */
-
-} TESTTHREAD_STATES;
+*
 
 
 // *****************************************************************************
@@ -107,16 +99,6 @@ typedef enum
   Remarks:
     Application strings and buffers are be defined outside this structure.
  */
-
-typedef struct
-{
-    /* The application's current state */
-    TESTTHREAD_STATES state;
-
-    /* TODO: Define any additional data used by the application. */
-
-} TESTTHREAD_DATA;
-
 
 // *****************************************************************************
 // *****************************************************************************

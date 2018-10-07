@@ -57,49 +57,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: Global Data Definitions
-// *****************************************************************************
-// *****************************************************************************
-
-// *****************************************************************************
-/* Application Data
-
-  Summary:
-    Holds application data
-
-  Description:
-    This structure holds the application's data.
-
-  Remarks:
-    This structure should be initialized by the APP_Initialize function.
-    
-    Application strings and buffers are be defined outside this structure.
-*/
-
-TESTTHREAD_DATA testthreadData;
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Application Callback Functions
-// *****************************************************************************
-// *****************************************************************************
-
-/* TODO:  Add any necessary callback functions.
-*/
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Application Local Functions
-// *****************************************************************************
-// *****************************************************************************
-
-
-/* TODO:  Add any necessary local functions.
-*/
-
-
-// *****************************************************************************
-// *****************************************************************************
 // Section: Application Initialization and State Machine Functions
 // *****************************************************************************
 // *****************************************************************************
@@ -114,13 +71,6 @@ TESTTHREAD_DATA testthreadData;
 
 void TESTTHREAD_Initialize ( void )
 {
-    /* Place the App state machine in its initial state. */
-    testthreadData.state = TESTTHREAD_STATE_INIT;
-
-    
-    /* TODO: Initialize your application's state machine and other
-     * parameters.
-     */
 }
 
 
@@ -134,43 +84,16 @@ void TESTTHREAD_Initialize ( void )
 
 void TESTTHREAD_Tasks ( void )
 {
-
-    /* Check the application's current state. */
-    switch ( testthreadData.state )
+    cJSON* test;
+    uint8_t i = 0;
+    while(1)
     {
-        /* Application's initial state. */
-        case TESTTHREAD_STATE_INIT:
-        {
-            bool appInitialized = true;
-       
-        
-            if (appInitialized)
-            {
-            
-                testthreadData.state = TESTTHREAD_STATE_SERVICE_TASKS;
-            }
-            break;
-        }
-
-        case TESTTHREAD_STATE_SERVICE_TASKS:
-        {
-        
-            break;
-        }
-
-        /* TODO: implement your application state machine.*/
-        
-
-        /* The default state should never be executed. */
-        default:
-        {
-            /* TODO: Handle error in application's state machine. */
-            break;
-        }
+        cJSON_AddNumberToObject(test, "val", i);
+        i++;
+        TxThreadQueue_Send(*test);
+        sleep(2000);
     }
 }
-
- 
 
 /*******************************************************************************
  End of File
