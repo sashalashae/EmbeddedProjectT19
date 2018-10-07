@@ -22,16 +22,18 @@ void TxISRQueue_Send(uint8_t msg)
     xQueueSend(TxISRQueue, &msg, 0);
 }
 
-uint32_t TxISRQueue_Count()
+BaseType_t TxISRQueue_IsEmpty()
 {
-    return (TxISRQueueSize - uxQueueSpacesAvailable(TxISRQueue));
+    return xQueueIsQueueEmptyFromISR(TxISRQueue);
 }
 
 uint8_t TxISRQueue_Receive()
 {
     //receive from ISR
+    dbgOutputLoc(60);
     uint8_t data;
     BaseType_t xTaskWokenByReceive = pdFALSE;
-    xQueueReceiveFromISR(TxISRQueue, ( void * ) &data, &xTaskWokenByReceive);
+    xQueueReceiveFromISR(TxISRQueue, &data, &xTaskWokenByReceive);
+    dbgOutputLoc(61);
     return data;
 }

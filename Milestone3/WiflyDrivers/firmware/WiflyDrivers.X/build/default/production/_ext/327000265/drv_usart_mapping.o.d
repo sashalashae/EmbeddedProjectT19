@@ -237,8 +237,8 @@ build/default/production/_ext/327000265/drv_usart_mapping.o:  \
 ../src/cJSON.h  \
 ../src/helper_functions.h  \
  ../src/debug.h  \
-../src/txthread.h  \
 ../src/TxISRQueue.h  \
+../src/txthread.h  \
  ../src/TxThreadQueue.h  \
 ../src/rxthread.h  \
 ../src/RxISRQueue.h 

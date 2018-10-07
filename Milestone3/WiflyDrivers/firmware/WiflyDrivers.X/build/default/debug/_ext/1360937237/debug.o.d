@@ -237,8 +237,8 @@ build/default/debug/_ext/1360937237/debug.o:  \
  ../src/testthread.h  \
 ../src/cJSON.h  \
 ../src/helper_functions.h  \
- ../src/txthread.h  \
-../src/TxISRQueue.h  \
+ ../src/TxISRQueue.h  \
+../src/txthread.h  \
 ../src/TxThreadQueue.h  \
  ../src/rxthread.h  \
 ../src/RxISRQueue.h 

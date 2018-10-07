@@ -236,9 +236,9 @@ build/default/debug/_ext/1360937237/helper_functions.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports_definitions.h  \
  ../src/testthread.h  \
 ../src/cJSON.h  \
-../src/txthread.h  \
 ../src/TxISRQueue.h  \
- ../src/TxThreadQueue.h  \
+../src/debug.h  \
+ ../src/txthread.h  \
+../src/TxThreadQueue.h  \
 ../src/rxthread.h  \
-../src/RxISRQueue.h  \
- ../src/debug.h 
+ ../src/RxISRQueue.h 

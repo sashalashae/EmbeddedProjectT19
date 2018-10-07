@@ -13,7 +13,7 @@
 
 void TxISRQueue_Init(uint32_t size);
 void TxISRQueue_Send(uint8_t msg);
-uint32_t TxISRQueue_Count();
+BaseType_t TxISRQueue_IsEmpty();
 uint8_t TxISRQueue_Receive();
 
 #endif

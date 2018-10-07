@@ -64,6 +64,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "txthread.h"
 #include "rxthread.h"
 #include "system_definitions.h"
+#include "debug.h"
 #include "portmacro.h"
 #include "osal/osal.h"
 
@@ -74,25 +75,25 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 void IntHandlerDrvUsartInstance0(void)
 {    
+    dbgOutputLoc(30);
     BaseType_t pxHigherPriorityTaskWoken = pdFALSE;
+    
     //UART interrupt handler
+    uint8_t TxData;
     
     //Check for Tx interrupts
     if(SYS_INT_SourceStatusGet(INT_SOURCE_USART_1_TRANSMIT))
-    {   
-        //initially disable interrupt source
-        SYS_INT_SourceDisable(INT_SOURCE_USART_1_TRANSMIT);
+    {
+        dbgOutputLoc(31);
         
-        //fill the transmit buffer from the TxISRQueue
-        while(!PLIB_USART_TransmitterBufferIsFull(USART_ID_1) && TxISRQueue_Count() != 0)
-        {
-            PLIB_USART_TransmitterByteSend(USART_ID_1, TxISRQueue_Receive());
-        }
+        //send one byte
+        TxData = TxISRQueue_Receive();
+        PLIB_USART_TransmitterByteSend(USART_ID_1, TxData);
         
-        //if the TxISRQueue count != 0, renable the interrupt
-        if(TxISRQueue_Count() != 0)
+        //if the no messages left in TxISRQueue, disable the interrupt
+        if(TxISRQueue_IsEmpty())
         {
-            SYS_INT_SourceEnable(INT_SOURCE_USART_1_TRANSMIT);
+            SYS_INT_SourceDisable(INT_SOURCE_USART_1_TRANSMIT);
         }
 
         //clear the interrupt flag
@@ -102,9 +103,7 @@ void IntHandlerDrvUsartInstance0(void)
     //Check for Rx Interrupts
     if(SYS_INT_SourceStatusGet(INT_SOURCE_USART_1_RECEIVE))
     {   
-        //initially disable recieve interrupt source
-        SYS_INT_SourceDisable(INT_SOURCE_USART_1_RECEIVE);
-        
+        dbgOutputLoc(32);
         //read the data into the RxISRQueue
         while(PLIB_USART_ReceiverDataIsAvailable(USART_ID_1))
         {
@@ -113,13 +112,11 @@ void IntHandlerDrvUsartInstance0(void)
         
         //clear the interrupt flag
         SYS_INT_SourceStatusClear(INT_SOURCE_USART_1_RECEIVE);
-        
-        //Tell scheduler that ISR is done
-        portEND_SWITCHING_ISR(pxHigherPriorityTaskWoken);
-        
-        //re-enable the receive interrupts
-        SYS_INT_SourceEnable(INT_SOURCE_USART_1_RECEIVE);
     }
+    
+    dbgOutputLoc(33);
+    //Tell scheduler that ISR is done
+    portEND_SWITCHING_ISR(pxHigherPriorityTaskWoken);
 }
  
 /*******************************************************************************

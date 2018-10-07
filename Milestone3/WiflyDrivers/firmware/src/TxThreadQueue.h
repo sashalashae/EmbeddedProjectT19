@@ -11,6 +11,7 @@
 #include "FreeRTOS.h"
 #include "queue.h"
 #include "cJSON.h"
+#include "debug.h"
 
 void TxThreadQueue_Init(uint32_t size);
 void TxThreadQueue_Send(cJSON msg);

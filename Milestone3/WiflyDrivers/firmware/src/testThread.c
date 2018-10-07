@@ -71,6 +71,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 void TESTTHREAD_Initialize ( void )
 {
+    dbgInit();
 }
 
 
@@ -84,14 +85,16 @@ void TESTTHREAD_Initialize ( void )
 
 void TESTTHREAD_Tasks ( void )
 {
-    cJSON* test;
     uint8_t i = 0;
+    uint16_t count;
     while(1)
     {
-        cJSON_AddNumberToObject(test, "val", i);
+        dbgOutputLoc(1);
+        TxISRQueue_Send(i); 
+        SYS_INT_SourceEnable(INT_SOURCE_USART_1_TRANSMIT);
+        dbgOutputLoc(3);
         i++;
-        TxThreadQueue_Send(*test);
-        sleep(2000);
+        sleep(1000);
     }
 }
 

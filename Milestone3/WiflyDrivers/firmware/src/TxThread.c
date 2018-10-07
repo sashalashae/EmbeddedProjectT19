@@ -41,7 +41,7 @@
 void TXTHREAD_Initialize ( void )
 {
     TxThreadQueue_Init(10);
-    TxISRQueue_Init(256);
+    TxISRQueue_Init(100);
 }
 
 
@@ -63,6 +63,8 @@ void TXTHREAD_Tasks ( void )
     {
         //receive a JSON message to transmit
         msg = TxThreadQueue_Receive();
+        //debug
+        dbgOutputLoc(3);
         //get pointer to the message
         msgPtr = (uint8_t *)&msg;
         //set count to 0

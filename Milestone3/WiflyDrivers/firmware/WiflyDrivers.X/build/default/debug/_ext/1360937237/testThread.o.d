@@ -239,7 +239,7 @@ build/default/debug/_ext/1360937237/testThread.o:  \
 ../src/TxISRQueue.h  \
  ../src/TxThreadQueue.h  \
 ../src/cJSON.h  \
+../src/debug.h  \
 ../src/rxthread.h  \
  ../src/RxISRQueue.h  \
-../src/helper_functions.h  \
-../src/debug.h 
+../src/helper_functions.h 
