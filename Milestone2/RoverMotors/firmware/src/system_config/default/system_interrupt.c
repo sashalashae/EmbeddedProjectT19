@@ -84,6 +84,9 @@ void IntHandlerDrvTmrInstance2(void)
 {
     dbgOutputLoc(DLOC_TIMER_ISR_START);
     
+    //Toggle LED
+    SYS_PORTS_PinToggle(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
+    
     BaseType_t pxHigherPriorityTaskWoken = pdFALSE;
     
     //Get encoder values

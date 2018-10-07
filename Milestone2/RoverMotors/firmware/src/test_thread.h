@@ -81,9 +81,12 @@ typedef enum
     END
 } test_state_t;
 
-#define ONE_CM_TRANSITION           150
-#define TURN_90_DEGREE_TRANSITION   1100
-    
+#define ONE_CM_TRANSITION           70
+#define SQUARE_LENGTH_TRANSITION    889
+#define LEFT_90_DEGREE_TRANSITION   1150
+#define RIGHT_90_DEGREE_TRANSITION  1150
+
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Initialization and State Machine Functions

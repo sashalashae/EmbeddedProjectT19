@@ -72,10 +72,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 void MOTOR_THREAD_Initialize ( void )
 {
     //Set USER LED off initially
-    //SYS_PORTS_PinClear(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
+    SYS_PORTS_PinClear(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
     motors_initialize();
     
-    //motors_forward(50);
     // initialize this thread's queue
     MotorQueue_Initialize(5);
 }
@@ -111,10 +110,10 @@ void MOTOR_THREAD_Tasks ( void )
             case FORWARD_LEFT:
                 motors_turn_left(FORWARD, msg.duty_cycle);
                 break;
-            case REVERSE_RIGHT:
+            case REVERSE_LEFT:
                 motors_turn_right(REVERSE, msg.duty_cycle);
                 break;
-            case REVERSE_LEFT:
+            case REVERSE_RIGHT:
                 motors_turn_left(REVERSE, msg.duty_cycle);
                 break;
             case STOP:
