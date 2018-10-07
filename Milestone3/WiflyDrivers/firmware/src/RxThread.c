@@ -32,7 +32,7 @@
 
 void RXTHREAD_Initialize ( void )
 {
-    RxISRQueue_Init(256);
+    RxISRQueue_Init(MAX_MESSAGE_SIZE);
 }
 
 
@@ -49,41 +49,54 @@ void RXTHREAD_Tasks ( void )
     uint8_t data;
     uint8_t check_gen = 0xff;
     uint8_t check_recv;
-    char R_Data[JSON_MAX_SIZE] = "";
+    int count;
+    char R_Data[MAX_MESSAGE_SIZE-1] = ""; // Minus 1 to make room for checksum
     char temp[2];
     cJSON *JSON_Data;
-    int i = 0;
     while(1)
     {
-        //receive current byte
-        data = RxISRQueue_Receive();
-        
-        check_gen = check_gen ^ data;
-        
-        //Concatenate the byte onto a cumulative string
-        temp[0] = data;
-        temp[1] = '\0';
-        strcat(R_Data, temp);
-        
-        
-        //parse the data into JSON messages
-        if(data == '\0')
+        count++;
+        if(count == 512)
         {
-            check_recv = RxISRQueue_Receive();
-            if(check_recv != check_gen)
+            //DbgOutputLoc(MESSAGE_OUT_OF_RANGE)
+            check_gen = 0xff;
+            count = 0;
+            R_Data[0] = '\0';
+        }
+        else
+        {
+            //receive current byte
+            data = RxISRQueue_Receive();
+
+            check_gen = check_gen ^ data;
+
+            //Concatenate the byte onto a cumulative string
+            temp[0] = data;
+            temp[1] = '\0';
+            strcat(R_Data, temp);
+
+            //parse the data into JSON messages
+            if(data == '\0')
             {
-                //Discard the data for being bad
-                //DbgOutputLoc(CHECKSUM_MISMATCH);
-                check_gen = 0xff;
-            }
-            else
-            {
-                JSON_Data = cJSON_Parse(R_Data);
-                //TODO: Send into queue to next thread
-                //Forward each message to the appropriate handling thread
-                cJSON_Delete(JSON_Data);
-                R_Data[0] = '\0';
-                check_gen = 0xff;
+                check_recv = RxISRQueue_Receive();
+                if(check_recv != check_gen)
+                {
+                    //Discard the data for being bad
+                    //DbgOutputLoc(CHECKSUM_MISMATCH);
+                    check_gen = 0xff;
+                    R_Data[0] = '\0';
+                    count = 0;
+                }
+                else
+                {
+                    JSON_Data = cJSON_Parse(R_Data);
+                    //TODO: Send into queue to next thread
+                    //Forward each message to the appropriate handling thread
+                    cJSON_Delete(JSON_Data);
+                    R_Data[0] = '\0';
+                    check_gen = 0xff;
+                    count = 0;
+                }
             }
         }
     }
