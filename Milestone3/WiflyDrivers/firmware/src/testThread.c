@@ -87,13 +87,25 @@ void TESTTHREAD_Tasks ( void )
 {
     uint8_t i = 0;
     uint16_t count;
+    cJSON *root;
+    
+    root = cJSON_CreateObject();
+    
+    //input data here
+	cJSON_AddStringToObject(root, "Source", "Source Test");
+	cJSON_AddStringToObject(root, "MsgType", "MsgType Test");
+	cJSON_AddNumberToObject(root, "FSRs", 771);
+	cJSON_AddStringToObject(root, "Symbol", "Symbol Test");
+	cJSON_AddStringToObject(root, "NextLoc", "NextLoc Test");
+	cJSON_AddStringToObject(root, "Move", "Move Test");
+	cJSON_AddStringToObject(root, "Encoder", "Encoder Test");
+    
     while(1)
     {
         dbgOutputLoc(1);
-        TxISRQueue_Send(i); 
+        TxThreadQueue_Send(root);
         SYS_INT_SourceEnable(INT_SOURCE_USART_1_TRANSMIT);
         dbgOutputLoc(3);
-        i++;
         sleep(1000);
     }
 }

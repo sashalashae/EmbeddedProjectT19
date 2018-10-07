@@ -239,8 +239,9 @@ build/default/debug/_ext/1688732426/system_interrupt.o:  \
 ../src/TxThreadQueue.h  \
  ../src/cJSON.h  \
 ../src/debug.h  \
+../src/UART_Defines.h  \
 ../src/rxthread.h  \
-../src/RxISRQueue.h  \
- ../src/helper_functions.h  \
+ ../src/RxISRQueue.h  \
+../src/helper_functions.h  \
  ../src/system_config/default/system_definitions.h  \
 ../src/debug.h 

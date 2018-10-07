@@ -112,11 +112,12 @@ void IntHandlerDrvUsartInstance0(void)
         
         //clear the interrupt flag
         SYS_INT_SourceStatusClear(INT_SOURCE_USART_1_RECEIVE);
+        //Tell scheduler that ISR is done
+
+        portEND_SWITCHING_ISR(pxHigherPriorityTaskWoken);
     }
     
     dbgOutputLoc(33);
-    //Tell scheduler that ISR is done
-    portEND_SWITCHING_ISR(pxHigherPriorityTaskWoken);
 }
  
 /*******************************************************************************

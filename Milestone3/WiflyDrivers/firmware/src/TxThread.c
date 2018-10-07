@@ -41,7 +41,7 @@
 void TXTHREAD_Initialize ( void )
 {
     TxThreadQueue_Init(10);
-    TxISRQueue_Init(100);
+    TxISRQueue_Init(MAX_MESSAGE_SIZE);
 }
 
 
@@ -55,31 +55,37 @@ void TXTHREAD_Initialize ( void )
 
 void TXTHREAD_Tasks ( void )
 {
-    int index, count;
-    cJSON msg;
-    uint8_t* msgPtr;
+    int index;
+    cJSON *msg;
     uint8_t currentByte;
+    char* str;
+    uint8_t checksum;
     while(1)
     {
+        //Initialize the checksum variable;
+        checksum = 0xff;
         //receive a JSON message to transmit
         msg = TxThreadQueue_Receive();
         //debug
         dbgOutputLoc(3);
         //get pointer to the message
-        msgPtr = (uint8_t *)&msg;
+        str = cJSON_PrintUnformatted(msg);
         //set count to 0
-        count = 0;
+        index = 0;
+        //begin filling the TxISRQueue in increments of 1 byte
+        currentByte = str[index];
         
-        //begin filling the TxISRQueue in increments of 8 bytes
-        while(count < sizeof(msg))
+        while(currentByte != '\0')
         {
-            currentByte = *msgPtr;
-            TxISRQueue_Send(currentByte);
-            msgPtr++;
-            count++;
-            //Enable TX interrupts
-            SYS_INT_SourceEnable(INT_SOURCE_USART_1_TRANSMIT);
+            checksum = checksum ^ currentByte;
+            TxISRQueue_Send(currentByte); 
+            index++;
+            currentByte = str[index];
         }
+        TxISRQueue_Send('\0'); // Send end character of string
+        TxISRQueue_Send(checksum); // Send checksum
+        //Enable TX interrupts
+        SYS_INT_SourceEnable(INT_SOURCE_USART_1_TRANSMIT);
     }
 }
 

@@ -240,5 +240,6 @@ build/default/debug/_ext/639803181/sys_clk_pic32mx.o:  \
 ../src/TxISRQueue.h  \
 ../src/txthread.h  \
  ../src/TxThreadQueue.h  \
+../src/UART_Defines.h  \
 ../src/rxthread.h  \
-../src/RxISRQueue.h 
+ ../src/RxISRQueue.h 

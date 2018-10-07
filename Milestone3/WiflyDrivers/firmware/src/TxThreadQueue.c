@@ -16,11 +16,11 @@ void TxThreadQueue_Init(uint32_t size)
     TxThreadQueueSize = size;
 }
 
-void TxThreadQueue_Send(cJSON msg)
+void TxThreadQueue_Send(cJSON *msg)
 {
     //sends from thread
     dbgOutputLoc(255);
-    xQueueSend(TxThreadQueue, &msg, 0);
+    xQueueSend(TxThreadQueue, msg, 0);
 }
 
 uint32_t TxThreadQueue_Count()
@@ -28,11 +28,11 @@ uint32_t TxThreadQueue_Count()
     return (TxThreadQueueSize - uxQueueSpacesAvailable(TxThreadQueue));
 }
 
-cJSON TxThreadQueue_Receive()
+cJSON *TxThreadQueue_Receive()
 {
     //receives from thread
     dbgOutputLoc(254);
-    cJSON data;
+    cJSON *data;
     xQueueReceive(TxThreadQueue, &data, portMAX_DELAY);
     dbgOutputLoc(253);
     return data;
