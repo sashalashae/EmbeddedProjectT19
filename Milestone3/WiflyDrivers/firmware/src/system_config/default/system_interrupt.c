@@ -75,20 +75,27 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 void IntHandlerDrvUsartInstance0(void)
 {    
-    dbgOutputLoc(30);
-    BaseType_t pxHigherPriorityTaskWoken = pdFALSE;
-    
     //UART interrupt handler
+    
+    //dbg
+    dbgOutputLoc(LOC_ENTER_UART_ISR);
+    
+    //variable declaration
+    BaseType_t pxHigherPriorityTaskWoken = pdFALSE;
     uint8_t TxData;
     
     //Check for Tx interrupts
     if(SYS_INT_SourceStatusGet(INT_SOURCE_USART_1_TRANSMIT))
     {
-        dbgOutputLoc(31);
+        //debug location
+        dbgOutputLoc(LOC_ENTER_UART_TX);
         
         //send one byte
-        TxData = TxISRQueue_Receive();
-        PLIB_USART_TransmitterByteSend(USART_ID_1, TxData);
+        while(!PLIB_USART_TransmitterBufferIsFull(USART_ID_1) && !TxISRQueue_IsEmpty())
+        {
+            TxData = TxISRQueue_Receive();
+            PLIB_USART_TransmitterByteSend(USART_ID_1, TxData);
+        }
         
         //if the no messages left in TxISRQueue, disable the interrupt
         if(TxISRQueue_IsEmpty())
@@ -98,12 +105,17 @@ void IntHandlerDrvUsartInstance0(void)
 
         //clear the interrupt flag
         SYS_INT_SourceStatusClear(INT_SOURCE_USART_1_TRANSMIT);
+        
+        //debug location
+        dbgOutputLoc(LOC_EXIT_UART_TX);
     }
     
     //Check for Rx Interrupts
     if(SYS_INT_SourceStatusGet(INT_SOURCE_USART_1_RECEIVE))
     {   
-        dbgOutputLoc(32);
+        //debug location
+        dbgOutputLoc(LOC_ENTER_UART_RX);
+        
         //read the data into the RxISRQueue
         while(PLIB_USART_ReceiverDataIsAvailable(USART_ID_1))
         {
@@ -115,9 +127,14 @@ void IntHandlerDrvUsartInstance0(void)
         //Tell scheduler that ISR is done
 
         portEND_SWITCHING_ISR(pxHigherPriorityTaskWoken);
+        
+        //debug location
+        dbgOutputLoc(LOC_EXIT_UART_RX);
     }
     
-    dbgOutputLoc(33);
+    //debug location
+    dbgOutputLoc(LOC_EXIT_UART_ISR);
+        
 }
  
 /*******************************************************************************
