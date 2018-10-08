@@ -66,8 +66,6 @@ void TXTHREAD_Tasks ( void )
         checksum = 0xff;
         //receive a JSON message to transmit
         msg = TxThreadQueue_Receive();
-        //debug
-        dbgOutputLoc(3);
         //get pointer to the message
         str = cJSON_PrintUnformatted(msg);
         //set count to 0

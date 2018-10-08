@@ -30,10 +30,8 @@ BaseType_t TxISRQueue_IsEmpty()
 uint8_t TxISRQueue_Receive()
 {
     //receive from ISR
-    dbgOutputLoc(60);
     uint8_t data;
     BaseType_t xTaskWokenByReceive = pdFALSE;
     xQueueReceiveFromISR(TxISRQueue, &data, &xTaskWokenByReceive);
-    dbgOutputLoc(61);
     return data;
 }

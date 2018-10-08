@@ -100,14 +100,6 @@ void RXTHREAD_Tasks ( void )
             }
         }
     }
-    while(1)
-    {
-        //receive current byte
-        data = RxISRQueue_Receive();
-        //parse the data into JSON messages
-        //Forward each message to the appropriate handling thread
-        //test
-    }
 }
 
 /*******************************************************************************
