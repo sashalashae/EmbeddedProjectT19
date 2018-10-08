@@ -1,6 +1,5 @@
-build/default/production/_ext/1688732426/system_interrupt.o:  \
- ../src/system_config/default/system_interrupt.c  \
- ../../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_common.h  \
+build/default/debug/_ext/1360937237/testThread.o:  \
+../src/testThread.c  \
  ../src/testthread.h  \
 ../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
@@ -36,6 +35,7 @@ build/default/production/_ext/1688732426/system_interrupt.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports_compatibility.h  \
  ../src/system_config/default/system_definitions.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_common.h  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_module.h  \
  ../src/system_config/default/framework/system/devcon/sys_devcon.h  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/system/system.h  \
@@ -234,14 +234,13 @@ build/default/production/_ext/1688732426/system_interrupt.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/system/debug/sys_debug.h  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports.h  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports_definitions.h  \
- ../src/txthread.h  \
+ ../src/testthread.h  \
+../src/txthread.h  \
 ../src/TxISRQueue.h  \
-../src/TxThreadQueue.h  \
- ../src/cJSON.h  \
+ ../src/TxThreadQueue.h  \
+../src/cJSON.h  \
 ../src/debug.h  \
-../src/UART_Defines.h  \
+ ../src/UART_Defines.h  \
 ../src/rxthread.h  \
- ../src/RxISRQueue.h  \
-../src/helper_functions.h  \
- ../src/system_config/default/system_definitions.h  \
-../src/debug.h 
+../src/RxISRQueue.h  \
+ ../src/helper_functions.h 

@@ -21,6 +21,7 @@ void TxISRQueue_Send(uint8_t msg)
     //if queue is full enable Tx and wait for spaces
     while(uxQueueSpacesAvailable(TxISRQueue) == 0)
     {
+        dbgOutputLoc(TX_ISR_QUEUE_FULL);
         SYS_INT_SourceEnable(INT_SOURCE_USART_1_TRANSMIT);
     }
     //sends from thread to the ISR    

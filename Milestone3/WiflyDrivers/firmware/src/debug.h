@@ -44,11 +44,6 @@ void dbgInit();
 #define TX_THREAD_SERIALIZATION_DONE    9
 #define TX_THREAD_BYTE_ENQUEUE_DONE     10
 
-/*
- * Defines for error codes
- */
-
-#define ERROR_UNKNOWN                   255
-#define ERROR_BOUNDS                    254
+#define TX_ISR_QUEUE_FULL               11
 
 #endif

@@ -90,7 +90,7 @@ void IntHandlerDrvUsartInstance0(void)
         //debug location
         dbgOutputLoc(LOC_ENTER_UART_TX);
         
-        //send one byte
+        //send bytes until full
         while(!PLIB_USART_TransmitterBufferIsFull(USART_ID_1) && !TxISRQueue_IsEmpty())
         {
             TxData = TxISRQueue_Receive();
@@ -124,8 +124,8 @@ void IntHandlerDrvUsartInstance0(void)
         
         //clear the interrupt flag
         SYS_INT_SourceStatusClear(INT_SOURCE_USART_1_RECEIVE);
+        
         //Tell scheduler that ISR is done
-
         portEND_SWITCHING_ISR(pxHigherPriorityTaskWoken);
         
         //debug location

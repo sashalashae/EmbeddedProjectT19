@@ -32,4 +32,5 @@ uint8_t RxISRQueue_Receive()
     //Receives in thread
     uint8_t data;
     xQueueReceive(RxISRQueue, &data, portMAX_DELAY);
+    return data;
 }

@@ -47,6 +47,11 @@ void RXTHREAD_Initialize ( void )
 void RXTHREAD_Tasks ( void )
 {
     uint8_t data;
+    while(1)
+    {
+        data = RxISRQueue_Receive();
+        dbgOutputLoc(data);
+    }
     uint8_t check_gen = 0xff;
     uint8_t check_recv;
     int count;

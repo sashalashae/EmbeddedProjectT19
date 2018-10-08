@@ -85,7 +85,7 @@ void TESTTHREAD_Initialize ( void )
 
 void TESTTHREAD_Tasks ( void )
 {
-    uint8_t i = 0;
+    uint8_t i = 45;
     uint16_t count;
     cJSON *root;
     
@@ -102,10 +102,17 @@ void TESTTHREAD_Tasks ( void )
     
     while(1)
     {
-        dbgOutputLoc(1);
-        TxThreadQueue_Send(root);
+        for(count = 0; count < 128; count++)
+        {
+            TxISRQueue_Send(i);
+            i++;
+            if(i>90)
+            {
+                i=45;
+            }
+        }
+        //TxThreadQueue_Send(root);
         SYS_INT_SourceEnable(INT_SOURCE_USART_1_TRANSMIT);
-        dbgOutputLoc(3);
         sleep(1000);
     }
 }

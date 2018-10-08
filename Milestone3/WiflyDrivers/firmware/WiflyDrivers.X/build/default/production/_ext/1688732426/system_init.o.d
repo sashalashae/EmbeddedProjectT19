@@ -244,5 +244,4 @@ build/default/production/_ext/1688732426/system_init.o:  \
 ../src/TxThreadQueue.h  \
  ../src/UART_Defines.h  \
 ../src/rxthread.h  \
-../src/RxISRQueue.h  \
-
+../src/RxISRQueue.h 

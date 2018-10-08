@@ -242,5 +242,4 @@ build/default/production/_ext/327000265/drv_usart_static.o:  \
  ../src/TxThreadQueue.h  \
 ../src/UART_Defines.h  \
 ../src/rxthread.h  \
- ../src/RxISRQueue.h  \
-
+ ../src/RxISRQueue.h 
