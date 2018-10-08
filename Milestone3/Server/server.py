@@ -4,6 +4,17 @@ import urlparse
 import threading
 import cgi
 import json
+from json import loads
+from pymongo import MongoClient
+from pprint import pprint
+import ast
+
+client = MongoClient()
+db = client.t19db
+try: db.command("serverStatus")
+except Exception as e: print(e)
+else: print("Status: Connected")
+collect = db.col
 
 class Handler(BaseHTTPRequestHandler):
     
@@ -30,8 +41,11 @@ class Handler(BaseHTTPRequestHandler):
 
         if(rpath == '/adddata'):
             data = self.rfile.read(int(self.headers.getheader('Content-Length')))
-            print(data)
-
+            file_data = ast.literal_eval(data)
+            print(file_data)
+            collect.insert(file_data)
+            print(collect.find_one())
+            
         return
     
 
