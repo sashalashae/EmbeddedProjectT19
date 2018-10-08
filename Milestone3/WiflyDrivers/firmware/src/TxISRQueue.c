@@ -18,7 +18,12 @@ void TxISRQueue_Init(uint32_t size)
 
 void TxISRQueue_Send(uint8_t msg)
 {
-    //sends from thread to the ISR
+    //if queue is full enable Tx and wait for spaces
+    while(uxQueueSpacesAvailable(TxISRQueue) == 0)
+    {
+        SYS_INT_SourceEnable(INT_SOURCE_USART_1_TRANSMIT);
+    }
+    //sends from thread to the ISR    
     xQueueSend(TxISRQueue, &msg, 0);
 }
 
