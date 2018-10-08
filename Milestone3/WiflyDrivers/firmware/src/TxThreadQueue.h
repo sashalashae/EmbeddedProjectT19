@@ -14,8 +14,8 @@
 #include "debug.h"
 
 void TxThreadQueue_Init(uint32_t size);
-void TxThreadQueue_Send(cJSON *msg);
+void TxThreadQueue_Send(char *str);
 uint32_t TxThreadQueue_Count();
-cJSON *TxThreadQueue_Receive();
+char *TxThreadQueue_Receive();
 
 #endif

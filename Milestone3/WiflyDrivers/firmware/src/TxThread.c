@@ -56,7 +56,6 @@ void TXTHREAD_Initialize ( void )
 void TXTHREAD_Tasks ( void )
 {
     int index;
-    cJSON *msg;
     uint8_t currentByte;
     char* str;
     uint8_t checksum;
@@ -64,10 +63,8 @@ void TXTHREAD_Tasks ( void )
     {
         //Initialize the checksum variable;
         checksum = 0xff;
-        //receive a JSON message to transmit
-        msg = TxThreadQueue_Receive();
-        //get pointer to the message
-        str = cJSON_PrintUnformatted(msg);
+        //receive a JSON string message to transmit
+        str = TxThreadQueue_Receive();
         //set count to 0
         index = 0;
         //begin filling the TxISRQueue in increments of 1 byte

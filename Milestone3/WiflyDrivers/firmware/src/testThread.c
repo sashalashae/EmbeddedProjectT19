@@ -88,6 +88,7 @@ void TESTTHREAD_Tasks ( void )
     uint8_t i = 45;
     uint16_t count;
     cJSON *root;
+    char *str;
     
     root = cJSON_CreateObject();
     
@@ -102,17 +103,8 @@ void TESTTHREAD_Tasks ( void )
     
     while(1)
     {
-        for(count = 0; count < 128; count++)
-        {
-            TxISRQueue_Send(i);
-            i++;
-            if(i>90)
-            {
-                i=45;
-            }
-        }
-        //TxThreadQueue_Send(root);
-        SYS_INT_SourceEnable(INT_SOURCE_USART_1_TRANSMIT);
+        str = cJSON_PrintUnformatted(root);
+        TxThreadQueue_Send(str);
         sleep(1000);
     }
 }

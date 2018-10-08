@@ -1,4 +1,4 @@
-build/default/debug/_ext/340578644/sys_devcon.o:  \
+build/default/production/_ext/340578644/sys_devcon.o:  \
  ../src/system_config/default/framework/system/devcon/src/sys_devcon.c  \
  ../src/system_config/default/framework/system/devcon/src/sys_devcon_local.h  \
  ../src/system_config/default/system_config.h  \

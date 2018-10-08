@@ -1,6 +1,6 @@
-build/default/production/_ext/1360937237/TxThreadQueue.o:  \
- ../src/TxThreadQueue.c  \
-../src/TxThreadQueue.h  \
+build/default/debug/_ext/1360937237/TxISRQueue.o:  \
+../src/TxISRQueue.c  \
+ ../src/TxISRQueue.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/FreeRTOS.h  \
  ../src/system_config/default/FreeRTOSConfig.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/projdefs.h  \
@@ -9,8 +9,12 @@ build/default/production/_ext/1360937237/TxThreadQueue.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX/portmacro.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/queue.h  \
- ../src/cJSON.h  \
-../src/debug.h  \
+ ../src/system_config/default/system_definitions.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_common.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_module.h  \
+ ../src/system_config/default/framework/system/devcon/sys_devcon.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/framework/system/system.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/framework/system/clk/sys_clk.h  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports.h  \
@@ -44,12 +48,6 @@ build/default/production/_ext/1360937237/TxThreadQueue.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Unsupported.h  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports_compatibility.h  \
- ../src/system_config/default/system_definitions.h  \
- ../../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_common.h  \
- ../../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_module.h  \
- ../src/system_config/default/framework/system/devcon/sys_devcon.h  \
- ../../../../../../../../../microchip/harmony/v2_06/framework/system/system.h  \
- ../../../../../../../../../microchip/harmony/v2_06/framework/system/clk/sys_clk.h  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/plib_osc.h  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/osc_processor.h  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/osc_p32xxxx.h  \
@@ -237,9 +235,11 @@ build/default/production/_ext/1360937237/TxThreadQueue.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports.h  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports_definitions.h  \
  ../src/testthread.h  \
+../src/cJSON.h  \
 ../src/helper_functions.h  \
-../src/TxISRQueue.h  \
- ../src/txthread.h  \
-../src/UART_Defines.h  \
+ ../src/debug.h  \
+../src/txthread.h  \
+../src/TxThreadQueue.h  \
+ ../src/UART_Defines.h  \
 ../src/rxthread.h  \
- ../src/RxISRQueue.h 
+../src/RxISRQueue.h 
