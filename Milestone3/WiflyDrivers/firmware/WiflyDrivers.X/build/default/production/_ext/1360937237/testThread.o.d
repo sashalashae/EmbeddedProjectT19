@@ -237,9 +237,10 @@ build/default/production/_ext/1360937237/testThread.o:  \
  ../src/testthread.h  \
 ../src/txthread.h  \
 ../src/TxISRQueue.h  \
- ../src/TxThreadQueue.h  \
+ ../src/UART_Defines.h  \
+../src/TxThreadQueue.h  \
 ../src/debug.h  \
-../src/UART_Defines.h  \
  ../src/rxthread.h  \
 ../src/RxISRQueue.h  \
-../src/helper_functions.h 
+../src/helper_functions.h  \
+ ../src/UART_defines.h 

@@ -120,6 +120,7 @@
       <itemPath>../src/TxThreadQueue.h</itemPath>
       <itemPath>../src/debug.h</itemPath>
       <itemPath>../src/helper_functions.h</itemPath>
+      <itemPath>../src/UART_Defines.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"

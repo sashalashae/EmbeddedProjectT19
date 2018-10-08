@@ -11,10 +11,11 @@
 #include "FreeRTOS.h"
 #include "queue.h"
 #include "debug.h"
+#include "UART_Defines.h"
 
 void TxThreadQueue_Init(uint32_t size);
-void TxThreadQueue_Send(char str[]);
+BaseType_t TxThreadQueue_Send(strStruct string);
 uint32_t TxThreadQueue_Count();
-char *TxThreadQueue_Receive();
+strStruct TxThreadQueue_Receive();
 
 #endif

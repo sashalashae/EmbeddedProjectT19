@@ -10,6 +10,7 @@
 
 #include "FreeRTOS.h"
 #include "queue.h"
+#include "UART_Defines.h"
 
 void RxISRQueue_Init(uint32_t size);
 void RxISRQueue_Send(uint8_t msg, BaseType_t *pxHigherPriorityTaskWoken);

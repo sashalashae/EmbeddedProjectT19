@@ -237,8 +237,9 @@ build/default/production/_ext/1360937237/TxISRQueue.o:  \
  ../src/testthread.h  \
 ../src/helper_functions.h  \
 ../src/debug.h  \
- ../src/txthread.h  \
-../src/TxThreadQueue.h  \
-../src/UART_Defines.h  \
- ../src/rxthread.h  \
+ ../src/UART_Defines.h  \
+../src/UART_defines.h  \
+../src/txthread.h  \
+ ../src/TxThreadQueue.h  \
+../src/rxthread.h  \
 ../src/RxISRQueue.h 

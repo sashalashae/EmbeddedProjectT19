@@ -11,6 +11,7 @@
 #include <stdint.h>
 #include "system_config.h"
 #include "system_definitions.h"
+#include "UART_Defines.h"
 
 /*
  * Function Headers

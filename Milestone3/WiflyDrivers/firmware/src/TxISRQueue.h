@@ -11,6 +11,7 @@
 #include "FreeRTOS.h"
 #include "queue.h"
 #include "system_definitions.h"
+#include "UART_Defines.h"
 
 void TxISRQueue_Init(uint32_t size);
 void TxISRQueue_Send(uint8_t msg);

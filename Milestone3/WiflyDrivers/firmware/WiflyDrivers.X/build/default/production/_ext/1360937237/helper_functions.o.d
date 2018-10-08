@@ -236,9 +236,10 @@ build/default/production/_ext/1360937237/helper_functions.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports_definitions.h  \
  ../src/testthread.h  \
 ../src/TxISRQueue.h  \
-../src/debug.h  \
+../src/UART_Defines.h  \
+ ../src/debug.h  \
+../src/UART_defines.h  \
 ../src/txthread.h  \
  ../src/TxThreadQueue.h  \
-../src/UART_Defines.h  \
 ../src/rxthread.h  \
- ../src/RxISRQueue.h 
+../src/RxISRQueue.h 

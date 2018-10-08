@@ -236,9 +236,10 @@ build/default/production/_ext/327000265/drv_usart_static_byte_model.o:  \
  ../src/testthread.h  \
 ../src/helper_functions.h  \
 ../src/debug.h  \
- ../src/TxISRQueue.h  \
-../src/txthread.h  \
-../src/TxThreadQueue.h  \
  ../src/UART_Defines.h  \
+../src/TxISRQueue.h  \
+../src/UART_defines.h  \
+ ../src/txthread.h  \
+../src/TxThreadQueue.h  \
 ../src/rxthread.h  \
-../src/RxISRQueue.h 
+ ../src/RxISRQueue.h 

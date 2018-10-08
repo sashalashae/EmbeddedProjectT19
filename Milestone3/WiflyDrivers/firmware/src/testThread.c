@@ -85,11 +85,18 @@ void TESTTHREAD_Initialize ( void )
 
 void TESTTHREAD_Tasks ( void )
 {
-    char str[MAX_MESSAGE_SIZE] =  "Hello my name is joe.\0";
-
+    strStruct string;
+    char * temp = "This is a test message.";
+    int len = strlen(temp);
+    int i;
+    for (i = 0; i < 120; i++)
+    {
+        string.str[i] = i;
+    }
+    string.str[120] = '\0';
     while(1)
     {
-        TxThreadQueue_Send(str);
+        TxThreadQueue_Send(string);
         sleep(1000);
     }
 }

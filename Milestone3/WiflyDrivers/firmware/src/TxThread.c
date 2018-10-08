@@ -57,25 +57,25 @@ void TXTHREAD_Tasks ( void )
 {
     int index;
     uint8_t currentByte;
-    char * str;
+    strStruct string;
     uint8_t checksum;
     while(1)
     {
         //Initialize the checksum variable;
         checksum = 0xff;
         //receive a JSON string message to transmit
-        str = TxThreadQueue_Receive();
+        string = TxThreadQueue_Receive();
         //set count to 0
         index = 0;
-        //begin filling the TxISRQueue in increments of 1 byte
-        currentByte = str[index];
+        //begin filling the TxISRQueue in increments of 1 byte        
+        currentByte = string.str[index];
         
-        while(currentByte != '\0')
+        while(index != '\0')
         {
             checksum = checksum ^ currentByte;
             TxISRQueue_Send(currentByte); 
             index++;
-            currentByte = str[index];
+            currentByte = string.str[index];
         }
         TxISRQueue_Send('\0'); // Send end character of string
         TxISRQueue_Send(checksum); // Send checksum

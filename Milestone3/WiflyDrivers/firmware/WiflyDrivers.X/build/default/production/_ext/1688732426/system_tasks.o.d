@@ -238,9 +238,10 @@ build/default/production/_ext/1688732426/system_tasks.o:  \
 ../src/system_config/default/system_definitions.h  \
  ../src/helper_functions.h  \
 ../src/debug.h  \
-../src/TxISRQueue.h  \
- ../src/txthread.h  \
-../src/TxThreadQueue.h  \
 ../src/UART_Defines.h  \
- ../src/rxthread.h  \
+ ../src/TxISRQueue.h  \
+../src/UART_defines.h  \
+../src/txthread.h  \
+ ../src/TxThreadQueue.h  \
+../src/rxthread.h  \
 ../src/RxISRQueue.h 

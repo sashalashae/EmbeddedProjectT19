@@ -12,14 +12,14 @@ static uint32_t TxThreadQueueSize;
 
 void TxThreadQueue_Init(uint32_t size)
 {
-    TxThreadQueue = xQueueCreate(size, MAX_MESSAGE_SIZE);
+    TxThreadQueue = xQueueCreate(size, sizeof( strStruct ));
     TxThreadQueueSize = size;
 }
 
-void TxThreadQueue_Send(char str[])
+BaseType_t TxThreadQueue_Send(strStruct string)
 {
     //sends from thread
-    xQueueSend(TxThreadQueue, &str, 0);
+    return xQueueSend(TxThreadQueue, &string, 0);
 }
 
 uint32_t TxThreadQueue_Count()
@@ -27,10 +27,10 @@ uint32_t TxThreadQueue_Count()
     return (TxThreadQueueSize - uxQueueSpacesAvailable(TxThreadQueue));
 }
 
-char* TxThreadQueue_Receive()
+strStruct TxThreadQueue_Receive()
 {
     //receives from thread
-    char *data;
+    strStruct data;
     xQueueReceive(TxThreadQueue, &data, portMAX_DELAY);
     return data;
 }
