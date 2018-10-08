@@ -70,7 +70,7 @@ void TXTHREAD_Tasks ( void )
         //begin filling the TxISRQueue in increments of 1 byte        
         currentByte = string.str[index];
         
-        while(index != '\0')
+        while(currentByte != '\0')
         {
             checksum = checksum ^ currentByte;
             TxISRQueue_Send(currentByte); 
