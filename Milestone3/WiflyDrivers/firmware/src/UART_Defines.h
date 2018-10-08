@@ -8,7 +8,7 @@
 #ifndef UART_DEFINES_H
 #define	UART_DEFINES_H
 
-#define MAX_MESSAGE_SIZE 512
+#define MAX_MESSAGE_SIZE 128
 
 #endif	/* UART_DEFINES_H */
 

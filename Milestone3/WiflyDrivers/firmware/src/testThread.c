@@ -85,25 +85,10 @@ void TESTTHREAD_Initialize ( void )
 
 void TESTTHREAD_Tasks ( void )
 {
-    uint8_t i = 45;
-    uint16_t count;
-    cJSON *root;
-    char *str;
-    
-    root = cJSON_CreateObject();
-    
-    //input data here
-	cJSON_AddStringToObject(root, "Source", "Source Test");
-	cJSON_AddStringToObject(root, "MsgType", "MsgType Test");
-	cJSON_AddNumberToObject(root, "FSRs", 771);
-	cJSON_AddStringToObject(root, "Symbol", "Symbol Test");
-	cJSON_AddStringToObject(root, "NextLoc", "NextLoc Test");
-	cJSON_AddStringToObject(root, "Move", "Move Test");
-	cJSON_AddStringToObject(root, "Encoder", "Encoder Test");
-    
+    char str[MAX_MESSAGE_SIZE] =  "Hello my name is joe.\0";
+
     while(1)
     {
-        str = cJSON_PrintUnformatted(root);
         TxThreadQueue_Send(str);
         sleep(1000);
     }

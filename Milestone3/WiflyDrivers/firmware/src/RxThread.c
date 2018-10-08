@@ -57,7 +57,6 @@ void RXTHREAD_Tasks ( void )
     int count;
     char R_Data[MAX_MESSAGE_SIZE-1] = ""; // Minus 1 to make room for checksum
     char temp[2];
-    cJSON *JSON_Data;
     while(1)
     {
         count++;
@@ -94,10 +93,8 @@ void RXTHREAD_Tasks ( void )
                 }
                 else
                 {
-                    JSON_Data = cJSON_Parse(R_Data);
                     //TODO: Send into queue to next thread
                     //Forward each message to the appropriate handling thread
-                    cJSON_Delete(JSON_Data);
                     R_Data[0] = '\0';
                     check_gen = 0xff;
                     count = 0;

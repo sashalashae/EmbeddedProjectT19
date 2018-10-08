@@ -236,12 +236,11 @@ build/default/production/_ext/1688732426/system_exceptions.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports_definitions.h  \
  ../src/testthread.h  \
 ../src/system_config/default/system_definitions.h  \
- ../src/cJSON.h  \
-../src/helper_functions.h  \
+ ../src/helper_functions.h  \
 ../src/debug.h  \
- ../src/TxISRQueue.h  \
-../src/txthread.h  \
+../src/TxISRQueue.h  \
+ ../src/txthread.h  \
 ../src/TxThreadQueue.h  \
- ../src/UART_Defines.h  \
-../src/rxthread.h  \
+../src/UART_Defines.h  \
+ ../src/rxthread.h  \
 ../src/RxISRQueue.h 

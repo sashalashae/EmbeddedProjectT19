@@ -57,7 +57,7 @@ void TXTHREAD_Tasks ( void )
 {
     int index;
     uint8_t currentByte;
-    char* str;
+    char * str;
     uint8_t checksum;
     while(1)
     {

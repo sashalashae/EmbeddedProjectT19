@@ -235,10 +235,9 @@ build/default/production/_ext/1360937237/TxThread.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports.h  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports_definitions.h  \
  ../src/testthread.h  \
-../src/cJSON.h  \
 ../src/helper_functions.h  \
- ../src/debug.h  \
-../src/TxISRQueue.h  \
+../src/debug.h  \
+ ../src/TxISRQueue.h  \
 ../src/txthread.h  \
 ../src/rxthread.h  \
  ../src/RxISRQueue.h  \

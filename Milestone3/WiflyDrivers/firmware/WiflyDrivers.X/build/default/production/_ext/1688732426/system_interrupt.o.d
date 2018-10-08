@@ -237,8 +237,7 @@ build/default/production/_ext/1688732426/system_interrupt.o:  \
  ../src/txthread.h  \
 ../src/TxISRQueue.h  \
 ../src/TxThreadQueue.h  \
- ../src/cJSON.h  \
-../src/debug.h  \
+ ../src/debug.h  \
 ../src/UART_Defines.h  \
 ../src/rxthread.h  \
  ../src/RxISRQueue.h  \

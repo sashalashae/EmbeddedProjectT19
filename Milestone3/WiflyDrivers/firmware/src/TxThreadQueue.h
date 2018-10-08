@@ -10,11 +10,10 @@
 
 #include "FreeRTOS.h"
 #include "queue.h"
-#include "cJSON.h"
 #include "debug.h"
 
 void TxThreadQueue_Init(uint32_t size);
-void TxThreadQueue_Send(char *str);
+void TxThreadQueue_Send(char str[]);
 uint32_t TxThreadQueue_Count();
 char *TxThreadQueue_Receive();
 

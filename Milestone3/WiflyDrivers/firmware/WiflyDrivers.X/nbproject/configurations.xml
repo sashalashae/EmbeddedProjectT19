@@ -118,7 +118,6 @@
       <itemPath>../src/TxISRQueue.h</itemPath>
       <itemPath>../src/RxISRQueue.h</itemPath>
       <itemPath>../src/TxThreadQueue.h</itemPath>
-      <itemPath>../src/cJSON.h</itemPath>
       <itemPath>../src/debug.h</itemPath>
       <itemPath>../src/helper_functions.h</itemPath>
     </logicalFolder>
@@ -215,7 +214,6 @@
       <itemPath>../src/TxISRQueue.c</itemPath>
       <itemPath>../src/RxISRQueue.c</itemPath>
       <itemPath>../src/TxThreadQueue.c</itemPath>
-      <itemPath>../src/cJSON.c</itemPath>
       <itemPath>../src/debug.c</itemPath>
       <itemPath>../src/helper_functions.c</itemPath>
     </logicalFolder>

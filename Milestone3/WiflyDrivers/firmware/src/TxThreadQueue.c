@@ -16,10 +16,10 @@ void TxThreadQueue_Init(uint32_t size)
     TxThreadQueueSize = size;
 }
 
-void TxThreadQueue_Send(char *str)
+void TxThreadQueue_Send(char str[])
 {
     //sends from thread
-    xQueueSend(TxThreadQueue, str, 0);
+    xQueueSend(TxThreadQueue, &str, 0);
 }
 
 uint32_t TxThreadQueue_Count()
@@ -30,7 +30,7 @@ uint32_t TxThreadQueue_Count()
 char* TxThreadQueue_Receive()
 {
     //receives from thread
-    char* data;
+    char *data;
     xQueueReceive(TxThreadQueue, &data, portMAX_DELAY);
     return data;
 }
