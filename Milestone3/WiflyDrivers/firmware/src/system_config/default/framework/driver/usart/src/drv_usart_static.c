@@ -119,11 +119,14 @@ SYS_MODULE_OBJ DRV_USART0_Initialize(void)
     SYS_INT_SourceStatusClear(INT_SOURCE_USART_1_RECEIVE);
     SYS_INT_SourceStatusClear(INT_SOURCE_USART_1_ERROR);
 
-    /* Enable the Transmit interrupt source */
-    SYS_INT_SourceEnable(INT_SOURCE_USART_1_TRANSMIT);
+    /* Disable the Transmit interrupt source initially */
+    SYS_INT_SourceDisable(INT_SOURCE_USART_1_TRANSMIT);
 
     /* Enable the Receive interrupt source */
     SYS_INT_SourceEnable(INT_SOURCE_USART_1_RECEIVE);
+    
+    //Enable the error interrupt
+    SYS_INT_SourceEnable(INT_SOURCE_USART_1_ERROR);
 
     /* Return the driver instance value*/
     return (SYS_MODULE_OBJ)DRV_USART_INDEX_0;

@@ -132,6 +132,19 @@ void IntHandlerDrvUsartInstance0(void)
         dbgOutputLoc(LOC_EXIT_UART_RX);
     }
     
+    //check for error interrupt flags
+    if(SYS_INT_SourceStatusGet(INT_SOURCE_USART_1_ERROR))
+    {
+        //debug location
+        dbgOutputLoc(LOC_ENTER_UART_ERROR);
+        
+        //clear the flag
+        SYS_INT_SourceStatusClear(INT_SOURCE_USART_1_ERROR);
+        
+        //debug location
+        dbgOutputLoc(LOC_EXIT_UART_ERROR);
+    }
+    
     //debug location
     dbgOutputLoc(LOC_EXIT_UART_ISR);
         
