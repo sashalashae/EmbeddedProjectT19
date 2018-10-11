@@ -60,7 +60,7 @@ void RXTHREAD_Tasks ( void )
     while(1)
     {
         count++;
-        if(count == 512)
+        if(count == MAX_MESSAGE_SIZE)
         {
             //DbgOutputLoc(MESSAGE_OUT_OF_RANGE)
             check_gen = 0xff;

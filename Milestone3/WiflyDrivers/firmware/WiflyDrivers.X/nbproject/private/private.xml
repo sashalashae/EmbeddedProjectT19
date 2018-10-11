@@ -4,11 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/nolan/Desktop/Dropbox/EmbeddedProjectT19/Milestone3/WiflyDrivers/firmware/src/UART_Defines.h</file>
-            <file>file:/C:/Users/nolan/Desktop/Dropbox/EmbeddedProjectT19/Milestone3/WiflyDrivers/firmware/src/TxThread.c</file>
-            <file>file:/C:/Users/nolan/Desktop/Dropbox/EmbeddedProjectT19/Milestone3/WiflyDrivers/firmware/src/TxThreadQueue.h</file>
-            <file>file:/C:/Users/nolan/Desktop/Dropbox/EmbeddedProjectT19/Milestone3/WiflyDrivers/firmware/src/system_config/default/system_exceptions.c</file>
-            <file>file:/C:/Users/nolan/Desktop/Dropbox/EmbeddedProjectT19/Milestone3/WiflyDrivers/firmware/src/testThread.c</file>
-            <file>file:/C:/Users/nolan/Desktop/Dropbox/EmbeddedProjectT19/Milestone3/WiflyDrivers/firmware/src/TxThreadQueue.c</file>
+            <file>file:/C:/Users/nolan/Desktop/Dropbox/EmbeddedProjectT19/Milestone3/WiflyDrivers/firmware/src/system_config/default/framework/driver/usart/src/drv_usart_static.c</file>
+            <file>file:/C:/Users/nolan/Desktop/Dropbox/EmbeddedProjectT19/Milestone3/WiflyDrivers/firmware/src/system_config/default/system_interrupt.c</file>
+            <file>file:/C:/Users/nolan/Desktop/Dropbox/EmbeddedProjectT19/Milestone3/WiflyDrivers/firmware/src/debug.h</file>
+            <file>file:/C:/Users/nolan/Desktop/Dropbox/EmbeddedProjectT19/Milestone3/WiflyDrivers/firmware/src/TxISRQueue.c</file>
+            <file>file:/C:/Users/nolan/Desktop/Dropbox/EmbeddedProjectT19/Milestone3/WiflyDrivers/firmware/src/helper_functions.h</file>
+            <file>file:/C:/Users/nolan/Desktop/Dropbox/EmbeddedProjectT19/Milestone3/WiflyDrivers/firmware/src/queue_definitions.h</file>
+            <file>file:/C:/Users/nolan/Desktop/Dropbox/EmbeddedProjectT19/Milestone3/WiflyDrivers/firmware/src/TxISRQueue.h</file>
+            <file>file:/C:/Users/nolan/Desktop/Dropbox/EmbeddedProjectT19/Milestone3/WiflyDrivers/firmware/src/queue_definitions.c</file>
         </group>
     </open-files>
 </project-private>

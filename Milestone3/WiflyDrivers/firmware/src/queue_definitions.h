@@ -8,13 +8,14 @@
 #ifndef QUEUE_DEFINITIONS
 #define QUEUE_DEFINITIONS
 
+#include "FreeRTOS.h"
 #include "queue.h"
 #include "system_definitions.h"
 
 //Define data types for the queue
 typedef enum 
 {
-    
+    UnknownMsg = 0
 }MsgType;
 
 typedef enum 

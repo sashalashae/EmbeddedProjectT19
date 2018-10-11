@@ -121,6 +121,7 @@
       <itemPath>../src/debug.h</itemPath>
       <itemPath>../src/helper_functions.h</itemPath>
       <itemPath>../src/queue_definitions.h</itemPath>
+      <itemPath>../src/UART_Defines.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"

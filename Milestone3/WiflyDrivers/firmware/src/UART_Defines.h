@@ -14,6 +14,5 @@ typedef struct {
     char str[MAX_MESSAGE_SIZE];
 } strStruct;
 
-
 #endif	/* UART_DEFINES_H */
 

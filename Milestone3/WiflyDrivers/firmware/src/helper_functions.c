@@ -14,7 +14,7 @@
  * Description: Generic sleep function which blocks the execution of the current
  * thread for a set number of milliseconds. Acts as a wrapper to vTaskDelay.
  * 
- * @param milliseconds: The number of millseconds to sleep for.
+ * @param milliseconds: The number of milliseconds to sleep for.
  * 
  * Returns: void
  */
@@ -31,4 +31,29 @@ void sleep(int16_t milliseconds)
     //turn off LED    //Set LED on
     SYS_PORTS_PinClear(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
     dbgOutputLoc(LOC_SLEEP_END);
+}
+
+
+/*
+ * Function: stringToStruct
+ * 
+ * Description:
+ * 
+ * @param str: The string to convert
+ * 
+ * Returns: a struct containing the string
+ */
+strStruct stringToStruct(char * str)
+{
+    strStruct ret;
+    uint8_t currentChar = str[0];
+    uint32_t index = 0;
+    while(currentChar != '\0')
+    {
+        ret.str[index] = currentChar;
+        index++;
+        currentChar = str[index];
+    }
+    //add null terminator
+    ret.str[index] = currentChar;
 }

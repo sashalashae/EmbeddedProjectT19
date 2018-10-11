@@ -236,8 +236,8 @@ build/default/production/_ext/1360937237/debug.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports_definitions.h  \
  ../src/testthread.h  \
 ../src/helper_functions.h  \
-../src/TxISRQueue.h  \
- ../src/UART_Defines.h  \
+../src/UART_Defines.h  \
+ ../src/TxISRQueue.h  \
 ../src/UART_defines.h  \
 ../src/txthread.h  \
  ../src/TxThreadQueue.h  \
