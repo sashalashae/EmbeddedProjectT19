@@ -50,7 +50,7 @@ void RXTHREAD_Tasks ( void )
     uint8_t check_gen = 0xff;
     uint8_t check_recv;
     int count = 0;
-    uint8_t str[MAX_MESSAGE_SIZE];
+    uint8_t str[MAX_MESSAGE_SIZE+64];
     while(1)
     {
         if(count == MAX_MESSAGE_SIZE)
@@ -58,7 +58,6 @@ void RXTHREAD_Tasks ( void )
             //DbgOutputLoc(MESSAGE_OUT_OF_RANGE)
             check_gen = 0xff;
             count = 0;
-            R_Data[0] = '\0';
         }
         else
         {

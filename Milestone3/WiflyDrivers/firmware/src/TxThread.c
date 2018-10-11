@@ -59,16 +59,32 @@ void TXTHREAD_Tasks ( void )
     uint8_t currentByte;
     strStruct string;
     uint8_t checksum;
+    
+    //constant header string
+    char * get = "GET\nHTTP/1.1\nContent-Type: application/json\nContent-Length: ";
+    char * post = "POST\nHTTP/1.1\nContent-Type: application/json\nContent-Length: ";
+    strStruct header;
+            
     while(1)
     {
         //Initialize the checksum variable;
         checksum = 0xff;
         //receive a JSON string message to transmit
         string = TxThreadQueue_Receive();
+        char* messageLength;
+        itoa(messageLength, (int)(strlen(string.str)), 10);
         //append a header
+        strcpy(header.str, get);
+        //set index
+        index = strlen(header.str);
+        int i = 0;
+        while(messageLength[i] != '\0')
+        {
+            string.str[index] = messageLength[i];
+            i++;
+            index++;
+        }
         
-        //set count to 0
-        index = 0;
         //begin filling the TxISRQueue in increments of 1 byte        
         currentByte = string.str[index];
         while(currentByte != '\0')
