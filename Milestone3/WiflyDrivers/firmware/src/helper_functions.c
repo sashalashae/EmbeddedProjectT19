@@ -43,10 +43,11 @@ void sleep(int16_t milliseconds)
  * 
  * Returns: a struct containing the string
  */
-strStruct stringToStruct(char * str)
+strStruct stringToStruct(char * str, uint8_t get)
 {
     strStruct ret;
-    uint8_t currentChar = str[0];
+    ret.get = get;
+    char currentChar = str[0];
     uint32_t index = 0;
     while(currentChar != '\0')
     {
@@ -55,5 +56,7 @@ strStruct stringToStruct(char * str)
         currentChar = str[index];
     }
     //add null terminator
-    ret.str[index] = currentChar;
+    ret.str[index] = '\0';
+    ret.count = index;
+    return ret;
 }

@@ -30,7 +30,7 @@ void dbgInit();
 #define LOC_SLEEP_END                   254
 
 /*
- * Milestone 3 specific loctions
+ * Milestone 3 specific locations
  */
 
 //ISR

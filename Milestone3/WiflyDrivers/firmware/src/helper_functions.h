@@ -18,6 +18,6 @@
 void sleep(int16_t milliseconds);
 
 //converts a string to a struct
-strStruct stringToStruct(char * str);
+strStruct stringToStruct(char * str, uint8_t get);
 
 #endif

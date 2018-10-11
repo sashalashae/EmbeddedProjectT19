@@ -56,36 +56,56 @@ void TXTHREAD_Initialize ( void )
 void TXTHREAD_Tasks ( void )
 {
     int index;
+    int pos3, pos2, pos1;
     uint8_t currentByte;
     strStruct string;
     uint8_t checksum;
+    char * header;
     
     //constant header string
-    char * get = "GET\nHTTP/1.1\nContent-Type: application/json\nContent-Length: ";
-    char * post = "POST\nHTTP/1.1\nContent-Type: application/json\nContent-Length: ";
-    strStruct header;
+    char * get = "GET\nHTTP/1.1\nContent-Type: application/json\nContent-Length: \0";
+    char * post = "POST\nHTTP/1.1\nContent-Type: application/json\nContent-Length: \0";
             
     while(1)
     {
-        //Initialize the checksum variable;
-        checksum = 0xff;
         //receive a JSON string message to transmit
-        string = TxThreadQueue_Receive();
-        char* messageLength;
-        itoa(messageLength, (int)(strlen(string.str)), 10);
-        //append a header
-        strcpy(header.str, get);
-        //set index
-        index = strlen(header.str);
-        int i = 0;
-        while(messageLength[i] != '\0')
+        dbgOutputLoc(TX_THREAD_WAITING_FOR_QUEUE);
+        string = TxThreadQueue_Receive();         
+        dbgOutputLoc(TX_THREAD_QUEUE_RECEIVED);
+
+        //add post or get request
+        if(string.get)
         {
-            string.str[index] = messageLength[i];
-            i++;
+            header = get;
+        }
+        else
+        {
+            header = post;
+        }   
+        index = 0;
+        currentByte = header[index];
+        while(currentByte != '\0')
+        {
+            TxISRQueue_Send(currentByte);
             index++;
+            currentByte = header[index];
         }
         
-        //begin filling the TxISRQueue in increments of 1 byte        
+        //add message length (3 digits)
+        pos3 = string.count / 100;
+        pos2 = string.count / 10;
+        pos1 = string.count % 10;
+        
+        TxISRQueue_Send(pos3 | 0x30);
+        TxISRQueue_Send(pos2 | 0x30);
+        TxISRQueue_Send(pos1 | 0x30);
+        
+        dbgOutputLoc(TX_THREAD_SERIALIZATION_DONE);
+        
+        //begin filling the TxISRQueue in increments of 1 byte 
+        index = 0;
+        //Initialize the checksum variable;
+        checksum = 0xFF;
         currentByte = string.str[index];
         while(currentByte != '\0')
         {
@@ -94,8 +114,9 @@ void TXTHREAD_Tasks ( void )
             index++;
             currentByte = string.str[index];
         }
-        TxISRQueue_Send('\0'); // Send end character of string
         TxISRQueue_Send(checksum); // Send checksum
+        TxISRQueue_Send('\0'); // Send end character of string
+        dbgOutputLoc(TX_THREAD_BYTE_ENQUEUE_DONE);
         //Enable TX interrupts
         SYS_INT_SourceEnable(INT_SOURCE_USART_1_TRANSMIT);
     }

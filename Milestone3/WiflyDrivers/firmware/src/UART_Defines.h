@@ -10,9 +10,11 @@
 
 #define MAX_MESSAGE_SIZE 256
 
-typedef struct {
-    char str[MAX_MESSAGE_SIZE];
-} strStruct;
+typedef struct{
+    uint8_t get; //get (1) or post (0)
+    uint16_t count; //length of string
+    uint8_t str[MAX_MESSAGE_SIZE];//string
+}strStruct;
 
 #endif	/* UART_DEFINES_H */
 

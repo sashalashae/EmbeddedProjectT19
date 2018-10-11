@@ -85,18 +85,11 @@ void TESTTHREAD_Initialize ( void )
 
 void TESTTHREAD_Tasks ( void )
 {
-    strStruct string;
-    char * temp = "This is a test message.";
-    int len = strlen(temp);
-    int i;
-    for (i = 0; i < 120; i++)
-    {
-        string.str[i] = i;
-    }
-    string.str[120] = '\0';
+    strStruct msg;
     while(1)
     {
-        TxThreadQueue_Send(string);
+        msg = stringToStruct("This is a test\n\0", 1);
+        TxThreadQueue_Send(msg);
         sleep(1000);
     }
 }
