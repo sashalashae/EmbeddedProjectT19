@@ -65,11 +65,12 @@ void TXTHREAD_Tasks ( void )
         checksum = 0xff;
         //receive a JSON string message to transmit
         string = TxThreadQueue_Receive();
+        //append a header
+        
         //set count to 0
         index = 0;
         //begin filling the TxISRQueue in increments of 1 byte        
         currentByte = string.str[index];
-        
         while(currentByte != '\0')
         {
             checksum = checksum ^ currentByte;

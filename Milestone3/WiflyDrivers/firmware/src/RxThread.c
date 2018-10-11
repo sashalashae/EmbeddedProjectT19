@@ -47,19 +47,12 @@ void RXTHREAD_Initialize ( void )
 void RXTHREAD_Tasks ( void )
 {
     uint8_t data;
-    while(1)
-    {
-        data = RxISRQueue_Receive();
-        dbgOutputLoc(data);
-    }
     uint8_t check_gen = 0xff;
     uint8_t check_recv;
-    int count;
-    char R_Data[MAX_MESSAGE_SIZE-1] = ""; // Minus 1 to make room for checksum
-    char temp[2];
+    int count = 0;
+    uint8_t str[MAX_MESSAGE_SIZE];
     while(1)
     {
-        count++;
         if(count == MAX_MESSAGE_SIZE)
         {
             //DbgOutputLoc(MESSAGE_OUT_OF_RANGE)
@@ -72,13 +65,12 @@ void RXTHREAD_Tasks ( void )
             //receive current byte
             data = RxISRQueue_Receive();
 
+            //update the XOR checksum
             check_gen = check_gen ^ data;
-
-            //Concatenate the byte onto a cumulative string
-            temp[0] = data;
-            temp[1] = '\0';
-            strcat(R_Data, temp);
-
+            
+            //add to the running string
+            str[count] = data;
+            
             //parse the data into JSON messages
             if(data == '\0')
             {
@@ -88,19 +80,18 @@ void RXTHREAD_Tasks ( void )
                     //Discard the data for being bad
                     //DbgOutputLoc(CHECKSUM_MISMATCH);
                     check_gen = 0xff;
-                    R_Data[0] = '\0';
                     count = 0;
                 }
                 else
                 {
                     //TODO: Send into queue to next thread
                     //Forward each message to the appropriate handling thread
-                    R_Data[0] = '\0';
                     check_gen = 0xff;
                     count = 0;
                 }
             }
         }
+        count++;
     }
 }
 
