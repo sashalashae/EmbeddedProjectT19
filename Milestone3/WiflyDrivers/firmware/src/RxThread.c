@@ -47,50 +47,39 @@ void RXTHREAD_Initialize ( void )
 void RXTHREAD_Tasks ( void )
 {
     uint8_t data;
-    uint8_t check_gen = 0xff;
-    uint8_t check_recv;
     int count = 0;
-    uint8_t str[MAX_MESSAGE_SIZE+64];
+    uint8_t str[MAX_MESSAGE_SIZE];
     while(1)
     {
-        if(count == MAX_MESSAGE_SIZE)
+        //receive a byte from the Rx ISR
+        data = RxISRQueue_Receive();
+        //waiting on a new message
+        if(count == 0)
         {
-            //DbgOutputLoc(MESSAGE_OUT_OF_RANGE)
-            check_gen = 0xff;
-            count = 0;
-        }
-        else
-        {
-            //receive current byte
-            data = RxISRQueue_Receive();
-
-            //update the XOR checksum
-            check_gen = check_gen ^ data;
-            
-            //add to the running string
-            str[count] = data;
-            
-            //parse the data into JSON messages
-            if(data == '\0')
+            //new JSON body starts with '{'
+            if(data == '{')
             {
-                check_recv = RxISRQueue_Receive();
-                if(check_recv != check_gen)
-                {
-                    //Discard the data for being bad
-                    //DbgOutputLoc(CHECKSUM_MISMATCH);
-                    check_gen = 0xff;
-                    count = 0;
-                }
-                else
-                {
-                    //TODO: Send into queue to next thread
-                    //Forward each message to the appropriate handling thread
-                    check_gen = 0xff;
-                    count = 0;
-                }
+                str[count] = data;
+                count = 1;
             }
         }
-        count++;
+        //else add to the current message
+        else if (count < MAX_MESSAGE_SIZE)
+        {
+            str[count] = data;
+            count++;
+            //check for end of json message
+            if(data == '}')
+            {
+                count = 0;
+                //string is now full formatted, do something with it
+            }
+        }
+        else
+        //handle case of message being too large
+        {
+            count = 0;
+        }
     }
 }
 

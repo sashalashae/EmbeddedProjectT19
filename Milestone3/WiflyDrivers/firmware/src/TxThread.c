@@ -63,8 +63,8 @@ void TXTHREAD_Tasks ( void )
     char * header;
     
     //constant header string
-    char * get = "GET\nHTTP/1.1\nContent-Type: application/json\nContent-Length: \0";
-    char * post = "POST\nHTTP/1.1\nContent-Type: application/json\nContent-Length: \0";
+    char * get = "GET HTTP/1.1\r\nContent-Type: application/json\r\nContent-Length: \0";
+    char * post = "POST HTTP/1.1\r\nContent-Type: application/json\r\nContent-Length: \0";
             
     while(1)
     {
@@ -73,6 +73,8 @@ void TXTHREAD_Tasks ( void )
         string = TxThreadQueue_Receive();         
         dbgOutputLoc(TX_THREAD_QUEUE_RECEIVED);
 
+        //add new line and carriage return
+        
         //add post or get request
         if(string.get)
         {
@@ -100,6 +102,12 @@ void TXTHREAD_Tasks ( void )
         TxISRQueue_Send(pos2 | 0x30);
         TxISRQueue_Send(pos1 | 0x30);
         
+        //add final newline/returns
+        TxISRQueue_Send('\r');
+        TxISRQueue_Send('\n');
+        TxISRQueue_Send('\r');
+        TxISRQueue_Send('\n');
+        
         dbgOutputLoc(TX_THREAD_SERIALIZATION_DONE);
         
         //begin filling the TxISRQueue in increments of 1 byte 
@@ -114,8 +122,9 @@ void TXTHREAD_Tasks ( void )
             index++;
             currentByte = string.str[index];
         }
-        TxISRQueue_Send(checksum); // Send checksum
-        TxISRQueue_Send('\0'); // Send end character of string
+        //TxISRQueue_Send(checksum); // Send checksum
+        TxISRQueue_Send('\r');
+        TxISRQueue_Send('\n');
         dbgOutputLoc(TX_THREAD_BYTE_ENQUEUE_DONE);
         //Enable TX interrupts
         SYS_INT_SourceEnable(INT_SOURCE_USART_1_TRANSMIT);

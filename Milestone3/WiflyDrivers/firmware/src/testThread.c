@@ -85,11 +85,9 @@ void TESTTHREAD_Initialize ( void )
 
 void TESTTHREAD_Tasks ( void )
 {
-    strStruct msg;
     while(1)
     {
-        msg = stringToStruct("This is a test\n\0", 1);
-        TxThreadQueue_Send(msg);
+        TxThreadQueue_Send(stringToStruct("{Field: Value}\r\n\0", 1));
         sleep(1000);
     }
 }
