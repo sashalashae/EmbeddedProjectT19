@@ -12,7 +12,9 @@
 //External includes
 #include "system_definitions.h"
 #include "debug.h"
+#include "string.h"
 #include "UART_Defines.h"
+#include "stdlib.h"
 
 //Function declarations
 void sleep(int16_t milliseconds);

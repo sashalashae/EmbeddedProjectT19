@@ -49,6 +49,27 @@ strStruct stringToStruct(char * str, uint8_t get)
     ret.get = get;
     char currentChar = str[0];
     uint32_t index = 0;
+    
+    //Replace "xxxxxx" with the ID
+    char *current_loc;
+    static uint32_t ID = 0;
+    char ID_string[7];
+    itoa(ID_string, ID, 10);
+    int i;
+    
+    //Find the first 6 x's of the string to replace with the ID
+    for(i = 0; i < 6; i++) 
+    {
+        current_loc = strchr(str, 'x');
+        if(current_loc) {
+           *current_loc = ID_string[i];
+        }
+        else {
+            //There is an error in str
+        }
+    }
+    ID++;
+    
     while(currentChar != '\0')
     {
         ret.str[index] = currentChar;

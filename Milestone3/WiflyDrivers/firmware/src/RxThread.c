@@ -72,12 +72,14 @@ void RXTHREAD_Tasks ( void )
             if(data == '}')
             {
                 count = 0;
-                //string is now full formatted, do something with it
+                //string is now fully formatted, do something with it
+                //parse the JSON object
             }
         }
         else
         //handle case of message being too large
         {
+            //dbgOutputLoc(MESSAGE_OUT_OF_RANGE);
             count = 0;
         }
     }

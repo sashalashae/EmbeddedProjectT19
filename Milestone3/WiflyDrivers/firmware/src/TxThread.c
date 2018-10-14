@@ -61,13 +61,16 @@ void TXTHREAD_Tasks ( void )
     strStruct string;
     uint8_t checksum;
     char * header;
+    uint32_t sequenceNum = 0;
     
     //constant header string
-    char * get = "GET HTTP/1.1\r\nContent-Type: application/json\r\nContent-Length: \0";
+    //ADD KEEP ALIVE
+    char * get = "GET HTTP/1.1\r\nKeep-Alive: timeout=10\r\nContent-Type: application/json\r\nContent-Length: \0";
     char * post = "POST HTTP/1.1\r\nContent-Type: application/json\r\nContent-Length: \0";
             
     while(1)
     {
+        //Add sequence number to JSON
         //receive a JSON string message to transmit
         dbgOutputLoc(TX_THREAD_WAITING_FOR_QUEUE);
         string = TxThreadQueue_Receive();         
