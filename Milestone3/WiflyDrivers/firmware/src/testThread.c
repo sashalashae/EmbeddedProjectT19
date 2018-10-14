@@ -87,7 +87,8 @@ void TESTTHREAD_Tasks ( void )
 {
     while(1)
     {
-        TxThreadQueue_Send(stringToStruct("{Field: Value}\r\n\0", 1));
+        strStruct sensorMessage = stringToStruct("some stuff", 1);
+        TxThreadQueue_Send(stringToStruct("{RID: xxxxxx}\r\nThis Is a test message\0", 1));
         sleep(1000);
     }
 }

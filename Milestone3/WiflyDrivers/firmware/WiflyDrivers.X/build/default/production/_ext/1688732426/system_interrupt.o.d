@@ -241,7 +241,8 @@ build/default/production/_ext/1688732426/system_interrupt.o:  \
 ../src/debug.h  \
 ../src/rxthread.h  \
  ../src/RxISRQueue.h  \
+../src/jsmn.h  \
 ../src/helper_functions.h  \
-../src/UART_defines.h  \
- ../src/system_config/default/system_definitions.h  \
-../src/debug.h 
+ ../src/UART_defines.h  \
+../src/system_config/default/system_definitions.h  \
+ ../src/debug.h 

@@ -49,6 +49,31 @@ void RXTHREAD_Tasks ( void )
     uint8_t data;
     int count = 0;
     uint8_t str[MAX_MESSAGE_SIZE];
+    
+    jsmn_parser parser;
+	jsmn_init(&parser);
+    int tok_size = MAX_MESSAGE_SIZE / 3;
+	jsmntok_t tokens[tok_size];
+    
+    int num_tok = jsmn_parse(&parser, str, strlen(str), tokens, tok_size);
+
+    int i;
+	for (i = 0; i < num_tok; i++)
+	{
+		if (tokens[i].type == JSMN_OBJECT)
+		{
+			// do something with objects printf("Object");
+		}
+		else
+		{
+			int len = tokens[i].end - tokens[i].start;
+			char substring[tok_size];
+			memcpy(substring, &str[tokens[i].start], len);
+			substring[len] = '\0';
+			//do something with strings/primitives printf("%s\n", substring);
+		}
+	}
+    
     while(1)
     {
         //receive a byte from the Rx ISR
@@ -72,12 +97,14 @@ void RXTHREAD_Tasks ( void )
             if(data == '}')
             {
                 count = 0;
-                //string is now full formatted, do something with it
+                //string is now fully formatted, do something with it
+                //parse the JSON object
             }
         }
         else
         //handle case of message being too large
         {
+            //dbgOutputLoc(MESSAGE_OUT_OF_RANGE);
             count = 0;
         }
     }

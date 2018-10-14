@@ -243,4 +243,5 @@ build/default/production/_ext/1360937237/queue_definitions.o:  \
  ../src/txthread.h  \
 ../src/TxThreadQueue.h  \
 ../src/rxthread.h  \
- ../src/RxISRQueue.h 
+ ../src/RxISRQueue.h  \
+../src/jsmn.h 
