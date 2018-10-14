@@ -69,21 +69,21 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     See prototype in testthread.h.
  */
 
+
 void TESTTHREAD_Initialize ( void )
 {
     dbgInit();
-    
-    TimerHandle_t testTimer;
-    testTimer = xTimerCreate("testTimer", pdMS_TO_TICKS(100), pdTRUE, ( void * ) 0, Timer_Cb);
-    xTimerStart(testTimer, 0);
-
 }
 
-void Timer_Cb()
+void MsgTimer_Cb()
 {
     TxThreadQueue_Send(stringToStruct("{\"RID\":\"xxxxxx\", \"Source\":\"4\", \"MsgType\":\"Type Test\", \"Key\":\"Value\"}\0", 1));
 }
 
+void ValueTimer_Cb()
+{
+    
+}
 
 /******************************************************************************
   Function:
@@ -95,6 +95,15 @@ void Timer_Cb()
 
 void TESTTHREAD_Tasks ( void )
 {
+    //set up 100ms timer to drive messages being sent to TxThread
+    TimerHandle_t messageTimer;
+    messageTimer = xTimerCreate("MsgTimer", pdMS_TO_TICKS(100), pdTRUE, ( void * ) 0, MsgTimer_Cb);
+    xTimerStart(messageTimer, 0);
+    
+    //create a variable period timer to set the "value" to send
+    TimerHandle_t ValueTimer;
+    messageTimer = xTimerCreate("TestTimer", pdMS_TO_TICKS(100), pdTRUE, ( void * ) 0, ValueTimer_Cb);
+    xTimerStart(ValueTimer, 0);
     /*while(1)
     {
         strStruct sensorMessage = stringToStruct("some stuff", 1);
