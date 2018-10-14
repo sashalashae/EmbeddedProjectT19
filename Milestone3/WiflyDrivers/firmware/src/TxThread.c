@@ -76,6 +76,7 @@ void TXTHREAD_Tasks ( void )
         string = TxThreadQueue_Receive();
         sequenceNum++;
         addSeqNum = true;
+        checksum = 0xff;
         dbgOutputLoc(TX_THREAD_QUEUE_RECEIVED);
 
         //add new line and carriage return
@@ -114,7 +115,6 @@ void TXTHREAD_Tasks ( void )
         //begin filling the TxISRQueue in increments of 1 byte 
         index = 0;
         //Initialize the checksum variable;
-        checksum = 0xFF;
         currentByte = string.str[index];
         while(currentByte != '\0')
         {
@@ -137,7 +137,7 @@ void TXTHREAD_Tasks ( void )
             }
             currentByte = string.str[index];
         }
-        //TxISRQueue_Send(checksum); // Send checksum
+        TxISRQueue_Send(checksum); // Send checksum
         TxISRQueue_Send('\r');
         TxISRQueue_Send('\n');
         dbgOutputLoc(TX_THREAD_BYTE_ENQUEUE_DONE);

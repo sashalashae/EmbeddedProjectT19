@@ -62,6 +62,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "TxISRQueue.h"
 #include "debug.h"
 #include "UART_defines.h"
+#include "timers.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
@@ -110,6 +111,8 @@ extern "C" {
 /* These routines are called by drivers when certain events occur.
 */
 	
+void Timer_Cb();
+    
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Initialization and State Machine Functions

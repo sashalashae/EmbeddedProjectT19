@@ -1,39 +1,30 @@
 /*******************************************************************************
   USART Driver Static implementation
-
   Company:
     Microchip Technology Inc.
-
   File Name:
     drv_usart_static.c
-
   Summary:
     Source code for the USART driver static implementation.
-
   Description:
     The USART device driver provides a simple interface to manage the USART
     modules on Microchip microcontrollers. This file contains static implementation
     for the USART driver.
-
   Remarks:
     Static interfaces incorporate the driver instance number within the names
     of the routines, eliminating the need for an object ID or object handle.
-
     Static single-open interfaces also eliminate the need for the open handle.
 *******************************************************************************/
 
 //DOM-IGNORE-BEGIN
 /*******************************************************************************
 Copyright (c) 2015 released Microchip Technology Inc.  All rights reserved.
-
 Microchip licenses to you the right to use, modify, copy and distribute
 Software only when embedded on a Microchip microcontroller or digital signal
 controller that is integrated into your product or third party product
 (pursuant to the sublicense terms in the accompanying license agreement).
-
 You should refer to the license agreement accompanying this Software for
 additional information regarding your rights and obligations.
-
 SOFTWARE AND DOCUMENTATION ARE PROVIDED AS IS WITHOUT WARRANTY OF ANY KIND,
 EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF
 MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.

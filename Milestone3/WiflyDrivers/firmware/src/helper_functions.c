@@ -80,6 +80,7 @@ strStruct stringToStruct(char * str, uint8_t get)
     }
     //add null terminator
     ret.str[index] = '\0';
-    ret.count = index;
+    //add one for checksum
+    ret.count = index+1;
     return ret;
 }

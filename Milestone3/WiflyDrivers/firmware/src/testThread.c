@@ -53,7 +53,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 // *****************************************************************************
 
-#include "testthread.h"
+#include "testThread.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -72,6 +72,16 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 void TESTTHREAD_Initialize ( void )
 {
     dbgInit();
+    
+    TimerHandle_t testTimer;
+    testTimer = xTimerCreate("testTimer", pdMS_TO_TICKS(100), pdTRUE, ( void * ) 0, Timer_Cb);
+    xTimerStart(testTimer, 0);
+
+}
+
+void Timer_Cb()
+{
+    TxThreadQueue_Send(stringToStruct("{\"RID\":\"xxxxxx\", \"Source\":\"4\", \"MsgType\":\"Type Test\", \"Key\":\"Value\"}\0", 1));
 }
 
 
@@ -85,12 +95,12 @@ void TESTTHREAD_Initialize ( void )
 
 void TESTTHREAD_Tasks ( void )
 {
-    while(1)
+    /*while(1)
     {
         strStruct sensorMessage = stringToStruct("some stuff", 1);
-        TxThreadQueue_Send(stringToStruct("{RID: xxxxxx}\r\nThis Is a test message\0", 1));
-        sleep(1000);
-    }
+        TxThreadQueue_Send(stringToStruct("{\"RID\":\"xxxxxx\", \"Source\":\"4\", \"MsgType\":\"Type Test\", \"Key\":\"Value\"}\0", 1));
+        sleep(100);
+    }*/
 }
 
 /*******************************************************************************
