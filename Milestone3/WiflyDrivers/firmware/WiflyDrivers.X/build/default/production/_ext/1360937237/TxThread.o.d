@@ -243,4 +243,5 @@ build/default/production/_ext/1360937237/TxThread.o:  \
  ../src/txthread.h  \
 ../src/rxthread.h  \
 ../src/RxISRQueue.h  \
+../src/jsmn.h  \
  ../src/TxThreadQueue.h 

@@ -50,11 +50,12 @@ strStruct stringToStruct(char * str, uint8_t get)
     char currentChar = str[0];
     uint32_t index = 0;
     
+    /*
     //Replace "xxxxxx" with the ID
     char *current_loc;
-    static uint32_t ID = 0;
-    char ID_string[7];
-    itoa(ID_string, ID, 10);
+    static uint32_t SN = 0;
+    char SN_string[7];
+    itoa(SN_string, SN, 10);
     int i;
     
     //Find the first 6 x's of the string to replace with the ID
@@ -62,13 +63,14 @@ strStruct stringToStruct(char * str, uint8_t get)
     {
         current_loc = strchr(str, 'x');
         if(current_loc) {
-           *current_loc = ID_string[i];
+           *current_loc = SN_string[i];
         }
         else {
             //There is an error in str
         }
     }
-    ID++;
+    
+    SN++; */
     
     while(currentChar != '\0')
     {

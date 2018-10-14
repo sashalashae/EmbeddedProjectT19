@@ -55,13 +55,13 @@ void TXTHREAD_Initialize ( void )
 
 void TXTHREAD_Tasks ( void )
 {
-    int index;
-    int pos3, pos2, pos1;
+    int index, i;
     uint8_t currentByte;
     strStruct string;
     uint8_t checksum;
     char * header;
     uint32_t sequenceNum = 0;
+    bool addSeqNum;
     
     //constant header string
     //ADD KEEP ALIVE
@@ -73,7 +73,9 @@ void TXTHREAD_Tasks ( void )
         //Add sequence number to JSON
         //receive a JSON string message to transmit
         dbgOutputLoc(TX_THREAD_WAITING_FOR_QUEUE);
-        string = TxThreadQueue_Receive();         
+        string = TxThreadQueue_Receive();
+        sequenceNum++;
+        addSeqNum = true;
         dbgOutputLoc(TX_THREAD_QUEUE_RECEIVED);
 
         //add new line and carriage return
@@ -96,14 +98,10 @@ void TXTHREAD_Tasks ( void )
             currentByte = header[index];
         }
         
-        //add message length (3 digits)
-        pos3 = string.count / 100;
-        pos2 = string.count / 10;
-        pos1 = string.count % 10;
-        
-        TxISRQueue_Send(pos3 | 0x30);
-        TxISRQueue_Send(pos2 | 0x30);
-        TxISRQueue_Send(pos1 | 0x30);
+        //add message length (3 digits)        
+        TxISRQueue_Send(((string.count / 100) % 10) | 0x30);
+        TxISRQueue_Send(((string.count / 10) % 10) | 0x30);
+        TxISRQueue_Send(((string.count) % 10) | 0x30);
         
         //add final newline/returns
         TxISRQueue_Send('\r');
@@ -120,9 +118,23 @@ void TXTHREAD_Tasks ( void )
         currentByte = string.str[index];
         while(currentByte != '\0')
         {
-            checksum = checksum ^ currentByte;
-            TxISRQueue_Send(currentByte); 
-            index++;
+            if(currentByte == 'x' && addSeqNum)
+            {
+                for(i = 100000; i != 0; i = i/10)
+                {
+                    currentByte = ((sequenceNum / i) % 10) | 0x30;
+                    TxISRQueue_Send(currentByte);
+                    checksum = checksum ^ currentByte;
+                    index++;
+                }
+                addSeqNum = false;
+            }
+            else
+            {
+                checksum = checksum ^ currentByte;
+                TxISRQueue_Send(currentByte); 
+                index++;
+            }
             currentByte = string.str[index];
         }
         //TxISRQueue_Send(checksum); // Send checksum
