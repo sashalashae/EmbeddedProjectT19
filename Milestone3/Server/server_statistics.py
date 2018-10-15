@@ -32,10 +32,14 @@ class ServerConnection:
             print "\t", "Correct Replies Received:", info[pic_number]["PIC Correct"]
             print "\t", "Missed Replies:", info[pic_number]["PIC Missed"], "\n"
         print "Server Statistics"
-        print "\t", "Correct Requests Received:", info[1]["Server Correct Req"]
-        print "\t", "Missed Requests:", info[1]["Server Missed"]
-        print "\t", "Correct Replies Sent:", info[1]["Server Correct Res"]
-        print "\t", "Incorrect Replies Sent:", info[1]["Server Inc Reply"]
+        corr_req = info[1]["Server Correct Req"] + info[2]["Server Correct Req"] + info[3]["Server Correct Req"] + info[4]["Server Correct Req"] 
+        print "\t", "Correct Requests Received:", corr_req
+        miss_req = info[1]["Server Missed"] + info[2]["Server Missed"] + info[3]["Server Missed"] + info[4]["Server Missed"] 
+        print "\t", "Missed Requests:", miss_req
+        corr_res = info[1]["Server Correct Res"] + info[2]["Server Correct Res"] + info[3]["Server Correct Res"] + info[4]["Server Correct Res"] 
+        print "\t", "Correct Replies Sent:", corr_res
+        inc_reply = info[1]["Server Inc Reply"] + info[2]["Server Inc Reply"] + info[3]["Server Inc Reply"] + info[4]["Server Inc Reply"] 
+        print "\t", "Incorrect Replies Sent:", inc_reply
         print 50*"="
 
     def __del__(self):
