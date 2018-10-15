@@ -9,7 +9,7 @@
 #define	UART_DEFINES_H
 
 #define MAX_MESSAGE_SIZE    256
-#define PIC_NUMBER          4
+#define PIC_NUMBER          1
 
 typedef struct{
     uint8_t get; //get (1) or post (0)

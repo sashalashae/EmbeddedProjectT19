@@ -118,7 +118,7 @@ void TESTTHREAD_Tasks ( void )
         }
         TxThreadQueue_Send(currentMsg);
         index++;
-        sleep(500);
+        sleep(400);
     }
 }
 
