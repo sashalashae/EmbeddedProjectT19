@@ -45,7 +45,7 @@ void dbgOutputLoc(uint32_t outVal)
         outVal = 255;
     }
     //Write location to port E
-    SYS_PORTS_Write(PORTS_ID_0, PORT_CHANNEL_E, outVal);
+    //SYS_PORTS_Write(PORTS_ID_0, PORT_CHANNEL_E, outVal);
 }
 
 /*

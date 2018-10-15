@@ -55,24 +55,13 @@ void RXTHREAD_Tasks ( void )
     int tok_size = MAX_MESSAGE_SIZE / 3;
 	jsmntok_t tokens[tok_size];
     
-    int num_tok = jsmn_parse(&parser, str, strlen(str), tokens, tok_size);
+    int len;
+    char substring[tok_size];
+    
+    int num_tok;
+    num_tok = jsmn_parse(&parser, str, strlen(str), tokens, tok_size);
 
     int i;
-	for (i = 0; i < num_tok; i++)
-	{
-		if (tokens[i].type == JSMN_OBJECT)
-		{
-			// do something with objects printf("Object");
-		}
-		else
-		{
-			int len = tokens[i].end - tokens[i].start;
-			char substring[tok_size];
-			memcpy(substring, &str[tokens[i].start], len);
-			substring[len] = '\0';
-			//do something with strings/primitives printf("%s\n", substring);
-		}
-	}
     
     while(1)
     {
@@ -91,14 +80,40 @@ void RXTHREAD_Tasks ( void )
         //else add to the current message
         else if (count < MAX_MESSAGE_SIZE)
         {
+            SYS_PORTS_Write(PORTS_ID_0, PORT_CHANNEL_E, data);
             str[count] = data;
             count++;
             //check for end of json message
             if(data == '}')
             {
+                str[count+1] = '\0';
                 count = 0;
+                
+                /*
                 //string is now fully formatted, do something with it
                 //parse the JSON object
+                num_tok = jsmn_parse(&parser, str, strlen(str), tokens, tok_size);
+                for (i = 0; i < num_tok; i++)
+                {
+                    if (tokens[i].type == JSMN_OBJECT)
+                    {
+                        // do something with objects printf("Object");
+                    }
+                    else
+                    {
+                        len = tokens[i].end - tokens[i].start;
+                        memcpy(substring, &str[tokens[i].start], len);
+                        substring[len] = '\0';
+                        if(substring == "Pic 1" || substring == "Pic 2" || substring == "Pic 3" || substring == "Pic 4")
+                        {
+                            len = tokens[i+1].end - tokens[i+1].start;
+                            memcpy(substring, &str[tokens[i+1].start], len);
+                            
+                            substring[len] = '\0';
+                        }
+                    }
+                }
+                 */
             }
         }
         else
