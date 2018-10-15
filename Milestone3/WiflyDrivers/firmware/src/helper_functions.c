@@ -50,33 +50,57 @@ strStruct stringToStruct(char * str, uint8_t get)
     char currentChar = str[0];
     uint32_t index = 0;
     
-    /*
-    //Replace "xxxxxx" with the ID
-    char *current_loc;
-    static uint32_t SN = 0;
-    char SN_string[7];
-    itoa(SN_string, SN, 10);
-    int i;
-    
-    //Find the first 6 x's of the string to replace with the ID
-    for(i = 0; i < 6; i++) 
-    {
-        current_loc = strchr(str, 'x');
-        if(current_loc) {
-           *current_loc = SN_string[i];
-        }
-        else {
-            //There is an error in str
-        }
-    }
-    
-    SN++; */
-    
     while(currentChar != '\0')
     {
         ret.str[index] = currentChar;
         index++;
         currentChar = str[index];
+    }
+    //add null terminator
+    ret.str[index] = '\0';
+    //add one for checksum
+    ret.count = index+1;
+    return ret;
+}
+
+/*
+ * Function: stringToStructValue
+ * 
+ * Description:
+ * 
+ * @param str: The string to convert
+ * @param value: The string to replace
+ * 
+ * Returns: a struct containing the string
+ */
+strStruct stringToStructValue(char * str, uint8_t get, char * value)
+{
+    strStruct ret;
+    ret.get = get;
+    char currentChar = str[0];
+    uint32_t index = 0;
+    uint32_t valueIndex = 0;
+    uint32_t strIndex = 0;
+    
+    while(currentChar != '\0')
+    {
+        if(currentChar == '$')
+        {
+            currentChar = value[0];
+            while(currentChar != '\0')
+            {
+                ret.str[index] = currentChar;
+                index++;
+                valueIndex++;
+                currentChar = value[valueIndex];
+            }
+            strIndex++;
+            currentChar = str[strIndex];
+        }
+        ret.str[index] = currentChar;
+        index++;
+        strIndex++;
+        currentChar = str[strIndex];
     }
     //add null terminator
     ret.str[index] = '\0';

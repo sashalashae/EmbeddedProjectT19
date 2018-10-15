@@ -22,4 +22,7 @@ void sleep(int16_t milliseconds);
 //converts a string to a struct
 strStruct stringToStruct(char * str, uint8_t get);
 
+//converts a string to a struct with value
+strStruct stringToStructValue(char * str, uint8_t get, char * value);
+
 #endif

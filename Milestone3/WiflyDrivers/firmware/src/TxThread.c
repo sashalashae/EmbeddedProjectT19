@@ -62,11 +62,12 @@ void TXTHREAD_Tasks ( void )
     char * header;
     uint32_t sequenceNum = 0;
     bool addSeqNum;
+    bool addSource;
     
     //constant header string
     //ADD KEEP ALIVE
-    char * get = "GET HTTP/1.1\r\nKeep-Alive: timeout=10\r\nContent-Type: application/json\r\nContent-Length: \0";
-    char * post = "POST HTTP/1.1\r\nContent-Type: application/json\r\nContent-Length: \0";
+    char * get = "GET / HTTP/1.1\r\nKeep-Alive: timeout=10\r\nContent-Type: application/json\r\nContent-Length: \0";
+    char * post = "POST / HTTP/1.1\r\nContent-Type: application/json\r\nContent-Length: \0";
             
     while(1)
     {
@@ -76,6 +77,7 @@ void TXTHREAD_Tasks ( void )
         string = TxThreadQueue_Receive();
         sequenceNum++;
         addSeqNum = true;
+        addSource = true;
         checksum = 0xff;
         dbgOutputLoc(TX_THREAD_QUEUE_RECEIVED);
 
@@ -128,6 +130,13 @@ void TXTHREAD_Tasks ( void )
                     index++;
                 }
                 addSeqNum = false;
+            }
+            else if(currentByte == 'x' && addSource)
+            {
+                currentByte = PIC_NUMBER | 0x30;
+                TxISRQueue_Send(currentByte);
+                checksum = checksum ^ currentByte;
+                index++;
             }
             else
             {

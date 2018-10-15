@@ -75,16 +75,6 @@ void TESTTHREAD_Initialize ( void )
     dbgInit();
 }
 
-void MsgTimer_Cb()
-{
-    TxThreadQueue_Send(stringToStruct("{\"RID\":\"xxxxxx\", \"Source\":\"4\", \"MsgType\":\"Type Test\", \"Key\":\"Value\"}\0", 1));
-}
-
-void ValueTimer_Cb()
-{
-    
-}
-
 /******************************************************************************
   Function:
     void TESTTHREAD_Tasks ( void )
@@ -95,21 +85,41 @@ void ValueTimer_Cb()
 
 void TESTTHREAD_Tasks ( void )
 {
-    //set up 100ms timer to drive messages being sent to TxThread
-    TimerHandle_t messageTimer;
-    messageTimer = xTimerCreate("MsgTimer", pdMS_TO_TICKS(100), pdTRUE, ( void * ) 0, MsgTimer_Cb);
-    xTimerStart(messageTimer, 0);
+    char valueStr[4];
+    //strStruct messages[10];
+    strStruct currentMsg;
     
-    //create a variable period timer to set the "value" to send
-    TimerHandle_t ValueTimer;
-    messageTimer = xTimerCreate("TestTimer", pdMS_TO_TICKS(100), pdTRUE, ( void * ) 0, ValueTimer_Cb);
-    xTimerStart(ValueTimer, 0);
-    /*while(1)
+    uint8_t index = 0;
+    uint8_t counter = 0;
+    
+    bool post = true;
+    
+    while(1)
     {
-        strStruct sensorMessage = stringToStruct("some stuff", 1);
-        TxThreadQueue_Send(stringToStruct("{\"RID\":\"xxxxxx\", \"Source\":\"4\", \"MsgType\":\"Type Test\", \"Key\":\"Value\"}\0", 1));
-        sleep(100);
-    }*/
+        if(index >= 9)
+        {
+            stringToStructValue("{\"RID\":\"xxxxxx\", \"Source\":\"x\", \"MsgType\":\"Type Test\", \"Key\":\"$\"}\0", 1, "Reallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallylongmessage");
+            index = 0;
+        }
+        else if(post)
+        {
+            valueStr[0] = (counter/100) | 0x30;
+            valueStr[1] = ((counter/10) % 10)  | 0x30;
+            valueStr[2] = (counter % 10) | 0x30;
+            valueStr[3] = '\0';
+            currentMsg = stringToStructValue("{\"RID\":\"xxxxxx\", \"Source\":\"x\", \"MsgType\":\"Type Test\", \"Key\":\"$\"}\0", 0, valueStr);
+            counter += PIC_NUMBER;
+            post = false;
+        }
+        else
+        {
+            currentMsg = stringToStruct("{\"RID\":\"xxxxxx\", \"Source\":\"x\", \"MsgType\":\"Value\"}\0", 1);
+            post = true;
+        }
+        TxThreadQueue_Send(currentMsg);
+        index++;
+        sleep(1000);
+    }
 }
 
 /*******************************************************************************

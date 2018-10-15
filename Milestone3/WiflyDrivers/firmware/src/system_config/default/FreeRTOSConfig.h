@@ -48,7 +48,7 @@
 #define configUSE_TICKLESS_IDLE                 0
 #define configCPU_CLOCK_HZ                      ( 80000000UL )
 #define configPERIPHERAL_CLOCK_HZ               ( 80000000UL )
-#define configTICK_RATE_HZ                      ( ( TickType_t ) 1000 )
+#define configTICK_RATE_HZ                      ( ( TickType_t ) 250 )
 #define configMAX_PRIORITIES                    ( 5UL )
 #define configMINIMAL_STACK_SIZE                ( 128 )
 #define configISR_STACK_SIZE                    ( 400 )
@@ -85,10 +85,10 @@
 #define configMAX_CO_ROUTINE_PRIORITIES         2
 
 /* Software timer related definitions. */
-#define configUSE_TIMERS                        1
-#define configTIMER_TASK_PRIORITY               3
-#define configTIMER_QUEUE_LENGTH                10
-#define configTIMER_TASK_STACK_DEPTH            256
+#define configUSE_TIMERS                        0
+#define configTIMER_TASK_PRIORITY               
+#define configTIMER_QUEUE_LENGTH                
+#define configTIMER_TASK_STACK_DEPTH            
 #define configUSE_DAEMON_TASK_STARTUP_HOOK      0
 
 /* Misc */
