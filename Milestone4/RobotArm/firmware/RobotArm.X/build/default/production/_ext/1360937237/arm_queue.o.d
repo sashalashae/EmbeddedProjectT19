@@ -130,9 +130,11 @@ build/default/production/_ext/1360937237/arm_queue.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/list.h  \
  ../src/testthread.h  \
 ../src/arm_library.h  \
-../src/debug.h  \
- ../src/helper_functions.h  \
-../src/test_queue.h  \
+../src/../../../common/debug.h  \
+ ../src/../../../common/UART_Defines.h  \
+ ../src/../../../common/helper_functions.h  \
+../src/../../../common/debug.h  \
+ ../src/test_queue.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/queue.h  \
  ../src/armthread.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h  \

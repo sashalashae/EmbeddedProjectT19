@@ -60,7 +60,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system_definitions.h"
 #include "arm_queue.h"
 #include "arm_library.h"
-#include "helper_functions.h"
+#include "../../../common/helper_functions.h"
 #include "test_queue.h"
 
 // DOM-IGNORE-BEGIN

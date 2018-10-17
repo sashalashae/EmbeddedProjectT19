@@ -1,13 +1,7 @@
-build/default/production/_ext/1360937237/helper_functions.o:  \
- ../src/helper_functions.c  \
-../src/helper_functions.h  \
- ../src/system_config/default/system_definitions.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_common.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_module.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/system/devcon/sys_devcon.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/system/system.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/system/clk/sys_clk.h  \
- ../src/system_config/default/system_config.h  \
+build/default/production/_ext/907750266/debug.o:  \
+../../../common/debug.c  \
+ ../../../common/debug.h  \
+../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/ports_processor.h  \
@@ -40,6 +34,12 @@ build/default/production/_ext/1360937237/helper_functions.o:  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Unsupported.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports_compatibility.h  \
+ ../src/system_config/default/system_definitions.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_common.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_module.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/system/devcon/sys_devcon.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/system/system.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/system/clk/sys_clk.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/plib_osc.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/osc_processor.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/osc_p32xxxx.h  \
@@ -132,8 +132,12 @@ build/default/production/_ext/1360937237/helper_functions.o:  \
 ../src/arm_queue.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/queue.h  \
  ../src/arm_library.h  \
-../src/debug.h  \
+../src/../../../common/debug.h  \
+ ../src/../../../common/helper_functions.h  \
+../src/../../../common/debug.h  \
+ ../src/../../../common/UART_Defines.h  \
 ../src/test_queue.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
- ../src/armthread.h 
+ ../src/armthread.h  \
+../../../common/UART_Defines.h 

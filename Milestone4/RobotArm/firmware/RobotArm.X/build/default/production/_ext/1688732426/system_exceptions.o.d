@@ -133,8 +133,10 @@ build/default/production/_ext/1688732426/system_exceptions.o:  \
  ../src/arm_queue.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/queue.h  \
  ../src/arm_library.h  \
-../src/debug.h  \
-../src/helper_functions.h  \
+../src/../../../common/debug.h  \
+ ../src/../../../common/UART_Defines.h  \
+ ../src/../../../common/helper_functions.h  \
+../src/../../../common/debug.h  \
  ../src/test_queue.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
