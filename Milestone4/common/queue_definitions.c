@@ -7,7 +7,7 @@
 
 #include "queue_definitions.h"
 
-void Queue_Init(QueueHandle_t queue, uint32_t size)
+void ArmQueue_Init(uint32_t size)
 {
     
 }

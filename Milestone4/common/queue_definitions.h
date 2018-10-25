@@ -43,7 +43,7 @@ typedef struct
 }QueueMsg;
 
 //functions to interface with queues
-void Queue_Init(QueueHandle_t queue, uint32_t size);
+void ArmQueue_Init(uint32_t size);
 QueueMsg Queue_Receive_FromISR(QueueHandle_t queue);
 QueueMsg Queue_Receive_FromThread(QueueHandle_t queue);
 void Queue_Send_FromISR(QueueHandle_t queue, QueueMsg msg);
