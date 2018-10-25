@@ -9,30 +9,40 @@
 
 void ArmQueue_Init(uint32_t size)
 {
-    
+    ArmQueue = xQueueCreate(size, sizeof(QueueMsg));
+}
+
+void NavQueue_Init(uint32_t size)
+{
+    NavQueue = xQueueCreate(size, sizeof(QueueMsg));
+}
+
+void MotorQueue_Init(uint32_t size)
+{
+    MotorQueue = xQueueCreate(size, sizeof(QueueMsg));
 }
 
 QueueMsg Queue_Receive_FromISR(QueueHandle_t queue)
 {
-    
+    QueueMsg data;
+    BaseType_t xTaskWokenByReceive = pdFALSE;
+    xQueueReceiveFromISR(queue, &data, &xTaskWokenByReceive);
+    return data;
 }
 
 QueueMsg Queue_Receive_FromThread(QueueHandle_t queue)
 {
-    
+    QueueMsg data;
+    xQueueReceive(queue, &data, portMAX_DELAY);
+    return data;
 }
 
-void Queue_Send_FromISR(QueueHandle_t queue, QueueMsg msg)
+BaseType_t Queue_Send_FromISR(QueueHandle_t queue, QueueMsg msg, BaseType_t *pxHigherPriorityTaskWoken)
 {
-    
+    return xQueueSendFromISR(queue, &msg, pxHigherPriorityTaskWoken);
 }
 
-void Queue_Send_FromThread(QueueHandle_t queue, QueueMsg msg)
+BaseType_t Queue_Send_FromThread(QueueHandle_t queue, QueueMsg msg)
 {
-    
-}
-
-bool Queue_IsEmpty(QueueHandle_t queue)
-{
-    
+    return xQueueSend(queue, &msg, 0);
 }

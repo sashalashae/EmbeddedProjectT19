@@ -12,6 +12,10 @@
 #include "queue.h"
 #include "system_definitions.h"
 
+static QueueHandle_t ArmQueue;
+static QueueHandle_t NavQueue;
+static QueueHandle_t MotorQueue;
+
 //Define data types for the queue
 typedef enum 
 {
@@ -44,10 +48,11 @@ typedef struct
 
 //functions to interface with queues
 void ArmQueue_Init(uint32_t size);
+void NavQueue_Init(uint32_t size);
+void MotorQueue_Init(uint32_t size);
 QueueMsg Queue_Receive_FromISR(QueueHandle_t queue);
 QueueMsg Queue_Receive_FromThread(QueueHandle_t queue);
-void Queue_Send_FromISR(QueueHandle_t queue, QueueMsg msg);
-void Queue_Send_FromThread(QueueHandle_t queue, QueueMsg msg);
-bool Queue_IsEmpty(QueueHandle_t queue);
+BaseType_t Queue_Send_FromISR(QueueHandle_t queue, QueueMsg msg, BaseType_t *pxHigherPriorityTaskWoken);
+BaseType_t Queue_Send_FromThread(QueueHandle_t queue, QueueMsg msg);
 
 #endif
