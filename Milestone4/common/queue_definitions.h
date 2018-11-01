@@ -19,7 +19,9 @@ static QueueHandle_t MotorQueue;
 //Define data types for the queue
 typedef enum 
 {
-    UnknownMsg = 0
+    UnknownMsg = 0,
+    Command,
+    TimerTick
 }MsgType;
 
 typedef enum 

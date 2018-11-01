@@ -8,15 +8,7 @@
 
 #include "arm_library.h"
 
-/*
- * Function: armInit
- * 
- * Description: Initializes output compare modules 1 - 3 to act as PWM outputs.
- * Also initializes timer 2 to run at 50Hz (20ms PWM period).
- * 
- * Returns: void
- */
-void armInit()
+void initPWM()
 {
     //Initially disable all output compare modules
     OC1CON = 0;
@@ -54,6 +46,33 @@ void armInit()
     OC1CONSET = BIT15;
     OC2CONSET = BIT15;
     OC3CONSET = BIT15;
+}
+
+/*
+ * Function: armInit
+ * 
+ * Description: Initializes output compare modules 1 - 3 to act as PWM outputs.
+ * Also initializes timer 2 to run at 50Hz (20ms PWM period).
+ * 
+ * Returns: void
+ */
+void armInit()
+{
+    
+    TimerHandle_t tickTimer;
+    //Start arm timer (feeds into queue)
+    tickTimer = xTimerCreate("Timer", pdMS_TO_TICKS(MOVEMENT_PERIOD_MS), pdTRUE, ( void * ) 0, Arm_Timer_Cb);
+    xTimerStart(tickTimer, 0);
+}
+
+//callback function for timer which driver arm motion
+void Arm_Timer_Cb(TimerHandle_t xTimer)
+{
+    ArmMessage timerTick;
+    timerTick.msgType = TimerTick;
+    timerTick.msgValue = 0;
+    Queue_Send_FromThread()
+    ArmQueue_SendMsg(timerTick);
 }
 
 /*

@@ -14,6 +14,9 @@
 #include "system_definitions.h"
 #include "../../../common/debug.h"
 #include "../../../common/helper_functions.h"
+#include "timers.h"
+#include "FreeRTOS.h"
+#include "queue.h"
 
 //Maximum movement speed for servo
 #define MAXSPEED            (1250)
@@ -46,6 +49,19 @@
 #define BIT13               (1<<13)
 #define BIT14               (1<<14)
 #define BIT15               (1<<15)
+
+//enum for the possible message types supported
+typedef enum 
+{
+    Null = 0,
+    TimerTick,
+    ResetArm,
+    DrawX,
+    DrawO,
+    SetServoAngle,
+    CalibrateArm,
+    CancelMovement
+}MessageType;
 
 //Data structure which stores servo angles for a given arm position
 typedef struct
