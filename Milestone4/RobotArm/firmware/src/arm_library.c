@@ -8,6 +8,14 @@
 
 #include "arm_library.h"
 
+/*
+ * Function: initPWM
+ * 
+ * Description: Initializes output compare modules 1 - 3 to act as PWM outputs.
+ * Also initializes timer 2 to run at 50Hz (20ms PWM period).
+ * 
+ * Returns: void
+ */
 void initPWM()
 {
     //Initially disable all output compare modules
@@ -49,30 +57,49 @@ void initPWM()
 }
 
 /*
+ * Function: Arm_Timer_Cb
+ * 
+ * Description: Callback function for the software timer used to drive the 
+ * complex arm motions.
+ * 
+ * @param xTimer: The timer handle for the calling function.
+ * 
+ * Returns: void
+ */
+void Arm_Timer_Cb(TimerHandle_t xTimer)
+{
+    QueueMsg timerTick;
+    timerTick.source = ArmThread;
+    timerTick.type = TimerMsg;
+    Queue_Send_FromThread(ArmQueue, timerTick);
+}
+
+/*
  * Function: armInit
  * 
- * Description: Initializes output compare modules 1 - 3 to act as PWM outputs.
- * Also initializes timer 2 to run at 50Hz (20ms PWM period).
+ * Description: Initialize all arm related controls
  * 
  * Returns: void
  */
 void armInit()
 {
-    
-    TimerHandle_t tickTimer;
+    //initialize queue
+    ArmQueue_Init(10);
     //Start arm timer (feeds into queue)
+    TimerHandle_t tickTimer;
     tickTimer = xTimerCreate("Timer", pdMS_TO_TICKS(MOVEMENT_PERIOD_MS), pdTRUE, ( void * ) 0, Arm_Timer_Cb);
     xTimerStart(tickTimer, 0);
+    //initialize the PWM
+    initPWM();
 }
 
-//callback function for timer which driver arm motion
-void Arm_Timer_Cb(TimerHandle_t xTimer)
+void Arm_SendAck()
 {
-    ArmMessage timerTick;
-    timerTick.msgType = TimerTick;
-    timerTick.msgValue = 0;
-    Queue_Send_FromThread()
-    ArmQueue_SendMsg(timerTick);
+    QueueMsg ack;
+    ack.source = ArmThread;
+    ack.type = AckMsg;
+    //send ack to nav thread queue
+    Queue_Send_FromThread(NavQueue, ack);
 }
 
 /*
@@ -87,8 +114,11 @@ void armCalibrate(CalibrateMode calFrom, CalibrateMode calTo)
     bool pinValue;
     uint16_t calValue;
     CalibrateMode mode = calFrom;
-    ArmMessage calMessage;
-    calMessage.msgType = CalibrateArm;
+    QueueMsg calMessage;
+    calMessage.type = CommandMsg;
+    calMessage.val0 = Calibrate;
+    calMessage.source = TestThread;
+    calMessage.val1 = mode; 
     while(mode <= calTo)
     {
         //wait for pin to be low again
@@ -113,8 +143,9 @@ void armCalibrate(CalibrateMode calFrom, CalibrateMode calTo)
                 default:
                     break;
             }
-            calMessage.msgValue = (mode << 16) + calValue;
-            ArmQueue_SendMsg(calMessage);
+            calMessage.val1 = mode;
+            calMessage.val2 = calValue;
+            Queue_Send_FromThread(ArmQueue, calMessage);
             //poll GPIO
             if(SYS_PORTS_PinRead(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_6))
             {
@@ -141,7 +172,7 @@ void setArmPosition(ArmMovement movement)
 {
     bool movementDone, baseDone, lowerDone, upperDone;
     movementDone = false;
-    ArmMessage tickMessage;
+    QueueMsg tickMessage;
     //check if each servo motion is needed
     baseDone = (movement.baseSpeed == 0);
     lowerDone = (movement.lowerJointSpeed == 0);
@@ -253,14 +284,18 @@ void setArmPosition(ArmMovement movement)
         }
         movementDone = (baseDone && lowerDone && upperDone);
         //Wait until timer tick is received in the queue to procede
-        tickMessage.msgType = Null;
-        while(tickMessage.msgType != TimerTick)
+        tickMessage.type = UnknownMsg;
+        while(tickMessage.type != TimerMsg)
         {
-            tickMessage = ArmQueue_ReceiveMsg();
+            tickMessage = Queue_Receive_FromThread(ArmQueue);
             //handle cancel commands
-            if(tickMessage.msgType == CancelMovement)
+            if(tickMessage.type == CommandMsg)
             {
-                return;
+                //if val0 is command, then cancel movement
+                if((ArmCommand) tickMessage.val0 == CancelCommand)
+                {
+                    return;
+                }
             }
         }
     }

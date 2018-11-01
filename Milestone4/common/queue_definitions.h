@@ -20,8 +20,9 @@ static QueueHandle_t MotorQueue;
 typedef enum 
 {
     UnknownMsg = 0,
-    Command,
-    TimerTick
+    CommandMsg,
+    TimerMsg,
+    AckMsg
 }MsgType;
 
 typedef enum 
@@ -31,7 +32,8 @@ typedef enum
     ArmThread,
     MovementThread,
     TxThread,
-    RxThread
+    RxThread,
+    TestThread
 }MsgSource;
 
 //Add definition for a generic queue message structure

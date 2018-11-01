@@ -11,8 +11,6 @@ void ARMTHREAD_Initialize ( void )
 {
     //Initialize arm control
     armInit();
-    //Initialize command queue
-    ArmQueue_Initialize(10);
 }
 
 void ARMTHREAD_Tasks ( void )
@@ -20,7 +18,7 @@ void ARMTHREAD_Tasks ( void )
     uint16_t calValue;
     CalibrateMode calMode;
     ArmCalibration cal;
-    ArmMessage currentMessage;
+    QueueMsg currentMessage;
     
     //Set the default calibration values
     cal.BaseMin = 750;
@@ -33,43 +31,44 @@ void ARMTHREAD_Tasks ( void )
     while(1)
     {
         //receive a command message
-        currentMessage = ArmQueue_ReceiveMsg();
+        currentMessage = Queue_Receive_FromThread(ArmQueue);
         //state machine for the message type
-        switch(currentMessage.msgType)
+        switch(currentMessage.type)
         {
-            case DrawX:
-                //send control flow to drawX function
-                drawX(cal);
-                //Acknowledge that operation is done
-                Arm_SendAck();
-                break;
-            case DrawO:
-                //send control flow to drawO function
-                drawO(cal);
-                //Acknowledge that operation is done
-                Arm_SendAck();
-                break;
-            case ResetArm:
-                //send control flow to resetArm function
-                resetArm(cal);
-                //Acknowledge that operation is done
-                Arm_SendAck();
-                break;
-            case SetServoAngle:
-                //Set the desired servo to the desired angle
-                setServoAngle(cal, (ArmServo) ((currentMessage.msgValue & 0xFFFF0000) >> 16), (currentMessage.msgValue & 0xFFFF));
-                //Acknowledge that operation is done
-                Arm_SendAck();
-                break;
-            case TimerTick:
-                //Ignore timer ticks in idle state
-                break;
-            case CalibrateArm:
-                //calibrate arm works by updating the calibration values to the most recently received value
-                calMode = (CalibrateMode) ((currentMessage.msgValue & 0xFFFF0000) >> 16);
-                calValue = (currentMessage.msgValue & 0xFFFF);
-                switch(calMode)
+            case CommandMsg:
+                //perform actions depending on the ArmCommand (in val0)
+                switch(currentMessage.val0)
                 {
+                case DrawX:
+                    //send control flow to drawX function
+                    drawX(cal);
+                    //Acknowledge that operation is done
+                    Arm_SendAck();
+                    break;
+                case DrawO:
+                    //send control flow to drawO function
+                    drawO(cal);
+                    //Acknowledge that operation is done
+                    Arm_SendAck();
+                    break;
+                case ResetArm:
+                    //send control flow to resetArm function
+                    resetArm(cal);
+                    //Acknowledge that operation is done
+                    Arm_SendAck();
+                    break;
+                case SetServoAngle:
+                    //Set the desired servo to the desired angle (val1 is servo, val2 is angle)
+                    setServoAngle(cal, (ArmServo) currentMessage.val1, currentMessage.val2);
+                    //Acknowledge that operation is done
+                    Arm_SendAck();
+                    break;
+                case Calibrate:
+                    //calibrate arm works by updating the calibration values to the most recently received value
+                    calMode = (CalibrateMode) currentMessage.val1;
+                    calValue = currentMessage.val2;
+                    switch(calMode)
+                    {
                     case BaseMin:
                         cal.BaseMin = calValue;
                         setCompareVal(BASE_SERVO, calValue);
@@ -96,10 +95,15 @@ void ARMTHREAD_Tasks ( void )
                         break;
                     default:
                         break;
-                }
+                    }
+                    break;
+                default:
+                    break;
+                } // end switch(currentMessage.val0)
                 break;
             default:
+                //do nothing right now
                 break;
-        }
-    }
-}
+        }//end switch(currentMessage.type)
+    } //end while(1)
+}//end ARMTHREAD_TASKS

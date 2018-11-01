@@ -14,6 +14,7 @@
 #include "system_definitions.h"
 #include "../../../common/debug.h"
 #include "../../../common/helper_functions.h"
+#include "../../../common/queue_definitions.h"
 #include "timers.h"
 #include "FreeRTOS.h"
 #include "queue.h"
@@ -54,14 +55,13 @@
 typedef enum 
 {
     Null = 0,
-    TimerTick,
     ResetArm,
     DrawX,
     DrawO,
     SetServoAngle,
-    CalibrateArm,
-    CancelMovement
-}MessageType;
+    Calibrate,
+    CancelCommand
+}ArmCommand;
 
 //Data structure which stores servo angles for a given arm position
 typedef struct

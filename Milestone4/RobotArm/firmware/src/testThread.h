@@ -58,10 +58,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include <stdlib.h>
 #include "system_config.h"
 #include "system_definitions.h"
-#include "arm_queue.h"
 #include "arm_library.h"
 #include "../../../common/helper_functions.h"
-#include "test_queue.h"
+#include "../../../common/debug.h"
+#include "../../../common/queue_definitions.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility

@@ -130,14 +130,13 @@ build/default/production/_ext/1688732426/system_init.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/list.h  \
  ../src/testthread.h  \
 ../src/system_config/default/system_definitions.h  \
- ../src/arm_queue.h  \
- ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/queue.h  \
  ../src/arm_library.h  \
 ../src/../../../common/debug.h  \
  ../src/../../../common/UART_Defines.h  \
  ../src/../../../common/helper_functions.h  \
 ../src/../../../common/debug.h  \
- ../src/test_queue.h  \
+ ../src/../../../common/queue_definitions.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/queue.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../src/armthread.h 

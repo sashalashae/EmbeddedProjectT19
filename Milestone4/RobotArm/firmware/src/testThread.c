@@ -100,8 +100,8 @@ void TESTTHREAD_Initialize ( void )
     //initialize debug
     dbgInit();
     
-    //initialize queue
-    TestQueue_Initialize(10);
+    //initialize queue (using navigation queue)
+    NavQueue_Init(10);
     
     //configure pin 52 for digital in (for calibrate)
     SYS_PORTS_PinDirectionSelect(PORTS_ID_0, SYS_PORTS_DIRECTION_INPUT, PORT_CHANNEL_G, PORTS_BIT_POS_6);
@@ -118,96 +118,14 @@ void TESTTHREAD_Initialize ( void )
 
 void TESTTHREAD_Tasks ( void )
 {
-    //Command messages to be sent
-    ArmMessage msg;
+    ArmCommand command;
+    QueueMsg ack;
+    QueueMsg commandMsg;
     
-    //angle to set
-    int16_t angle;
-    
-    //Ack message for receiving done notifications
-    TestMessage ackMsg;
-    
-    //set upper and lower joints
-    msg.msgType = SetServoAngle;
-    angle = 25;
-    msg.msgValue = (LowerServo << 16) | (angle & 0xFFFF);
-    ArmQueue_SendMsg(msg);
-    ackMsg = TestQueue_ReceiveMsg();
-    angle = 31;
-    msg.msgValue = (UpperServo << 16) | (angle & 0xFFFF);
-    ArmQueue_SendMsg(msg);
-    ackMsg = TestQueue_ReceiveMsg();
-    
-    //Test sweeping across motion range on base
-    angle = -90;
-    while(angle <= 90)
+    while(1)
     {
-        msg.msgValue = (BaseServo << 16) | (angle & 0xFFFF);
-        ArmQueue_SendMsg(msg);
-        ackMsg = TestQueue_ReceiveMsg();
-        angle += 30;
-        sleep(3000);
+        sleep(5000);
     }
-    
-    //Test motion on lower joint
-    angle = 0;
-    while(angle <= 90)
-    {
-        msg.msgValue = (LowerServo << 16) | (angle & 0xFFFF);
-        ArmQueue_SendMsg(msg);
-        ackMsg = TestQueue_ReceiveMsg();
-        angle += 15;
-        sleep(3000);
-    }
-    
-    //Test motion on upper joint
-    angle = -30;
-    while(angle <= 15)
-    {
-        msg.msgValue = (UpperServo << 16) | (angle & 0xFFFF);
-        ArmQueue_SendMsg(msg);
-        ackMsg = TestQueue_ReceiveMsg();
-        angle += 15;
-        sleep(3000);
-    }
-
-    //demo the reset command
-    msg.msgType = ResetArm;
-    ArmQueue_SendMsg(msg);
-    ackMsg = TestQueue_ReceiveMsg();
-    sleep(5000);
-    
-    //demo drawX
-    msg.msgType = DrawX;
-    ArmQueue_SendMsg(msg);
-    ackMsg = TestQueue_ReceiveMsg();
-    sleep(5000);
-    
-    //demo draw0
-    msg.msgType = DrawO;
-    ArmQueue_SendMsg(msg);
-    ackMsg = TestQueue_ReceiveMsg();
-    sleep(5000);
-    
-    //test calibration routine
-    armCalibrate(BaseMin, BaseMax);
-    
-    //set to -90 degrees
-    msg.msgType = SetServoAngle;
-    angle = -90;
-    msg.msgValue = (BaseServo << 16) | (angle & 0xFFFF);
-    ArmQueue_SendMsg(msg);
-    ackMsg = TestQueue_ReceiveMsg();
-    
-    sleep(5000);
-    
-    //set to 90 degrees
-    angle = 90;
-    msg.msgValue = (BaseServo << 16) | (angle & 0xFFFF);
-    ArmQueue_SendMsg(msg);
-    ackMsg = TestQueue_ReceiveMsg();
-    //block forever
-    ackMsg = TestQueue_ReceiveMsg();
 }
 
 /*******************************************************************************

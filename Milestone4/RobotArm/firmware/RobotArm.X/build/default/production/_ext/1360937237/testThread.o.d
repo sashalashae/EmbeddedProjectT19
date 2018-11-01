@@ -135,8 +135,7 @@ build/default/production/_ext/1360937237/testThread.o:  \
 ../src/../../../common/UART_Defines.h  \
  ../src/../../../common/helper_functions.h  \
 ../src/../../../common/debug.h  \
- ../src/arm_queue.h  \
+ ../src/../../../common/queue_definitions.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/queue.h  \
- ../src/test_queue.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h 
