@@ -1,6 +1,6 @@
-build/default/production/_ext/340578644/sys_devcon.o:  \
- ../src/system_config/default/framework/system/devcon/src/sys_devcon.c  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/system/devcon/src/sys_devcon_local.h  \
+build/default/debug/_ext/340578644/sys_devcon_pic32mx.o:  \
+ ../src/system_config/default/framework/system/devcon/src/sys_devcon_pic32mx.c  \
+ ../src/system_config/default/framework/system/devcon/src/sys_devcon_local.h  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports.h  \
@@ -58,25 +58,6 @@ build/default/production/_ext/340578644/sys_devcon.o:  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/int/processor/../templates/int_ShadowRegisterAssign_Unsupported.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/int/processor/../templates/int_VariableOffset_Unsupported.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/int/processor/../templates/int_SoftwareNMI_Unsupported.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/plib_devcon.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/devcon_processor.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/devcon_p32xxxx.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/devcon_p32mx795f512l.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_AlternateClock_Unsupported.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_DeviceRegsLockUnlock_Unsupported.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_OTPConfigLockUnlock_Unsupported.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_USB_PHY_SleepModeSet_Unsupported.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_ECCModes_Unsupported.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_JTAGEnable_Default_1.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_AnalogChargePumpControl_Unsupported.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_TraceOutput_Default_1.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_JTAGUsesTDO_Default_1.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_IgnoreDebugFreeze_Unsupported.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_DeviceVerAndId_Default.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_SysLockUnlock_Default.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_MPLL_Unsupported.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_HSUARTControl_Unsupported.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_BootSelection_Unsupported.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/plib_osc.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/osc_processor.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/osc_p32xxxx.h  \
@@ -131,4 +112,50 @@ build/default/production/_ext/340578644/sys_devcon.o:  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/../templates/osc_ResetPLL_Unsupported.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/../templates/osc_PLLBypass_Unsupported.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/../templates/osc_BTPLLClockOut_Unsupported.h  \
-
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/plib_pcache.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/pcache_processor.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/pcache_p32xxxx.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/pcache_p32mx795f512l.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_WaitState_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_Registers.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_PFMAddressWaitStateEnable_Unsupported.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_CachePerformanceCountersEnable_Unsupported.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_PrefetchEnable_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_DataCacheEnable_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_CacheEnable_Unsupported.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_FlashSECInt_Unsupported.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_FlashDEDStatus_Unsupported.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_FlashSECStatus_Unsupported.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_FlashSECCount_Unsupported.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_InvalidateOnPFMProgram_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_InvalidateCache_Unsupported.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_CacheLineSelect_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_CacheLineType_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_CacheLineLock_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_CacheLineValid_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_CacheLineAddr_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_CacheLineFlashType_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_CacheLineMask_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_Word_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_LeastRecentlyUsedState_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_CacheHit_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_CacheMiss_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/pcache/processor/../templates/pcache_PrefetchAbort_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/plib_bmx.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/bmx_processor.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/bmx_p32xxxx.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/bmx_p32mx795f512l.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/../templates/bmx_ArbitrationMode_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/../templates/bmx_registers.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/../templates/bmx_DataRamWaitState_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/../templates/bmx_ProgramFlashMemoryCacheDma_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/../templates/bmx_BusExceptionIXI_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/../templates/bmx_BusExceptionICD_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/../templates/bmx_BusExceptionDMA_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/../templates/bmx_BusExceptionData_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/../templates/bmx_BusExceptionInstruction_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/../templates/bmx_ProgramFlashPartition_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/../templates/bmx_DataRAMPartition_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/../templates/bmx_ProgramFlashMemorySize_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/../templates/bmx_DataRAMSize_Default.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/bmx/processor/../templates/bmx_ProgramFlashBootSize_Default.h 

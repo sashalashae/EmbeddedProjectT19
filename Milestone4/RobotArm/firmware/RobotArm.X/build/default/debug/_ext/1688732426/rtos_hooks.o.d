@@ -1,4 +1,4 @@
-build/default/production/_ext/1688732426/rtos_hooks.o:  \
+build/default/debug/_ext/1688732426/rtos_hooks.o:  \
  ../src/system_config/default/rtos_hooks.c  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/FreeRTOS.h  \
  ../src/system_config/default/FreeRTOSConfig.h  \
@@ -8,5 +8,4 @@ build/default/production/_ext/1688732426/rtos_hooks.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX/portmacro.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
- ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/list.h  \
-
+ ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/list.h 

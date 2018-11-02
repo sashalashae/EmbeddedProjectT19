@@ -12,9 +12,9 @@
 #include "queue.h"
 #include "system_definitions.h"
 
-static QueueHandle_t ArmQueue;
-static QueueHandle_t NavQueue;
-static QueueHandle_t MotorQueue;
+QueueHandle_t ArmQueue;
+QueueHandle_t NavQueue;
+QueueHandle_t MotorQueue;
 
 //Define data types for the queue
 typedef enum 

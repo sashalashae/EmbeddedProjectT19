@@ -1,4 +1,4 @@
-build/default/production/_ext/340578644/sys_devcon.o:  \
+build/default/debug/_ext/340578644/sys_devcon.o:  \
  ../src/system_config/default/framework/system/devcon/src/sys_devcon.c  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/system/devcon/src/sys_devcon_local.h  \
  ../src/system_config/default/system_config.h  \
@@ -130,5 +130,4 @@ build/default/production/_ext/340578644/sys_devcon.o:  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/../templates/osc_ForceLock_Unsupported.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/../templates/osc_ResetPLL_Unsupported.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/../templates/osc_PLLBypass_Unsupported.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/../templates/osc_BTPLLClockOut_Unsupported.h  \
-
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/../templates/osc_BTPLLClockOut_Unsupported.h 

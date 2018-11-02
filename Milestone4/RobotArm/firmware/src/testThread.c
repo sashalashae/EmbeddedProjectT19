@@ -117,13 +117,18 @@ void TESTTHREAD_Initialize ( void )
  */
 
 void TESTTHREAD_Tasks ( void )
-{
-    ArmCommand command;
+{    
     QueueMsg ack;
-    QueueMsg commandMsg;
+    QueueMsg currentCommand;
+    
+    currentCommand.source = TestThread;
+    currentCommand.type = CommandMsg;
+    currentCommand.val0 = DrawX;
     
     while(1)
     {
+        Queue_Send_FromThread(ArmQueue, currentCommand);
+        ack = Queue_Receive_FromThread(NavQueue);
         sleep(5000);
     }
 }

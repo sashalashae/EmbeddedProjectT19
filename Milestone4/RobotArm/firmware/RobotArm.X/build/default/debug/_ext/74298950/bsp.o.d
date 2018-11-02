@@ -1,4 +1,4 @@
-build/default/production/_ext/74298950/bsp.o:  \
+build/default/debug/_ext/74298950/bsp.o:  \
  ../src/system_config/default/bsp/bsp.c  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports.h  \
@@ -31,5 +31,4 @@ build/default/production/_ext/74298950/bsp.o:  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/../templates/ports_ChannelChangeNoticeMethod_Unsupported.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Unsupported.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports_compatibility.h  \
-
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports_compatibility.h 
