@@ -76,8 +76,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     Application strings and buffers are be defined outside this structure.
 */
 
-NAVTHREAD_DATA navthreadData;
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Callback Functions
@@ -114,13 +112,8 @@ NAVTHREAD_DATA navthreadData;
 
 void NAVTHREAD_Initialize ( void )
 {
-    /* Place the App state machine in its initial state. */
-    navthreadData.state = NAVTHREAD_STATE_INIT;
-
-    
-    /* TODO: Initialize your application's state machine and other
-     * parameters.
-     */
+    //initialize queue
+    NavQueue_Init(10);
 }
 
 
@@ -134,16 +127,55 @@ void NAVTHREAD_Initialize ( void )
 
 void NAVTHREAD_Tasks ( void )
 {
-    
+    int newMove = 0;
+    QueueMsg move;
+    move.source = NavigationThread;
+    move.type = CommandMsg;
+    QueueMsg ack;
+    QueueMsg serverResponse;
     while(1)
     {
-        //ask the server what the next move is
-        
-        //wait for RX thread to send something back
+        while(!newMove)
+        {
+            //ask the server what the next move is (GET request)
+            TxThreadQueue_Send(stringToStruct("move", 1));
+            
+            //wait for RX thread to send something back
+            serverResponse = Queue_Receive_FromThread(NavQueue);
+            if(serverResponse.source == RxThread)
+            {
+                if(serverResponse.type == CommandMsg)
+                {
+                    if(serverResponse.val0 == DrawX)
+                    {
+                        newMove = 1;
+                        move.val0 = DrawX;
+                    }
+                    else if(serverResponse.val0 == DrawO)
+                    {
+                        newMove = 1;
+                        move.val0 = DrawO;
+                    }
+                    else
+                    {
+                        newMove = 0;
+                    }
+                }
+            }
+            sleep(1000);
+        }
+        //clear new move flag
+        newMove = 0;
         
         //send move to arm
+        Queue_Send_FromThread(ArmQueue, move);
         
         //wait for ack
+        ack.type = UnknownMsg;
+        while(!ack.type == AckMsg)
+        {
+            ack = Queue_Receive_FromThread(NavQueue);
+        }
     }
 }
 

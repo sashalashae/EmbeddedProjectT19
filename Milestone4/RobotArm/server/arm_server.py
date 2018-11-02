@@ -51,6 +51,5 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
 
 if __name__ == '__main__':
     server = ThreadedHTTPServer(('0.0.0.0', 2000), Handler)
-    
     print('Starting server, use <Ctrl-C> to stop')
     server.serve_forever()
