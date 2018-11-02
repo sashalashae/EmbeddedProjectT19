@@ -28,6 +28,7 @@ Partial Class ControlForm
         Me.Label1 = New System.Windows.Forms.Label()
         Me.commandLabel = New System.Windows.Forms.Label()
         Me.reset = New System.Windows.Forms.Button()
+        Me.getStatus = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'drawX
@@ -50,7 +51,7 @@ Partial Class ControlForm
         '
         'checkConnection
         '
-        Me.checkConnection.Location = New System.Drawing.Point(174, 12)
+        Me.checkConnection.Location = New System.Drawing.Point(12, 93)
         Me.checkConnection.Name = "checkConnection"
         Me.checkConnection.Size = New System.Drawing.Size(75, 75)
         Me.checkConnection.TabIndex = 2
@@ -60,7 +61,7 @@ Partial Class ControlForm
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 109)
+        Me.Label1.Location = New System.Drawing.Point(12, 211)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(97, 13)
         Me.Label1.TabIndex = 3
@@ -69,7 +70,7 @@ Partial Class ControlForm
         'commandLabel
         '
         Me.commandLabel.AutoSize = True
-        Me.commandLabel.Location = New System.Drawing.Point(115, 109)
+        Me.commandLabel.Location = New System.Drawing.Point(115, 211)
         Me.commandLabel.Name = "commandLabel"
         Me.commandLabel.Size = New System.Drawing.Size(39, 13)
         Me.commandLabel.TabIndex = 4
@@ -77,18 +78,28 @@ Partial Class ControlForm
         '
         'reset
         '
-        Me.reset.Location = New System.Drawing.Point(255, 12)
+        Me.reset.Location = New System.Drawing.Point(93, 93)
         Me.reset.Name = "reset"
         Me.reset.Size = New System.Drawing.Size(75, 75)
         Me.reset.TabIndex = 5
         Me.reset.Text = "Reset Command Number"
         Me.reset.UseVisualStyleBackColor = True
         '
+        'getStatus
+        '
+        Me.getStatus.Location = New System.Drawing.Point(174, 12)
+        Me.getStatus.Name = "getStatus"
+        Me.getStatus.Size = New System.Drawing.Size(75, 75)
+        Me.getStatus.TabIndex = 6
+        Me.getStatus.Text = "Get PIC Status"
+        Me.getStatus.UseVisualStyleBackColor = True
+        '
         'ControlForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(345, 138)
+        Me.ClientSize = New System.Drawing.Size(262, 233)
+        Me.Controls.Add(Me.getStatus)
         Me.Controls.Add(Me.reset)
         Me.Controls.Add(Me.commandLabel)
         Me.Controls.Add(Me.Label1)
@@ -108,4 +119,5 @@ Partial Class ControlForm
     Friend WithEvents Label1 As Label
     Friend WithEvents commandLabel As Label
     Friend WithEvents reset As Button
+    Friend WithEvents getStatus As Button
 End Class

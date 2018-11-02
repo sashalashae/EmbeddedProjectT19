@@ -138,10 +138,12 @@ void NAVTHREAD_Tasks ( void )
         while(!newMove)
         {
             //ask the server what the next move is (GET request)
-            TxThreadQueue_Send(stringToStruct("move", 1));
+            TxThreadQueue_Send(stringToStruct("getmove\0", 1));
             
             //wait for RX thread to send something back
             serverResponse = Queue_Receive_FromThread(NavQueue);
+            
+            //handle RX thread response
             if(serverResponse.source == RxThread)
             {
                 if(serverResponse.type == CommandMsg)
@@ -164,18 +166,19 @@ void NAVTHREAD_Tasks ( void )
             }
             sleep(1000);
         }
-        //clear new move flag
-        newMove = 0;
         
         //send move to arm
         Queue_Send_FromThread(ArmQueue, move);
         
         //wait for ack
         ack.type = UnknownMsg;
-        while(!ack.type == AckMsg)
+        while(ack.type != AckMsg)
         {
             ack = Queue_Receive_FromThread(NavQueue);
         }
+        
+        //clear new move flag
+        newMove = 0;
     }
 }
 

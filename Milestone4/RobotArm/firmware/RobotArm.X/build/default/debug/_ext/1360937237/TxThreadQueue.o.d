@@ -236,12 +236,12 @@ build/default/debug/_ext/1360937237/TxThreadQueue.o:  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports_definitions.h  \
  ../src/navthread.h  \
-../src/armthread.h  \
+../src/../../../common/queue_definitions.h  \
+ ../src/armthread.h  \
 ../src/arm_library.h  \
  ../src/../../../common/helper_functions.h  \
 ../src/../../../common/debug.h  \
  ../src/../../../common/UART_Defines.h  \
- ../src/../../../common/queue_definitions.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../src/txthread.h  \

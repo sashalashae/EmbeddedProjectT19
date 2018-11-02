@@ -234,18 +234,18 @@ build/default/debug/_ext/327000265/drv_usart_mapping.o:  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports_definitions.h  \
  ../src/navthread.h  \
-../src/armthread.h  \
-../src/arm_library.h  \
- ../src/../../../common/debug.h  \
-../src/../../../common/UART_Defines.h  \
- ../src/../../../common/helper_functions.h  \
+../src/../../../common/queue_definitions.h  \
+ ../src/TxThreadQueue.h  \
 ../src/../../../common/debug.h  \
- ../src/../../../common/queue_definitions.h  \
+ ../src/../../../common/UART_Defines.h  \
+ ../src/../../../common/UART_Defines.h  \
+../src/armthread.h  \
+ ../src/arm_library.h  \
+../src/../../../common/helper_functions.h  \
+ ../src/../../../common/debug.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../src/txthread.h  \
 ../src/TxISRQueue.h  \
- ../src/../../../common/UART_Defines.h  \
-../src/TxThreadQueue.h  \
- ../src/rxthread.h  \
-../src/RxISRQueue.h 
+../src/rxthread.h  \
+ ../src/RxISRQueue.h 

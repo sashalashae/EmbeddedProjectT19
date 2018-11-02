@@ -98,8 +98,6 @@ void SYS_Tasks ( void )
                 "Sys Tasks",
                 1024, NULL, 0, NULL);
 
- 
- 
     /* Create OS Thread for NAVTHREAD Tasks. */
     xTaskCreate((TaskFunction_t) _NAVTHREAD_Tasks,
                 "NAVTHREAD Tasks",

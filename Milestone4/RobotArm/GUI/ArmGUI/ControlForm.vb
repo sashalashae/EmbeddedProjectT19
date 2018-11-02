@@ -84,6 +84,19 @@ Public Class ControlForm
 
     End Sub
 
+    Private Async Sub GetPicStatus()
+        Dim responseString As String = ""
+        Dim response As HttpResponseMessage
+        Dim content As HttpContent = New StringContent("getpicbusy", Encoding.UTF8, "application/json")
+        Try
+            response = Await client.PostAsync(server, content)
+            responseString = Await response.Content.ReadAsStringAsync()
+        Catch ex As Exception
+            MsgBox("ERROR: Connection Failed")
+        End Try
+        MsgBox("PIC Busy: " + responseString)
+    End Sub
+
     Private Sub ControlForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'init command number to 1
         commandNum = 0
@@ -101,5 +114,11 @@ Public Class ControlForm
         commandNum = 0
         commandLabel.Text = commandNum.ToString()
         ResetCommandNum()
+    End Sub
+
+    Private Sub getStatus_Click(sender As Object, e As EventArgs) Handles getStatus.Click
+        commandNum = commandNum + 1
+        commandLabel.Text = commandNum.ToString()
+        GetPicStatus()
     End Sub
 End Class
