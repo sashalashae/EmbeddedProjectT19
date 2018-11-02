@@ -1,8 +1,17 @@
-build/default/production/_ext/1360937237/main.o:  \
-../src/main.c  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_module.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_common.h  \
+build/default/production/_ext/1360937237/TxISRQueue.o:  \
+ ../src/TxISRQueue.c  \
+../src/TxISRQueue.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/FreeRTOS.h  \
+ ../src/system_config/default/FreeRTOSConfig.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/projdefs.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/portable.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/deprecated_definitions.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX/portmacro.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
+ ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/queue.h  \
  ../src/system_config/default/system_definitions.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_common.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_module.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/system/devcon/sys_devcon.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/system/system.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/system/clk/sys_clk.h  \
@@ -218,14 +227,6 @@ build/default/production/_ext/1360937237/main.o:  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/osal/osal.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/osal/osal_definitions.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/osal/osal_freertos.h  \
- ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/FreeRTOS.h  \
- ../src/system_config/default/FreeRTOSConfig.h  \
- ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/projdefs.h  \
- ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/portable.h  \
- ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/deprecated_definitions.h  \
- ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX/portmacro.h  \
- ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
- ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/queue.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/semphr.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/queue.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
@@ -244,8 +245,7 @@ build/default/production/_ext/1360937237/main.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../src/txthread.h  \
-../src/TxISRQueue.h  \
- ../src/../../../common/UART_Defines.h  \
 ../src/TxThreadQueue.h  \
- ../src/rxthread.h  \
-../src/RxISRQueue.h 
+ ../src/../../../common/UART_Defines.h  \
+../src/rxthread.h  \
+ ../src/RxISRQueue.h 
