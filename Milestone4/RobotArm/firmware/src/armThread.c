@@ -9,12 +9,18 @@
 
 void ARMTHREAD_Initialize ( void )
 {
-    //Initialize arm control
-    armInit();
+    //initialize queue
+    ArmQueue_Init(10);
+    //initialize the PWM
+    initPWM();
 }
 
 void ARMTHREAD_Tasks ( void )
-{
+{   
+    //Initialize arm timer
+    initArmTimer();
+    
+    //variable declaration
     uint16_t calValue;
     CalibrateMode calMode;
     ArmCalibration cal;

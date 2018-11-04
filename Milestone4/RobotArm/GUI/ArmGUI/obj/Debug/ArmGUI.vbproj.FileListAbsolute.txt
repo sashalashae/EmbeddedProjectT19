@@ -1,0 +1,12 @@
+C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\Milestone4\RobotArm\GUI\ArmGUI\bin\Debug\ArmGUI.exe.config
+C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\Milestone4\RobotArm\GUI\ArmGUI\bin\Debug\ArmGUI.exe
+C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\Milestone4\RobotArm\GUI\ArmGUI\bin\Debug\ArmGUI.pdb
+C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\Milestone4\RobotArm\GUI\ArmGUI\bin\Debug\ArmGUI.xml
+C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\Milestone4\RobotArm\GUI\ArmGUI\obj\Debug\ArmGUI.vbprojResolveAssemblyReference.cache
+C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\Milestone4\RobotArm\GUI\ArmGUI\obj\Debug\ArmGUI.ControlForm.resources
+C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\Milestone4\RobotArm\GUI\ArmGUI\obj\Debug\ArmGUI.Resources.resources
+C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\Milestone4\RobotArm\GUI\ArmGUI\obj\Debug\ArmGUI.vbproj.GenerateResource.cache
+C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\Milestone4\RobotArm\GUI\ArmGUI\obj\Debug\ArmGUI.vbproj.CoreCompileInputs.cache
+C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\Milestone4\RobotArm\GUI\ArmGUI\obj\Debug\ArmGUI.exe
+C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\Milestone4\RobotArm\GUI\ArmGUI\obj\Debug\ArmGUI.xml
+C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\Milestone4\RobotArm\GUI\ArmGUI\obj\Debug\ArmGUI.pdb

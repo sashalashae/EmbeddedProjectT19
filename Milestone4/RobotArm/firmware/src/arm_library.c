@@ -75,22 +75,18 @@ void Arm_Timer_Cb(TimerHandle_t xTimer)
 }
 
 /*
- * Function: armInit
+ * Function: initArmTimer
  * 
- * Description: Initialize all arm related controls
+ * Description: Initialize arm timer
  * 
  * Returns: void
  */
-void armInit()
+void initArmTimer()
 {
-    //initialize queue
-    ArmQueue_Init(10);
     //Start arm timer (feeds into queue)
     TimerHandle_t tickTimer;
     tickTimer = xTimerCreate("Timer", pdMS_TO_TICKS(MOVEMENT_PERIOD_MS), pdTRUE, ( void * ) 0, Arm_Timer_Cb);
     xTimerStart(tickTimer, 0);
-    //initialize the PWM
-    initPWM();
 }
 
 void Arm_SendAck()

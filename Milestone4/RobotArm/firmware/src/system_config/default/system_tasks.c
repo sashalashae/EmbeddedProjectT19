@@ -54,8 +54,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include "system_config.h"
 #include "system_definitions.h"
-#include "testthread.h"
+#include "navthread.h"
 #include "armthread.h"
+#include "txthread.h"
+#include "rxthread.h"
 
 
 // *****************************************************************************
@@ -69,8 +71,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 static void _SYS_Tasks ( void );
  
  
-static void _TESTTHREAD_Tasks(void);
+static void _NAVTHREAD_Tasks(void);
 static void _ARMTHREAD_Tasks(void);
+static void _TXTHREAD_Tasks(void);
+static void _RXTHREAD_Tasks(void);
 
 
 // *****************************************************************************
@@ -94,15 +98,25 @@ void SYS_Tasks ( void )
                 "Sys Tasks",
                 1024, NULL, 0, NULL);
 
+    /* Create OS Thread for NAVTHREAD Tasks. */
+    xTaskCreate((TaskFunction_t) _NAVTHREAD_Tasks,
+                "NAVTHREAD Tasks",
+                2048, NULL, 1, NULL);
+
     /* Create OS Thread for ARMTHREAD Tasks. */
     xTaskCreate((TaskFunction_t) _ARMTHREAD_Tasks,
                 "ARMTHREAD Tasks",
-                2048, NULL, 1, NULL);
-    
-    /* Create OS Thread for TESTTHREAD Tasks. */
-    xTaskCreate((TaskFunction_t) _TESTTHREAD_Tasks,
-                "TESTTHREAD Tasks",
                 2048, NULL, 2, NULL);
+
+    /* Create OS Thread for TXTHREAD Tasks. */
+    xTaskCreate((TaskFunction_t) _TXTHREAD_Tasks,
+                "TXTHREAD Tasks",
+                2048, NULL, 3, NULL);
+
+    /* Create OS Thread for RXTHREAD Tasks. */
+    xTaskCreate((TaskFunction_t) _RXTHREAD_Tasks,
+                "RXTHREAD Tasks",
+                2048, NULL, 4, NULL);
 
     /**************
      * Start RTOS * 
@@ -139,17 +153,17 @@ static void _SYS_Tasks ( void)
 
 /*******************************************************************************
   Function:
-    void _TESTTHREAD_Tasks ( void )
+    void _NAVTHREAD_Tasks ( void )
 
   Summary:
-    Maintains state machine of TESTTHREAD.
+    Maintains state machine of NAVTHREAD.
 */
 
-static void _TESTTHREAD_Tasks(void)
+static void _NAVTHREAD_Tasks(void)
 {
     while(1)
     {
-        TESTTHREAD_Tasks();
+        NAVTHREAD_Tasks();
     }
 }
 
@@ -167,6 +181,40 @@ static void _ARMTHREAD_Tasks(void)
     while(1)
     {
         ARMTHREAD_Tasks();
+    }
+}
+
+
+/*******************************************************************************
+  Function:
+    void _TXTHREAD_Tasks ( void )
+
+  Summary:
+    Maintains state machine of TXTHREAD.
+*/
+
+static void _TXTHREAD_Tasks(void)
+{
+    while(1)
+    {
+        TXTHREAD_Tasks();
+    }
+}
+
+
+/*******************************************************************************
+  Function:
+    void _RXTHREAD_Tasks ( void )
+
+  Summary:
+    Maintains state machine of RXTHREAD.
+*/
+
+static void _RXTHREAD_Tasks(void)
+{
+    while(1)
+    {
+        RXTHREAD_Tasks();
     }
 }
 

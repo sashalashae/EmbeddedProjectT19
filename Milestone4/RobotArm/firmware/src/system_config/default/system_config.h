@@ -129,6 +129,15 @@ extern "C" {
 // Section: Driver Configuration
 // *****************************************************************************
 // *****************************************************************************
+// *****************************************************************************
+/* USART Driver Configuration Options
+*/
+#define DRV_USART_INSTANCES_NUMBER                  1
+#define DRV_USART_CLIENTS_NUMBER                    1
+#define DRV_USART_INTERRUPT_MODE                    true
+#define DRV_USART_BYTE_MODEL_SUPPORT                false
+#define DRV_USART_READ_WRITE_MODEL_SUPPORT          false
+#define DRV_USART_BUFFER_QUEUE_SUPPORT              false
 
 // *****************************************************************************
 // *****************************************************************************
@@ -182,6 +191,10 @@ extern "C" {
 /*** Application Instance 0 Configuration ***/
 
 /*** Application Instance 1 Configuration ***/
+
+/*** Application Instance 2 Configuration ***/
+
+/*** Application Instance 3 Configuration ***/
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus

@@ -5,7 +5,7 @@
     Microchip Technology Inc.
 
   File Name:
-    testthread.h
+    navthread.h
 
   Summary:
     This header file provides prototypes and definitions for the application.
@@ -43,8 +43,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
  *******************************************************************************/
 //DOM-IGNORE-END
 
-#ifndef _TESTTHREAD_H
-#define _TESTTHREAD_H
+#ifndef _NAVTHREAD_H
+#define _NAVTHREAD_H
 
 // *****************************************************************************
 // *****************************************************************************
@@ -58,10 +58,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include <stdlib.h>
 #include "system_config.h"
 #include "system_definitions.h"
-#include "arm_library.h"
-#include "../../../common/helper_functions.h"
-#include "../../../common/debug.h"
 #include "../../../common/queue_definitions.h"
+#include "TxThreadQueue.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
@@ -88,6 +86,16 @@ extern "C" {
     determine the behavior of the application at various times.
 */
 
+typedef enum
+{
+	/* Application's state machine's initial state. */
+	NAVTHREAD_STATE_INIT=0,
+	NAVTHREAD_STATE_SERVICE_TASKS,
+
+	/* TODO: Define states used by the application state machine. */
+
+} NAVTHREAD_STATES;
+
 
 // *****************************************************************************
 /* Application Data
@@ -101,6 +109,15 @@ extern "C" {
   Remarks:
     Application strings and buffers are be defined outside this structure.
  */
+
+typedef struct
+{
+    /* The application's current state */
+    NAVTHREAD_STATES state;
+
+    /* TODO: Define any additional data used by the application. */
+
+} NAVTHREAD_DATA;
 
 
 // *****************************************************************************
@@ -119,7 +136,7 @@ extern "C" {
 
 /*******************************************************************************
   Function:
-    void TESTTHREAD_Initialize ( void )
+    void NAVTHREAD_Initialize ( void )
 
   Summary:
      MPLAB Harmony application initialization routine.
@@ -141,19 +158,19 @@ extern "C" {
 
   Example:
     <code>
-    TESTTHREAD_Initialize();
+    NAVTHREAD_Initialize();
     </code>
 
   Remarks:
     This routine must be called from the SYS_Initialize function.
 */
 
-void TESTTHREAD_Initialize ( void );
+void NAVTHREAD_Initialize ( void );
 
 
 /*******************************************************************************
   Function:
-    void TESTTHREAD_Tasks ( void )
+    void NAVTHREAD_Tasks ( void )
 
   Summary:
     MPLAB Harmony Demo application tasks function
@@ -174,17 +191,17 @@ void TESTTHREAD_Initialize ( void );
 
   Example:
     <code>
-    TESTTHREAD_Tasks();
+    NAVTHREAD_Tasks();
     </code>
 
   Remarks:
     This routine must be called from SYS_Tasks() routine.
  */
 
-void TESTTHREAD_Tasks( void );
+void NAVTHREAD_Tasks( void );
 
 
-#endif /* _TESTTHREAD_H */
+#endif /* _NAVTHREAD_H */
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus

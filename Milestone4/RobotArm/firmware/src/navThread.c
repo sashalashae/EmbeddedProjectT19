@@ -5,7 +5,7 @@
     Microchip Technology Inc.
   
   File Name:
-    testthread.c
+    navthread.c
 
   Summary:
     This file contains the source code for the MPLAB Harmony application.
@@ -53,13 +53,28 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 // *****************************************************************************
 
-#include "testthread.h"
+#include "navthread.h"
 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Global Data Definitions
 // *****************************************************************************
 // *****************************************************************************
+
+// *****************************************************************************
+/* Application Data
+
+  Summary:
+    Holds application data
+
+  Description:
+    This structure holds the application's data.
+
+  Remarks:
+    This structure should be initialized by the APP_Initialize function.
+    
+    Application strings and buffers are be defined outside this structure.
+*/
 
 // *****************************************************************************
 // *****************************************************************************
@@ -89,44 +104,85 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 /*******************************************************************************
   Function:
-    void TESTTHREAD_Initialize ( void )
+    void NAVTHREAD_Initialize ( void )
 
   Remarks:
-    See prototype in testthread.h.
+    See prototype in navthread.h.
  */
 
-void TESTTHREAD_Initialize ( void )
+void NAVTHREAD_Initialize ( void )
 {
-    //initialize debug
-    dbgInit();
-    
-    //initialize queue (using navigation queue)
+    //initialize queue
     NavQueue_Init(10);
-    
-    //configure pin 52 for digital in (for calibrate)
-    SYS_PORTS_PinDirectionSelect(PORTS_ID_0, SYS_PORTS_DIRECTION_INPUT, PORT_CHANNEL_G, PORTS_BIT_POS_6);
 }
 
 
 /******************************************************************************
   Function:
-    void TESTTHREAD_Tasks ( void )
+    void NAVTHREAD_Tasks ( void )
 
   Remarks:
-    See prototype in testthread.h.
+    See prototype in navthread.h.
  */
 
-void TESTTHREAD_Tasks ( void )
+void NAVTHREAD_Tasks ( void )
 {
-    ArmCommand command;
+    int newMove = 0;
+    QueueMsg move;
+    move.source = NavigationThread;
+    move.type = CommandMsg;
     QueueMsg ack;
-    QueueMsg commandMsg;
-    
+    QueueMsg serverResponse;
     while(1)
     {
-        sleep(5000);
+        while(!newMove)
+        {
+            //ask the server what the next move is (GET request)
+            TxThreadQueue_Send(stringToStruct("getmove\0", 1));
+            
+            //wait for RX thread to send something back
+            serverResponse = Queue_Receive_FromThread(NavQueue);
+            
+            //handle RX thread response
+            if(serverResponse.source == RxThread)
+            {
+                if(serverResponse.type == CommandMsg)
+                {
+                    if(serverResponse.val0 == DrawX)
+                    {
+                        newMove = 1;
+                        move.val0 = DrawX;
+                    }
+                    else if(serverResponse.val0 == DrawO)
+                    {
+                        newMove = 1;
+                        move.val0 = DrawO;
+                    }
+                    else
+                    {
+                        newMove = 0;
+                    }
+                }
+            }
+            sleep(1000);
+        }
+        
+        //send move to arm
+        Queue_Send_FromThread(ArmQueue, move);
+        
+        //wait for ack
+        ack.type = UnknownMsg;
+        while(ack.type != AckMsg)
+        {
+            ack = Queue_Receive_FromThread(NavQueue);
+        }
+        
+        //clear new move flag
+        newMove = 0;
     }
 }
+
+ 
 
 /*******************************************************************************
  End of File

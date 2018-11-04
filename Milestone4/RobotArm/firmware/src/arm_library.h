@@ -115,7 +115,11 @@ typedef enum
 }ArmServo;
 
 //Configuration Functions
-void armInit();
+void initArmTimer();
+void initPWM();
+
+//timer callback
+void Arm_Timer_Cb(TimerHandle_t xTimer);
 
 //Calibration function
 void armCalibrate(CalibrateMode calFrom, CalibrateMode calTo);
