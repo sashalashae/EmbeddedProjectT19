@@ -79,7 +79,6 @@ void MOTOR_THREAD_Initialize ( void )
     MotorQueue_Initialize(5);
 }
 
-
 /******************************************************************************
   Function:
     void MOTOR_THREAD_Tasks ( void )
@@ -90,35 +89,80 @@ void MOTOR_THREAD_Initialize ( void )
 
 void MOTOR_THREAD_Tasks ( void )
 {
+    uint32_t right_target_val = 0;
+    uint32_t left_target_val = 0;
+    TestQueueData_t ack_msg;
+    uint32_t current_left;
+    uint32_t current_right;
+    const uint8_t DUTY_CYCLE = 50;
+    const uint8_t KP = 1;
+    bool running = false;
     while(true)
     {
         MotorQueueData_t msg = MotorQueue_ReceiveMsg();
-        motors_stop();
-        DRV_TMR0_CounterClear();
-        DRV_TMR1_CounterClear();
+        if(running)
+        {
+            while(msg.type != TIMER_TICK && msg.type != ASYNC_STOP)
+            {
+                msg = MotorQueue_ReceiveMsg();
+            }
+        }
         switch(msg.type)
         {
             case MOVEMENT_COMMAND:
+                motors_stop();
+                DRV_TMR0_CounterClear();
+                DRV_TMR1_CounterClear();
+                right_target_val = msg.right;
+                left_target_val = msg.left;
                 switch(msg.movement)
                 {
                     case FORWARD_BOTH:
-                        motors_forward(msg.duty_cycle);
+                        motors_forward(DUTY_CYCLE);
                         break;
                     case REVERSE_BOTH:
-                        motors_reverse(msg.duty_cycle);
+                        motors_reverse(DUTY_CYCLE);
                         break;
                     case TURN_RIGHT:
-                        motors_turn_right(msg.duty_cycle);
+                        motors_turn_right(DUTY_CYCLE);
                         break;
                     case TURN_LEFT:
-                        motors_turn_left(msg.duty_cycle);
+                        motors_turn_left(DUTY_CYCLE);
                         break;
                     case STOP:
                         motors_stop();
+                        right_target_val = 0;
+                        left_target_val = 0;
                         break;
                 }
+                running = true;
                 break;
             case TIMER_TICK:
+                current_left = DRV_TMR0_CounterValueGet();
+                current_right = DRV_TMR1_CounterValueGet();
+                uint8_t expected_val = 50;
+                uint32_t diff;
+                if(current_left > expected_val)
+                    diff = current_left - expected_val;
+                else
+                    diff = expected_val - current_left;
+                dbgOutputLoc(diff);
+                //diff_left_right = current_left-current_right
+                /*if(current_left >= left_target_val)
+                {
+                    motor_left_stop();
+                }
+                if(current_right >= right_target_val)
+                {
+                    motor_right_stop();
+                }*/
+                if(current_left >= left_target_val && current_right >= right_target_val)
+                {
+                    motors_stop();
+                    running = false;
+                    ack_msg.ack = true;
+                    TestQueue_SendMsg(ack_msg);
+                }
                 break;
             case ASYNC_STOP:
                 motors_stop();

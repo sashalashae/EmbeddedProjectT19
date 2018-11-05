@@ -1,6 +1,6 @@
-build/default/production/_ext/1360937237/debug.o:  \
-../src/debug.c  \
- ../src/debug.h  \
+build/default/production/_ext/907750266/debug.o:  \
+../../../common/debug.c  \
+ ../../../common/debug.h  \
 ../src/system_config/default/system_config.h  \
  ../src/system_config/default/system_definitions.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_common.h  \
@@ -156,5 +156,7 @@ build/default/production/_ext/1360937237/debug.o:  \
 ../src/motor_library.h  \
 ../src/motor_queue.h  \
  ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/queue.h  \
- ../src/test_thread.h  \
-../src/test_queue.h 
+ ../src/debug.h  \
+../src/test_thread.h  \
+../src/test_queue.h  \
+ ../../../common/UART_Defines.h 

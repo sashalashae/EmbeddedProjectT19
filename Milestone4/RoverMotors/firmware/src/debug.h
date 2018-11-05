@@ -28,12 +28,14 @@ void dbgInit();
 
 #define DLOC_TIMER_ISR_START                1
 #define DLOC_TIMER_ISR_END                  2
-#define LOC_TEST_QUEUE_ISR_SEND             3
-#define LOC_TEST_QUEUE_RECEIVE_WAITING      4
-#define LOC_TEST_QUEUE_RECEIVE_FINISHED     5
-#define LOC_MOTOR_QUEUE_SEND                6
-#define LOC_MOTOR_QUEUE_RECEIVE_WAITING     7
-#define LOC_MOTOR_QUEUE_RECEIVE_FINISHED    8
+#define LOC_TEST_QUEUE_SEND                 3
+#define LOC_TEST_QUEUE_ISR_SEND             4
+#define LOC_TEST_QUEUE_RECEIVE_WAITING      5
+#define LOC_TEST_QUEUE_RECEIVE_FINISHED     6
+#define LOC_MOTOR_QUEUE_SEND                7
+#define LOC_MOTOR_QUEUE_ISR_SEND            8
+#define LOC_MOTOR_QUEUE_RECEIVE_WAITING     9
+#define LOC_MOTOR_QUEUE_RECEIVE_FINISHED    10
 
 /*
  * Defines for error codes

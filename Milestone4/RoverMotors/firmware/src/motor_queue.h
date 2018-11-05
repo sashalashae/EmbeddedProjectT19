@@ -38,8 +38,10 @@ typedef struct
     msg_type_t type;
     // Movement type for movement command
     movement_type_t movement;
-    // Duty cycle of PWMs to complete movement command
-    uint8_t duty_cycle;
+    // Right encoder value
+    uint32_t right;
+    // Left encoder value
+    uint32_t left;
 } MotorQueueData_t;
 
 // Initializes the motor queue with the specified size
@@ -47,6 +49,9 @@ void MotorQueue_Initialize(uint32_t size);
 
 // Sends message onto the motor queue
 BaseType_t MotorQueue_SendMsg(MotorQueueData_t msg);
+
+// Sends message onto the motor queue from ISR
+BaseType_t MotorQueue_SendMsgISR(MotorQueueData_t msg, BaseType_t *pxHigherPriorityTaskWoken);
 
 // Receives message from the motor queue
 MotorQueueData_t MotorQueue_ReceiveMsg();

@@ -90,11 +90,10 @@ void IntHandlerDrvTmrInstance2(void)
     BaseType_t pxHigherPriorityTaskWoken = pdFALSE;
     
     //Get encoder values
-    TestQueueData_t encoder_values;
-    encoder_values.left = DRV_TMR0_CounterValueGet();
-    encoder_values.right = DRV_TMR1_CounterValueGet();
+    MotorQueueData_t msg;
+    msg.type = TIMER_TICK;
     
-    TestQueue_SendMsgISR(encoder_values, &pxHigherPriorityTaskWoken);
+    MotorQueue_SendMsgISR(msg, &pxHigherPriorityTaskWoken);
     //Clear interrupt flag
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_3);
     

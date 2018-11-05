@@ -21,6 +21,13 @@ BaseType_t MotorQueue_SendMsg(MotorQueueData_t msg)
     return status;
 }
 
+BaseType_t MotorQueue_SendMsgISR(MotorQueueData_t msg, BaseType_t *pxHigherPriorityTaskWoken)
+{
+    BaseType_t status = xQueueSendFromISR(MotorQueue, &msg, pxHigherPriorityTaskWoken);
+    dbgOutputLoc(LOC_MOTOR_QUEUE_ISR_SEND);
+    return status;
+}
+
 MotorQueueData_t MotorQueue_ReceiveMsg()
 {
     MotorQueueData_t data;
