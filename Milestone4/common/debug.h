@@ -49,6 +49,16 @@ void dbgInit();
 #define TX_THREAD_SERIALIZATION_DONE    9
 #define TX_THREAD_BYTE_ENQUEUE_DONE     10
 
+#define TX_ISR_QUEUE_FULL               11
+#define LOC_ADC_START                  15
+#define LOC_ADC_READ                   16
+#define LOC_CONFIG_START               17
+#define LOC_CONFIG_END                 18
+#define LOC_ADC_END                    19
+#define LOC_ADC_ISR_START              20
+#define LOC_ADC_ISR_END                21
+
+
 //Queue related
 #define TX_ISR_QUEUE_FULL               11
 
