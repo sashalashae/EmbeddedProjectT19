@@ -63,4 +63,15 @@ void dbgInit();
 #define LOC_DRAW_O_END                  5
 #define LOC_ACK_SEND                    8
 
+#define DLOC_TIMER_ISR_START                31
+#define DLOC_TIMER_ISR_END                  32
+#define LOC_TEST_QUEUE_SEND                 33
+#define LOC_TEST_QUEUE_ISR_SEND             34
+#define LOC_TEST_QUEUE_RECEIVE_WAITING      35
+#define LOC_TEST_QUEUE_RECEIVE_FINISHED     36
+#define LOC_MOTOR_QUEUE_SEND                37
+#define LOC_MOTOR_QUEUE_ISR_SEND            38
+#define LOC_MOTOR_QUEUE_RECEIVE_WAITING     39
+#define LOC_MOTOR_QUEUE_RECEIVE_FINISHED    40
+
 #endif
