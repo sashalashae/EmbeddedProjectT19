@@ -12,7 +12,7 @@ build/default/production/_ext/907750266/queue_definitions.o:  \
  ../src/system_config/default/system_definitions.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_common.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_module.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/system/devcon/sys_devcon.h  \
+ ../src/system_config/default/framework/system/devcon/sys_devcon.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/system.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/clk/sys_clk.h  \
  ../src/system_config/default/system_config.h  \

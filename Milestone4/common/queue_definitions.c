@@ -22,6 +22,11 @@ void MotorQueue_Init(uint32_t size)
     MotorQueue = xQueueCreate(size, sizeof(QueueMsg));
 }
 
+void SensorQueue_Init(uint32_t size)
+{
+    SensorQueue = xQueueCreate(size, sizeof(QueueMsg));
+}
+
 QueueMsg Queue_Receive_FromISR(QueueHandle_t queue)
 {
     QueueMsg data;

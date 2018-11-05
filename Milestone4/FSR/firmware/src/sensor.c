@@ -116,7 +116,8 @@ void SENSOR_Initialize ( void )
 {
     /* Place the App state machine in its initial state. */
     sensorData.state = SENSOR_STATE_INIT;
-
+    //Initialize the sensor queue
+    SensorQueue_Init(10);
     
     /* TODO: Initialize your application's state machine and other
      * parameters.
@@ -133,15 +134,27 @@ void SENSOR_Initialize ( void )
  */
 
 void SENSOR_Tasks ( void )
-{
-    uint32_t sensorValue;
-    //Initialize the ADC
-    DRV_ADC_Open();
+{   
+    strStruct value;
+    QueueMsg latestValue;
     //SYS_PORTS_PinDirectionSelect(PORTS_ID_0, SYS_PORTS_DIRECTION_OUTPUT, PORT_CHANNEL_A, PORTS_BIT_POS_3);
     while(1)
     {
-        sensorValue = FSRsRead();
-        //SYS_PORTS_Toggle(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
+        //wait 500ms for next transmission
+        sleep(500);
+        //enable ADC interrupt
+        DRV_ADC_Open();
+        //receive message
+        latestValue = Queue_Receive_FromThread(SensorQueue);
+        //transmit to server
+        value.str[0] = ((latestValue.val0/1000) % 10) | 0x30;
+        value.str[1] = ((latestValue.val0/100) % 10) | 0x30;
+        value.str[2] = ((latestValue.val0/10) % 10) | 0x30;
+        value.str[3] = ((latestValue.val0) % 10) | 0x30;
+        value.str[4] = '\0';
+        value.get = 1;
+        value.count = 4;
+        TxThreadQueue_Send(value);
     }
 }
 

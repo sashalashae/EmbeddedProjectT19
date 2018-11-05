@@ -1,6 +1,6 @@
 build/default/production/_ext/340578644/sys_devcon.o:  \
  ../src/system_config/default/framework/system/devcon/src/sys_devcon.c  \
- ../../../../../../../../microchip/harmony/v2_06/framework/system/devcon/src/sys_devcon_local.h  \
+ ../src/system_config/default/framework/system/devcon/src/sys_devcon_local.h  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports.h  \
@@ -34,7 +34,7 @@ build/default/production/_ext/340578644/sys_devcon.o:  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Unsupported.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports_compatibility.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/system/devcon/sys_devcon.h  \
+ ../src/system_config/default/framework/system/devcon/sys_devcon.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/system.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_common.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_module.h  \

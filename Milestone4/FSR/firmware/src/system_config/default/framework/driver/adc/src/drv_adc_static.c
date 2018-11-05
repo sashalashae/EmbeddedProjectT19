@@ -51,8 +51,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 // *****************************************************************************
 void DRV_ADC_Initialize(void)
-{
-    PLIB_ADC_MuxAInputScanEnable(ADC_ID_1);
+{    PLIB_ADC_MuxAInputScanEnable(ADC_ID_1);
     /* Select Clock Source */
     PLIB_ADC_ConversionClockSourceSelect(ADC_ID_1, ADC_CLOCK_SOURCE_SYSTEM_CLOCK);
     /* Select Clock Prescaler */

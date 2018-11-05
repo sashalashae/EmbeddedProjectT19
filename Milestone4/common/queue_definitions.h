@@ -15,6 +15,7 @@
 QueueHandle_t ArmQueue;
 QueueHandle_t NavQueue;
 QueueHandle_t MotorQueue;
+QueueHandle_t SensorQueue;
 
 //Define data types for the queue
 typedef enum 
@@ -22,7 +23,8 @@ typedef enum
     UnknownMsg = 0,
     CommandMsg,
     TimerMsg,
-    AckMsg
+    AckMsg,
+    FsrMsg
 }MsgType;
 
 typedef enum 
@@ -31,6 +33,7 @@ typedef enum
     NavigationThread,
     ArmThread,
     MovementThread,
+    SensorThread,
     TxThread,
     RxThread,
     TestThread
@@ -54,6 +57,7 @@ typedef struct
 void ArmQueue_Init(uint32_t size);
 void NavQueue_Init(uint32_t size);
 void MotorQueue_Init(uint32_t size);
+void SensorQueue_Init(uint32_t size);
 QueueMsg Queue_Receive_FromISR(QueueHandle_t queue);
 QueueMsg Queue_Receive_FromThread(QueueHandle_t queue);
 BaseType_t Queue_Send_FromISR(QueueHandle_t queue, QueueMsg msg, BaseType_t *pxHigherPriorityTaskWoken);

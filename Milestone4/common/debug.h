@@ -57,6 +57,9 @@ void dbgInit();
 #define LOC_ADC_END                    19
 #define LOC_ADC_ISR_START              20
 #define LOC_ADC_ISR_END                21
+#define LOC_ADC_ISR_Q_START              22
+#define LOC_ADC_ISR_Q_END                23
+
 
 
 //Queue related

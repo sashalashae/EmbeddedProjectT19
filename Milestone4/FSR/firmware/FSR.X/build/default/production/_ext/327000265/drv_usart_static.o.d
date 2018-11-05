@@ -36,7 +36,7 @@ build/default/production/_ext/327000265/drv_usart_static.o:  \
  ../src/system_config/default/system_definitions.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_common.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_module.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/system/devcon/sys_devcon.h  \
+ ../src/system_config/default/framework/system/devcon/sys_devcon.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/system.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/clk/sys_clk.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/plib_osc.h  \

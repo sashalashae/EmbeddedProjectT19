@@ -8,8 +8,8 @@
 #include "fsr.h"
 #include "../../../common/debug.h"
 
-uint16_t FSRsRead(){
-    uint16_t out = 0;
+uint32_t FSRsRead(){
+    uint32_t out = 0;
     int i;
     //start a new sample
     dbgOutputLoc(LOC_ADC_START);

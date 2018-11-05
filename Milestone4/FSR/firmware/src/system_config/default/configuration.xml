@@ -9,7 +9,7 @@
     <Processor dnOrder="1" name="PIC32MX795F512L"/>
     <Board dnOrder="2" name=" "/>
     <ForceOptimization dnOrder="3" flag="true"/>
-    <MergeStrategy dnOrder="4" flag="ALL"/>
+    <MergeStrategy dnOrder="4" flag="OVERWRITE"/>
   </General>
   <Manifest>
     <Files dnOrder="0">
@@ -239,13 +239,11 @@
         <Name dnOrder="0">sys_ports_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/system/ports/src</Path>
         <Checksum dnOrder="2">BC814B1E833F48A33953D65B71BC498D</Checksum>
-        <ProjectFileChecksum dnOrder="3">AA3EC9210476F53F67928D9148A4804E</ProjectFileChecksum>
       </Template>
       <Template dnOrder="1">
         <Name dnOrder="0">system_interrupt_a.S</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
         <Checksum dnOrder="2">2AADE7885E66E00DBB7FE911439FFA49</Checksum>
-        <ProjectFileChecksum dnOrder="3">2BFE5D737E1242E1EE04E0152687B8DC</ProjectFileChecksum>
       </Template>
       <Template dnOrder="2">
         <Name dnOrder="0">RxThread.c</Name>
@@ -255,13 +253,11 @@
         <Name dnOrder="0">drv_adc_static.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default/framework/driver/adc</Path>
         <Checksum dnOrder="2">31D430FA1764B11E33FAB22F51FC5B03</Checksum>
-        <ProjectFileChecksum dnOrder="3">A2F683C59B724067E1D84EAF504ECE79</ProjectFileChecksum>
       </Template>
       <Template dnOrder="4">
         <Name dnOrder="0">drv_adc_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/driver/adc/src</Path>
         <Checksum dnOrder="2">A0595EE5799F9FEFBFABFA50D85D66E8</Checksum>
-        <ProjectFileChecksum dnOrder="3">8073D8D33BF7533580898F281416F525</ProjectFileChecksum>
       </Template>
       <Template dnOrder="5">
         <Name dnOrder="0">RxThread.h</Name>
@@ -271,43 +267,36 @@
         <Name dnOrder="0">bsp.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/bsp</Path>
         <Checksum dnOrder="2">1AAAFA70656E1D8D66940093B542D937</Checksum>
-        <ProjectFileChecksum dnOrder="3">0EAE4A535CB92CAB41718D2E83E94381</ProjectFileChecksum>
       </Template>
       <Template dnOrder="7">
         <Name dnOrder="0">drv_usart_mapping.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/driver/usart/src</Path>
         <Checksum dnOrder="2">7D238CA2327824013E51CEC7EFD6E3E0</Checksum>
-        <ProjectFileChecksum dnOrder="3">3B3B5778A3B0D20A59A5FD2E4275E9F2</ProjectFileChecksum>
       </Template>
       <Template dnOrder="8">
         <Name dnOrder="0">sys_devcon_local.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default/framework/system/devcon/src</Path>
         <Checksum dnOrder="2">B66F9B4DBD85DA7F9DE775E864E01395</Checksum>
-        <ProjectFileChecksum dnOrder="3">4189014DBB2A27C5BD14A62DF44153AC</ProjectFileChecksum>
       </Template>
       <Template dnOrder="9">
         <Name dnOrder="0">sys_devcon.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default/framework/system/devcon</Path>
         <Checksum dnOrder="2">07580DCDEF89D9C79B062544109C5367</Checksum>
-        <ProjectFileChecksum dnOrder="3">30E1C926A1B22045AC794E820F72FC8C</ProjectFileChecksum>
       </Template>
       <Template dnOrder="10">
         <Name dnOrder="0">bsp.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default/bsp</Path>
         <Checksum dnOrder="2">4BFD4ADFBD1349338DAF5682785F28A5</Checksum>
-        <ProjectFileChecksum dnOrder="3">192ACB1FC0CAABED85214F384E5FBA35</ProjectFileChecksum>
       </Template>
       <Template dnOrder="11">
         <Name dnOrder="0">FreeRTOSConfig.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default</Path>
         <Checksum dnOrder="2">42522A8CB5D17DF87C54F69F2A164C75</Checksum>
-        <ProjectFileChecksum dnOrder="3">A02972A39591162FDD9A911B327097C4</ProjectFileChecksum>
       </Template>
       <Template dnOrder="12">
         <Name dnOrder="0">system_interrupt.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
         <Checksum dnOrder="2">EE1B1131F44A966210621E82E146F69F</Checksum>
-        <ProjectFileChecksum dnOrder="3">001CBBF7FBC0C8679D59C54FD18298B1</ProjectFileChecksum>
       </Template>
       <Template dnOrder="13">
         <Name dnOrder="0">TxThread.h</Name>
@@ -317,13 +306,11 @@
         <Name dnOrder="0">drv_usart_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/driver/usart/src</Path>
         <Checksum dnOrder="2">0CA32CD53D2E70BAB81257B15034B3C0</Checksum>
-        <ProjectFileChecksum dnOrder="3">C8BE3869261963E97FEB11BC828B9677</ProjectFileChecksum>
       </Template>
       <Template dnOrder="15">
         <Name dnOrder="0">system_init.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
         <Checksum dnOrder="2">A9CDE4F04057FA7E7F1A31C9C76871A1</Checksum>
-        <ProjectFileChecksum dnOrder="3">73A1CE0FCB72C3BB6F223968CC474600</ProjectFileChecksum>
       </Template>
       <Template dnOrder="16">
         <Name dnOrder="0">main.c</Name>
@@ -341,37 +328,31 @@
         <Name dnOrder="0">system_definitions.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default</Path>
         <Checksum dnOrder="2">C0FFA0AF657B7FAB590794F378890DF1</Checksum>
-        <ProjectFileChecksum dnOrder="3">475EC0D38C260C1AD74D91C18A884187</ProjectFileChecksum>
       </Template>
       <Template dnOrder="20">
         <Name dnOrder="0">system_exceptions.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
         <Checksum dnOrder="2">9836A04F3E98D3971DB91DF539160F34</Checksum>
-        <ProjectFileChecksum dnOrder="3">C1A0F9045DA41CA5CFE477AA42F6C5D6</ProjectFileChecksum>
       </Template>
       <Template dnOrder="21">
         <Name dnOrder="0">sys_devcon.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/system/devcon/src</Path>
         <Checksum dnOrder="2">54ADBD4A35BCA03C42C74182FCE41849</Checksum>
-        <ProjectFileChecksum dnOrder="3">A5473BDB23E98992B1D1A7A2426EF1A4</ProjectFileChecksum>
       </Template>
       <Template dnOrder="22">
         <Name dnOrder="0">drv_usart_static.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default/framework/driver/usart</Path>
         <Checksum dnOrder="2">3C0C43357A1E31146B418EDECDF92725</Checksum>
-        <ProjectFileChecksum dnOrder="3">197CECA659E2AB8E0E8FADD79D484428</ProjectFileChecksum>
       </Template>
       <Template dnOrder="23">
         <Name dnOrder="0">system_tasks.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
         <Checksum dnOrder="2">C5997143E925103C71863E41A5E7A757</Checksum>
-        <ProjectFileChecksum dnOrder="3">148912BECD078D7C7E6AEE52759420DC</ProjectFileChecksum>
       </Template>
       <Template dnOrder="24">
         <Name dnOrder="0">sys_devcon_pic32mx.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/system/devcon/src</Path>
         <Checksum dnOrder="2">5141464248E33ABE9E7D144A2D4DC129</Checksum>
-        <ProjectFileChecksum dnOrder="3">A2E49B8D8B77E08EF98EC447D7BD3C37</ProjectFileChecksum>
       </Template>
       <Template dnOrder="25">
         <Name dnOrder="0">sensor.h</Name>
@@ -381,25 +362,21 @@
         <Name dnOrder="0">system_config.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default</Path>
         <Checksum dnOrder="2">460403590D34E87DE8AFF25AEFA43184</Checksum>
-        <ProjectFileChecksum dnOrder="3">CB081583D00BEEC1D243EFA5871CA77E</ProjectFileChecksum>
       </Template>
       <Template dnOrder="27">
         <Name dnOrder="0">rtos_hooks.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
         <Checksum dnOrder="2">FA52743264536E5207D2ADBE57B48D05</Checksum>
-        <ProjectFileChecksum dnOrder="3">39CC45C38F99010CCEE47158736A3D02</ProjectFileChecksum>
       </Template>
       <Template dnOrder="28">
         <Name dnOrder="0">drv_usart_static_local.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default/framework/driver/usart/src</Path>
         <Checksum dnOrder="2">1BC24F235F6DEC57BFF969A7508990F9</Checksum>
-        <ProjectFileChecksum dnOrder="3">55147E62450A1EF5BA54686DAECA6325</ProjectFileChecksum>
       </Template>
       <Template dnOrder="29">
         <Name dnOrder="0">sys_clk_pic32mx.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/system/clk/src</Path>
         <Checksum dnOrder="2">FDF6C8068CFFAEEC5F8537A8D6514230</Checksum>
-        <ProjectFileChecksum dnOrder="3">085F6BA438869ACD6DAC596344B06D8B</ProjectFileChecksum>
       </Template>
     </Templates>
     <CompilerItems dnOrder="2">
@@ -409,11 +386,11 @@
         <Include dnOrder="2" value="../src/system_config/default"/>
       </C32-AS>
       <C32 dnOrder="1">
-        <Include dnOrder="0" value="C:\Users\SWAT Loaner\MPLABXProjects\EmbeddedProjectT19New\Milestone4\FSR\firmware\src"/>
-        <Include dnOrder="1" value="C:\Users\SWAT Loaner\MPLABXProjects\EmbeddedProjectT19New\Milestone4\FSR\firmware\src\system_config\default"/>
-        <Include dnOrder="2" value="C:\Users\SWAT Loaner\MPLABXProjects\EmbeddedProjectT19New\Milestone4\FSR\firmware\src\default"/>
+        <Include dnOrder="0" value="C:\Users\SWAT Loaner\Desktop\EmbeddedProjectT19\Milestone4\FSR\firmware\src"/>
+        <Include dnOrder="1" value="C:\Users\SWAT Loaner\Desktop\EmbeddedProjectT19\Milestone4\FSR\firmware\src\system_config\default"/>
+        <Include dnOrder="2" value="C:\Users\SWAT Loaner\Desktop\EmbeddedProjectT19\Milestone4\FSR\firmware\src\default"/>
         <Include dnOrder="3" value="C:\microchip\harmony\v2_06\framework"/>
-        <Include dnOrder="4" value="C:\Users\SWAT Loaner\MPLABXProjects\EmbeddedProjectT19New\Milestone4\FSR\firmware\src\system_config\default\framework"/>
+        <Include dnOrder="4" value="C:\Users\SWAT Loaner\Desktop\EmbeddedProjectT19\Milestone4\FSR\firmware\src\system_config\default\framework"/>
         <Include dnOrder="5" value="../src/system_config/default/bsp"/>
         <Include dnOrder="6" value="../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include"/>
         <Include dnOrder="7" value="../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX"/>

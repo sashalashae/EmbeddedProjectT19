@@ -64,7 +64,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "rxthread.h"
 #include "txthread.h"
 #include "system_definitions.h"
-#include "../../../common/debug.h"
+#include "../../../common/queue_definitions.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -150,10 +150,28 @@ void IntHandlerDrvUsartInstance0(void)
  
 void IntHandlerDrvAdc(void)
 {
+    BaseType_t pxHigherPriorityTaskWoken = pdFALSE;
+    QueueMsg newSample;
+    uint32_t sensorValue;
+    
+    //Send ISR start message over GPIO
+    dbgOutputLoc(LOC_ADC_ISR_Q_START);
+  
+    //Read in value from the ADC
+    sensorValue = FSRsRead();//ReadADCData(0);
+    
+    //Queue Data Build
+    newSample.val0 = sensorValue;
+    //Add to message queue
+    Queue_Send_FromISR(SensorQueue, newSample, &pxHigherPriorityTaskWoken);
+    dbgOutputLoc(LOC_ADC_ISR_Q_END);
+     
    /* Clear ADC Interrupt Flag */
-   PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_ADC_1);
+    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_ADC_1);
+    
+    //disable adc interrupt
+    DRV_ADC_Close();
+    
+    portEND_SWITCHING_ISR(pxHigherPriorityTaskWoken);
 }
  
-/*******************************************************************************
- End of File
-*/

@@ -11,7 +11,7 @@
 #include "../src/system_config/default/system_config.h"
 #include "../src/system_config/default/system_definitions.h"
 
-uint16_t FSRsRead();
+uint32_t FSRsRead();
 
 
 #endif	/* FSR_H */
