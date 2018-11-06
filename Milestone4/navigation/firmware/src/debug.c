@@ -1,5 +1,4 @@
-#include "debug.h"
-
+/*
 void dbgOutputLoc(uint32_t outLoc) {
     //If outloc is out of range return
     if (outLoc > 127) {
@@ -27,7 +26,8 @@ void dbgErrorHandler(uint32_t errorCode) {
     //Wait forever
     while (1);
 }
-
+*/
+/*
 void navigation_test_bench() {
     Position_Data pd;
     pd.check = 0;
@@ -200,3 +200,5 @@ void navigation_test_bench() {
         position_tracker(FSRs, &pd);
     }
 }
+
+ */

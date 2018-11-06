@@ -84,4 +84,35 @@ void dbgInit();
 #define LOC_MOTOR_QUEUE_RECEIVE_WAITING     39
 #define LOC_MOTOR_QUEUE_RECEIVE_FINISHED    40
 
+/*
+ * Navigation Specific Locations
+ */
+
+#define LOC_BOTTOM_LEFT_CORNER     50
+#define LOC_BOTTOM_LEFT            51
+#define LOC_TRUE_BOTTOM            52
+#define LOC_BOTTOM_RIGHT           53
+#define LOC_BOTTOM_RIGHT_CORNER    54
+#define LOC_RIGHT_BOTTOM           55
+#define LOC_TRUE_RIGHT             56
+#define LOC_RIGHT_TOP              57
+#define LOC_TOP_RIGHT_CORNER       58
+#define LOC_TOP_RIGHT              59
+#define LOC_TRUE_TOP               60 
+#define LOC_TOP_LEFT               61 
+#define LOC_TOP_LEFT_CORNER        62 
+#define LOC_LEFT_TOP               63 
+#define LOC_TRUE_LEFT              64 
+#define LOC_LEFT_BOTTOM            65 
+#define LOC_OFF_TRACK              66
+#define LOC_OFF_INSIDE             67
+#define LOC_OFF_OUTSIDE            68
+#define ERROR_DEFAULT_CASE         69
+#define LOC_QUEUE_SEND_BEGIN       70 
+#define LOC_QUEUE_SEND_END         71 
+#define LOC_QUEUE_WAITING          72 
+#define LOC_QUEUE_RECEIVED         73 
+#define LOC_APP_TASKS_START        74 
+
+
 #endif

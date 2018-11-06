@@ -10,7 +10,6 @@
 
 #include <stdint.h>
 #include "pdStruct.h"
-#include "debug.h"
 #include "../../../common/debug.h"
 #include "../../../common/helper_functions.h"
 #include "../../../common/queue_definitions.h"

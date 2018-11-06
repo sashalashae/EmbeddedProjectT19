@@ -8,7 +8,6 @@
 #ifndef SLEEP_H
 #define	SLEEP_H
 
-#include "debug.h"
 
 void sleep(int16_t milliseconds);
 

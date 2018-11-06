@@ -28,7 +28,7 @@ testData NavQueue_ReceiveMsg()
 {
     testData data;
     BaseType_t status = xQueueReceive(NavQueue, &data, portMAX_DELAY);
-    dbgOutputLoc(DLOC_QUEUE_RECEIVED);
+    dbgOutputLoc(LOC_QUEUE_RECEIVED);
     return data;
 }
 

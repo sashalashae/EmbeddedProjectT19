@@ -128,9 +128,8 @@ build/default/production/_ext/1688732426/system_interrupt.o:  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/list.h  \
- ../src/navigation_thread.h  \
+ ../src/navigation_library.h  \
 ../src/pdStruct.h  \
-../src/debug.h  \
  ../src/../../../common/debug.h  \
 ../src/../../../common/UART_Defines.h  \
  ../src/../../../common/helper_functions.h  \

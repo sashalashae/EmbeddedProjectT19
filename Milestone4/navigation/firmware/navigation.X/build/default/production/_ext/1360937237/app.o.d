@@ -129,9 +129,8 @@ build/default/production/_ext/1360937237/app.o:  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/list.h  \
  ../src/app.h  \
-../src/navigation_thread.h  \
+../src/navigation_library.h  \
 ../src/pdStruct.h  \
-../src/debug.h  \
  ../src/../../../common/debug.h  \
 ../src/../../../common/UART_Defines.h  \
  ../src/../../../common/helper_functions.h  \

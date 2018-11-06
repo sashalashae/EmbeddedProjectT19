@@ -138,7 +138,7 @@ void APP_Tasks ( void )
 {
     //Initialize the struct
     //navigation_test_bench();
-    dbgOutputLoc(DLOC_APP_TASKS_START);
+    dbgOutputLoc(LOC_APP_TASKS_START);
     
     //testData td;
     
@@ -151,7 +151,7 @@ void APP_Tasks ( void )
     //int i = 0;
     while(1)
     {
-        dbgOutputLoc(DLOC_QUEUE_WAITING);
+        dbgOutputLoc(LOC_QUEUE_WAITING);
         //td = NavQueue_ReceiveMsg();
         //FSRs = td.FSRs;
         //pd.dir = td.dir;
