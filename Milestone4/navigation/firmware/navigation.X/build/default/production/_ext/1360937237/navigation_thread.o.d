@@ -1,8 +1,9 @@
 build/default/production/_ext/1360937237/navigation_thread.o:  \
  ../src/navigation_thread.c  \
 ../src/navigation_thread.h  \
-../src/debug.h  \
- ../src/system_config/default/system_config.h  \
+../src/pdStruct.h  \
+ ../src/debug.h  \
+../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../../../framework/peripheral/ports/plib_ports.h  \
  ../../../../../../framework/peripheral/ports/processor/ports_processor.h  \
@@ -130,14 +131,9 @@ build/default/production/_ext/1360937237/navigation_thread.o:  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/list.h  \
  ../src/app.h  \
-../src/sleep.h  \
-../src/pdStruct.h  \
-../src/navQueue.h  \
- ../../../../../../third_party/rtos/FreeRTOS/Source/include/queue.h  \
- ../../../../../../third_party/rtos/FreeRTOS/Source/include/timers.h  \
- ../../../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
- ../src/../../../common/debug.h  \
-../src/../../../common/UART_Defines.h  \
+../src/../../../common/debug.h  \
+ ../src/../../../common/UART_Defines.h  \
  ../src/../../../common/helper_functions.h  \
 ../src/../../../common/debug.h  \
- ../src/../../../common/queue_definitions.h 
+ ../src/../../../common/queue_definitions.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/queue.h 

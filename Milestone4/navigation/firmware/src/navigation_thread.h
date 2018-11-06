@@ -15,11 +15,11 @@
 #include "../../../common/helper_functions.h"
 #include "../../../common/queue_definitions.h"
 
-void position_tracker(uint16_t FSRs, Position_Data * pd);
+void position_tracker(uint16_t FSRs, Position_Data * pdToCpy);
 
-void toNextLoc(Position_Data * pd, int nextPos);
+void toNextLoc(Position_Data * pdToCpy, int nextPos);
 
-void dirTravel(Position_Data * pd, int nextPos);
+void dirTravel(Position_Data * pdToCpy, int nextPos);
 
 #endif	/* NAVIGATION_THREAD_H */
 
