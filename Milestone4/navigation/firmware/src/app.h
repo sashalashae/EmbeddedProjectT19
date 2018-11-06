@@ -61,10 +61,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 //User defined includes
 #include "navigation_thread.h"
-#include "sleep.h"
-#include "debug.h"
+#include "../../../common/debug.h"
+#include "../../../common/helper_functions.h"
+#include "../../../common/queue_definitions.h"
 #include "pdStruct.h"
-#include "navQueue.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility

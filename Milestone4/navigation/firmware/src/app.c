@@ -146,7 +146,7 @@ void APP_Tasks ( void )
     Position_Data pd;
     pd.current_position = bottom_left_corner;
     pd.check = 0;
-    pd.dir = forwards;
+    pd.dir = stop;
     pd.prevDbg = bottom_left_corner;
     //int i = 0;
     while(1)
@@ -155,7 +155,7 @@ void APP_Tasks ( void )
         td = NavQueue_ReceiveMsg();
         FSRs = td.FSRs;
         pd.dir = td.dir;
-        pd = position_tracker(FSRs, pd);
+        pd = position_tracker(FSRs, &pd);
         //i++;
         //if( i == 26 )
             //i = 0;

@@ -9,10 +9,17 @@
 #define	NAVIGATION_THREAD_H
 
 #include <stdint.h>
-#include "debug.h"
 #include "pdStruct.h"
+#include "debug.h"
+#include "../../../common/debug.h"
+#include "../../../common/helper_functions.h"
+#include "../../../common/queue_definitions.h"
 
-Position_Data position_tracker(uint16_t FSRs, Position_Data pd);
+void position_tracker(uint16_t FSRs, Position_Data * pd);
+
+void toNextLoc(Position_Data * pd, int nextPos);
+
+void dirTravel(Position_Data * pd, int nextPos);
 
 #endif	/* NAVIGATION_THREAD_H */
 
