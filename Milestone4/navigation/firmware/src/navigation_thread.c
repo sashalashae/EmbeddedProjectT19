@@ -1,6 +1,6 @@
 #include "navigation_thread.h"
 
-Position_Data position_tracker(uint16_t FSRs, Position_Data pd) {
+void position_tracker(uint16_t FSRs, Position_Data * pd) {
     switch (pd.current_position) {
         case bottom_left_corner:
             dbgOutputLoc(DLOC_BOTTOM_LEFT_CORNER);
@@ -23,7 +23,6 @@ Position_Data position_tracker(uint16_t FSRs, Position_Data pd) {
                 pd.current_position = off_outside;
             else if (FSRs == 0b0000000010 || FSRs == 0b0100000000)
                 pd.current_position = off_inside;*/
-            return pd;
             break;
         case bottom_left:
             dbgOutputLoc(DLOC_BOTTOM_LEFT);
@@ -55,7 +54,6 @@ Position_Data position_tracker(uint16_t FSRs, Position_Data pd) {
                 pd.current_position = off_inside;
                 pd.check = 0;
             }*/
-            return pd;
             break;
         case true_bottom:
             dbgOutputLoc(DLOC_TRUE_BOTTOM);
@@ -91,7 +89,6 @@ Position_Data position_tracker(uint16_t FSRs, Position_Data pd) {
                 pd.current_position = off_inside;
                 pd.check = 0;
             }*/
-            return pd;
             break;
         case bottom_right:
             dbgOutputLoc(DLOC_BOTTOM_RIGHT);
@@ -110,7 +107,6 @@ Position_Data position_tracker(uint16_t FSRs, Position_Data pd) {
                 pd.current_position = off_outside;
             else if(FSRs == 0b0100000000 || FSRs == 0b0100001000 || FSRs == 0b0100000100)
                 pd.current_position = off_inside;*/
-            return pd;
             break;
         case bottom_right_corner:
             dbgOutputLoc(DLOC_BOTTOM_RIGHT_CORNER);
@@ -133,7 +129,6 @@ Position_Data position_tracker(uint16_t FSRs, Position_Data pd) {
                 pd.current_position = off_outside;
             else if (FSRs == 0b0100000000 || FSRs == 0b0000001000)
                 pd.current_position = off_inside;*/
-            return pd;
             break;
         case right_bottom:
             dbgOutputLoc(DLOC_RIGHT_BOTTOM);
@@ -152,7 +147,6 @@ Position_Data position_tracker(uint16_t FSRs, Position_Data pd) {
                 pd.current_position = off_inside;
             else if (FSRs == 0b0000010000 || FSRs == 0b0100010000 || FSRs == 0b0010010000)
                 pd.current_position = off_outside;*/
-            return pd;
             break;
         case true_right:
             dbgOutputLoc(DLOC_TRUE_RIGHT);
@@ -183,7 +177,6 @@ Position_Data position_tracker(uint16_t FSRs, Position_Data pd) {
                 pd.current_position = off_ouside;
                 pd.check = 0;
             }*/
-            return pd;
             break;
         case right_top:
             dbgOutputLoc(DLOC_RIGHT_TOP);
@@ -213,7 +206,6 @@ Position_Data position_tracker(uint16_t FSRs, Position_Data pd) {
                 pd.current_position = off_ouside;
                 pd.check = 0;
             }*/
-            return pd;
             break;
         case top_right_corner:
             dbgOutputLoc(DLOC_TOP_RIGHT_CORNER);
@@ -236,7 +228,6 @@ Position_Data position_tracker(uint16_t FSRs, Position_Data pd) {
                 pd.current_position = off_outside;
             else if (FSRs == 0b0000001000 || FSRs == 0b0001000000)
                 pd.current_position = off_inside;*/
-            return pd;
             break;
         case top_right:
             dbgOutputLoc(DLOC_TOP_RIGHT);
@@ -254,7 +245,6 @@ Position_Data position_tracker(uint16_t FSRs, Position_Data pd) {
                 pd.check = 0;
                 pd.prevDbg = top_right;
             }
-            return pd;
             break;
         case true_top:
             dbgOutputLoc(DLOC_TRUE_TOP);
@@ -275,7 +265,6 @@ Position_Data position_tracker(uint16_t FSRs, Position_Data pd) {
                 pd.check = 0;
                 pd.prevDbg = true_top;
             }
-            return pd;
             break;
         case top_left:
             dbgOutputLoc(DLOC_TOP_LEFT);
@@ -296,7 +285,6 @@ Position_Data position_tracker(uint16_t FSRs, Position_Data pd) {
                 pd.check = 0;
                 pd.prevDbg = top_left;
             }
-            return pd;
             break;
         case top_left_corner:
             dbgOutputLoc(DLOC_TOP_LEFT_CORNER);
@@ -311,7 +299,6 @@ Position_Data position_tracker(uint16_t FSRs, Position_Data pd) {
                 pd.current_position = off_track;
                 pd.prevDbg = top_left_corner;
             }
-            return pd;
             break;
         case left_top:
             dbgOutputLoc(DLOC_LEFT_TOP);
@@ -332,7 +319,6 @@ Position_Data position_tracker(uint16_t FSRs, Position_Data pd) {
                 pd.check = 0;
                 pd.prevDbg = left_top;
             }
-            return pd;
             break;
         case true_left:
             dbgOutputLoc(DLOC_TRUE_LEFT);
@@ -353,7 +339,6 @@ Position_Data position_tracker(uint16_t FSRs, Position_Data pd) {
                 pd.check = 0;
                 pd.prevDbg = true_left;
             }
-            return pd;
             break;
         case left_bottom:
             dbgOutputLoc(DLOC_LEFT_BOTTOM);
@@ -368,7 +353,6 @@ Position_Data position_tracker(uint16_t FSRs, Position_Data pd) {
                 pd.current_position = off_track;
                 pd.prevDbg = left_bottom;
             }
-            return pd;
             break;
         case off_track:
             dbgOutputLoc(DLOC_OFF_TRACK);
@@ -380,19 +364,16 @@ Position_Data position_tracker(uint16_t FSRs, Position_Data pd) {
                     FSRs == 0b1000010000 || FSRs == 0b0100010000 || FSRs == 0b0010010000 || FSRs == 0b0001010000 || FSRs == 0b0000110000 || FSRs == 0b0000110000 || FSRs == 0b0000101000 || FSRs == 0b0000100100 || FSRs == 0b0000100010 || 
                     FSRs == 0b0000100001 || FSRs == 0b0000100001 || FSRs == 0b0001000001 || FSRs == 0b0010000001 || FSRs == 0b0100000001 || FSRs == 0b1000000001)
                 pd.current_position = off_outside;
-            return pd;
             break;
         case off_inside:
             dbgOutputLoc(DLOC_OFF_INSIDE);
             pd.current_position = pd.prevDbg;
             //CALL REORIENT ALGORITHM
-            return pd;
             break;
         case off_outside:
             //CALL REORIENT ALGORITHM
             dbgOutputLoc(DLOC_OFF_OUTSIDE);
             pd.current_position = pd.prevDbg;
-            return pd;
             break;
         default:
             dbgOutputLoc(ERROR_DEFAULT_CASE);
@@ -403,11 +384,146 @@ Position_Data position_tracker(uint16_t FSRs, Position_Data pd) {
              */
             if(FSRs == 0b1100000011)
                 pd.current_position = bottom_left_corner;
-            return pd;
             break;
     }
 }
 
+void dirTravel(Position_Data * pd, int nextPos)
+{
+    if(nextPos == 0) //bottom left corner
+        {
+            if(pd.current_position < 8 && pd.current_position > 1)
+                pd.dir = reverse;
+            else if((pd.current_position >= 8 && pd.current_position < 15) || pd.current_position == 0)
+                pd.dir = forwards;
+            else if(pd.current_position == 15 || pd.current_position == 1)
+                pd.dir = stop;
+            else {} // ERROR
+        }
+        else if(nextPos == 1) // bottom
+        {
+            if(pd.current_position < 10 && pd.current_position > 2)
+                pd.dir = reverse;
+            else if((pd.current_position >= 10 && pd.current_position <= 15) || pd.current_position < 2)
+                pd.dir = forwards;
+            else if(pd.current_position == 2)
+                pd.dir = stop;
+            else {} //ERROR
+        }
+        else if(nextPos == 2) // bottom right corner
+        {
+            if(pd.current_position < 12 && pd.current_position > 5)
+                pd.dir = reverse;
+            else if ((pd.current_position >= 12 && pd.current_position <= 15) || pd.current_position < 3 || pd.current_position == 4)
+                pd.dir = forwards;
+            else if(pd.current_position == 3 || pd.current_position == 5)
+                pd.dir = stop;
+            else {} // ERROR
+        }
+        else if(nextPos == 3) // right
+        {
+            if(pd.current_position < 14 && pd.current_position > 6)
+                pd.dir = reverse;
+            else if(pd.current_position == 14 || pd.current_position == 15 || pd.current_position <= 5 )
+                pd.dir = forwards;
+            else if(pd.current_position == 6)
+                pd.dir = stop;
+        }
+        else if(nextPos == 4) // middle
+        {
+            // TODO: implement navigate to middle and back
+        }
+        else if(nextPos == 5) // left
+        {
+            if(pd.current_position < 6 || pd.current_position == 15)
+                pd.dir = reverse;
+            else if(pd.current_position >= 6 && pd.current_position < 14)
+                pd.dir = forwards;
+            else if(pd.current_position == 14)
+                pd.dir = stop;
+        }
+        else if(nextPos == 6) // top left corner
+        {
+            if(pd.current_position < 4 || pd.current_position > 14 || pd.current_position == 15)
+                pd.dir = reverse;
+            else if((pd.current_position >= 4 && pd.current_position < 11) || pd.current_position == 12)
+                pd.dir = forwards;
+            else if(pd.current_position == 11 || pd.current_position == 13)
+                pd.dir = stop;
+            else {} //ERROR
+        }
+        else if(nextPos == 7) // top
+        {
+            if(pd.current_position < 2 || (pd.current_position <= 15 && pd.current_position > 10))
+                pd.dir = reverse;
+            else if(pd.current_position >= 2 && pd.current_position < 10)
+                pd.dir = forwards;
+            else if(pd.current_position == 10)
+                pd.dir = stop;
+            else {} //ERROR
+        }
+        else if(nextPos == 8) // top right corner
+        {
+            if(pd.current_position < 7)
+                pd.dir = reverse;
+            else if((pd.current_position > 9 && pd.current_position <= 15) || pd.current_position == 8)
+                pd.dir = forwards;
+            else {} //ERROR
+        }
+}
+
+void toNextLoc(Position_Data * pd, int nextPos)
+{
+    static int initCheck = 1;
+    static int firstCorner = 1;
+    if(initCheck)
+    {
+        initCheck = 0; 
+        while(pd.current_position != bottom_left_corner) {} //wait for rover to be placed and FSRs to send data
+    }
+    else
+    {
+        while(1) {} // Wait for first move location
+        dirTravel(&pd, nextPos);
+        if(pd.dir == stop)
+        {
+            // Send stop to rover
+            // TODO: Send draw command and wait for ack
+            // Send ack to server
+        }
+        else if(pd.dir == forwards)
+        {
+            if(pd.current_position == 0 || pd.current_position == 4 || pd.current_position == 8 || pd.current_position == 12)
+            {
+                if(firstCorner)
+                {
+                    firstCorner = 0;
+                    //Send drive forwards
+                }
+                else
+                {
+                    //Send turn 90 degrees left
+                }
+            }
+            else if(pd.current_position <= 15)
+            {
+                //send drive forwards
+            }
+        }
+        else
+        {
+            if(pd.current_position == 0 || pd.current_position == 4 || pd.current_position == 8 || pd.current_position == 12)
+            {
+                firstCorner = 0;
+                //Send turn 90 degrees right
+            }
+            else if(pd.current_position <= 15)
+            {
+                //send drive forwards
+            }
+        }
+    }
+}
 
 
 

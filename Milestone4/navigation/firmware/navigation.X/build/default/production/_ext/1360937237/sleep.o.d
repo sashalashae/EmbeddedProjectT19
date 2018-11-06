@@ -132,7 +132,12 @@ build/default/production/_ext/1360937237/sleep.o:  \
  ../src/app.h  \
 ../src/navigation_thread.h  \
 ../src/pdStruct.h  \
- ../src/navQueue.h  \
+ ../src/../../../common/debug.h  \
+../src/../../../common/UART_Defines.h  \
+ ../src/../../../common/helper_functions.h  \
+../src/../../../common/debug.h  \
+ ../src/../../../common/queue_definitions.h  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/queue.h  \
+ ../src/navQueue.h  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/task.h 
