@@ -62,5 +62,6 @@ QueueMsg Queue_Receive_FromISR(QueueHandle_t queue);
 QueueMsg Queue_Receive_FromThread(QueueHandle_t queue);
 BaseType_t Queue_Send_FromISR(QueueHandle_t queue, QueueMsg msg, BaseType_t *pxHigherPriorityTaskWoken);
 BaseType_t Queue_Send_FromThread(QueueHandle_t queue, QueueMsg msg);
+BaseType_t Queue_Clear(QueueHandle_t queue);
 
 #endif

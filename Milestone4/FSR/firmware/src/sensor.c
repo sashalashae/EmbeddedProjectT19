@@ -116,8 +116,9 @@ void SENSOR_Initialize ( void )
 {
     /* Place the App state machine in its initial state. */
     sensorData.state = SENSOR_STATE_INIT;
+    DRV_ADC_Open();
     //Initialize the sensor queue
-    SensorQueue_Init(10);
+    SensorQueue_Init(100);
     
     /* TODO: Initialize your application's state machine and other
      * parameters.
@@ -141,9 +142,9 @@ void SENSOR_Tasks ( void )
     while(1)
     {
         //wait 500ms for next transmission
-        sleep(500);
+        //sleep(500);
         //enable ADC interrupt
-        DRV_ADC_Open();
+        //SYS_INT_SourceStatusSet(INT_SOURCE_ADC_1);
         //receive message
         latestValue = Queue_Receive_FromThread(SensorQueue);
         //transmit to server
@@ -155,6 +156,9 @@ void SENSOR_Tasks ( void )
         value.get = 1;
         value.count = 4;
         TxThreadQueue_Send(value);
+        DRV_ADC_Open();
+        sleep(500);
+//        Queue_Clear(SensorQueue);
     }
 }
 

@@ -1,39 +1,30 @@
 /*******************************************************************************
   USART Driver Static implementation
-
   Company:
     Microchip Technology Inc.
-
   File Name:
     drv_usart_static.c
-
   Summary:
     Source code for the USART driver static implementation.
-
   Description:
     The USART device driver provides a simple interface to manage the USART
     modules on Microchip microcontrollers. This file contains static implementation
     for the USART driver.
-
   Remarks:
     Static interfaces incorporate the driver instance number within the names
     of the routines, eliminating the need for an object ID or object handle.
-
     Static single-open interfaces also eliminate the need for the open handle.
 *******************************************************************************/
 
 //DOM-IGNORE-BEGIN
 /*******************************************************************************
 Copyright (c) 2015 released Microchip Technology Inc.  All rights reserved.
-
 Microchip licenses to you the right to use, modify, copy and distribute
 Software only when embedded on a Microchip microcontroller or digital signal
 controller that is integrated into your product or third party product
 (pursuant to the sublicense terms in the accompanying license agreement).
-
 You should refer to the license agreement accompanying this Software for
 additional information regarding your rights and obligations.
-
 SOFTWARE AND DOCUMENTATION ARE PROVIDED AS IS WITHOUT WARRANTY OF ANY KIND,
 EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF
 MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
@@ -103,7 +94,7 @@ SYS_MODULE_OBJ DRV_USART0_Initialize(void)
        is not empty */
     PLIB_USART_InitializeOperation(USART_ID_1,
             USART_RECEIVE_FIFO_ONE_CHAR,
-            USART_TRANSMIT_FIFO_IDLE,
+            USART_TRANSMIT_FIFO_EMPTY,
             USART_ENABLE_TX_RX_USED);
 
     /* Get the USART clock source value*/
@@ -119,9 +110,14 @@ SYS_MODULE_OBJ DRV_USART0_Initialize(void)
     SYS_INT_SourceStatusClear(INT_SOURCE_USART_1_RECEIVE);
     SYS_INT_SourceStatusClear(INT_SOURCE_USART_1_ERROR);
 
-    /* Enable the error interrupt source */
-    SYS_INT_SourceEnable(INT_SOURCE_USART_1_ERROR);
+    /* Disable the Transmit interrupt source initially */
+    SYS_INT_SourceDisable(INT_SOURCE_USART_1_TRANSMIT);
 
+    /* Enable the Receive interrupt source */
+    SYS_INT_SourceEnable(INT_SOURCE_USART_1_RECEIVE);
+    
+    //Enable the error interrupt
+    SYS_INT_SourceEnable(INT_SOURCE_USART_1_ERROR);
 
     /* Return the driver instance value*/
     return (SYS_MODULE_OBJ)DRV_USART_INDEX_0;
@@ -163,6 +159,11 @@ SYS_STATUS DRV_USART0_Status(void)
 
 void DRV_USART0_TasksTransmit(void)
 {
+    //In the UART driver thread, push bytes into a transmit queue
+    //once all bytes are in queue, enable TX interrupt
+    //in the TX ISR, if there is data in queue, fill the transmit buffer from
+    //the queue. If there is not data disable TX interrupt.
+    
     /* This is the USART Driver Transmit tasks routine.
        In this function, the driver checks if a transmit
        interrupt is active and performs respective action*/
@@ -170,6 +171,8 @@ void DRV_USART0_TasksTransmit(void)
     /* Reading the transmit interrupt flag */
     if(SYS_INT_SourceStatusGet(INT_SOURCE_USART_1_TRANSMIT))
     {
+        /* Disable the interrupt, to avoid calling ISR continuously*/
+        SYS_INT_SourceDisable(INT_SOURCE_USART_1_TRANSMIT);
 
         /* Clear up the interrupt flag */
         SYS_INT_SourceStatusClear(INT_SOURCE_USART_1_TRANSMIT);
@@ -178,9 +181,7 @@ void DRV_USART0_TasksTransmit(void)
 
 void DRV_USART0_TasksReceive(void)
 {
-    /* This is the USART Driver Receive tasks routine. If the receive
-       interrupt flag is set, the tasks routines are executed.
-     */
+    // When you receive an RX interrupt, take the byte and push into the queue
 
     /* Reading the receive interrupt flag */
     if(SYS_INT_SourceStatusGet(INT_SOURCE_USART_1_RECEIVE))

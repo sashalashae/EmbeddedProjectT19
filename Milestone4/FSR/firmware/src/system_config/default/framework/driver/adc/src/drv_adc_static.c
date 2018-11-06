@@ -45,13 +45,16 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 #include "framework/driver/adc/drv_adc_static.h"
  
+
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: ADC Static Driver Functions
 // *****************************************************************************
 // *****************************************************************************
 void DRV_ADC_Initialize(void)
-{    PLIB_ADC_MuxAInputScanEnable(ADC_ID_1);
+{
+       PLIB_ADC_MuxAInputScanEnable(ADC_ID_1);
     /* Select Clock Source */
     PLIB_ADC_ConversionClockSourceSelect(ADC_ID_1, ADC_CLOCK_SOURCE_SYSTEM_CLOCK);
     /* Select Clock Prescaler */
@@ -89,21 +92,22 @@ void DRV_ADC_Initialize(void)
     PLIB_ADC_InputScanMaskAdd(ADC_ID_1, ADC_INPUT_SCAN_AN3);
     /* Select Scan Input 4 */
     PLIB_ADC_InputScanMaskAdd(ADC_ID_1, ADC_INPUT_SCAN_AN4);
-        /* Select Scan Input 5 */
     PLIB_ADC_InputScanMaskAdd(ADC_ID_1, ADC_INPUT_SCAN_AN5);
-    /* Select Scan Input 6 */
+    /* Select Scan Input 1 */
     PLIB_ADC_InputScanMaskAdd(ADC_ID_1, ADC_INPUT_SCAN_AN6);
-    /* Select Scan Input 7 */
+    /* Select Scan Input 2 */
     PLIB_ADC_InputScanMaskAdd(ADC_ID_1, ADC_INPUT_SCAN_AN7);
-    /* Select Scan Input 8 */
+    /* Select Scan Input 3 */
     PLIB_ADC_InputScanMaskAdd(ADC_ID_1, ADC_INPUT_SCAN_AN8);
-    /* Select Scan Input 9 */
+    /* Select Scan Input 4 */
     PLIB_ADC_InputScanMaskAdd(ADC_ID_1, ADC_INPUT_SCAN_AN9);
+    /* Initialize ADC Interrupt */
+ 
     /* Initialize ADC Interrupt */
     PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_ADC_1);
     PLIB_INT_SourceEnable(INT_ID_0, INT_SOURCE_ADC_1);
     PLIB_INT_VectorPrioritySet(INT_ID_0, INT_VECTOR_AD1, INT_PRIORITY_LEVEL3);
-    PLIB_INT_VectorSubPrioritySet(INT_ID_0, INT_VECTOR_AD1, INT_SUBPRIORITY_LEVEL0); 
+    PLIB_INT_VectorSubPrioritySet(INT_ID_0, INT_VECTOR_AD1, INT_SUBPRIORITY_LEVEL0);
 }
 
 inline void DRV_ADC_DeInitialize(void)

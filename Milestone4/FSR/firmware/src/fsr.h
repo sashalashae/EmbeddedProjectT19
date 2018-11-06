@@ -12,7 +12,7 @@
 #include "../src/system_config/default/system_definitions.h"
 
 uint32_t FSRsRead();
-
+void FSRsRead2();
 
 #endif	/* FSR_H */
 

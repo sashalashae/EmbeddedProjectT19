@@ -51,3 +51,9 @@ BaseType_t Queue_Send_FromThread(QueueHandle_t queue, QueueMsg msg)
 {
     return xQueueSend(queue, &msg, 0);
 }
+
+BaseType_t Queue_Clear(QueueHandle_t queue)
+{
+    return xQueueReset(queue);
+}
+

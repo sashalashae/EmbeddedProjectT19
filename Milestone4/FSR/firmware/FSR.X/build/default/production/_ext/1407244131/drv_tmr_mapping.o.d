@@ -1,6 +1,6 @@
-build/default/debug/_ext/340578644/sys_devcon.o:  \
- ../src/system_config/default/framework/system/devcon/src/sys_devcon.c  \
- ../../../../../../../../microchip/harmony/v2_06/framework/system/devcon/src/sys_devcon_local.h  \
+build/default/production/_ext/1407244131/drv_tmr_mapping.o:  \
+ ../src/system_config/default/framework/driver/tmr/src/drv_tmr_mapping.c  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/driver/tmr/drv_tmr.h  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports.h  \
@@ -34,8 +34,29 @@ build/default/debug/_ext/340578644/sys_devcon.o:  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Unsupported.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports_compatibility.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/system/devcon/sys_devcon.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/system/system.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/driver/driver_common.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/plib_tmr.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/tmr_processor.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/tmr_p32xxxx.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/tmr_p32mx795f512l.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_GatedTimeAccumulation_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_registers.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_ClockSource_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_Prescale_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_ClockSourceSync_Inverted.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_Mode16Bit_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_Mode32Bit_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_EnableControl_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_StopInIdle_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_Counter16Bit_In16BitRegister.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_Counter32Bit_In16BitRegister.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_Period16Bit_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_Period32Bit_In16BitRegister_pic32.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_CounterAsyncWriteControl_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_CounterAsyncWriteInProgress_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/tmr/processor/../templates/tmr_TimerOperationMode_Default.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/driver/tmr/tmr_definitions_pic32m.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/system/int/sys_int.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_common.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_module.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/int/plib_int.h  \
@@ -58,25 +79,8 @@ build/default/debug/_ext/340578644/sys_devcon.o:  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/int/processor/../templates/int_ShadowRegisterAssign_Unsupported.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/int/processor/../templates/int_VariableOffset_Unsupported.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/int/processor/../templates/int_SoftwareNMI_Unsupported.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/plib_devcon.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/devcon_processor.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/devcon_p32xxxx.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/devcon_p32mx795f512l.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_AlternateClock_Unsupported.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_DeviceRegsLockUnlock_Unsupported.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_OTPConfigLockUnlock_Unsupported.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_USB_PHY_SleepModeSet_Unsupported.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_ECCModes_Unsupported.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_JTAGEnable_Default_1.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_AnalogChargePumpControl_Unsupported.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_TraceOutput_Default_1.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_JTAGUsesTDO_Default_1.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_IgnoreDebugFreeze_Unsupported.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_DeviceVerAndId_Default.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_SysLockUnlock_Default.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_MPLL_Unsupported.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_HSUARTControl_Unsupported.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_BootSelection_Unsupported.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/system/int/sys_int_mapping.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/system/clk/sys_clk.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/plib_osc.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/osc_processor.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/osc_p32xxxx.h  \
@@ -130,4 +134,7 @@ build/default/debug/_ext/340578644/sys_devcon.o:  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/../templates/osc_ForceLock_Unsupported.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/../templates/osc_ResetPLL_Unsupported.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/../templates/osc_PLLBypass_Unsupported.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/../templates/osc_BTPLLClockOut_Unsupported.h 
+ ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/../templates/osc_BTPLLClockOut_Unsupported.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/system/clk/sys_clk_compatibility.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/driver/tmr/drv_tmr_compatibility.h  \
+ ../src/system_config/default/framework/driver/tmr/drv_tmr_static.h 
