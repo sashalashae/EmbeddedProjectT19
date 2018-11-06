@@ -1,5 +1,6 @@
 ﻿Imports System.Net.Http
 Imports System.Text
+Imports System.Threading
 
 Public Class ControlForm
 
@@ -57,9 +58,13 @@ Public Class ControlForm
         Dim responseString As String
         Dim response As HttpResponseMessage
         Dim content As HttpContent = New StringContent("checkConnection", Encoding.UTF8, "application/json")
-        response = Await client.PostAsync(server, content)
-        responseString = Await response.Content.ReadAsStringAsync()
-        MsgBox("Server Response: " + responseString)
+        Try
+            response = Await client.PostAsync(server, content)
+            responseString = Await response.Content.ReadAsStringAsync()
+            MsgBox("Server Response: " + responseString)
+        Catch ex As Exception
+            MsgBox("ERROR: Server Not Connected")
+        End Try
     End Sub
 
     Private Async Sub ResetCommandNum()
@@ -92,9 +97,19 @@ Public Class ControlForm
             response = Await client.PostAsync(server, content)
             responseString = Await response.Content.ReadAsStringAsync()
         Catch ex As Exception
-            MsgBox("ERROR: Connection Failed")
+            Me.Invoke(Sub() picStatus.Text = "ERROR: No server Connection")
+            Me.Invoke(Sub() picStatus.BackColor = Color.Red)
         End Try
-        MsgBox("PIC Busy: " + responseString)
+        If responseString = "True" Then
+            Me.Invoke(Sub() picStatus.Text = "PIC Busy")
+            Me.Invoke(Sub() picStatus.BackColor = Color.Yellow)
+        ElseIf responseString = "False" Then
+            Me.Invoke(Sub() picStatus.Text = "PIC Idle")
+            Me.Invoke(Sub() picStatus.BackColor = Color.Green)
+        Else
+            Me.Invoke(Sub() picStatus.Text = "ERROR: Unknown Message")
+            Me.Invoke(Sub() picStatus.BackColor = Color.Red)
+        End If
     End Sub
 
     Private Sub ControlForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -116,9 +131,10 @@ Public Class ControlForm
         ResetCommandNum()
     End Sub
 
-    Private Sub getStatus_Click(sender As Object, e As EventArgs) Handles getStatus.Click
+    Private Sub getStatusBtn_Click(sender As Object, e As EventArgs) Handles getStatusBtn.Click
         commandNum = commandNum + 1
         commandLabel.Text = commandNum.ToString()
         GetPicStatus()
     End Sub
+
 End Class
