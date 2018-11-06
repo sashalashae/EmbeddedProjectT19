@@ -43,9 +43,7 @@ Public Class ControlForm
             MsgBox("ERROR: Connection Failed")
         End Try
         Try
-            If Convert.ToInt32(responseString) = commandNum Then
-                MsgBox("Command Received Successfully")
-            Else
+            If Not Convert.ToInt32(responseString) = commandNum Then
                 Throw New Exception
             End If
         Catch ex As Exception
