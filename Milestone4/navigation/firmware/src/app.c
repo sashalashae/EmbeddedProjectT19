@@ -138,24 +138,24 @@ void APP_Tasks ( void )
 {
     //Initialize the struct
     //navigation_test_bench();
-    dbgOutputLoc(DLOC_APP_TASKS_START);
+    dbgOutputLoc(LOC_APP_TASKS_START);
     
-    testData td;
+    //testData td;
     
-    uint16_t FSRs;
+    uint16_t FSRs = 0;
     Position_Data pd;
     pd.current_position = bottom_left_corner;
     pd.check = 0;
-    pd.dir = forwards;
+    pd.dir = stop;
     pd.prevDbg = bottom_left_corner;
     //int i = 0;
     while(1)
     {
-        dbgOutputLoc(DLOC_QUEUE_WAITING);
-        td = NavQueue_ReceiveMsg();
-        FSRs = td.FSRs;
-        pd.dir = td.dir;
-        pd = position_tracker(FSRs, pd);
+        dbgOutputLoc(LOC_QUEUE_WAITING);
+        //td = NavQueue_ReceiveMsg();
+        //FSRs = td.FSRs;
+        //pd.dir = td.dir;
+        position_tracker(FSRs, &pd);
         //i++;
         //if( i == 26 )
             //i = 0;

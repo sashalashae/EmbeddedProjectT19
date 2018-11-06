@@ -76,12 +76,14 @@ typedef enum
     TEST2,
     TEST3,
     TEST4,
+    /*TEST5,
+    TEST6,*/
     END
 } test_state_t;
 
 #define ONE_CM_TRANSITION           70
 #define SQUARE_LENGTH_TRANSITION    889
-#define DEGREE_90_TRANSITION        575
+#define DEGREE_90_TRANSITION        590
 
 // *****************************************************************************
 // *****************************************************************************

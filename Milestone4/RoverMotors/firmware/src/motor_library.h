@@ -45,13 +45,18 @@ typedef enum direction
 } direction_t;
     
 void motors_initialize();
+void motor_left_duty_cycle(uint8_t duty_cycle);
+void motor_right_duty_cycle(uint8_t duty_cycle);
 void motor_left(direction_t direction, uint8_t duty_cycle);
 void motor_right(direction_t direction, uint8_t duty_cycle);
 void motors_forward(uint8_t duty_cycle);
 void motors_reverse(uint8_t duty_cycle);
+void motor_right_stop();
+void motor_left_stop();
 void motors_stop();
 void motors_turn_right(uint8_t duty_cycle);
 void motors_turn_left(uint8_t duty_cycle);
+
 
     /* Provide C++ Compatibility */
 #ifdef __cplusplus

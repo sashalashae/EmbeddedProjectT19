@@ -57,26 +57,36 @@ void motors_initialize()
     OC2CONSET = BIT15;
 }
 
-void motor_right(direction_t direction, uint8_t duty_cycle)
+void motor_left_duty_cycle(uint8_t duty_cycle)
 {
     //check for duty cycle that is too high
     if(duty_cycle > 100)
     {
         duty_cycle = 100;
     }
-    SYS_PORTS_PinWrite(PORT_ID, MOTOR_PORT_RIGHT, MOTOR_PIN_RIGHT, direction);
+    OC2RS = duty_cycle*DUTY_CYCLE_COEFFICIENT;
+}
+
+void motor_right_duty_cycle(uint8_t duty_cycle)
+{
+    //check for duty cycle that is too high
+    if(duty_cycle > 100)
+    {
+        duty_cycle = 100;
+    }
     OC1RS = duty_cycle*DUTY_CYCLE_COEFFICIENT;
 }
 
 void motor_left(direction_t direction, uint8_t duty_cycle)
 {
-    //check for duty cycle that is too high
-    if(duty_cycle > 100)
-    {
-        duty_cycle = 100;
-    }
     SYS_PORTS_PinWrite(PORT_ID, MOTOR_PORT_LEFT, MOTOR_PIN_LEFT, direction);
-    OC2RS = duty_cycle*DUTY_CYCLE_COEFFICIENT;
+    motor_left_duty_cycle(duty_cycle);
+}
+
+void motor_right(direction_t direction, uint8_t duty_cycle)
+{
+    SYS_PORTS_PinWrite(PORT_ID, MOTOR_PORT_RIGHT, MOTOR_PIN_RIGHT, direction);
+    motor_right_duty_cycle(duty_cycle);
 }
 
 void motors_forward(uint8_t duty_cycle)
@@ -91,10 +101,20 @@ void motors_reverse(uint8_t duty_cycle)
     motor_left(REVERSE, duty_cycle);
 }
 
-void motors_stop()
+void motor_right_stop()
 {
     motor_right(FORWARD, 0);
+}
+
+void motor_left_stop()
+{
     motor_left(FORWARD, 0);
+}
+
+void motors_stop()
+{
+    motor_right_stop();
+    motor_left_stop();
 }
 
 void motors_turn_right(uint8_t duty_cycle)

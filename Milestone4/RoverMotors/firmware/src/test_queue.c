@@ -14,6 +14,13 @@ void TestQueue_Initialize(uint32_t size)
     TestQueue = xQueueCreate(size, sizeof(TestQueueData_t));
 }
 
+BaseType_t TestQueue_SendMsg(TestQueueData_t msg)
+{
+    BaseType_t status = xQueueOverwrite(TestQueue, &msg);
+    dbgOutputLoc(LOC_TEST_QUEUE_SEND);
+    return status;
+}
+
 BaseType_t TestQueue_SendMsgISR(TestQueueData_t msg, BaseType_t *pxHigherPriorityTaskWoken)
 {
     BaseType_t status = xQueueOverwriteFromISR(TestQueue, &msg, pxHigherPriorityTaskWoken);

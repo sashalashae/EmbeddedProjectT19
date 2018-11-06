@@ -12,7 +12,6 @@
 #include "FreeRTOS.h"
 #include "queue.h"
 #include "timers.h"
-#include "debug.h"
 #include "pdStruct.h"
 
 typedef struct

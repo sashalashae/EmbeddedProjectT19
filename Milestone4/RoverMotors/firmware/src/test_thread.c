@@ -93,84 +93,68 @@ void TEST_THREAD_Tasks ( void )
     DRV_TMR0_Start();
     DRV_TMR1_Start();
     DRV_TMR2_Start();
+    TestQueueData_t acknowledge;
     //uint32_t target_value;
     test_state_t state = INIT;
-    test_state_t prev_state;
     while(true)
     {
         MotorQueueData_t msg;
         msg.type = MOVEMENT_COMMAND;
-        TestQueueData_t encoder_data = TestQueue_ReceiveMsg();
-        uint32_t left = encoder_data.left;
-        uint32_t right = encoder_data.right;
         switch(state)
         {
             case INIT:
-                prev_state = state;
                 state = TEST1;
                 break;
             case TEST1:
-                if(prev_state != TEST1)
-                {
-                    msg.movement = FORWARD_BOTH;
-                    msg.duty_cycle = 50;
-                    MotorQueue_SendMsg(msg);
-                    prev_state = state;
-                }
-                else if(right >= SQUARE_LENGTH_TRANSITION || left >= SQUARE_LENGTH_TRANSITION) 
-                {
-                    state = TEST2;
-                }
+                msg.movement = FORWARD_BOTH;
+                msg.left = SQUARE_LENGTH_TRANSITION;
+                msg.right = SQUARE_LENGTH_TRANSITION;
+                MotorQueue_SendMsg(msg);
+                state = TEST2;
                 break;
             case TEST2:
-                if(prev_state != TEST2)
-                {
-                    msg.movement = TURN_RIGHT;
-                    msg.duty_cycle = 50;
-                    MotorQueue_SendMsg(msg);
-                    prev_state = state;
-                }
-                else if(left >= DEGREE_90_TRANSITION || right >= DEGREE_90_TRANSITION) 
-                {
-                    state = TEST3;
-                }
+                msg.movement = TURN_RIGHT;
+                msg.left = DEGREE_90_TRANSITION;
+                msg.right = DEGREE_90_TRANSITION;
+                MotorQueue_SendMsg(msg);
+                state = TEST3;
                 break;
             case TEST3:
-                if(prev_state != TEST3)
-                {
-                    msg.movement = REVERSE_BOTH;
-                    msg.duty_cycle = 50;
-                    MotorQueue_SendMsg(msg);
-                    prev_state = state;
-                }
-                else if(right >= SQUARE_LENGTH_TRANSITION || left >= SQUARE_LENGTH_TRANSITION)
-                {
-                    state = TEST4;
-                }
+                msg.movement = REVERSE_BOTH;
+                msg.left = SQUARE_LENGTH_TRANSITION;
+                msg.right = SQUARE_LENGTH_TRANSITION;
+                MotorQueue_SendMsg(msg);
+                state = TEST4;
                 break;
             case TEST4:
-                if(prev_state != TEST4)
-                {
-                    msg.movement = TURN_LEFT;
-                    msg.duty_cycle = 50;
-                    MotorQueue_SendMsg(msg);
-                    prev_state = state;
-                }
-                else if(right >= DEGREE_90_TRANSITION || left >= DEGREE_90_TRANSITION)
-                {
-                    state = END;
-                }
+                msg.movement = TURN_LEFT;
+                msg.left = DEGREE_90_TRANSITION;
+                msg.right = DEGREE_90_TRANSITION;
+                MotorQueue_SendMsg(msg);
+                state = END; //change for the two other test cases
                 break;
+            /*case TEST5:
+                msg.movement = FORWARD_BOTH;
+                msg.duty_cycle = 50;
+                msg.left = SQUARE_LENGTH_TRANSITION;
+                msg.right = SQUARE_LENGTH_TRANSITION;
+                MotorQueue_SendMsg(msg);
+                state = TEST6;
+                break;
+            case TEST6:
+                msg.movement = TURN_RIGHT;
+                msg.duty_cycle = 50;
+                msg.left = DEGREE_90_TRANSITION;
+                msg.right = DEGREE_90_TRANSITION;
+                MotorQueue_SendMsg(msg);
+                state = END;
+                break;*/    
             case END:
-                if(prev_state != END)
-                {
-                    msg.movement = STOP;
-                    msg.duty_cycle = 0;
-                    MotorQueue_SendMsg(msg);
-                    prev_state = state;
-                }
+                msg.movement = STOP;
+                MotorQueue_SendMsg(msg);
                 break;
         }
+        acknowledge = TestQueue_ReceiveMsg();
     }
 }
 

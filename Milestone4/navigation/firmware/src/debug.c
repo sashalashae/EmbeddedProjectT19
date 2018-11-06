@@ -1,5 +1,4 @@
-#include "debug.h"
-
+/*
 void dbgOutputLoc(uint32_t outLoc) {
     //If outloc is out of range return
     if (outLoc > 127) {
@@ -27,7 +26,8 @@ void dbgErrorHandler(uint32_t errorCode) {
     //Wait forever
     while (1);
 }
-
+*/
+/*
 void navigation_test_bench() {
     Position_Data pd;
     pd.check = 0;
@@ -39,164 +39,166 @@ void navigation_test_bench() {
         pd.dir = forwards;
         FSRs = 0b1100000011;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b1100000010;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b1100000000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b1100000100;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b1100000000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b1100001000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b1100011000; // Bottom Right Corner
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0100011000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0000011000; // Right Bottom
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0010011000; // True Right
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         sleep(sTime);
-        pd = position_tracker(FSRs, pd); // Must do twice for True Right into Right Top to iterate past 
+        position_tracker(FSRs, &pd); // Must do twice for True Right into Right Top to iterate past 
         FSRs = 0b0000011000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0001011000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0001111000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0001101000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0001100000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0001100100;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0001100000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0001100010;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0001100011;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0001000011;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0000000011;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0010000011;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0000000011;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0100000011;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b1100000011;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
 
         //Reverse Now
         pd.dir = reverse;
         FSRs = 0b1100000011; // Bottom Left
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0100000011; // Bottom Left
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0000000011; // left bottom
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0010000011; // true left
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0010000011; // true left
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0000000011; // left top
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0001000011; // top left corner
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0001100011; //top left corner
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0001100010; // top left corner
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0001100000; // top left
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0001100100;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0001100000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0001101000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0001111000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0001011000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0000011000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0010011000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0000011000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b0100011000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b1100011000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b1100001000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b1100000000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b1100000100;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b1100000100;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b1100000000;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b1100000010;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
         FSRs = 0b1100000011;
         sleep(sTime);
-        pd = position_tracker(FSRs, pd);
+        position_tracker(FSRs, &pd);
     }
 }
+
+ */

@@ -130,11 +130,11 @@ build/default/production/_ext/1688732426/system_tasks.o:  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/list.h  \
  ../src/app.h  \
 ../src/system_config/default/system_definitions.h  \
- ../src/navigation_thread.h  \
-../src/debug.h  \
+ ../src/navigation_library.h  \
 ../src/pdStruct.h  \
- ../src/sleep.h  \
-../src/navQueue.h  \
- ../../../../../../third_party/rtos/FreeRTOS/Source/include/queue.h  \
- ../../../../../../third_party/rtos/FreeRTOS/Source/include/timers.h  \
- ../../../../../../third_party/rtos/FreeRTOS/Source/include/task.h 
+ ../src/../../../common/debug.h  \
+../src/../../../common/UART_Defines.h  \
+ ../src/../../../common/helper_functions.h  \
+../src/../../../common/debug.h  \
+ ../src/../../../common/queue_definitions.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/queue.h 

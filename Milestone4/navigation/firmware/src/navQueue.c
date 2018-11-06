@@ -1,6 +1,6 @@
 #include "navQueue.h"
 
-static QueueHandle_t NavQueue;
+//static QueueHandle_t NavQueue;
 //static QueueHandle_t RetQueue;
 
 void NavQueue_Initialize(uint32_t size)
@@ -28,7 +28,7 @@ testData NavQueue_ReceiveMsg()
 {
     testData data;
     BaseType_t status = xQueueReceive(NavQueue, &data, portMAX_DELAY);
-    dbgOutputLoc(DLOC_QUEUE_RECEIVED);
+    dbgOutputLoc(LOC_QUEUE_RECEIVED);
     return data;
 }
 
@@ -43,6 +43,7 @@ uint16_t RetQueue_ReceiveIndex()
 
 void Nav_Timer_Cb(TimerHandle_t xTimer)
 {       
+    /*
     testData td;
     static uint16_t testArr[] = {0b1100000011, 0b1100000010, 0b1100000000, 0b1100000100, 0b1100000000,
         0b1100001000, 0b1100011000, 0b0100011000, 0b0000011000, 0b0010011000, 0b0010011000, 
@@ -65,6 +66,6 @@ void Nav_Timer_Cb(TimerHandle_t xTimer)
         i = 0;
     dbgOutputLoc(DLOC_QUEUE_SEND_BEGIN);
     NavQueue_SendMsg(td);
-    dbgOutputLoc(DLOC_QUEUE_SEND_END);
+    dbgOutputLoc(DLOC_QUEUE_SEND_END);*/
 
 }

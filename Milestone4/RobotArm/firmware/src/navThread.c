@@ -137,6 +137,9 @@ void NAVTHREAD_Tasks ( void )
     {
         while(!newMove)
         {
+            //insert delay in polling
+            sleep(500);
+            
             //ask the server what the next move is (GET request)
             TxThreadQueue_Send(stringToStruct("getmove\0", 1));
             
@@ -164,7 +167,6 @@ void NAVTHREAD_Tasks ( void )
                     }
                 }
             }
-            sleep(1000);
         }
         
         //send move to arm

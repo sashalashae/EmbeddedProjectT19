@@ -8,6 +8,8 @@
 #ifndef PDSTRUCT_H
 #define	PDSTRUCT_H
 
+
+// 0 - 15
 typedef enum {bottom_left_corner, bottom_left, true_bottom, bottom_right, 
     bottom_right_corner, right_bottom, true_right, right_top, 
     top_right_corner, top_right, true_top, top_left, top_left_corner, 

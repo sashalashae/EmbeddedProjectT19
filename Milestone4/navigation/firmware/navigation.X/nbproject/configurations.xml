@@ -89,11 +89,14 @@
         <itemPath>../../../../../../third_party/rtos/FreeRTOS/Source/include/stream_buffer.h</itemPath>
         <itemPath>../../../../../../third_party/rtos/FreeRTOS/Source/include/message_buffer.h</itemPath>
       </logicalFolder>
-      <itemPath>../src/navigation_thread.h</itemPath>
-      <itemPath>../src/debug.h</itemPath>
-      <itemPath>../src/sleep.h</itemPath>
       <itemPath>../src/pdStruct.h</itemPath>
       <itemPath>../src/navQueue.h</itemPath>
+      <itemPath>../src/navigation_library.h</itemPath>
+      <itemPath>../../../common/UART_Defines.h</itemPath>
+      <itemPath>../../../common/debug.h</itemPath>
+      <itemPath>../../../common/helper_functions.h</itemPath>
+      <itemPath>../../../common/jsmn.h</itemPath>
+      <itemPath>../../../common/queue_definitions.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -173,10 +176,12 @@
         <itemPath>../../../../../../third_party/rtos/FreeRTOS/Source/event_groups.c</itemPath>
         <itemPath>../../../../../../third_party/rtos/FreeRTOS/Source/stream_buffer.c</itemPath>
       </logicalFolder>
-      <itemPath>../src/navigation_thread.c</itemPath>
-      <itemPath>../src/debug.c</itemPath>
-      <itemPath>../src/sleep.c</itemPath>
       <itemPath>../src/navQueue.c</itemPath>
+      <itemPath>../src/navigation_library.c</itemPath>
+      <itemPath>../../../common/debug.c</itemPath>
+      <itemPath>../../../common/helper_functions.c</itemPath>
+      <itemPath>../../../common/jsmn.c</itemPath>
+      <itemPath>../../../common/queue_definitions.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

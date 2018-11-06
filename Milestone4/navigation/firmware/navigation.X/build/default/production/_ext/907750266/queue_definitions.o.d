@@ -1,7 +1,20 @@
-build/default/production/_ext/1360937237/sleep.o:  \
-../src/sleep.c  \
- ../src/sleep.h  \
-../src/debug.h  \
+build/default/production/_ext/907750266/queue_definitions.o:  \
+ ../../../common/queue_definitions.c  \
+../../../common/queue_definitions.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/FreeRTOS.h  \
+ ../src/system_config/default/FreeRTOSConfig.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/projdefs.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/portable.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/deprecated_definitions.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX/portmacro.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/queue.h  \
+ ../src/system_config/default/system_definitions.h  \
+ ../../../../../../framework/system/common/sys_common.h  \
+ ../../../../../../framework/system/common/sys_module.h  \
+ ../../../../../../framework/system/devcon/sys_devcon.h  \
+ ../../../../../../framework/system/system.h  \
+ ../../../../../../framework/system/clk/sys_clk.h  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../../../framework/peripheral/ports/plib_ports.h  \
@@ -35,12 +48,6 @@ build/default/production/_ext/1360937237/sleep.o:  \
  ../../../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Unsupported.h  \
  ../../../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h  \
  ../../../../../../framework/peripheral/ports/plib_ports_compatibility.h  \
- ../src/system_config/default/system_definitions.h  \
- ../../../../../../framework/system/common/sys_common.h  \
- ../../../../../../framework/system/common/sys_module.h  \
- ../../../../../../framework/system/devcon/sys_devcon.h  \
- ../../../../../../framework/system/system.h  \
- ../../../../../../framework/system/clk/sys_clk.h  \
  ../../../../../../framework/peripheral/osc/plib_osc.h  \
  ../../../../../../framework/peripheral/osc/processor/osc_processor.h  \
  ../../../../../../framework/peripheral/osc/processor/osc_p32xxxx.h  \
@@ -120,19 +127,13 @@ build/default/production/_ext/1360937237/sleep.o:  \
  ../../../../../../framework/system/int/sys_int_mapping.h  \
  ../../../../../../framework/system/ports/sys_ports.h  \
  ../../../../../../framework/system/ports/sys_ports_definitions.h  \
- ../../../../../../third_party/rtos/FreeRTOS/Source/include/FreeRTOS.h  \
- ../src/system_config/default/FreeRTOSConfig.h  \
- ../../../../../../third_party/rtos/FreeRTOS/Source/include/projdefs.h  \
- ../../../../../../third_party/rtos/FreeRTOS/Source/include/portable.h  \
- ../../../../../../third_party/rtos/FreeRTOS/Source/include/deprecated_definitions.h  \
- ../../../../../../third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX/portmacro.h  \
- ../../../../../../third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/list.h  \
  ../src/app.h  \
-../src/navigation_thread.h  \
+../src/navigation_library.h  \
 ../src/pdStruct.h  \
- ../src/navQueue.h  \
- ../../../../../../third_party/rtos/FreeRTOS/Source/include/queue.h  \
- ../../../../../../third_party/rtos/FreeRTOS/Source/include/timers.h  \
- ../../../../../../third_party/rtos/FreeRTOS/Source/include/task.h 
+ ../src/../../../common/debug.h  \
+../src/../../../common/UART_Defines.h  \
+ ../src/../../../common/helper_functions.h  \
+../src/../../../common/debug.h  \
+ ../src/../../../common/queue_definitions.h 

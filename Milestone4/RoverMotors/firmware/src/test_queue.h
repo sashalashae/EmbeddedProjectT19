@@ -17,16 +17,17 @@
 
 //Struct for the test queue entry
 typedef struct{
-    // left encoder value
-    uint32_t left;
-    // right encoder value
-    uint32_t right;
+    // acknowledge
+    bool ack;
 } TestQueueData_t;
 
 // Initializes the test queue with the specified size
 void TestQueue_Initialize(uint32_t size);
 
-// Sends message onto the test queue
+// Sends message into the test queue
+BaseType_t TestQueue_SendMsg(TestQueueData_t msg);
+
+// Sends message into the test queue from ISR
 BaseType_t TestQueue_SendMsgISR(TestQueueData_t msg, BaseType_t *pxHigherPriorityTaskWoken);
 
 // Receives message from the test queue
