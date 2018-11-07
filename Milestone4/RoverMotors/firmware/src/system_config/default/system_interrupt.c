@@ -80,27 +80,6 @@ void IntHandlerDrvTmrInstance1(void)
 {
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_5);
 }
-void IntHandlerDrvTmrInstance2(void)
-{
-    dbgOutputLoc(DLOC_TIMER_ISR_START);
-    
-    //Toggle LED
-    SYS_PORTS_PinToggle(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
-    
-    BaseType_t pxHigherPriorityTaskWoken = pdFALSE;
-    
-    //Get encoder values
-    MotorQueueData_t msg;
-    msg.type = TIMER_TICK;
-    
-    MotorQueue_SendMsgISR(msg, &pxHigherPriorityTaskWoken);
-    //Clear interrupt flag
-    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_3);
-    
-    portEND_SWITCHING_ISR(pxHigherPriorityTaskWoken);
-    
-    dbgOutputLoc(DLOC_TIMER_ISR_END);
-}
  /*******************************************************************************
  End of File
 */

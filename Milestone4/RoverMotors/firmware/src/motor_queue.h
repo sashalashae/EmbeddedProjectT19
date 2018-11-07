@@ -38,10 +38,8 @@ typedef struct
     msg_type_t type;
     // Movement type for movement command
     movement_type_t movement;
-    // Right encoder value
-    uint32_t right;
-    // Left encoder value
-    uint32_t left;
+    // Distance to travel in number of transitions
+    uint32_t distance;
 } MotorQueueData_t;
 
 // Initializes the motor queue with the specified size
