@@ -135,4 +135,5 @@ build/default/production/_ext/639803181/sys_clk_pic32mx.o:  \
  ../src/../../../common/helper_functions.h  \
 ../src/../../../common/debug.h  \
  ../src/../../../common/queue_definitions.h  \
- ../../../../../../third_party/rtos/FreeRTOS/Source/include/queue.h 
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/queue.h  \
+ ../src/../../../common/UART_Defines.h 

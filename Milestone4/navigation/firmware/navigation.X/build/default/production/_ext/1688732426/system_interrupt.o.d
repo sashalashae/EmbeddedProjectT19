@@ -136,4 +136,5 @@ build/default/production/_ext/1688732426/system_interrupt.o:  \
 ../src/../../../common/debug.h  \
  ../src/../../../common/queue_definitions.h  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/queue.h  \
+ ../src/../../../common/UART_Defines.h  \
  ../src/system_config/default/system_definitions.h 

@@ -89,18 +89,12 @@ void TESTTHREAD_Tasks ( void )
     //strStruct messages[10];
     strStruct currentMsg;
     
-    uint8_t index = 0;
     uint8_t counter = 0;
     
     bool post = true;
     
     while(1)
     {
-        if(index >= 9)
-        {
-            stringToStructValue("{\"RID\":\"xxxxxx\", \"Source\":\"x\", \"MsgType\":\"Type Test\", \"Key\":\"$\"}\0", 1, "Reallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallylongmessage");
-            index = 0;
-        }
         else if(post)
         {
             valueStr[0] = (counter/100) | 0x30;
@@ -117,7 +111,6 @@ void TESTTHREAD_Tasks ( void )
             post = true;
         }
         TxThreadQueue_Send(currentMsg);
-        index++;
         sleep(400);
     }
 }

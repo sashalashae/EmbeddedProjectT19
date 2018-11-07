@@ -1,9 +1,7 @@
-build/default/production/_ext/1360937237/navigation_library.o:  \
- ../src/navigation_library.c  \
-../src/navigation_library.h  \
- ../src/pdStruct.h  \
-../src/../../../common/debug.h  \
- ../src/system_config/default/system_config.h  \
+build/default/production/_ext/1360937237/RxThread.o:  \
+../src/RxThread.c  \
+ ../src/rxthread.h  \
+../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../../../framework/peripheral/ports/plib_ports.h  \
  ../../../../../../framework/peripheral/ports/processor/ports_processor.h  \
@@ -131,9 +129,14 @@ build/default/production/_ext/1360937237/navigation_library.o:  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/list.h  \
  ../src/app.h  \
-../src/../../../common/helper_functions.h  \
+../src/navigation_library.h  \
+../src/pdStruct.h  \
  ../src/../../../common/debug.h  \
 ../src/../../../common/UART_Defines.h  \
+ ../src/../../../common/helper_functions.h  \
+../src/../../../common/debug.h  \
  ../src/../../../common/queue_definitions.h  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/queue.h  \
- ../src/../../../common/UART_Defines.h 
+ ../src/../../../common/UART_Defines.h  \
+../src/RxISRQueue.h  \
+ ../src/../../../common/jsmn.h 

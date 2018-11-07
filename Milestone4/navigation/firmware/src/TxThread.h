@@ -1,27 +1,24 @@
 /*******************************************************************************
-  MPLAB Harmony Application Source File
-  
+  MPLAB Harmony Application Header File
+
   Company:
     Microchip Technology Inc.
-  
+
   File Name:
-    app.c
+    txthread.h
 
   Summary:
-    This file contains the source code for the MPLAB Harmony application.
+    This header file provides prototypes and definitions for the application.
 
   Description:
-    This file contains the source code for the MPLAB Harmony application.  It 
-    implements the logic of the application's state machine and it may call 
-    API routines of other MPLAB Harmony modules in the system, such as drivers,
-    system services, and middleware.  However, it does not call any of the
-    system interfaces (such as the "Initialize" and "Tasks" functions) of any of
-    the modules in the system or make any assumptions about when those functions
-    are called.  That is the responsibility of the configuration-specific system
-    files.
- *******************************************************************************/
+    This header file provides function prototypes and data type definitions for
+    the application.  Some of these are required by the system (such as the
+    "APP_Initialize" and "APP_Tasks" prototypes) and some of them are only used
+    internally by the application (such as the "APP_STATES" definition).  Both
+    are defined here for convenience.
+*******************************************************************************/
 
-// DOM-IGNORE-BEGIN
+//DOM-IGNORE-BEGIN
 /*******************************************************************************
 Copyright (c) 2013-2014 released Microchip Technology Inc.  All rights reserved.
 
@@ -44,22 +41,62 @@ CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT OF
 SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
  *******************************************************************************/
-// DOM-IGNORE-END
+//DOM-IGNORE-END
 
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Included Files 
-// *****************************************************************************
-// *****************************************************************************
-
-#include "app.h"
+#ifndef _TXTHREAD_H
+#define _TXTHREAD_H
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: Global Data Definitions
+// Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
+
+#include <stdint.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdlib.h>
+#include "system_config.h"
+#include "system_definitions.h"
+#include "TxISRQueue.h"
+#include "TxThreadQueue.h"
+#include "../../../common/UART_Defines.h"
+
+// DOM-IGNORE-BEGIN
+#ifdef __cplusplus  // Provide C++ Compatibility
+
+extern "C" {
+
+#endif
+// DOM-IGNORE-END 
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Type Definitions
+// *****************************************************************************
+// *****************************************************************************
+
+// *****************************************************************************
+/* Application states
+
+  Summary:
+    Application states enumeration
+
+  Description:
+    This enumeration defines the valid application states.  These states
+    determine the behavior of the application at various times.
+*/
+
+typedef enum
+{
+	/* Application's state machine's initial state. */
+	TXTHREAD_STATE_INIT=0,
+	TXTHREAD_STATE_SERVICE_TASKS,
+
+	/* TODO: Define states used by the application state machine. */
+
+} TXTHREAD_STATES;
+
 
 // *****************************************************************************
 /* Application Data
@@ -71,33 +108,27 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     This structure holds the application's data.
 
   Remarks:
-    This structure should be initialized by the APP_Initialize function.
-    
     Application strings and buffers are be defined outside this structure.
+ */
+
+typedef struct
+{
+    /* The application's current state */
+    TXTHREAD_STATES state;
+
+    /* TODO: Define any additional data used by the application. */
+
+} TXTHREAD_DATA;
+
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Application Callback Routines
+// *****************************************************************************
+// *****************************************************************************
+/* These routines are called by drivers when certain events occur.
 */
-
-APP_DATA appData;
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Application Callback Functions
-// *****************************************************************************
-// *****************************************************************************
-
-/* TODO:  Add any necessary callback functions.
-*/
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Application Local Functions
-// *****************************************************************************
-// *****************************************************************************
-
-
-/* TODO:  Add any necessary local functions.
-*/
-
-
+	
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Initialization and State Machine Functions
@@ -106,70 +137,80 @@ APP_DATA appData;
 
 /*******************************************************************************
   Function:
-    void APP_Initialize ( void )
+    void TXTHREAD_Initialize ( void )
+
+  Summary:
+     MPLAB Harmony application initialization routine.
+
+  Description:
+    This function initializes the Harmony application.  It places the 
+    application in its initial state and prepares it to run so that its 
+    APP_Tasks function can be called.
+
+  Precondition:
+    All other system initialization routines should be called before calling
+    this routine (in "SYS_Initialize").
+
+  Parameters:
+    None.
+
+  Returns:
+    None.
+
+  Example:
+    <code>
+    TXTHREAD_Initialize();
+    </code>
 
   Remarks:
-    See prototype in app.h.
- */
+    This routine must be called from the SYS_Initialize function.
+*/
 
-void APP_Initialize ( void )
-{
-    //Configure LED pin to act as output
-    SYS_PORTS_PinDirectionSelect(PORTS_ID_0, SYS_PORTS_DIRECTION_OUTPUT, PORT_CHANNEL_A, PORTS_BIT_POS_3);
-    //Set USER LED off initially
-    SYS_PORTS_PinClear(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
-    
-    //Configure digital output pins (output Val)
-    SYS_PORTS_DirectionSelect(PORTS_ID_0, SYS_PORTS_DIRECTION_OUTPUT, PORT_CHANNEL_E, 0xFF);
-    
-    NavQueue_Initialize(10);
-}
+void TXTHREAD_Initialize ( void );
 
 
-/******************************************************************************
+/*******************************************************************************
   Function:
-    void APP_Tasks ( void )
+    void TXTHREAD_Tasks ( void )
+
+  Summary:
+    MPLAB Harmony Demo application tasks function
+
+  Description:
+    This routine is the Harmony Demo application's tasks function.  It
+    defines the application's state machine and core logic.
+
+  Precondition:
+    The system and application initialization ("SYS_Initialize") should be
+    called before calling this.
+
+  Parameters:
+    None.
+
+  Returns:
+    None.
+
+  Example:
+    <code>
+    TXTHREAD_Tasks();
+    </code>
 
   Remarks:
-    See prototype in app.h.
+    This routine must be called from SYS_Tasks() routine.
  */
 
-void APP_Tasks ( void )
-{
-    //Initialize the struct
-    //navigation_test_bench();
-    //dbgOutputLoc(LOC_APP_TASKS_START);
-    
-    //testData td;
-    
-    //uint16_t FSRs = 0;
-    //Position_Data pd;
-    //pd.current_position = bottom_left_corner;
-    //pd.check = 0;
-    //pd.dir = stop;
-    //pd.prevDbg = bottom_left_corner;
-    //int i = 0;
-    //strStruct currentMsg;
-    while(1)
-    {
-        TxThreadQueue_Send(stringToStruct("{\"RID\":\"xxxxxx\", \"Source\":\"x\", \"MsgType\":\"Value\"}\0", 1));
-        sleep(400);
-        //currentMsg = stringToStruct("{\"MsgType\":\"FSRs\"}\0", 1);
-        //dbgOutputLoc(LOC_QUEUE_WAITING);
-        //td = NavQueue_ReceiveMsg();
-        //FSRs = td.FSRs;
-        //pd.dir = td.dir;
-        //position_tracker(FSRs, &pd);
-        //i++;
-        //if( i == 26 )
-            //i = 0;
-        //RetQueue_SendIndex(i);
-    }
-    
-}
+void TXTHREAD_Tasks( void );
 
- 
+
+#endif /* _TXTHREAD_H */
+
+//DOM-IGNORE-BEGIN
+#ifdef __cplusplus
+}
+#endif
+//DOM-IGNORE-END
 
 /*******************************************************************************
  End of File
  */
+

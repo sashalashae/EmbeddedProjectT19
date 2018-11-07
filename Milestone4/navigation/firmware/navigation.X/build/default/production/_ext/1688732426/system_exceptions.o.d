@@ -138,4 +138,5 @@ build/default/production/_ext/1688732426/system_exceptions.o:  \
 ../src/../../../common/debug.h  \
  ../src/../../../common/queue_definitions.h  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/queue.h  \
+ ../src/../../../common/UART_Defines.h  \
  ../../../../../../framework/system/debug/sys_debug.h 

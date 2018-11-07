@@ -137,4 +137,5 @@ build/default/production/_ext/1688732426/system_init.o:  \
  ../src/../../../common/helper_functions.h  \
 ../src/../../../common/debug.h  \
  ../src/../../../common/queue_definitions.h  \
- ../../../../../../third_party/rtos/FreeRTOS/Source/include/queue.h 
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/queue.h  \
+ ../src/../../../common/UART_Defines.h 

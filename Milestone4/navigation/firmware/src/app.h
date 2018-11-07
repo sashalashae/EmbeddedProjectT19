@@ -64,6 +64,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "../../../common/debug.h"
 #include "../../../common/helper_functions.h"
 #include "../../../common/queue_definitions.h"
+#include "../../../common/UART_Defines.h"
 #include "pdStruct.h"
 
 // DOM-IGNORE-BEGIN

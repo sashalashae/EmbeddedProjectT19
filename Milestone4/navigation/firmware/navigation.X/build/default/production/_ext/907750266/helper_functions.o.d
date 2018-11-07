@@ -136,5 +136,6 @@ build/default/production/_ext/907750266/helper_functions.o:  \
  ../src/../../../common/helper_functions.h  \
  ../src/../../../common/queue_definitions.h  \
  ../../../../../../third_party/rtos/FreeRTOS/Source/include/queue.h  \
- ../../../common/debug.h  \
-../../../common/UART_Defines.h 
+ ../src/../../../common/UART_Defines.h  \
+../../../common/debug.h  \
+ ../../../common/UART_Defines.h 

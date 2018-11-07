@@ -136,4 +136,5 @@ build/default/production/_ext/907750266/queue_definitions.o:  \
 ../src/../../../common/UART_Defines.h  \
  ../src/../../../common/helper_functions.h  \
 ../src/../../../common/debug.h  \
- ../src/../../../common/queue_definitions.h 
+ ../src/../../../common/queue_definitions.h  \
+ ../src/../../../common/UART_Defines.h 
