@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/NavigationThread.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/system_config/default/system_init.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/NavigationThread.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/helper_functions.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/tasks.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/RxThread.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/system_config/default/bsp/bsp.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/system_config/default/system_exceptions.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/helper_functions.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/RxThread.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/RxISRQueue.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/get_timer.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/RxISRQueue.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/queue.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/pdStruct.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/main.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/system_config/default/FreeRTOSConfig.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/system_config/default/system_interrupt_a.S</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/Navigation.X/nbproject/Makefile-default.mk</file>
+            <file>file:/C:/microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/NavigationLibrary.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/TxThreadQueue.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/system_config/default/system_definitions.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/TxISRQueue.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/system_config/default/system_tasks.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/TxThreadQueue.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/NavigationLibrary.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/system_config/default/system_config.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/TxISRQueue.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/get_timer.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/system_config/default/system_interrupt.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/system_config/default/framework/driver/usart/src/drv_usart_static.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/testThread.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/system_config/default/framework/driver/usart/src/drv_usart_static_byte_model.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/TxThread.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/system_config/default/rtos_hooks.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/TxThread.c</file>
+        </group>
+    </open-files>
+</project-private>

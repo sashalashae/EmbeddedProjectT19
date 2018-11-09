@@ -5,7 +5,7 @@
 // Description: Implementation of debug functions to print data over GPIO and UART
 /* ************************************************************************** */
 
-#include "debug.h"
+#include "../../../common/debug.h"
 
 /*
  * Function: dbgInit
