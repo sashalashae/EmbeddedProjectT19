@@ -30,7 +30,6 @@ Partial Class ControlForm
         Me.reset = New System.Windows.Forms.Button()
         Me.picStatus = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.getStatusBtn = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'drawX
@@ -106,21 +105,11 @@ Partial Class ControlForm
         Me.Label3.TabIndex = 7
         Me.Label3.Text = "PIC Status:"
         '
-        'getStatusBtn
-        '
-        Me.getStatusBtn.Location = New System.Drawing.Point(255, 93)
-        Me.getStatusBtn.Name = "getStatusBtn"
-        Me.getStatusBtn.Size = New System.Drawing.Size(75, 75)
-        Me.getStatusBtn.TabIndex = 8
-        Me.getStatusBtn.Text = "Get PIC Status"
-        Me.getStatusBtn.UseVisualStyleBackColor = True
-        '
         'ControlForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(340, 177)
-        Me.Controls.Add(Me.getStatusBtn)
+        Me.ClientSize = New System.Drawing.Size(340, 156)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.picStatus)
         Me.Controls.Add(Me.reset)
@@ -145,5 +134,4 @@ Partial Class ControlForm
     Friend WithEvents getStatus As Button
     Friend WithEvents picStatus As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents getStatusBtn As Button
 End Class

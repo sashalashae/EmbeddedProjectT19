@@ -54,7 +54,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include "system_config.h"
 #include "system_definitions.h"
-#include "app.h"
+#include "NavigationThread.h"
+#include "txthread.h"
+#include "rxthread.h"
 
 
 // *****************************************************************************
@@ -68,7 +70,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 static void _SYS_Tasks ( void );
  
  
-static void _APP_Tasks(void);
+static void _WIFLYDRIVER_Tasks(void);
+static void _TESTTHREAD_Tasks(void);
+static void _TXTHREAD_Tasks(void);
+static void _RXTHREAD_Tasks(void);
 
 
 // *****************************************************************************
@@ -92,12 +97,20 @@ void SYS_Tasks ( void )
                 "Sys Tasks",
                 1024, NULL, 0, NULL);
 
- 
- 
-    /* Create OS Thread for APP Tasks. */
-    xTaskCreate((TaskFunction_t) _APP_Tasks,
-                "APP Tasks",
-                1024, NULL, 1, NULL);
+    /* Create OS Thread for TESTTHREAD Tasks. */
+    xTaskCreate((TaskFunction_t) _TESTTHREAD_Tasks,
+                "TESTTHREAD Tasks",
+                1024, NULL, 2, NULL);
+
+    /* Create OS Thread for TXTHREAD Tasks. */
+    xTaskCreate((TaskFunction_t) _TXTHREAD_Tasks,
+                "TXTHREAD Tasks",
+                1024, NULL, 3, NULL);
+
+    /* Create OS Thread for RXTHREAD Tasks. */
+    xTaskCreate((TaskFunction_t) _RXTHREAD_Tasks,
+                "RXTHREAD Tasks",
+                1024, NULL, 3, NULL);
 
     /**************
      * Start RTOS * 
@@ -129,23 +142,54 @@ static void _SYS_Tasks ( void)
     }
 }
 
- 
- 
 
 /*******************************************************************************
   Function:
-    void _APP_Tasks ( void )
+    void _TESTTHREAD_Tasks ( void )
 
   Summary:
-    Maintains state machine of APP.
+    Maintains state machine of TESTTHREAD.
 */
 
-static void _APP_Tasks(void)
+static void _TESTTHREAD_Tasks(void)
 {
     while(1)
     {
-        APP_Tasks();
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
+        TESTTHREAD_Tasks();
+    }
+}
+
+
+/*******************************************************************************
+  Function:
+    void _TXTHREAD_Tasks ( void )
+
+  Summary:
+    Maintains state machine of TXTHREAD.
+*/
+
+static void _TXTHREAD_Tasks(void)
+{
+    while(1)
+    {
+        TXTHREAD_Tasks();
+    }
+}
+
+
+/*******************************************************************************
+  Function:
+    void _RXTHREAD_Tasks ( void )
+
+  Summary:
+    Maintains state machine of RXTHREAD.
+*/
+
+static void _RXTHREAD_Tasks(void)
+{
+    while(1)
+    {
+        RXTHREAD_Tasks();
     }
 }
 

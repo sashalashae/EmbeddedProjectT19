@@ -33,6 +33,7 @@
 void RXTHREAD_Initialize ( void )
 {
     RxISRQueue_Init(MAX_MESSAGE_SIZE);
+    NavQueue_Init(MAX_MESSAGE_SIZE);
 }
 
 
@@ -47,81 +48,62 @@ void RXTHREAD_Initialize ( void )
 void RXTHREAD_Tasks ( void )
 {
     uint8_t data;
-    int count = 0;
-    uint8_t str[MAX_MESSAGE_SIZE];
-    
-    jsmn_parser parser;
-	jsmn_init(&parser);
-    int tok_size = MAX_MESSAGE_SIZE / 3;
-	jsmntok_t tokens[tok_size];
-    
-    int len;
-    char substring[tok_size];
-    
-    int num_tok;
-    num_tok = jsmn_parse(&parser, str, strlen(str), tokens, tok_size);
-
-    int i;
+    int index = 0;
+    uint32_t val = 0;
+    QueueMsg fromServer;
+    char str[MAX_MESSAGE_SIZE];
     
     while(1)
     {
         //receive a byte from the Rx ISR
+        index = 0;
+        //receive first char
         data = RxISRQueue_Receive();
-        //waiting on a new message
-        if(count == 0)
+        //wait for open brackets
+        while(data != '{')
         {
-            //new JSON body starts with '{'
-            if(data == '{')
+            data = RxISRQueue_Receive();
+        }
+        index = 0;
+        while(data != '}')
+        {
+            data = RxISRQueue_Receive();
+            str[index] = data;
+            index++;
+        }
+        str[index] = '\0';
+            
+        //TxThreadQueue_Send(stringToStruct(str, 1));
+        
+        int i;
+        int checknext = 0;
+        int checkFSRs = 0;
+        int checkDraw = 0;
+        
+        for(i = 0; i < index; i++)
+        {
+            if(str[i] == 'n' && str[i+1] == 'e' && str[i+2] == 'x' && str[i+3] == 't')
             {
-                str[count] = data;
-                count = 1;
+                checknext = 1;
+                fromServer.val0 = str[i+7] & 0b001111;
+            }
+            else if(str[i] == 'F' && str[i+1] == 'S' && str[i+2] == 'R' && str[i+3] == 's')
+            {
+                checkFSRs = 1;
+                val = (str[i+9] & 0b001111) * 100;
+                val = val + ((str[i+10] & 0b001111) * 10);
+                val = val + (str[i+11] & 0b001111);
+                fromServer.val1 = val;
+            }
+            else if(str[i] == 'd' && str[i+1] == 'r' && str[i+2] == 'a' && str[i+3] == 'w')
+            {
+                checkDraw = 1;
+                fromServer.val2 = str[i+9];
             }
         }
-        //else add to the current message
-        else if (count < MAX_MESSAGE_SIZE)
-        {
-            SYS_PORTS_Write(PORTS_ID_0, PORT_CHANNEL_E, data);
-            str[count] = data;
-            count++;
-            //check for end of json message
-            if(data == '}')
-            {
-                str[count+1] = '\0';
-                count = 0;
                 
-                /*
-                //string is now fully formatted, do something with it
-                //parse the JSON object
-                num_tok = jsmn_parse(&parser, str, strlen(str), tokens, tok_size);
-                for (i = 0; i < num_tok; i++)
-                {
-                    if (tokens[i].type == JSMN_OBJECT)
-                    {
-                        // do something with objects printf("Object");
-                    }
-                    else
-                    {
-                        len = tokens[i].end - tokens[i].start;
-                        memcpy(substring, &str[tokens[i].start], len);
-                        substring[len] = '\0';
-                        if(substring == "Pic 1" || substring == "Pic 2" || substring == "Pic 3" || substring == "Pic 4")
-                        {
-                            len = tokens[i+1].end - tokens[i+1].start;
-                            memcpy(substring, &str[tokens[i+1].start], len);
-                            
-                            substring[len] = '\0';
-                        }
-                    }
-                }
-                 */
-            }
-        }
-        else
-        //handle case of message being too large
-        {
-            //dbgOutputLoc(MESSAGE_OUT_OF_RANGE);
-            count = 0;
-        }
+        if(checknext && checkFSRs && checkDraw)
+            Queue_Send_FromThread(NavQueue, fromServer);
     }
 }
 

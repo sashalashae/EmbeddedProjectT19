@@ -121,18 +121,25 @@ Public Class ControlForm
         serverURI.Host = "192.168.1.100"
         serverURI.Port = "2000"
         server = serverURI.ToString()
+
+        'spin up thread for polling status
+        Dim pollThread As Thread = New Thread(AddressOf statusPoll)
+        pollThread.Start()
+
+    End Sub
+
+    Private Sub statusPoll()
+        While True
+            GetPicStatus()
+            commandNum = commandNum + 1
+            System.Threading.Thread.Sleep(1000)
+        End While
     End Sub
 
     Private Sub reset_Click(sender As Object, e As EventArgs) Handles reset.Click
         commandNum = 0
         commandLabel.Text = commandNum.ToString()
         ResetCommandNum()
-    End Sub
-
-    Private Sub getStatusBtn_Click(sender As Object, e As EventArgs) Handles getStatusBtn.Click
-        commandNum = commandNum + 1
-        commandLabel.Text = commandNum.ToString()
-        GetPicStatus()
     End Sub
 
 End Class

@@ -55,16 +55,13 @@ void TXTHREAD_Initialize ( void )
 
 void TXTHREAD_Tasks ( void )
 {
-    int index, i;
+    int index;
     uint8_t currentByte;
     strStruct string;
-    uint8_t checksum;
     char * header;
-    uint32_t sequenceNum = 0;
-    bool addSeqNum;
-    bool addSource;
     
     //constant header string
+    //ADD KEEP ALIVE
     char * get = "GET / HTTP/1.1\r\nKeep-Alive: timeout=10\r\nContent-Type: application/json\r\nContent-Length: \0";
     char * post = "POST / HTTP/1.1\r\nContent-Type: application/json\r\nContent-Length: \0";
             
@@ -74,10 +71,6 @@ void TXTHREAD_Tasks ( void )
         //receive a JSON string message to transmit
         dbgOutputLoc(TX_THREAD_WAITING_FOR_QUEUE);
         string = TxThreadQueue_Receive();
-        sequenceNum++;
-        addSeqNum = true;
-        addSource = true;
-        checksum = 0xff;
         dbgOutputLoc(TX_THREAD_QUEUE_RECEIVED);
 
         //add new line and carriage return
@@ -115,37 +108,13 @@ void TXTHREAD_Tasks ( void )
         
         //begin filling the TxISRQueue in increments of 1 byte 
         index = 0;
-        //Initialize the checksum variable;
         currentByte = string.str[index];
         while(currentByte != '\0')
         {
-            if(currentByte == 'x' && addSeqNum)
-            {
-                for(i = 100000; i != 0; i = i/10)
-                {
-                    currentByte = ((sequenceNum / i) % 10) | 0x30;
-                    TxISRQueue_Send(currentByte);
-                    checksum = checksum ^ currentByte;
-                    index++;
-                }
-                addSeqNum = false;
-            }
-            else if(currentByte == 'x' && addSource)
-            {
-                currentByte = PIC_NUMBER | 0x30;
-                TxISRQueue_Send(currentByte);
-                checksum = checksum ^ currentByte;
-                index++;
-            }
-            else
-            {
-                checksum = checksum ^ currentByte;
-                TxISRQueue_Send(currentByte); 
-                index++;
-            }
+            TxISRQueue_Send(currentByte); 
+            index++;
             currentByte = string.str[index];
         }
-        TxISRQueue_Send(checksum); // Send checksum
         TxISRQueue_Send('\r');
         TxISRQueue_Send('\n');
         dbgOutputLoc(TX_THREAD_BYTE_ENQUEUE_DONE);

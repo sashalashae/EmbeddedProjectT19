@@ -11,7 +11,15 @@
               <itemPath>../src/system_config/default/bsp/bsp.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f1" displayName="framework" projectFiles="true">
-              <logicalFolder name="f1" displayName="system" projectFiles="true">
+              <logicalFolder name="f1" displayName="driver" projectFiles="true">
+                <logicalFolder name="f1" displayName="usart" projectFiles="true">
+                  <logicalFolder name="f1" displayName="src" projectFiles="true">
+                    <itemPath>../src/system_config/default/framework/driver/usart/src/drv_usart_static_local.h</itemPath>
+                  </logicalFolder>
+                  <itemPath>../src/system_config/default/framework/driver/usart/drv_usart_static.h</itemPath>
+                </logicalFolder>
+              </logicalFolder>
+              <logicalFolder name="f2" displayName="system" projectFiles="true">
                 <logicalFolder name="f1" displayName="devcon" projectFiles="true">
                   <logicalFolder name="f1" displayName="src" projectFiles="true">
                     <itemPath>../src/system_config/default/framework/system/devcon/src/sys_devcon_local.h</itemPath>
@@ -25,40 +33,56 @@
             <itemPath>../src/system_config/default/system_definitions.h</itemPath>
           </logicalFolder>
         </logicalFolder>
-        <itemPath>../src/app.h</itemPath>
-        <itemPath>../src/RxThread.h</itemPath>
+        <itemPath>../src/testThread.h</itemPath>
         <itemPath>../src/TxThread.h</itemPath>
+        <itemPath>../src/RxThread.h</itemPath>
+        <itemPath>../src/NavigationThread.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="framework" projectFiles="true">
-        <logicalFolder name="f1" displayName="osal" projectFiles="true">
+        <logicalFolder name="f1" displayName="driver" projectFiles="true">
+          <logicalFolder name="f1" displayName="usart" projectFiles="true">
+            <logicalFolder name="f1" displayName="src" projectFiles="true">
+              <itemPath>../../../../../../framework/driver/usart/src/drv_usart_variant_mapping.h</itemPath>
+            </logicalFolder>
+            <itemPath>../../../../../../framework/driver/usart/drv_usart.h</itemPath>
+            <itemPath>../../../../../../framework/driver/usart/drv_usart_definitions.h</itemPath>
+          </logicalFolder>
+          <itemPath>../../../../../../framework/driver/driver.h</itemPath>
+          <itemPath>../../../../../../framework/driver/driver_common.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="f3" displayName="osal" projectFiles="true">
           <itemPath>../../../../../../framework/osal/osal.h</itemPath>
           <itemPath>../../../../../../framework/osal/osal_definitions.h</itemPath>
           <itemPath>../../../../../../framework/osal/osal_freertos.h</itemPath>
           <itemPath>../../../../../../framework/osal/osal_impl_basic.h</itemPath>
         </logicalFolder>
         <logicalFolder name="f2" displayName="system" projectFiles="true">
-          <logicalFolder name="f2" displayName="clk" projectFiles="true">
+          <logicalFolder name="f4" displayName="clk" projectFiles="true">
             <itemPath>../../../../../../framework/system/clk/sys_clk.h</itemPath>
             <itemPath>../../../../../../framework/system/clk/sys_clk_compatibility.h</itemPath>
             <itemPath>../../../../../../framework/system/clk/sys_clk_mapping.h</itemPath>
           </logicalFolder>
-          <logicalFolder name="f1" displayName="common" projectFiles="true">
+          <logicalFolder name="f3" displayName="common" projectFiles="true">
             <itemPath>../../../../../../framework/system/common/sys_common.h</itemPath>
             <itemPath>../../../../../../framework/system/common/sys_module.h</itemPath>
             <itemPath>../../../../../../framework/system/common/sys_buffer.h</itemPath>
             <itemPath>../../../../../../framework/system/common/sys_queue.h</itemPath>
           </logicalFolder>
-          <logicalFolder name="f4" displayName="debug" projectFiles="true">
+          <logicalFolder name="f6" displayName="debug" projectFiles="true">
             <itemPath>../../../../../../framework/system/debug/sys_debug.h</itemPath>
           </logicalFolder>
-          <logicalFolder name="f5" displayName="int" projectFiles="true">
+          <logicalFolder name="f1" displayName="dma" projectFiles="true">
+            <itemPath>../../../../../../framework/system/dma/sys_dma.h</itemPath>
+            <itemPath>../../../../../../framework/system/dma/sys_dma_definitions.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="f2" displayName="int" projectFiles="true">
             <logicalFolder name="f1" displayName="src" projectFiles="true">
               <itemPath>../../../../../../framework/system/int/src/sys_int_private.h</itemPath>
             </logicalFolder>
             <itemPath>../../../../../../framework/system/int/sys_int.h</itemPath>
             <itemPath>../../../../../../framework/system/int/sys_int_mapping.h</itemPath>
           </logicalFolder>
-          <logicalFolder name="f3" displayName="ports" projectFiles="true">
+          <logicalFolder name="f5" displayName="ports" projectFiles="true">
             <itemPath>../../../../../../framework/system/ports/sys_ports.h</itemPath>
             <itemPath>../../../../../../framework/system/ports/sys_ports_definitions.h</itemPath>
           </logicalFolder>
@@ -91,17 +115,19 @@
         <itemPath>../../../../../../third_party/rtos/FreeRTOS/Source/include/stream_buffer.h</itemPath>
         <itemPath>../../../../../../third_party/rtos/FreeRTOS/Source/include/message_buffer.h</itemPath>
       </logicalFolder>
+      <itemPath>../src/wifly_library.h</itemPath>
+      <itemPath>../src/TxISRQueue.h</itemPath>
+      <itemPath>../src/RxISRQueue.h</itemPath>
+      <itemPath>../src/TxThreadQueue.h</itemPath>
+      <itemPath>../src/helper_functions.h</itemPath>
+      <itemPath>../src/NavigationLibrary.h</itemPath>
       <itemPath>../src/pdStruct.h</itemPath>
-      <itemPath>../src/navQueue.h</itemPath>
-      <itemPath>../src/navigation_library.h</itemPath>
       <itemPath>../../../common/UART_Defines.h</itemPath>
       <itemPath>../../../common/debug.h</itemPath>
       <itemPath>../../../common/helper_functions.h</itemPath>
       <itemPath>../../../common/jsmn.h</itemPath>
       <itemPath>../../../common/queue_definitions.h</itemPath>
-      <itemPath>../src/RxISRQueue.h</itemPath>
-      <itemPath>../src/TxISRQueue.h</itemPath>
-      <itemPath>../src/TxThreadQueue.h</itemPath>
+      <itemPath>../src/get_timer.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -117,7 +143,16 @@
               <itemPath>../src/system_config/default/bsp/bsp.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f1" displayName="framework" projectFiles="true">
-              <logicalFolder name="f1" displayName="system" projectFiles="true">
+              <logicalFolder name="f1" displayName="driver" projectFiles="true">
+                <logicalFolder name="f1" displayName="usart" projectFiles="true">
+                  <logicalFolder name="f1" displayName="src" projectFiles="true">
+                    <itemPath>../src/system_config/default/framework/driver/usart/src/drv_usart_mapping.c</itemPath>
+                    <itemPath>../src/system_config/default/framework/driver/usart/src/drv_usart_static.c</itemPath>
+                    <itemPath>../src/system_config/default/framework/driver/usart/src/drv_usart_static_byte_model.c</itemPath>
+                  </logicalFolder>
+                </logicalFolder>
+              </logicalFolder>
+              <logicalFolder name="f2" displayName="system" projectFiles="true">
                 <logicalFolder name="f1" displayName="clk" projectFiles="true">
                   <logicalFolder name="f1" displayName="src" projectFiles="true">
                     <itemPath>../src/system_config/default/framework/system/clk/src/sys_clk_pic32mx.c</itemPath>
@@ -144,10 +179,11 @@
             <itemPath>../src/system_config/default/rtos_hooks.c</itemPath>
           </logicalFolder>
         </logicalFolder>
-        <itemPath>../src/app.c</itemPath>
         <itemPath>../src/main.c</itemPath>
-        <itemPath>../src/RxThread.c</itemPath>
         <itemPath>../src/TxThread.c</itemPath>
+        <itemPath>../src/RxThread.c</itemPath>
+        <itemPath>../src/NavigationThread.c</itemPath>
+        <itemPath>../src/testThread.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="framework" projectFiles="true">
         <logicalFolder name="f1" displayName="osal" projectFiles="true">
@@ -183,15 +219,17 @@
         <itemPath>../../../../../../third_party/rtos/FreeRTOS/Source/event_groups.c</itemPath>
         <itemPath>../../../../../../third_party/rtos/FreeRTOS/Source/stream_buffer.c</itemPath>
       </logicalFolder>
-      <itemPath>../src/navQueue.c</itemPath>
-      <itemPath>../src/navigation_library.c</itemPath>
+      <itemPath>../src/wifly_library.c</itemPath>
+      <itemPath>../src/TxISRQueue.c</itemPath>
+      <itemPath>../src/RxISRQueue.c</itemPath>
+      <itemPath>../src/TxThreadQueue.c</itemPath>
+      <itemPath>../src/helper_functions.c</itemPath>
+      <itemPath>../src/NavigationLibrary.c</itemPath>
       <itemPath>../../../common/debug.c</itemPath>
       <itemPath>../../../common/helper_functions.c</itemPath>
       <itemPath>../../../common/jsmn.c</itemPath>
       <itemPath>../../../common/queue_definitions.c</itemPath>
-      <itemPath>../src/RxISRQueue.c</itemPath>
-      <itemPath>../src/TxISRQueue.c</itemPath>
-      <itemPath>../src/TxThreadQueue.c</itemPath>
+      <itemPath>../src/get_timer.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -201,10 +239,11 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>../src</Elem>
-    <Elem>../../../..</Elem>
+    <Elem>../../../../../../../microchip/harmony/v2_06</Elem>
     <Elem>..\src</Elem>
     <Elem>..\src\default</Elem>
     <Elem>..\src\system_config\default</Elem>
+    <Elem>../../../common</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -255,7 +294,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/system_config/default;../src/default;../../../../../../framework;../src/system_config/default/framework;../src/system_config/default/bsp;../../../../../../third_party/rtos/FreeRTOS/Source/include;../../../../../../third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX"/>
+                  value="../../../../../../../../../microchip/harmony/v2_06/framework;../src;../src/default;../../../../../../../../microchip/harmony/v2_06/framework;../src/system_config/default/framework;../src/system_config/default;../../../../../../framework;../src/system_config/default/bsp;../../../../../../third_party/rtos/FreeRTOS/Source/include;../../../../../../third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
@@ -278,7 +317,7 @@
         <property key="extra-include-directories-for-assembler"
                   value="../../../../../../third_party/rtos/FreeRTOS/Source/include;../../../../../../third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX;../src/system_config/default"/>
         <property key="extra-include-directories-for-preprocessor"
-                  value="../../../../../../third_party/rtos/FreeRTOS/Source/include;../../../../../../third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX;../src/system_config/default"/>
+                  value="../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include;../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX;../src/system_config/default;../../../../../../third_party/rtos/FreeRTOS/Source/include;../../../../../../third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX;../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include;../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX"/>
         <property key="generate-micro-compressed-code" value="false"/>
       </C32-AS>
       <C32-LD>

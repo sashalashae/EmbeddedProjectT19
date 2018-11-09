@@ -60,7 +60,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system_definitions.h"
 #include "RxISRQueue.h"
 #include "../../../common/UART_Defines.h"
-#include "../../../common/jsmn.h"
+#include "../../../common/queue_definitions.h"
+#include "jsmn.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility

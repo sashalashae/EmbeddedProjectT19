@@ -54,7 +54,7 @@
 #define configISR_STACK_SIZE                    ( 400 )
 #define configSUPPORT_DYNAMIC_ALLOCATION        1
 #define configSUPPORT_STATIC_ALLOCATION         0
-#define configTOTAL_HEAP_SIZE                   ( ( size_t ) 20480 )
+#define configTOTAL_HEAP_SIZE                   ( ( size_t ) 50000 )
 #define configMAX_TASK_NAME_LEN                 ( 16 )
 #define configUSE_16_BIT_TICKS                  0
 #define configIDLE_SHOULD_YIELD                 1
@@ -64,7 +64,7 @@
 #define configUSE_TASK_NOTIFICATIONS            1
 #define configQUEUE_REGISTRY_SIZE               0
 #define configUSE_QUEUE_SETS                    0
-#define configUSE_TIME_SLICING                  1
+#define configUSE_TIME_SLICING                  0
 #define configUSE_NEWLIB_REENTRANT              0
 #define configENABLE_BACKWARD_COMPATIBILITY     0
 #define configUSE_TASK_FPU_SUPPORT              0
@@ -89,7 +89,7 @@
 #define configTIMER_TASK_PRIORITY               3
 #define configTIMER_QUEUE_LENGTH                10
 #define configTIMER_TASK_STACK_DEPTH            256
-#define configUSE_DAEMON_TASK_STARTUP_HOOK      1
+#define configUSE_DAEMON_TASK_STARTUP_HOOK      0
 
 /* Misc */
 #define configUSE_APPLICATION_TASK_TAG          0

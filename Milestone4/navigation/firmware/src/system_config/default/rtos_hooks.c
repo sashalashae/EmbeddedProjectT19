@@ -116,21 +116,6 @@ void vApplicationMallocFailedHook( void )
 
 
 
-/*-----------------------------------------------------------*/
-
-/* Application Daemon Task Startup hook */
-void vApplicationDaemonTaskStartupHook( void )
-{
-
- /* For this function to get called, the macro configUSE_DAEMON_TASK_STARTUP_HOOK has 
-  to be set to 1 in FreeRTOSConfig.h. This gets executed once when the RTOS daemon task 
-  (which used to be called the timer service task) starts running.  This is useful 
-  if the application includes initialisation code that would benefit from executing 
-  after the scheduler has been started.*/
-
-  //user code can be added here
-}
-/*-----------------------------------------------------------*/
 
 /*******************************************************************************
  End of File
