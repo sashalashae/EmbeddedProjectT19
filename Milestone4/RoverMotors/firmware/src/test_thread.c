@@ -89,10 +89,6 @@ void TEST_THREAD_Initialize ( void )
 
 void TEST_THREAD_Tasks ( void )
 {
-    //Start the timer
-    DRV_TMR0_Start();
-    DRV_TMR1_Start();
-    DRV_TMR2_Start();
     TestQueueData_t acknowledge;
     //uint32_t target_value;
     test_state_t state = INIT;
@@ -107,54 +103,49 @@ void TEST_THREAD_Tasks ( void )
                 break;
             case TEST1:
                 msg.movement = FORWARD_BOTH;
-                msg.left = SQUARE_LENGTH_TRANSITION;
-                msg.right = SQUARE_LENGTH_TRANSITION;
+                msg.distance = 2*SQUARE_LENGTH_TRANSITION;
                 MotorQueue_SendMsg(msg);
-                state = TEST2;
-                break;
-            case TEST2:
-                msg.movement = TURN_RIGHT;
-                msg.left = DEGREE_90_TRANSITION;
-                msg.right = DEGREE_90_TRANSITION;
-                MotorQueue_SendMsg(msg);
-                state = TEST3;
-                break;
-            case TEST3:
-                msg.movement = REVERSE_BOTH;
-                msg.left = SQUARE_LENGTH_TRANSITION;
-                msg.right = SQUARE_LENGTH_TRANSITION;
-                MotorQueue_SendMsg(msg);
-                state = TEST4;
-                break;
-            case TEST4:
+                acknowledge = TestQueue_ReceiveMsg();
                 msg.movement = TURN_LEFT;
-                msg.left = DEGREE_90_TRANSITION;
-                msg.right = DEGREE_90_TRANSITION;
+                msg.distance = DEGREE_90_TRANSITION;
                 MotorQueue_SendMsg(msg);
-                state = END; //change for the two other test cases
-                break;
-            /*case TEST5:
+                acknowledge = TestQueue_ReceiveMsg();
                 msg.movement = FORWARD_BOTH;
-                msg.duty_cycle = 50;
-                msg.left = SQUARE_LENGTH_TRANSITION;
-                msg.right = SQUARE_LENGTH_TRANSITION;
+                msg.distance = 4*SQUARE_LENGTH_TRANSITION;
                 MotorQueue_SendMsg(msg);
-                state = TEST6;
-                break;
-            case TEST6:
+                acknowledge = TestQueue_ReceiveMsg();
+                msg.movement = TURN_LEFT;
+                msg.distance = DEGREE_90_TRANSITION;
+                MotorQueue_SendMsg(msg);
+                acknowledge = TestQueue_ReceiveMsg();
+                msg.movement = FORWARD_BOTH;
+                msg.distance = 2*SQUARE_LENGTH_TRANSITION;
+                MotorQueue_SendMsg(msg);
+                acknowledge = TestQueue_ReceiveMsg();
+                /*msg.movement = FORWARD_BOTH;
+                msg.distance = SQUARE_LENGTH_TRANSITION;
+                MotorQueue_SendMsg(msg);
+                acknowledge = TestQueue_ReceiveMsg();
                 msg.movement = TURN_RIGHT;
-                msg.duty_cycle = 50;
-                msg.left = DEGREE_90_TRANSITION;
-                msg.right = DEGREE_90_TRANSITION;
+                msg.distance = DEGREE_90_TRANSITION;
                 MotorQueue_SendMsg(msg);
-                state = END;
-                break;*/    
+                acknowledge = TestQueue_ReceiveMsg();
+                msg.movement = REVERSE_BOTH;
+                msg.distance = SQUARE_LENGTH_TRANSITION;
+                MotorQueue_SendMsg(msg);
+                acknowledge = TestQueue_ReceiveMsg();
+                msg.movement = TURN_LEFT;
+                msg.distance = DEGREE_90_TRANSITION;
+                MotorQueue_SendMsg(msg);
+                acknowledge = TestQueue_ReceiveMsg();*/
+                state = END; //change for the other test cases
+                break;   
             case END:
                 msg.movement = STOP;
                 MotorQueue_SendMsg(msg);
+                acknowledge = TestQueue_ReceiveMsg();
                 break;
         }
-        acknowledge = TestQueue_ReceiveMsg();
     }
 }
 

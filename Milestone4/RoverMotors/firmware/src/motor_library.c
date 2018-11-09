@@ -17,6 +17,23 @@
 
 #include "motor_library.h"
 
+void motors_timer_cb(TimerHandle_t xTimer)
+{
+    //Toggle LED
+    SYS_PORTS_PinToggle(PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_3);
+    
+    MotorQueueData_t msg;
+    msg.type = TIMER_TICK;
+    MotorQueue_SendMsg(msg);
+}
+
+void motors_timer_init()
+{
+    TimerHandle_t timer_encoder;
+    timer_encoder = xTimerCreate("Motor Timer", pdMS_TO_TICKS(ENCODER_PERIOD_MS), pdTRUE, ( void * ) 0, motors_timer_cb);
+    xTimerStart(timer_encoder, 0);
+}
+
 void motors_initialize()
 {
     //Set left direction pin off initially
@@ -127,6 +144,16 @@ void motors_turn_left(uint8_t duty_cycle)
 {
     motor_left(REVERSE, duty_cycle);
     motor_right(FORWARD, duty_cycle);
+}
+
+void motors_pid_adjust(int32_t left_error, int32_t right_error, int32_t total_left_error, int32_t total_right_error, int32_t derivative_left_error, int32_t derivative_right_error, uint8_t kp, uint8_t ki, uint8_t kd)
+{
+    dbgOutputLoc(LOC_PID_ADJUST_START);
+    // left Proportional, Integral
+    OC2RS += (left_error * kp) + (total_left_error * ki) + (derivative_left_error * kd);
+    // right Proportional, Integral
+    OC1RS += (right_error * kp) + (total_right_error * ki) + (derivative_right_error * kd);
+    dbgOutputLoc(LOC_PID_ADJUST_END);
 }
 
 /* *****************************************************************************

@@ -155,7 +155,9 @@ build/default/production/_ext/1688732426/system_init.o:  \
  ../src/motor_thread.h  \
 ../src/system_config/default/system_definitions.h  \
  ../src/motor_library.h  \
-../src/motor_queue.h  \
+ ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h  \
+ ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
+ ../src/motor_queue.h  \
  ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/queue.h  \
  ../src/debug.h  \
 ../src/test_thread.h  \

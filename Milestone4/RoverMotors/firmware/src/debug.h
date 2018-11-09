@@ -36,6 +36,8 @@ void dbgInit();
 #define LOC_MOTOR_QUEUE_ISR_SEND            8
 #define LOC_MOTOR_QUEUE_RECEIVE_WAITING     9
 #define LOC_MOTOR_QUEUE_RECEIVE_FINISHED    10
+#define LOC_PID_ADJUST_START                31
+#define LOC_PID_ADJUST_END                  32
 
 /*
  * Defines for error codes

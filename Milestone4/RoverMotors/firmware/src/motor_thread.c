@@ -77,6 +77,7 @@ void MOTOR_THREAD_Initialize ( void )
     
     // initialize this thread's queue
     MotorQueue_Initialize(5);
+    motors_timer_init();
 }
 
 /******************************************************************************
@@ -89,13 +90,24 @@ void MOTOR_THREAD_Initialize ( void )
 
 void MOTOR_THREAD_Tasks ( void )
 {
-    uint32_t right_target_val = 0;
-    uint32_t left_target_val = 0;
+    //Start the timers
+    DRV_TMR0_Start();
+    DRV_TMR1_Start();
+    
+    uint32_t distance_target_val = 0;
     TestQueueData_t ack_msg;
     uint32_t current_left;
     uint32_t current_right;
+    int32_t accumulated_left_error = 0;
+    int32_t accumulated_right_error = 0;
+    int32_t prev_left_error = 0;
+    int32_t prev_right_error = 0;
+    uint8_t expected_val = TIMER_100_MS_TRANSITIONS;
     const uint8_t DUTY_CYCLE = 50;
+    const uint8_t DELTA_TIME_MS = ENCODER_PERIOD_MS; // period of timer interrupts
     const uint8_t KP = 1;
+    const uint8_t KI = 1;
+    const uint8_t KD = 1;
     bool running = false;
     while(true)
     {
@@ -113,8 +125,7 @@ void MOTOR_THREAD_Tasks ( void )
                 motors_stop();
                 DRV_TMR0_CounterClear();
                 DRV_TMR1_CounterClear();
-                right_target_val = msg.right;
-                left_target_val = msg.left;
+                distance_target_val = msg.distance;
                 switch(msg.movement)
                 {
                     case FORWARD_BOTH:
@@ -131,8 +142,7 @@ void MOTOR_THREAD_Tasks ( void )
                         break;
                     case STOP:
                         motors_stop();
-                        right_target_val = 0;
-                        left_target_val = 0;
+                        distance_target_val = 0;
                         break;
                 }
                 running = true;
@@ -140,13 +150,31 @@ void MOTOR_THREAD_Tasks ( void )
             case TIMER_TICK:
                 current_left = DRV_TMR0_CounterValueGet();
                 current_right = DRV_TMR1_CounterValueGet();
-                uint8_t expected_val = 50;
-                uint32_t diff;
-                if(current_left > expected_val)
-                    diff = current_left - expected_val;
+                if(current_left >= distance_target_val || current_right >= distance_target_val)
+                {
+                    motors_stop();
+                    accumulated_left_error = 0;
+                    accumulated_right_error = 0;
+                    prev_left_error = 0;
+                    prev_right_error = 0;
+                    running = false;
+                    ack_msg.ack = true;
+                    TestQueue_SendMsg(ack_msg);
+                    expected_val = TIMER_100_MS_TRANSITIONS;
+                }
                 else
-                    diff = expected_val - current_left;
-                dbgOutputLoc(diff);
+                {
+                    int32_t left_error = expected_val - current_left;                       // proportional
+                    accumulated_left_error += left_error * DELTA_TIME_MS;                   // integral
+                    int32_t derivative_left_error = (left_error - prev_left_error)/DELTA_TIME_MS;   // derivative
+                    prev_left_error = left_error;
+                    int32_t right_error = expected_val - current_right;                     // proportional
+                    accumulated_right_error += right_error * DELTA_TIME_MS;                 // integral
+                    int32_t derivative_right_error = (right_error - prev_left_error)/DELTA_TIME_MS;  // derivative
+                    prev_right_error = right_error;
+                    motors_pid_adjust(left_error, right_error, accumulated_left_error, accumulated_right_error, derivative_left_error, derivative_right_error, KP, KI, KD);
+                    expected_val += TIMER_100_MS_TRANSITIONS;
+                }
                 //diff_left_right = current_left-current_right
                 /*if(current_left >= left_target_val)
                 {
@@ -156,16 +184,17 @@ void MOTOR_THREAD_Tasks ( void )
                 {
                     motor_right_stop();
                 }*/
-                if(current_left >= left_target_val && current_right >= right_target_val)
-                {
-                    motors_stop();
-                    running = false;
-                    ack_msg.ack = true;
-                    TestQueue_SendMsg(ack_msg);
-                }
                 break;
             case ASYNC_STOP:
                 motors_stop();
+                accumulated_left_error = 0;
+                accumulated_right_error = 0;
+                prev_left_error = 0;
+                prev_right_error = 0;
+                running = false;
+                ack_msg.ack = true;
+                TestQueue_SendMsg(ack_msg);
+                expected_val = TIMER_100_MS_TRANSITIONS;
                 break;
         }
     }

@@ -108,7 +108,7 @@
       <itemPath>../src/motor_library.h</itemPath>
       <itemPath>../src/motor_queue.h</itemPath>
       <itemPath>../src/test_queue.h</itemPath>
-      <itemPath>../../../common/debug.h</itemPath>
+      <itemPath>../src/debug.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -197,7 +197,7 @@
       <itemPath>../src/motor_library.c</itemPath>
       <itemPath>../src/motor_queue.c</itemPath>
       <itemPath>../src/test_queue.c</itemPath>
-      <itemPath>../../../common/debug.c</itemPath>
+      <itemPath>../src/debug.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
