@@ -43,7 +43,7 @@ extern "C" {
 #define ENCODER_PERIOD_MS           100
 
 #define ONE_CM_TRANSITION           75
-#define FIVE_DEGREE_TRANSITION      33
+#define FIVE_DEGREE_TRANSITION      31
 #define SQUARE_LENGTH_TRANSITION    889
     
 // Enum type to define motor direction

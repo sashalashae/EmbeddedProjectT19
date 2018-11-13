@@ -103,7 +103,7 @@ void MOTORTHREAD_Tasks ( void )
     int32_t accumulated_right_error = 0;
     int32_t prev_left_error = 0;
     int32_t prev_right_error = 0;
-    uint32_t expected_val = TIMER_100_MS_TRANSITIONS;
+    uint32_t expected_val;// = TIMER_100_MS_TRANSITIONS;
     const uint8_t DUTY_CYCLE = 50;
     const uint8_t DELTA_TIME_MS = ENCODER_PERIOD_MS; // period of timer interrupts
     
@@ -175,7 +175,7 @@ void MOTORTHREAD_Tasks ( void )
                     running = false;
                     ack_msg.ack = true;
                     TestQueue_SendMsg(ack_msg);
-                    expected_val = TIMER_100_MS_TRANSITIONS;
+                    //expected_val = TIMER_100_MS_TRANSITIONS;
                 }
                 else if(current_left >= distance_target_val)
                 {
@@ -187,6 +187,7 @@ void MOTORTHREAD_Tasks ( void )
                 }
                 else
                 {
+                    expected_val = (current_left + current_right)/2;
                     int32_t left_error = expected_val - current_left;                       // proportional
                     accumulated_left_error += left_error * DELTA_TIME_MS;                   // integral
                     int32_t derivative_left_error = (left_error - prev_left_error)/DELTA_TIME_MS;   // derivative
@@ -195,34 +196,70 @@ void MOTORTHREAD_Tasks ( void )
                     accumulated_right_error += right_error * DELTA_TIME_MS;                 // integral
                     int32_t derivative_right_error = (right_error - prev_left_error)/DELTA_TIME_MS;  // derivative
                     prev_right_error = right_error;
-                    /*char msg[256] = "{\"left\":\"";
-                    msg[10] = (left_error/10000) + '0';
-                    msg[11] = ((left_error%10000)/1000) + '0';
-                    msg[12] = ((left_error%1000)/100) + '0';
-                    msg[13] = ((left_error%100)/10) + '0';
-                    msg[14] = (left_error%10) + '0';
-                    msg[15] = '\"';
-                    msg[16] = ',';
-                    msg[17] = '\"';
-                    msg[18] = 'r';
-                    msg[19] = 'i';
-                    msg[20] = 'g';
-                    msg[21] = 'h';
-                    msg[22] = 't';
-                    msg[23] = '\"';
-                    msg[24] = ':';
-                    msg[25] = '\"';
-                    msg[26] = (right_error/10000) + '0';
-                    msg[27] = ((right_error%10000)/1000) + '0';
-                    msg[28] = ((right_error%1000)/100) + '0';
-                    msg[29] = ((right_error%100)/10) + '0';
-                    msg[30] = (right_error%10) + '0';
-                    msg[31] = '\"';
-                    msg[32] = '}';
-                    msg[33] = '\0';
-                    TxThreadQueue_Send(stringToStruct(msg, 0));*/
                     motors_pid_adjust(left_error, right_error, accumulated_left_error, accumulated_right_error, derivative_left_error, derivative_right_error, KP, KI, KD);
-                    expected_val += TIMER_100_MS_TRANSITIONS;
+                    
+                    char msg[137] = "{\"Type\":\"Error\",\"Content\":{\"left\":\"+xxxxx\",\"right\":\"+xxxxx\",\"total_l\":\"+xxxxxxx\",\"total_r\":\"+xxxxxxx\",\"KP\":\"xxx\",\"KI\":\"xxx\",\"KD\":\"xxx\"}}\0";
+                    
+                    if(left_error < 0)
+                    {
+                        msg[35] = '-';
+                        left_error = -left_error;
+                    }
+                    msg[36] = (left_error/10000) + '0';
+                    msg[37] = ((left_error%10000)/1000) + '0';
+                    msg[38] = ((left_error%1000)/100) + '0';
+                    msg[39] = ((left_error%100)/10) + '0';
+                    msg[40] = (left_error%10) + '0';
+                    if(right_error < 0)
+                    {
+                        msg[52] = '-';
+                        right_error = -right_error;
+                    }
+                    msg[53] = (right_error/10000) + '0';
+                    msg[54] = ((right_error%10000)/1000) + '0';
+                    msg[55] = ((right_error%1000)/100) + '0';
+                    msg[56] = ((right_error%100)/10) + '0';
+                    msg[57] = (right_error%10) + '0';
+                    
+                    if(accumulated_left_error < 0)
+                    {
+                        msg[71] = '-';
+                        accumulated_left_error = -accumulated_left_error;
+                    }
+                    msg[72] = (accumulated_left_error/1000000) + '0';
+                    msg[73] = ((accumulated_left_error%1000000)/100000) + '0';
+                    msg[74] = ((accumulated_left_error%100000)/10000) + '0';
+                    msg[75] = ((accumulated_left_error%10000)/1000) + '0';
+                    msg[76] = ((accumulated_left_error%1000)/100) + '0';
+                    msg[77] = ((accumulated_left_error%100)/10) + '0';
+                    msg[78] = (accumulated_left_error%10) + '0';
+                    
+                    if(accumulated_right_error < 0)
+                    {
+                        msg[92] = '-';
+                        accumulated_right_error = -accumulated_right_error;
+                    }
+                    msg[93] = (accumulated_right_error/1000000) + '0';
+                    msg[94] = ((accumulated_right_error%1000000)/100000) + '0';
+                    msg[95] = ((accumulated_right_error%100000)/10000) + '0';
+                    msg[96] = ((accumulated_right_error%10000)/1000) + '0';
+                    msg[97] = ((accumulated_right_error%1000)/100) + '0';
+                    msg[98] = ((accumulated_right_error%100)/10) + '0';
+                    msg[99] = (accumulated_right_error%10) + '0';
+                    
+                    msg[108] = (KP/100) + '0';
+                    msg[109] = ((KP%100)/10) + '0';
+                    msg[110] = (KP%10) + '0';
+                    
+                    msg[119] = (KI/100) + '0';
+                    msg[120] = ((KI%100)/10) + '0';
+                    msg[121] = (KI%10) + '0';
+                    
+                    msg[130] = (KD/100) + '0';
+                    msg[131] = ((KD%100)/10) + '0';
+                    msg[132] = (KD%10) + '0';
+                    TxThreadQueue_Send(stringToStruct(msg, 1));
+                    //expected_val += TIMER_100_MS_TRANSITIONS;
                 }
                 break;
             case ASYNC_STOP:
@@ -234,7 +271,7 @@ void MOTORTHREAD_Tasks ( void )
                 running = false;
                 ack_msg.ack = true;
                 TestQueue_SendMsg(ack_msg);
-                expected_val = TIMER_100_MS_TRANSITIONS;
+                //expected_val = TIMER_100_MS_TRANSITIONS;
                 break;
             case CALIBRATE:
                 KP = msg.kp;
