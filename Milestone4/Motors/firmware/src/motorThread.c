@@ -258,7 +258,7 @@ void MOTORTHREAD_Tasks ( void )
                     msg[130] = (KD/100) + '0';
                     msg[131] = ((KD%100)/10) + '0';
                     msg[132] = (KD%10) + '0';
-                    TxThreadQueue_Send(stringToStruct(msg, 1));
+                    TxThreadQueue_Send(stringToStruct(msg, 0));
                     //expected_val += TIMER_100_MS_TRANSITIONS;
                 }
                 break;
