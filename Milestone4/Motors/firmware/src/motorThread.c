@@ -173,6 +173,7 @@ void MOTORTHREAD_Tasks ( void )
                     prev_right_error = 0;
                     running = false;
                     ack_msg.type = AckMsg;
+                    ack_msg.source = MovementThread;
                     Queue_Send_FromThread(NavQueue, ack_msg);
                     //expected_val = TIMER_100_MS_TRANSITIONS;
                 }
@@ -269,6 +270,7 @@ void MOTORTHREAD_Tasks ( void )
                 prev_right_error = 0;
                 running = false;
                 ack_msg.type = AckMsg;
+                ack_msg.source = MovementThread;
                 Queue_Send_FromThread(NavQueue, ack_msg);
                 break;
             case CalibrateMsg:
@@ -276,6 +278,7 @@ void MOTORTHREAD_Tasks ( void )
                 KI = msg.val1;
                 KD = msg.val2;
                 ack_msg.type = AckMsg;
+                ack_msg.source = MovementThread;
                 Queue_Send_FromThread(NavQueue, ack_msg);
                 break;
         }
