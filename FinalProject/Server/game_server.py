@@ -128,10 +128,16 @@ class Handler(BaseHTTPRequestHandler):
         data = rawdata
         datajson = json.loads(data)
         whichpi = datajson.pop("Source")
+        resp = response(whichpi)
         return
 
     def do_POST(self):
-
+        rawdata = str(
+            self.rfile.read(int(self.headers.getheader('Content-Length'))))
+        data = rawdata
+        datajson = json.loads(data)
+        whichpi = datajson.pop("Source")
+        insert(datajson, whichpi)
         return
 
 
