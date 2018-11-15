@@ -41,15 +41,6 @@ typedef enum
     TestThread
 }MsgSource;
 
-typedef enum
-{
-    FORWARD_BOTH,
-    REVERSE_BOTH,
-    TURN_RIGHT,
-    TURN_LEFT,
-    STOP
-} movement_type_t;
-
 //Add definition for a generic queue message structure
 typedef struct
 {

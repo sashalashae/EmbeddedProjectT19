@@ -53,6 +53,15 @@ typedef enum direction
     REVERSE = true,
 } direction_t;
 
+typedef enum
+{
+    FORWARD_BOTH,
+    REVERSE_BOTH,
+    TURN_RIGHT,
+    TURN_LEFT,
+    STOP
+} movement_type_t;
+
 void motors_timer_cb(TimerHandle_t xTimer);
 void motors_timer_init();
 void motors_initialize();
