@@ -21,7 +21,9 @@ QueueHandle_t SensorQueue;
 typedef enum 
 {
     UnknownMsg = 0,
+    CalibrateMsg,
     CommandMsg,
+    AsyncStopMsg,
     TimerMsg,
     AckMsg,
     FsrMsg
@@ -38,6 +40,15 @@ typedef enum
     RxThread,
     TestThread
 }MsgSource;
+
+typedef enum
+{
+    FORWARD_BOTH,
+    REVERSE_BOTH,
+    TURN_RIGHT,
+    TURN_LEFT,
+    STOP
+} movement_type_t;
 
 //Add definition for a generic queue message structure
 typedef struct
