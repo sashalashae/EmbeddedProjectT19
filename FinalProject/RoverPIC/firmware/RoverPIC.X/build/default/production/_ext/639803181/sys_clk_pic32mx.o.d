@@ -246,5 +246,4 @@ build/default/production/_ext/639803181/sys_clk_pic32mx.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../src/txthread.h  \
 ../src/../../../common/UART_Defines.h  \
- ../src/rxthread.h  \
-
+ ../src/rxthread.h 

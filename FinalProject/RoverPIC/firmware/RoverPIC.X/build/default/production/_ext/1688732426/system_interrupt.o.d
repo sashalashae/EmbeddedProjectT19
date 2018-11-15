@@ -247,5 +247,4 @@ build/default/production/_ext/1688732426/system_interrupt.o:  \
  ../src/txthread.h  \
 ../src/../../../common/UART_Defines.h  \
  ../src/rxthread.h  \
-../src/system_config/default/system_definitions.h  \
-
+../src/system_config/default/system_definitions.h 

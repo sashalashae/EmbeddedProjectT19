@@ -12,5 +12,4 @@ build/default/production/_ext/103552462/osal_freertos.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/queue.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/list.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/osal/osal_freertos.h  \
-
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/osal/osal_freertos.h 

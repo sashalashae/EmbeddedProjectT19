@@ -247,5 +247,4 @@ build/default/production/_ext/1360937237/TxThread.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../src/txthread.h  \
 ../src/rxthread.h  \
- ../src/../../../common/UART_Defines.h  \
-
+ ../src/../../../common/UART_Defines.h 

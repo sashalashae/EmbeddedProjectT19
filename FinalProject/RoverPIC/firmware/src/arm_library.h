@@ -29,9 +29,9 @@
 #define TICKS_PER_180       (1250)
 
 //defines for servo output compare module mappings
-#define BASE_SERVO          1
-#define LOWER_JOINT_SERVO   2
-#define UPPER_JOINT_SERVO   3
+#define BASE_SERVO          3
+#define LOWER_JOINT_SERVO   4
+#define UPPER_JOINT_SERVO   5
 
 //Bit defines
 #define BIT0                (1<<0)

@@ -247,5 +247,4 @@ build/default/production/_ext/1360937237/armThread.o:  \
  ../src/../../../common/helper_functions.h  \
 ../src/../../../common/debug.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h  \
- ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
-
+ ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h 

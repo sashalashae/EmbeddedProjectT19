@@ -19,26 +19,26 @@
 void initPWM()
 {
     //Initially disable all output compare modules
-    OC1CON = 0;
-    OC2CON = 0;
     OC3CON = 0;
+    OC4CON = 0;
+    OC5CON = 0;
     
     //OCxRS / PR2 = Duty Cycle
     //Positive pulse needs to be from 1ms (-90 degrees) to 2m (90 degrees)
     //OCxRS / PR2 = 1.5ms/20ms -> OCxRS = 1875
-    OC1RS = 1875;
-    OC2RS = 1875;
-    OC3RS = 1875;
+    OC5RS = 1875;
+    OC4RS = 1875;
+    OC5RS = 1875;
     
     //Initialize OCxR before enabling compare module
-    OC1R = 1875;
-    OC2R = 1875;
     OC3R = 1875;
+    OC4R = 1875;
+    OC5R = 1875;
     
     //Set output compare modules to PWM mode (fault pin disabled)
-    OC1CON = 6;
-    OC2CON = 6;
     OC3CON = 6;
+    OC4CON = 6;
+    OC5CON = 6;
     
     //PR = Timer Source Clock / (PWM Frequency * Prescaler) - 1
     //PR = 80000000Hz / (64 Prescaler * 50 Hz) - 1 = 24999
@@ -51,9 +51,9 @@ void initPWM()
     T2CONSET = BIT15;
     
     //Enable output compare modules
-    OC1CONSET = BIT15;
-    OC2CONSET = BIT15;
     OC3CONSET = BIT15;
+    OC4CONSET = BIT15;
+    OC5CONSET = BIT15;
 }
 
 /*
@@ -179,30 +179,30 @@ void setArmPosition(ArmMovement movement)
         //update movement for base
         if(!baseDone)
         {
-            if(OC1RS < movement.destination.baseServo)
+            if(OC3RS < movement.destination.baseServo)
             {
                 //current reg value is smaller than desired position
-                if((OC1RS + movement.baseSpeed) > movement.destination.baseServo)
+                if((OC3RS + movement.baseSpeed) > movement.destination.baseServo)
                 {
-                    OC1RS = movement.destination.baseServo;
+                    OC3RS = movement.destination.baseServo;
                     baseDone = true;
                 }
                 else
                 {
-                    OC1RS += movement.baseSpeed;
+                    OC3RS += movement.baseSpeed;
                 }
             }
-            else if(OC1RS > movement.destination.baseServo)
+            else if(OC3RS > movement.destination.baseServo)
             {
                 //current reg value is greater than desired position
-                if((OC1RS - movement.baseSpeed) < movement.destination.baseServo)
+                if((OC3RS - movement.baseSpeed) < movement.destination.baseServo)
                 {
-                    OC1RS = movement.destination.baseServo;
+                    OC3RS = movement.destination.baseServo;
                     baseDone = true;
                 }
                 else
                 {
-                    OC1RS -= movement.baseSpeed;
+                    OC3RS -= movement.baseSpeed;
                 }
             }
             else
@@ -213,30 +213,30 @@ void setArmPosition(ArmMovement movement)
         //update movement for lower joint
         if(!lowerDone)
         {
-            if(OC2RS < movement.destination.lowerJoint)
+            if(OC4RS < movement.destination.lowerJoint)
             {
                 //current reg value is smaller than desired position
-                if((OC2RS + movement.lowerJointSpeed) > movement.destination.lowerJoint)
+                if((OC4RS + movement.lowerJointSpeed) > movement.destination.lowerJoint)
                 {
-                    OC2RS = movement.destination.lowerJoint;
+                    OC4RS = movement.destination.lowerJoint;
                     lowerDone = true;
                 }
                 else
                 {
-                    OC2RS += movement.lowerJointSpeed;
+                    OC4RS += movement.lowerJointSpeed;
                 }
             }
-            else if(OC2RS > movement.destination.lowerJoint)
+            else if(OC4RS > movement.destination.lowerJoint)
             {
                 //current reg value is greater than desired position
-                if((OC2RS - movement.lowerJointSpeed) < movement.destination.lowerJoint)
+                if((OC4RS - movement.lowerJointSpeed) < movement.destination.lowerJoint)
                 {
-                    OC2RS = movement.destination.lowerJoint;
+                    OC4RS = movement.destination.lowerJoint;
                     lowerDone = true;
                 }
                 else
                 {
-                    OC2RS -= movement.lowerJointSpeed;
+                    OC4RS -= movement.lowerJointSpeed;
                 }
             }
             else
@@ -247,30 +247,30 @@ void setArmPosition(ArmMovement movement)
         //update movement for upper joint
         if(!upperDone)
         {
-            if(OC3RS < movement.destination.upperJoint)
+            if(OC5RS < movement.destination.upperJoint)
             {
                 //current reg value is smaller than desired position
-                if((OC3RS + movement.upperJointSpeed) > movement.destination.upperJoint)
+                if((OC5RS + movement.upperJointSpeed) > movement.destination.upperJoint)
                 {
-                    OC3RS = movement.destination.upperJoint;
+                    OC5RS = movement.destination.upperJoint;
                     upperDone = true;
                 }
                 else
                 {
-                    OC3RS += movement.upperJointSpeed;
+                    OC5RS += movement.upperJointSpeed;
                 }
             }
-            else if(OC3RS > movement.destination.upperJoint)
+            else if(OC5RS > movement.destination.upperJoint)
             {
                 //current reg value is greater than desired position
-                if((OC3RS - movement.upperJointSpeed) < movement.destination.upperJoint)
+                if((OC5RS - movement.upperJointSpeed) < movement.destination.upperJoint)
                 {
-                    OC3RS = movement.destination.upperJoint;
+                    OC5RS = movement.destination.upperJoint;
                     upperDone = true;
                 }
                 else
                 {
-                    OC3RS -= movement.upperJointSpeed;
+                    OC5RS -= movement.upperJointSpeed;
                 }
             }
             else
@@ -316,13 +316,13 @@ void setServoAngle(ArmCalibration cal, ArmServo servo, int16_t servoAngle)
     switch(servo)
     {
         case BaseServo:
-            OC1RS = AngleToCompareVal(cal, servo, servoAngle);
+            OC3RS = AngleToCompareVal(cal, servo, servoAngle);
             break;
         case LowerServo:
-            OC2RS = AngleToCompareVal(cal, servo, servoAngle);
+            OC4RS = AngleToCompareVal(cal, servo, servoAngle);
             break;
         case UpperServo:
-            OC3RS = AngleToCompareVal(cal, servo, servoAngle);
+            OC5RS = AngleToCompareVal(cal, servo, servoAngle);
             break;
         default:
             //Invalid servo

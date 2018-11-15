@@ -77,5 +77,4 @@ build/default/production/_ext/822048611/sys_ports_static.o:  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_SysLockUnlock_Default.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_MPLL_Unsupported.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_HSUARTControl_Unsupported.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_BootSelection_Unsupported.h  \
-
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/devcon/processor/../templates/devcon_BootSelection_Unsupported.h 
