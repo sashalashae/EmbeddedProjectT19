@@ -64,6 +64,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "armthread.h"
 #include "txthread.h"
 #include "rxthread.h"
+#include "motorthread.h"
 #include "system_definitions.h"
 
 // *****************************************************************************

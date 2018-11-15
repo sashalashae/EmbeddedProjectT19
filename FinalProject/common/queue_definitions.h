@@ -22,7 +22,9 @@ QueueHandle_t SensorQueue;
 typedef enum 
 {
     UnknownMsg = 0,
+    CalibrateMsg,
     CommandMsg,
+    AsyncStopMsg,
     TimerMsg,
     AckMsg,
     FsrMsg

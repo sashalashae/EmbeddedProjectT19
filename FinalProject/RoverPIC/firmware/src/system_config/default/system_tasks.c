@@ -58,6 +58,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "armthread.h"
 #include "txthread.h"
 #include "rxthread.h"
+#include "motorthread.h"
 
 
 // *****************************************************************************
@@ -68,13 +69,13 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 
  
-static void _SYS_Tasks ( void );
- 
+static void _SYS_Tasks ( void ); 
  
 static void _NAVTHREAD_Tasks(void);
 static void _ARMTHREAD_Tasks(void);
 static void _TXTHREAD_Tasks(void);
 static void _RXTHREAD_Tasks(void);
+static void _MOTORTHREAD_Tasks(void);
 
 
 // *****************************************************************************
@@ -97,7 +98,7 @@ void SYS_Tasks ( void )
     xTaskCreate((TaskFunction_t) _SYS_Tasks,
                 "Sys Tasks",
                 1024, NULL, 0, NULL);
-
+ 
     /* Create OS Thread for NAVTHREAD Tasks. */
     xTaskCreate((TaskFunction_t) _NAVTHREAD_Tasks,
                 "NAVTHREAD Tasks",
@@ -117,6 +118,11 @@ void SYS_Tasks ( void )
     xTaskCreate((TaskFunction_t) _RXTHREAD_Tasks,
                 "RXTHREAD Tasks",
                 2048, NULL, 4, NULL);
+
+    /* Create OS Thread for MOTORTHREAD Tasks. */
+    xTaskCreate((TaskFunction_t) _MOTORTHREAD_Tasks,
+                "MOTORTHREAD Tasks",
+                2048, NULL, 2, NULL);
 
     /**************
      * Start RTOS * 
@@ -215,6 +221,23 @@ static void _RXTHREAD_Tasks(void)
     while(1)
     {
         RXTHREAD_Tasks();
+    }
+}
+
+
+/*******************************************************************************
+  Function:
+    void _MOTORTHREAD_Tasks ( void )
+
+  Summary:
+    Maintains state machine of MOTORTHREAD.
+*/
+
+static void _MOTORTHREAD_Tasks(void)
+{
+    while(1)
+    {
+        MOTORTHREAD_Tasks();
     }
 }
 

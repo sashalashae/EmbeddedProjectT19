@@ -85,6 +85,8 @@ void dbgInit();
 #define LOC_MOTOR_QUEUE_ISR_SEND            38
 #define LOC_MOTOR_QUEUE_RECEIVE_WAITING     39
 #define LOC_MOTOR_QUEUE_RECEIVE_FINISHED    40
+#define LOC_PID_ADJUST_START                41
+#define LOC_PID_ADJUST_END                  42
 
 /*
  * Navigation Specific Locations
