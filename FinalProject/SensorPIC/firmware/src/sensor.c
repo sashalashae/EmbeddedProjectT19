@@ -136,7 +136,8 @@ void SENSOR_Initialize ( void )
 
 void SENSOR_Tasks ( void )
 {   
-    strStruct value;
+    strStruct output;
+    char valueStr;
     QueueMsg latestValue;
     //SYS_PORTS_PinDirectionSelect(PORTS_ID_0, SYS_PORTS_DIRECTION_OUTPUT, PORT_CHANNEL_A, PORTS_BIT_POS_3);
     while(1)
@@ -146,16 +147,14 @@ void SENSOR_Tasks ( void )
         //enable ADC interrupt
         //SYS_INT_SourceStatusSet(INT_SOURCE_ADC_1);
         //receive message
-        latestValue = Queue_Receive_FromThread(SensorQueue);
+        latestValue = Queue_Receive_FromThread(SensorQueue);   
         //transmit to server
-        value.str[0] = ((latestValue.val0/1000) % 10) | 0x30;
-        value.str[1] = ((latestValue.val0/100) % 10) | 0x30;
-        value.str[2] = ((latestValue.val0/10) % 10) | 0x30;
-        value.str[3] = ((latestValue.val0) % 10) | 0x30;
-        value.str[4] = '\0';
-        value.get = 1;
-        value.count = 4;
-        TxThreadQueue_Send(value);
+        valueStr[0] = ((latestValue.val0/1000) % 10) | 0x30;
+        valueStr[1] = ((latestValue.val0/100) % 10) | 0x30;
+        valueStr[2] = ((latestValue.val0/10) % 10) | 0x30;
+        valueStr[3] = ((latestValue.val0) % 10) | 0x30;
+        output = stringToStructValue("{\"Source\":\"SensorPIC\", \"Value\":\"$\"}\0", 0, valueStr)
+        TxThreadQueue_Send(output);
         DRV_ADC_Open();
         sleep(500);
 //        Queue_Clear(SensorQueue);
