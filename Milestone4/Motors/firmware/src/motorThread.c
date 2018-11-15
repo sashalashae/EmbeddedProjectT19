@@ -194,7 +194,7 @@ void MOTORTHREAD_Tasks ( void )
                     prev_left_error = left_error;
                     int32_t right_error = expected_val - current_right;                     // proportional
                     accumulated_right_error += right_error * DELTA_TIME_MS;                 // integral
-                    int32_t derivative_right_error = (right_error - prev_left_error)/DELTA_TIME_MS;  // derivative
+                    int32_t derivative_right_error = (right_error - prev_right_error)/DELTA_TIME_MS;  // derivative
                     prev_right_error = right_error;
                     motors_pid_adjust(left_error, right_error, accumulated_left_error, accumulated_right_error, derivative_left_error, derivative_right_error, KP, KI, KD);
                     

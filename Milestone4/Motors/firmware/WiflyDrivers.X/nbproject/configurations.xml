@@ -133,7 +133,6 @@
       <itemPath>../src/TxThreadQueue.h</itemPath>
       <itemPath>../src/debug.h</itemPath>
       <itemPath>../src/helper_functions.h</itemPath>
-      <itemPath>../src/queue_definitions.h</itemPath>
       <itemPath>../src/UART_Defines.h</itemPath>
       <itemPath>../src/motor_library.h</itemPath>
       <itemPath>../src/motor_queue.h</itemPath>
@@ -241,7 +240,6 @@
       <itemPath>../src/TxThreadQueue.c</itemPath>
       <itemPath>../src/debug.c</itemPath>
       <itemPath>../src/helper_functions.c</itemPath>
-      <itemPath>../src/queue_definitions.c</itemPath>
       <itemPath>../src/motor_library.c</itemPath>
       <itemPath>../src/motor_queue.c</itemPath>
       <itemPath>../src/test_queue.c</itemPath>
@@ -259,6 +257,7 @@
     <Elem>..\src\default</Elem>
     <Elem>..\src\system_config\default</Elem>
     <Elem>../../../RoverMotors/firmware/src</Elem>
+    <Elem>../../../common</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
