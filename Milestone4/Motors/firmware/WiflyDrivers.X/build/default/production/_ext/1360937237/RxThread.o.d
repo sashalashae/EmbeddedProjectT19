@@ -271,7 +271,6 @@ build/default/production/_ext/1360937237/RxThread.o:  \
 ../src/rxthread.h  \
  ../src/motorthread.h  \
 ../src/motor_library.h  \
-../src/motor_queue.h  \
- ../src/test_queue.h  \
+ ../src/../../../common/queue_definitions.h  \
 ../src/RxISRQueue.h  \
-../src/jsmn.h 
+ ../src/jsmn.h 

@@ -135,8 +135,7 @@
       <itemPath>../src/helper_functions.h</itemPath>
       <itemPath>../src/UART_Defines.h</itemPath>
       <itemPath>../src/motor_library.h</itemPath>
-      <itemPath>../src/motor_queue.h</itemPath>
-      <itemPath>../src/test_queue.h</itemPath>
+      <itemPath>../../../common/queue_definitions.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -241,8 +240,7 @@
       <itemPath>../src/debug.c</itemPath>
       <itemPath>../src/helper_functions.c</itemPath>
       <itemPath>../src/motor_library.c</itemPath>
-      <itemPath>../src/motor_queue.c</itemPath>
-      <itemPath>../src/test_queue.c</itemPath>
+      <itemPath>../../../common/queue_definitions.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

@@ -1,6 +1,6 @@
-build/default/production/_ext/1360937237/test_queue.o:  \
- ../src/test_queue.c  \
-../src/test_queue.h  \
+build/default/production/_ext/907750266/queue_definitions.o:  \
+ ../../../common/queue_definitions.c  \
+../../../common/queue_definitions.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/FreeRTOS.h  \
  ../src/system_config/default/FreeRTOSConfig.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/projdefs.h  \
@@ -9,8 +9,13 @@ build/default/production/_ext/1360937237/test_queue.o:  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX/portmacro.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/queue.h  \
- ../src/debug.h  \
-../src/system_config/default/system_config.h  \
+ ../src/system_config/default/system_definitions.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_common.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_module.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/system/devcon/sys_devcon.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/system/system.h  \
+ ../../../../../../../../microchip/harmony/v2_06/framework/system/clk/sys_clk.h  \
+ ../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/ports_processor.h  \
@@ -43,12 +48,6 @@ build/default/production/_ext/1360937237/test_queue.o:  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Unsupported.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports_compatibility.h  \
- ../src/system_config/default/system_definitions.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_common.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_module.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/system/devcon/sys_devcon.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/system/system.h  \
- ../../../../../../../../microchip/harmony/v2_06/framework/system/clk/sys_clk.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/plib_osc.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/osc_processor.h  \
  ../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/osc_p32xxxx.h  \
@@ -261,8 +260,9 @@ build/default/production/_ext/1360937237/test_queue.o:  \
  ../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports_definitions.h  \
  ../src/testthread.h  \
 ../src/helper_functions.h  \
-../src/UART_Defines.h  \
- ../src/TxISRQueue.h  \
+../src/debug.h  \
+ ../src/UART_Defines.h  \
+../src/TxISRQueue.h  \
 ../src/UART_defines.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
@@ -273,4 +273,4 @@ build/default/production/_ext/1360937237/test_queue.o:  \
 ../src/jsmn.h  \
 ../src/motorthread.h  \
  ../src/motor_library.h  \
-../src/motor_queue.h 
+../src/../../../common/queue_definitions.h 

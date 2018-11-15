@@ -52,7 +52,7 @@ void RXTHREAD_Tasks ( void )
     
     while(1)
     {
-        MotorQueueData_t msg_to_send;
+        QueueMsg msg_to_send;
         //receive first char
         currentChar = RxISRQueue_Receive();
         //wait for open brackets
@@ -86,10 +86,10 @@ void RXTHREAD_Tasks ( void )
             kd += (str[18] - '0') * 100;
             kd += (str[19] - '0') * 10;
             kd += (str[20] - '0');
-            msg_to_send.type = CALIBRATE;
-            msg_to_send.kp = kp;
-            msg_to_send.ki = ki;
-            msg_to_send.kd = kd;
+            msg_to_send.type = CalibrateMsg;
+            msg_to_send.val0 = kp;
+            msg_to_send.val1 = ki;
+            msg_to_send.val2 = kd;
         }
         else if(str[0] == 'F' && str[1] == 'O' && str[2] == 'R' && str[3] == 'W' && str[4] == 'A' && str[5] == 'R' && str[6] == 'D')
         {   
@@ -97,9 +97,9 @@ void RXTHREAD_Tasks ( void )
             cm += (str[8] - '0') * 10;
             cm += (str[9] - '0');
             
-            msg_to_send.type = MOVEMENT_COMMAND;
-            msg_to_send.movement = FORWARD_BOTH;
-            msg_to_send.distance = cm * ONE_CM_TRANSITION;
+            msg_to_send.type = CommandMsg;
+            msg_to_send.val0 = FORWARD_BOTH;
+            msg_to_send.val1 = cm * ONE_CM_TRANSITION;
         }
         else if(str[0] == 'R' && str[1] == 'E' && str[2] == 'V' && str[3] == 'E' && str[4] == 'R' && str[5] == 'S' && str[6] == 'E')
         {   
@@ -107,9 +107,9 @@ void RXTHREAD_Tasks ( void )
             cm += (str[8] - '0') * 10;
             cm += (str[9] - '0');
             
-            msg_to_send.type = MOVEMENT_COMMAND;
-            msg_to_send.movement = REVERSE_BOTH;
-            msg_to_send.distance = cm * ONE_CM_TRANSITION;
+            msg_to_send.type = CommandMsg;
+            msg_to_send.val0 = REVERSE_BOTH;
+            msg_to_send.val1 = cm * ONE_CM_TRANSITION;
         }
         else if(str[0] == 'L' && str[1] == 'E' && str[2] == 'F' && str[3] == 'T')
         {
@@ -117,9 +117,9 @@ void RXTHREAD_Tasks ( void )
             degrees += (str[5] - '0') * 10;
             degrees += (str[6] - '0');
             
-            msg_to_send.type = MOVEMENT_COMMAND;
-            msg_to_send.movement = TURN_LEFT;
-            msg_to_send.distance = FIVE_DEGREE_TRANSITION * (degrees/5);
+            msg_to_send.type = CommandMsg;
+            msg_to_send.val0 = TURN_LEFT;
+            msg_to_send.val1 = FIVE_DEGREE_TRANSITION * (degrees/5);
         }
         else if(str[0] == 'R' && str[1] == 'I' && str[2] == 'G' && str[3] == 'H' && str[4] == 'T')
         {
@@ -127,21 +127,21 @@ void RXTHREAD_Tasks ( void )
             degrees += (str[6] - '0') * 10;
             degrees += (str[7] - '0');
             
-            msg_to_send.type = MOVEMENT_COMMAND;
-            msg_to_send.movement = TURN_RIGHT;
-            msg_to_send.distance = FIVE_DEGREE_TRANSITION * (degrees/5);
+            msg_to_send.type = CommandMsg;
+            msg_to_send.val0 = TURN_RIGHT;
+            msg_to_send.val1 = FIVE_DEGREE_TRANSITION * (degrees/5);
         }
         else if(str[0] == 'S' && str[1] == 'T' && str[2] == 'O' && str[3] == 'P')
         {
-            msg_to_send.type = MOVEMENT_COMMAND;
-            msg_to_send.movement = STOP;
-            msg_to_send.distance = 0;
+            msg_to_send.type = CommandMsg;
+            msg_to_send.val0 = STOP;
+            msg_to_send.val1 = 0;
         }
         else if(str[0] == 'A' && str[1] == 'S' && str[2] == 'Y' && str[3] == 'N' && str[4] == 'C' && str[5] == 'S' && str[6] == 'T' && str[7] == 'O' && str[8] == 'P')
         {
-            msg_to_send.type = ASYNC_STOP;
+            msg_to_send.type = AsyncStopMsg;
         }
-        MotorQueue_SendMsg(msg_to_send);
+        Queue_Send_FromThread(MotorQueue, msg_to_send);
     }
 }
 

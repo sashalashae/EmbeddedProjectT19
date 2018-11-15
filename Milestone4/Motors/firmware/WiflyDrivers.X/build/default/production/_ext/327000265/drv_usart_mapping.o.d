@@ -272,5 +272,4 @@ build/default/production/_ext/327000265/drv_usart_mapping.o:  \
 ../src/jsmn.h  \
 ../src/motorthread.h  \
  ../src/motor_library.h  \
-../src/motor_queue.h  \
-../src/test_queue.h 
+../src/../../../common/queue_definitions.h 

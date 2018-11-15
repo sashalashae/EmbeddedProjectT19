@@ -73,7 +73,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 void TESTTHREAD_Initialize ( void )
 {
     dbgInit();
-    TestQueue_Initialize(1);
+    NavQueue_Init(1);
 }
 
 /******************************************************************************
@@ -86,13 +86,13 @@ void TESTTHREAD_Initialize ( void )
 
 void TESTTHREAD_Tasks ( void )
 {   
-    TestQueueData_t acknowledge;
+    QueueMsg acknowledge;
     strStruct ack_msg = stringToStruct("Acknowledge\0", 1);
     
     while(true)
     {
-        acknowledge = TestQueue_ReceiveMsg();
-        if(acknowledge.ack)
+        acknowledge = Queue_Receive_FromThread(NavQueue);
+        if(acknowledge.type = AckMsg)
         {
             TxThreadQueue_Send(ack_msg);
         }

@@ -274,5 +274,4 @@ build/default/production/_ext/1688732426/system_exceptions.o:  \
 ../src/jsmn.h  \
 ../src/motorthread.h  \
  ../src/motor_library.h  \
-../src/motor_queue.h  \
-../src/test_queue.h 
+../src/../../../common/queue_definitions.h 

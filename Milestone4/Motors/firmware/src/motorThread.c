@@ -76,7 +76,7 @@ void MOTORTHREAD_Initialize ( void )
     motors_initialize();
     
     // initialize this thread's queue
-    MotorQueue_Initialize(5);
+    MotorQueue_Init(5);
     motors_timer_init();
 }
 
@@ -96,7 +96,7 @@ void MOTORTHREAD_Tasks ( void )
     DRV_TMR1_Start();
     
     uint32_t distance_target_val = 0;
-    TestQueueData_t ack_msg;
+    QueueMsg ack_msg;
     uint32_t current_left;
     uint32_t current_right;
     int32_t accumulated_left_error = 0;
@@ -110,38 +110,37 @@ void MOTORTHREAD_Tasks ( void )
     strStruct coefficient_msg = stringToStruct("Coefficients\0", 1);
     TxThreadQueue_Send(coefficient_msg);
     
-    uint8_t KP = 0;
-    uint8_t KI = 0;
-    uint8_t KD = 0;
+    uint8_t KP = 70;
+    uint8_t KI = 30;
+    uint8_t KD = 25;
     
     bool running = false;
     
     while(true)
     {
-        MotorQueueData_t msg = MotorQueue_ReceiveMsg();
+        QueueMsg msg = Queue_Receive_FromThread(MotorQueue);
         if(running)
         {
-            if(msg.type != TIMER_TICK && msg.type != ASYNC_STOP)
+            if(msg.type != TimerMsg && msg.type != AsyncStopMsg)
             {
                 continue;
             }
         }
         else
         {
-            if(msg.type == TIMER_TICK)
+            if(msg.type == TimerMsg)
             {
                 continue;
             }
         }
-        strStruct debug_msg;
         switch(msg.type)
         {
-            case MOVEMENT_COMMAND:
+            case CommandMsg:
                 motors_stop();
                 DRV_TMR0_CounterClear();
                 DRV_TMR1_CounterClear();
-                distance_target_val = msg.distance;
-                switch(msg.movement)
+                distance_target_val = msg.val1;
+                switch(msg.val0)
                 {
                     case FORWARD_BOTH:
                         motors_forward(DUTY_CYCLE);
@@ -162,7 +161,7 @@ void MOTORTHREAD_Tasks ( void )
                 }
                 running = true;
                 break;
-            case TIMER_TICK:
+            case TimerMsg:
                 current_left = DRV_TMR0_CounterValueGet();
                 current_right = DRV_TMR1_CounterValueGet();
                 if(current_left >= distance_target_val && current_right >= distance_target_val)
@@ -173,8 +172,8 @@ void MOTORTHREAD_Tasks ( void )
                     prev_left_error = 0;
                     prev_right_error = 0;
                     running = false;
-                    ack_msg.ack = true;
-                    TestQueue_SendMsg(ack_msg);
+                    ack_msg.type = AckMsg;
+                    Queue_Send_FromThread(NavQueue, ack_msg);
                     //expected_val = TIMER_100_MS_TRANSITIONS;
                 }
                 else if(current_left >= distance_target_val)
@@ -262,23 +261,22 @@ void MOTORTHREAD_Tasks ( void )
                     //expected_val += TIMER_100_MS_TRANSITIONS;
                 }
                 break;
-            case ASYNC_STOP:
+            case AsyncStopMsg:
                 motors_stop();
                 accumulated_left_error = 0;
                 accumulated_right_error = 0;
                 prev_left_error = 0;
                 prev_right_error = 0;
                 running = false;
-                ack_msg.ack = true;
-                TestQueue_SendMsg(ack_msg);
-                //expected_val = TIMER_100_MS_TRANSITIONS;
+                ack_msg.type = AckMsg;
+                Queue_Send_FromThread(NavQueue, ack_msg);
                 break;
-            case CALIBRATE:
-                KP = msg.kp;
-                KI = msg.ki;
-                KD = msg.kd;
-                ack_msg.ack = true;
-                TestQueue_SendMsg(ack_msg);
+            case CalibrateMsg:
+                KP = msg.val0;
+                KI = msg.val1;
+                KD = msg.val2;
+                ack_msg.type = AckMsg;
+                Queue_Send_FromThread(NavQueue, ack_msg);
                 break;
         }
     }

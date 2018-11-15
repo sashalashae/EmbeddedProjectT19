@@ -19,9 +19,9 @@
 
 void motors_timer_cb(TimerHandle_t xTimer)
 {
-    MotorQueueData_t msg;
-    msg.type = TIMER_TICK;
-    MotorQueue_SendMsg(msg);
+    QueueMsg msg;
+    msg.type = TimerMsg;
+    Queue_Send_FromThread(MotorQueue, msg);
 }
 
 void motors_timer_init()

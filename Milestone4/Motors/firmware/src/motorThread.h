@@ -59,8 +59,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system_config.h"
 #include "system_definitions.h"
 #include "motor_library.h"
-#include "motor_queue.h"
-#include "test_queue.h"
+#include "../../../common/queue_definitions.h"
 #include "TxThreadQueue.h"
 #include "debug.h"
 

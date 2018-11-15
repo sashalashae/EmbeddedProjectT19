@@ -271,7 +271,6 @@ build/default/production/_ext/1360937237/testThread.o:  \
  ../src/motor_library.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
- ../src/motor_queue.h  \
-../src/test_queue.h  \
+ ../src/../../../common/queue_definitions.h  \
 ../src/helper_functions.h  \
  ../src/UART_defines.h 

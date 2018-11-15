@@ -272,6 +272,5 @@ build/default/production/_ext/1360937237/TxThread.o:  \
 ../src/jsmn.h  \
  ../src/motorthread.h  \
 ../src/motor_library.h  \
-../src/motor_queue.h  \
- ../src/test_queue.h  \
+ ../src/../../../common/queue_definitions.h  \
 ../src/TxThreadQueue.h 
