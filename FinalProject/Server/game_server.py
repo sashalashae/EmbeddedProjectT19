@@ -51,11 +51,11 @@ def getdata(source):
 
     # Gets the Json Data
     data.pop("_id")
-    data = json.dumps(data)
-
+    
     # Gets the element to return
     if (source == "FSR"):
         out = data.pop("Sensor")
+        out = json.dumps(out)
     elif (source == "Sym"):
         out = data.pop("Symbol")
     elif (source == "Move"):
@@ -68,17 +68,20 @@ def getdata(source):
     return out
 
 
-def response(jdata, source):
+def response(source):
     out = {}
     if (source == "RoverPIC"):
-        out = {}
+        out = {
+            "FSRs": getdata("FSR"),
+            "next": getdata("Next"),
+            "draw": getdata("Sym")
+            }
     elif (source == "GUI"):
-
         out = {
             "FSR": getdata("FSR"),
-            "NextLoc": getdata("Next")
-            "Symbol": getdata("Sym")
-            "Movement": getdata("Move")
+            "NextLoc": getdata("Next"),
+            "Symbol": getdata("Sym"),
+            "Movement": getdata("Move"),
             "Ackno": getdata("Ack")
         }
     return out
@@ -89,6 +92,7 @@ def insert(jdata, source):
         # Getting the data from Json
         fsrdata = jdata.pop("Value")
         # Formatting
+        print(fsrdata)
         fsrjson = {"Sensor": fsrdata}
         #Inserting
         fsrTable.insert(fsrjson)
@@ -118,7 +122,6 @@ def insert(jdata, source):
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
-
         # self.close_connection = 0
         self.send_response(200)
         self.end_headers()
@@ -129,15 +132,24 @@ class Handler(BaseHTTPRequestHandler):
         datajson = json.loads(data)
         whichpi = datajson.pop("Source")
         resp = response(whichpi)
+        self.wfile.write(resp)
         return
 
     def do_POST(self):
+        self.send_response(200)
+        self.end_headers()
         rawdata = str(
             self.rfile.read(int(self.headers.getheader('Content-Length'))))
         data = rawdata
+        #print(rawdata)
         datajson = json.loads(data)
         whichpi = datajson.pop("Source")
-        insert(datajson, whichpi)
+        if(whichpi == "GUI" and datajson.pop("Type") == "Status"):
+            resp = response(whichpi)
+            self.wfile.write(resp)
+        else:    
+            insert(datajson, whichpi)
+
         return
 
 
@@ -146,7 +158,20 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
 
 
 if __name__ == '__main__':
-    server = ThreadedHTTPServer(('0.0.0.0', 2000), Handler)
+            # Formatting the data to be inserted into Mongo
+    fsrjson = {"Sensor": 0000}
+    ackjson = {"Ack": 1}
+    symjson = {"Symbol": 2}
+    tilejson = {"Tile": 3}
+    monjson = {"MoveNumber": 4}
 
+    # Inserting the data
+    ackTable.insert(ackjson)
+    fsrTable.insert(fsrjson)
+    symTable.insert(symjson)
+    tileTable.insert(tilejson)
+    movenumTable.insert(monjson)
+    server = ThreadedHTTPServer(('0.0.0.0', 2000), Handler)
+    
     print('Starting server, use <Ctrl-C> to stop')
     server.serve_forever()
