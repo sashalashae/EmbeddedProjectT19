@@ -1,6 +1,7 @@
 ﻿Imports System.Net.Http
 Imports System.Text
 Imports System.Threading
+Imports System.Web.Script.Serialization
 
 Public Class DiagnosticGUI
 
@@ -35,7 +36,7 @@ Public Class DiagnosticGUI
         Dim FSRdata As UInt16
         Dim fsrStr As String
         Dim currentLabel As Label
-        Dim val As UInt16
+        Dim parser As New JavaScriptSerializer()
         Dim contentStr As String = "{""Source"":""GUI"", ""Type"":""Status""}"
         Dim content As HttpContent = New StringContent(contentStr, Encoding.UTF8, "application/json")
         Try
@@ -49,8 +50,8 @@ Public Class DiagnosticGUI
         End Try
         Try
             'Parse JSON message
-            fsrStr = respStr.Substring(respStr.IndexOf("FSR") + 8, 4)
-            FSRdata = Convert.ToUInt16(fsrStr)
+            Dim jsonMsg = parser.DeserializeObject(respStr)
+            FSRdata = Convert.ToUInt16(jsonMsg("FSR"))
         Catch ex As Exception
             Me.Invoke(Sub() serverStatus.Text = "Bad JSON received")
             Me.Invoke(Sub() serverStatus.BackColor = Color.Red)
