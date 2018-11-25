@@ -138,20 +138,6 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             *pdToCpy = pd;
             break;
         case bottom_right_corner:
-            /*sleep(400);
-            char temp[MAX_MESSAGE_SIZE];
-            strStruct currentMsg;
-            temp[0] = ((FSRs % 1000) / 100 )| 0b110000;
-            temp[1] = ((FSRs % 100) /10 )| 0b110000;
-            temp[2] = (FSRs % 10) | 0b110000;
-            temp[3] = ' ';
-            temp[4] = pd.check | 0b110000;
-            temp[5] = ' ';
-            temp[6] = pd.dir | 0b110000;
-            temp[7] = '\0';
-            currentMsg = stringToStructValue("{\"FROMBOTRIGHTCORNER\":\"$\"}\0",0,temp);
-            TxThreadQueue_Send(currentMsg);*/
-            
             dbgOutputLoc(LOC_BOTTOM_RIGHT_CORNER);
             if (FSRs == 0b1100011000 || FSRs == 0b1100010000 || FSRs == 0b1000011000)
                 pd.current_position = bottom_right_corner; //On all 4
@@ -827,9 +813,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol)
                     Queue_Send_FromThread(ArmQueue, toArm);
                     while(armAck.source == ArmThread && armAck.type == AckMsg)
                         armAck = Queue_Receive_FromThread(NavQueue);
-                }
-                    //currentMsg = stringToStruct("{\"MoveCmd\":\"TurnLeft90, DriveForward25, stop, DriveBackwards25, TurnRight90\",\"ArmCmd\":\"drawO\",\"Beside\":\"4\"}\0", 0);
-                
+                }                
                 
                 toMotor.type = CommandMsg;
                 toMotor.val0 = REVERSE_BOTH;
@@ -846,11 +830,12 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol)
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while(motorAck.source == MovementThread && motorAck.type == AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
-                
-                //TxThreadQueue_Send(currentMsg); //Send Ack
+                currentMsg = stringToStruct("{\"Source\":\"RoverPIC\",\"Ack\":\"\"}\0", 0);
+                TxThreadQueue_Send(currentMsg); //Send Ack
             }
             else if(nextPos == 9)
             {
+                //Do nothing
                 //currentMsg = stringToStructValue("{\"MoveCmd\":\"stop\",\"ArmCmd\":\"wait\",\"Beside\":\"$\"}\0", 0, pd.beside);
                 //TxThreadQueue_Send(currentMsg);
             }
@@ -886,8 +871,8 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol)
                     //currentMsg = stringToStructValue("{\"MoveCmd\":\"stop\",\"ArmCmd\":\"drawO\",\"Beside\":\"$\"}\0", 0, pd.beside);
                 }
                 
-                
-                //TxThreadQueue_Send(currentMsg); //SEND ACK
+                currentMsg = stringToStruct("{\"Source\":\"RoverPIC\",\"Ack\":\"\"}\0", 0);
+                TxThreadQueue_Send(currentMsg); //Send Ack
             }
         }
         else if(pd.dir == forwards)

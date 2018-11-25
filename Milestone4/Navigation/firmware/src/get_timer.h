@@ -21,8 +21,8 @@ void Timer_Init();
 
 
 void Nav_Timer_Cb(TimerHandle_t xTimer);
-void MotorAck_cb(TimerHandle_t xTimer);
-void ArmAck_cb(TimerHandle_t xTimer);
+//void MotorAck_cb(TimerHandle_t xTimer);
+//void ArmAck_cb(TimerHandle_t xTimer);
 
 
 #endif	/* GET_TIMER_H */
