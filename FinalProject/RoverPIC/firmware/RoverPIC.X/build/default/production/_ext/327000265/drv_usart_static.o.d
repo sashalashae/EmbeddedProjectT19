@@ -260,16 +260,16 @@ build/default/production/_ext/327000265/drv_usart_static.o:  \
  ../src/navthread.h  \
 ../src/../../../common/queue_definitions.h  \
  ../src/../../../common/UART_Defines.h  \
-../src/armthread.h  \
- ../src/arm_library.h  \
+../src/motor_library.h  \
+ ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h  \
+ ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
+ ../src/armthread.h  \
+../src/arm_library.h  \
 ../src/../../../common/debug.h  \
  ../src/../../../common/UART_Defines.h  \
  ../src/../../../common/helper_functions.h  \
 ../src/../../../common/debug.h  \
- ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h  \
- ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../src/txthread.h  \
 ../src/../../../common/UART_Defines.h  \
  ../src/rxthread.h  \
-../src/motorthread.h  \
-../src/motor_library.h 
+../src/motorthread.h 

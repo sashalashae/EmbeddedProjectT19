@@ -273,6 +273,7 @@
         <Name dnOrder="0">drv_tmr_static.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default/framework/driver/tmr</Path>
         <Checksum dnOrder="2">DA8B92ECCB270627686EB2ED733F7CF2</Checksum>
+        <ProjectFileChecksum dnOrder="3">C1B3936ABE2FC9872CAA8D927A02DC17</ProjectFileChecksum>
       </Template>
       <Template dnOrder="4">
         <Name dnOrder="0">motorThread.c</Name>
@@ -319,7 +320,7 @@
       <Template dnOrder="13">
         <Name dnOrder="0">FreeRTOSConfig.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default</Path>
-        <Checksum dnOrder="2">A6760E556B8E4EAF646CEC02CDCB14CC</Checksum>
+        <Checksum dnOrder="2">E20F906B45567E5430B871779DC7CA82</Checksum>
       </Template>
       <Template dnOrder="14">
         <Name dnOrder="0">armThread.c</Name>
@@ -382,6 +383,7 @@
         <Name dnOrder="0">system_tasks.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
         <Checksum dnOrder="2">4C420D6FB0D1B1841C492FDC24D20229</Checksum>
+        <ProjectFileChecksum dnOrder="3">0D60BED21FDF727CC333CAD1E86EF985</ProjectFileChecksum>
       </Template>
       <Template dnOrder="27">
         <Name dnOrder="0">sys_devcon_pic32mx.c</Name>

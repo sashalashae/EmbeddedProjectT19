@@ -129,58 +129,50 @@ void NAVTHREAD_Tasks ( void )
 {
     int newMove = 0;
     QueueMsg move;
+    QueueMsg ArmMove;
     move.source = NavigationThread;
     move.type = CommandMsg;
+    ArmMove.type = CommandMsg;
+    ArmMove.source = NavigationThread;
+    ArmMove.val0 = DrawX;
     QueueMsg ack;
-    QueueMsg serverResponse;
     while(1)
     {
-        while(!newMove)
-        {
-            //insert delay in polling
-            sleep(500);
-            
-            //ask the server what the next move is (GET request)
-            TxThreadQueue_Send(stringToStruct("getmove\0", 1));
-            
-            //wait for RX thread to send something back
-            serverResponse = Queue_Receive_FromThread(NavQueue);
-            
-            //handle RX thread response
-            if(serverResponse.source == RxThread)
-            {
-                if(serverResponse.type == CommandMsg)
-                {
-                    if(serverResponse.val0 == DrawX)
-                    {
-                        newMove = 1;
-                        move.val0 = DrawX;
-                    }
-                    else if(serverResponse.val0 == DrawO)
-                    {
-                        newMove = 1;
-                        move.val0 = DrawO;
-                    }
-                    else
-                    {
-                        newMove = 0;
-                    }
-                }
-            }
-        }
         
-        //send move to arm
-        Queue_Send_FromThread(ArmQueue, move);
-        
-        //wait for ack
+        move.val0 = FORWARD_BOTH;
+        move.val1 = 10*ONE_CM_TRANSITION;
+        Queue_Send_FromThread(MotorQueue, move);
+
         ack.type = UnknownMsg;
         while(ack.type != AckMsg)
         {
             ack = Queue_Receive_FromThread(NavQueue);
         }
         
-        //clear new move flag
-        newMove = 0;
+        Queue_Send_FromThread(ArmQueue, ArmMove);
+        ack.type = UnknownMsg;
+        while(ack.type != AckMsg)
+        {
+            ack = Queue_Receive_FromThread(NavQueue);
+        }
+        
+        move.val0 = REVERSE_BOTH;
+        move.val1 = 10*ONE_CM_TRANSITION;
+        Queue_Send_FromThread(MotorQueue, move);
+        
+        ack.type = UnknownMsg;
+        while(ack.type != AckMsg)
+        {
+            ack = Queue_Receive_FromThread(NavQueue);
+        }
+        
+        ArmMove.val0 = DrawO;
+        Queue_Send_FromThread(ArmQueue, ArmMove);
+        ack.type = UnknownMsg;
+        while(ack.type != AckMsg)
+        {
+            ack = Queue_Receive_FromThread(NavQueue);
+        }
     }
 }
 

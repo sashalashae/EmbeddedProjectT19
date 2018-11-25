@@ -113,16 +113,16 @@ void SYS_Tasks ( void )
     xTaskCreate((TaskFunction_t) _TXTHREAD_Tasks,
                 "TXTHREAD Tasks",
                 2048, NULL, 3, NULL);
+    
+        /* Create OS Thread for MOTORTHREAD Tasks. */
+    xTaskCreate((TaskFunction_t) _MOTORTHREAD_Tasks,
+                "MOTORTHREAD Tasks",
+                2048, NULL, 2, NULL);
 
     /* Create OS Thread for RXTHREAD Tasks. */
     xTaskCreate((TaskFunction_t) _RXTHREAD_Tasks,
                 "RXTHREAD Tasks",
                 2048, NULL, 4, NULL);
-
-    /* Create OS Thread for MOTORTHREAD Tasks. */
-    xTaskCreate((TaskFunction_t) _MOTORTHREAD_Tasks,
-                "MOTORTHREAD Tasks",
-                2048, NULL, 2, NULL);
 
     /**************
      * Start RTOS * 

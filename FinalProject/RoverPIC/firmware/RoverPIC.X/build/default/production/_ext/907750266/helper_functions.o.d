@@ -261,17 +261,17 @@ build/default/production/_ext/907750266/helper_functions.o:  \
  ../src/navthread.h  \
 ../src/../../../common/queue_definitions.h  \
  ../src/../../../common/UART_Defines.h  \
-../src/armthread.h  \
- ../src/arm_library.h  \
+../src/motor_library.h  \
+ ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h  \
+ ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
+ ../src/armthread.h  \
+../src/arm_library.h  \
 ../src/../../../common/debug.h  \
  ../src/../../../common/UART_Defines.h  \
  ../src/../../../common/helper_functions.h  \
- ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h  \
- ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
- ../src/txthread.h  \
-../src/../../../common/UART_Defines.h  \
- ../src/rxthread.h  \
-../src/motorthread.h  \
-../src/motor_library.h  \
- ../../../common/debug.h  \
-../../../common/UART_Defines.h 
+../src/txthread.h  \
+ ../src/../../../common/UART_Defines.h  \
+../src/rxthread.h  \
+ ../src/motorthread.h  \
+../../../common/debug.h  \
+ ../../../common/UART_Defines.h 
