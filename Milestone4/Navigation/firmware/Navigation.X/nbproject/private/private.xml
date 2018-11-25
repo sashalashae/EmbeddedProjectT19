@@ -3,22 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Thomas/Desktop/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/NavigationLibrary.c</file>
-            <file>file:/C:/Users/Thomas/Desktop/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/get_timer.c</file>
-            <file>file:/C:/Users/Thomas/Desktop/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/TxThreadQueue.h</file>
-            <file>file:/C:/Users/Thomas/Desktop/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/pdStruct.h</file>
-            <file>file:/C:/Users/Thomas/Desktop/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/helper_functions.c</file>
-            <file>file:/C:/Users/Thomas/Desktop/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/get_timer.h</file>
-            <file>file:/C:/Users/Thomas/Desktop/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/wifly_library.h</file>
-            <file>file:/C:/Users/Thomas/Desktop/EmbeddedProjectT19/Milestone4/common/queue_definitions.h</file>
-            <file>file:/C:/Users/Thomas/Desktop/EmbeddedProjectT19/Milestone4/common/jsmn.h</file>
-            <file>file:/C:/Users/Thomas/Desktop/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/helper_functions.h</file>
-            <file>file:/C:/Users/Thomas/Desktop/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/NavigationLibrary.h</file>
-            <file>file:/C:/Users/Thomas/Desktop/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/RxThread.c</file>
-            <file>file:/C:/Users/Thomas/Desktop/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/TxISRQueue.h</file>
-            <file>file:/C:/Users/Thomas/Desktop/EmbeddedProjectT19/Milestone4/common/helper_functions.h</file>
-            <file>file:/C:/Users/Thomas/Desktop/EmbeddedProjectT19/Milestone4/Navigation/firmware/src/NavigationThread.c</file>
-            <file>file:/C:/Users/Thomas/Desktop/EmbeddedProjectT19/Milestone4/common/UART_Defines.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/navigation/firmware/src/RxThread.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/common/debug.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/navigation/firmware/src/pdStruct.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/navigation/firmware/src/NavigationLibrary.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/common/queue_definitions.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/navigation/firmware/src/get_timer.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/navigation/firmware/src/TxThread.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/navigation/firmware/src/NavigationThread.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/common/queue_definitions.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/navigation/firmware/src/testThread.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/Milestone4/navigation/firmware/src/get_timer.c</file>
         </group>
     </open-files>
 </project-private>

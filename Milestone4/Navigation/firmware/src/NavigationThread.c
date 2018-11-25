@@ -75,6 +75,7 @@ void TESTTHREAD_Initialize ( void )
 {
     dbgInit();
     Timer_Init();
+    NavQueue_Init(MAX_MESSAGE_SIZE);
 }
 
 /******************************************************************************

@@ -33,7 +33,6 @@
 void RXTHREAD_Initialize ( void )
 {
     RxISRQueue_Init(MAX_MESSAGE_SIZE);
-    NavQueue_Init(MAX_MESSAGE_SIZE);
 }
 
 

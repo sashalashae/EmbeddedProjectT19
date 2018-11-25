@@ -25,5 +25,25 @@ typedef struct {
     uint8_t flip;
 }Position_Data;
 
+typedef enum
+{
+    FORWARD_BOTH,
+    REVERSE_BOTH,
+    TURN_RIGHT,
+    TURN_LEFT,
+    STOP
+} movement_type_t;
+
+typedef enum 
+{
+    Null = 0,
+    ResetArm,
+    DrawX,
+    DrawO,
+    SetServoAngle,
+    Calibrate,
+    CancelCommand
+}ArmCommand;
+
 #endif	/* PDSTRUCT_H */
 
