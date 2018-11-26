@@ -892,8 +892,6 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol)
                     toMotor.val1 = 750; // 10 cm
                     toMotor.val2 = 0;
                     Queue_Send_FromThread(MotorQueue, toMotor);
-                    while(motorAck.source != MovementThread && motorAck.type != AckMsg)
-                    motorAck = Queue_Receive_FromThread(NavQueue);
                     
                     //currentMsg = stringToStructValue("{\"MoveCmd\":\"DriveForward10\",\"ArmCmd\":\"wait\",\"Beside\":\"$\"}\0", 0, pd.beside);
                     //TxThreadQueue_Send(currentMsg);
@@ -908,8 +906,6 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol)
                         toMotor.val1 = 750; // 10 cm
                         toMotor.val2 = 0;
                         Queue_Send_FromThread(MotorQueue, toMotor);
-                        while(motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
                         
                         //currentMsg = stringToStructValue("{\"MoveCmd\":\"DriveForward10\",\"ArmCmd\":\"wait\",\"Beside\":\"$\"}\0", 0, pd.beside);
                         pd.flip = 0;
@@ -937,8 +933,6 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol)
                         toMotor.val1 = 750; // 10 cm
                         toMotor.val2 = 0;
                         Queue_Send_FromThread(MotorQueue, toMotor);
-                        while(motorAck.source != MovementThread && motorAck.type != AckMsg)
-                            motorAck = Queue_Receive_FromThread(NavQueue);
                         
                         //currentMsg = stringToStructValue("{\"MoveCmd\":\"stop, TurnLeft90, DriveForward10\",\"ArmCmd\":\"wait\",\"Beside\":\"$\"}\0", 0, pd.beside);
                     }
@@ -948,15 +942,13 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol)
             else if(pd.current_position <= 15)
             {
                 turnCheck = 1;
-                currentMsg = stringToStructValue("{\"MoveCmd\":\"DriveForward4\",\"ArmCmd\":\"wait\",\"Beside\":\"$\"}\0", 0, pd.beside);
+                //currentMsg = stringToStructValue("{\"MoveCmd\":\"DriveForward4\",\"ArmCmd\":\"wait\",\"Beside\":\"$\"}\0", 0, pd.beside);
                 
                 toMotor.type = CommandMsg;
                 toMotor.val0 = FORWARD_BOTH;
                 toMotor.val1 = 150; // 2 cm
                 toMotor.val2 = 0;
                 Queue_Send_FromThread(MotorQueue, toMotor);
-                while(motorAck.source != MovementThread && motorAck.type != AckMsg)
-                    motorAck = Queue_Receive_FromThread(NavQueue);
                 
                 //TxThreadQueue_Send(currentMsg);
             }
@@ -980,8 +972,6 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol)
                         toMotor.val1 = 750; // 10 cm
                         toMotor.val2 = 0;
                         Queue_Send_FromThread(MotorQueue, toMotor);
-                        while(motorAck.source != MovementThread && motorAck.type != AckMsg)
-                            motorAck = Queue_Receive_FromThread(NavQueue);
                             
                         pd.flip = 0;
                     }
@@ -1008,10 +998,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol)
                         toMotor.val0 = REVERSE_BOTH;
                         toMotor.val1 = 750; // 10 cm
                         toMotor.val2 = 0;
-                        Queue_Send_FromThread(MotorQueue, toMotor);
-                        while(motorAck.source != MovementThread && motorAck.type != AckMsg)
-                            motorAck = Queue_Receive_FromThread(NavQueue);
-                        
+                        Queue_Send_FromThread(MotorQueue, toMotor);                        
                     }
                     //TxThreadQueue_Send(currentMsg);   
                 }
@@ -1025,8 +1012,6 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol)
                 toMotor.val1 = 150; // 2 cm
                 toMotor.val2 = 0;
                 Queue_Send_FromThread(MotorQueue, toMotor);
-                while(motorAck.source != MovementThread && motorAck.type != AckMsg)
-                    motorAck = Queue_Receive_FromThread(NavQueue);
                 
                 //TxThreadQueue_Send(currentMsg);
             }
