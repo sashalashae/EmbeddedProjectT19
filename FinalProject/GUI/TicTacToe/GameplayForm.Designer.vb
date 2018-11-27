@@ -46,6 +46,9 @@ Partial Class GameplayForm
         Me.sensor4 = New System.Windows.Forms.Label()
         Me.sensor3 = New System.Windows.Forms.Label()
         Me.sensor2 = New System.Windows.Forms.Label()
+        Me.roverImg = New System.Windows.Forms.PictureBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        CType(Me.roverImg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tile0
@@ -265,11 +268,31 @@ Partial Class GameplayForm
         Me.sensor2.Size = New System.Drawing.Size(7, 300)
         Me.sensor2.TabIndex = 24
         '
+        'roverImg
+        '
+        Me.roverImg.Image = Global.TicTacToe.My.Resources.Resources.rover
+        Me.roverImg.Location = New System.Drawing.Point(264, 277)
+        Me.roverImg.Name = "roverImg"
+        Me.roverImg.Size = New System.Drawing.Size(45, 45)
+        Me.roverImg.TabIndex = 25
+        Me.roverImg.TabStop = False
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(435, 339)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 26
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'GameplayForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(593, 378)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.roverImg)
         Me.Controls.Add(Me.sensor2)
         Me.Controls.Add(Me.sensor3)
         Me.Controls.Add(Me.sensor4)
@@ -296,6 +319,7 @@ Partial Class GameplayForm
         Me.Controls.Add(Me.tile0)
         Me.Name = "GameplayForm"
         Me.Text = "Rover Tic-Tac-Toe"
+        CType(Me.roverImg, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -325,4 +349,6 @@ Partial Class GameplayForm
     Friend WithEvents sensor4 As Label
     Friend WithEvents sensor3 As Label
     Friend WithEvents sensor2 As Label
+    Friend WithEvents roverImg As PictureBox
+    Friend WithEvents Button1 As Button
 End Class

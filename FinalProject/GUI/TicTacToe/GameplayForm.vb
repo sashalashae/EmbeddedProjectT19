@@ -30,6 +30,8 @@ Public Class GameplayForm
     Private difficulty As GameDifficulty
     Private threadRunning As Boolean
 
+    Private temp As Integer
+
     Public Sub New(ByVal numPlay As Integer, ByVal diff As GameDifficulty)
 
         ' This call is required by the designer.
@@ -63,6 +65,8 @@ Public Class GameplayForm
         pollThread.IsBackground = True
         pollThread.Start()
 
+        temp = 0
+
     End Sub
 
     'thread function for polling server
@@ -81,6 +85,7 @@ Public Class GameplayForm
         Dim resp As HttpResponseMessage
         Dim respStr As String = ""
         Dim FSRdata As UInt16
+        Dim roverPos As Integer
         Dim badconnection As Boolean = False
         Dim currentLabel As Label
         Try
@@ -98,6 +103,8 @@ Public Class GameplayForm
                 ackCounter = Convert.ToInt32(jsonMsg("Ackno"))
                 moveDone = True
             End If
+            roverPos = Convert.ToInt32(jsonMsg("Position"))
+            moveRover(roverPos)
             FSRdata = Convert.ToUInt16(jsonMsg("FSR"))
             For i As Integer = 0 To 9
                 currentLabel = Me.Controls.Find("sensor" + i.ToString(), True).FirstOrDefault()
@@ -118,6 +125,47 @@ Public Class GameplayForm
                 'no handling
             End Try
         End If
+    End Sub
+
+    Private Sub moveRover(ByRef position As Integer)
+        Dim pos As Point
+        Select Case position
+            Case 0
+                pos = New Point(264, 277)
+            Case 1
+                pos = New Point(328, 277)
+            Case 2
+                pos = New Point(388, 277)
+            Case 3
+                pos = New Point(461, 277)
+            Case 4
+                pos = New Point(536, 277)
+            Case 5
+                pos = New Point(536, 210)
+            Case 6
+                pos = New Point(536, 142)
+            Case 7
+                pos = New Point(536, 77)
+            Case 8
+                pos = New Point(536, 1)
+            Case 9
+                pos = New Point(461, 1)
+            Case 10
+                pos = New Point(388, 1)
+            Case 11
+                pos = New Point(328, 1)
+            Case 12
+                pos = New Point(264, 1)
+            Case 13
+                pos = New Point(264, 77)
+            Case 14
+                pos = New Point(264, 142)
+            Case 15
+                pos = New Point(264, 210)
+            Case Else
+                pos = New Point(264, 277)
+        End Select
+        Me.Invoke(Sub() roverImg.Location = pos)
     End Sub
 
     Public Sub NextMove()
@@ -260,18 +308,213 @@ Public Class GameplayForm
         Dim maxPri, maxInd As Integer
         Dim i As Integer
 
-        'set tiles with potential to win as 6
+        'set all tiles to 1
+        For i = 0 To 8
+            priority(i) = 1
+        Next
+
+        'set corners to 2
+        priority(0) = 2
+        priority(2) = 2
+        priority(6) = 2
+        priority(8) = 2
+
+        'block forks
+        If boardstate(0) = "X" Or boardstate(2) = "X" Or boardstate(6) = "X" Or boardstate(8) = "X" Then
+            priority(1) = 6
+            priority(7) = 6
+            priority(3) = 6
+            priority(5) = 6
+        End If
 
         'set center tile to 7
+        priority(4) = 7
 
-        'set block win condition spaces to 8
-
-        'set win condition spaces to 9
-        If boardstate(0) = "O" And boardstate(1) = "O" Then
-            priority(2) = 9
+        'set win condition spaces to 9, block win to 8
+        'tile 0
+        If boardstate(1) = boardstate(2) Then
+            If boardstate(1) = "X" Then
+                priority(0) = 8
+            ElseIf boardstate(1) = "O" Then
+                priority(0) = 9
+            End If
         End If
-        If boardstate(5) = "O" And boardstate(8) = "O" Then
-            priority(2) = 9
+        If boardstate(3) = boardstate(6) Then
+            If boardstate(3) = "X" Then
+                priority(0) = 8
+            ElseIf boardstate(3) = "O" Then
+                priority(0) = 9
+            End If
+        End If
+        If boardstate(4) = boardstate(8) Then
+            If boardstate(4) = "X" Then
+                priority(0) = 8
+            ElseIf boardstate(4) = "O" Then
+                priority(0) = 9
+            End If
+        End If
+
+        'tile1
+        If boardstate(0) = boardstate(2) Then
+            If boardstate(0) = "X" Then
+                priority(1) = 8
+            ElseIf boardstate(0) = "O" Then
+                priority(1) = 9
+            End If
+        End If
+        If boardstate(4) = boardstate(7) Then
+            If boardstate(4) = "X" Then
+                priority(1) = 8
+            ElseIf boardstate(4) = "O" Then
+                priority(1) = 9
+            End If
+        End If
+
+        'tile2
+        If boardstate(0) = boardstate(1) Then
+            If boardstate(0) = "X" Then
+                priority(2) = 8
+            ElseIf boardstate(0) = "O" Then
+                priority(2) = 9
+            End If
+        End If
+        If boardstate(5) = boardstate(8) Then
+            If boardstate(5) = "X" Then
+                priority(2) = 8
+            ElseIf boardstate(5) = "O" Then
+                priority(2) = 9
+            End If
+        End If
+        If boardstate(4) = boardstate(6) Then
+            If boardstate(4) = "X" Then
+                priority(2) = 8
+            ElseIf boardstate(4) = "O" Then
+                priority(2) = 9
+            End If
+        End If
+
+        'tile3
+        If boardstate(0) = boardstate(6) Then
+            If boardstate(0) = "X" Then
+                priority(3) = 8
+            ElseIf boardstate(0) = "O" Then
+                priority(3) = 9
+            End If
+        End If
+        If boardstate(4) = boardstate(5) Then
+            If boardstate(4) = "X" Then
+                priority(3) = 8
+            ElseIf boardstate(4) = "O" Then
+                priority(3) = 9
+            End If
+        End If
+
+        'tile4
+        If boardstate(0) = boardstate(8) Then
+            If boardstate(0) = "X" Then
+                priority(4) = 8
+            ElseIf boardstate(0) = "O" Then
+                priority(4) = 9
+            End If
+        End If
+        If boardstate(2) = boardstate(6) Then
+            If boardstate(2) = "X" Then
+                priority(4) = 8
+            ElseIf boardstate(2) = "O" Then
+                priority(4) = 9
+            End If
+        End If
+        If boardstate(3) = boardstate(5) Then
+            If boardstate(3) = "X" Then
+                priority(4) = 8
+            ElseIf boardstate(3) = "O" Then
+                priority(4) = 9
+            End If
+        End If
+        If boardstate(1) = boardstate(7) Then
+            If boardstate(1) = "X" Then
+                priority(4) = 8
+            ElseIf boardstate(1) = "O" Then
+                priority(4) = 9
+            End If
+        End If
+
+        'tile5
+        If boardstate(2) = boardstate(8) Then
+            If boardstate(2) = "X" Then
+                priority(5) = 8
+            ElseIf boardstate(2) = "O" Then
+                priority(5) = 9
+            End If
+        End If
+        If boardstate(3) = boardstate(4) Then
+                If boardstate(3) = "X" Then
+                    priority(5) = 8
+                ElseIf boardstate(3) = "O" Then
+                    priority(5) = 9
+                End If
+            End If
+
+            'tile6
+            If boardstate(0) = boardstate(3) Then
+            If boardstate(0) = "X" Then
+                priority(6) = 8
+            ElseIf boardstate(0) = "O" Then
+                priority(6) = 9
+            End If
+        End If
+        If boardstate(7) = boardstate(8) Then
+            If boardstate(7) = "X" Then
+                priority(6) = 8
+            ElseIf boardstate(7) = "O" Then
+                priority(6) = 9
+            End If
+        End If
+        If boardstate(4) = boardstate(2) Then
+            If boardstate(4) = "X" Then
+                priority(6) = 8
+            ElseIf boardstate(4) = "O" Then
+                priority(6) = 9
+            End If
+        End If
+
+        'tile7
+        If boardstate(6) = boardstate(8) Then
+            If boardstate(6) = "X" Then
+                priority(7) = 8
+            ElseIf boardstate(6) = "O" Then
+                priority(7) = 9
+            End If
+        End If
+        If boardstate(1) = boardstate(4) Then
+            If boardstate(1) = "X" Then
+                priority(7) = 8
+            ElseIf boardstate(1) = "O" Then
+                priority(7) = 9
+            End If
+        End If
+
+        'tile8
+        If boardstate(2) = boardstate(5) Then
+            If boardstate(2) = "X" Then
+                priority(8) = 8
+            ElseIf boardstate(2) = "O" Then
+                priority(8) = 9
+            End If
+        End If
+        If boardstate(6) = boardstate(7) Then
+            If boardstate(6) = "X" Then
+                priority(8) = 8
+            ElseIf boardstate(6) = "O" Then
+                priority(8) = 9
+            End If
+        End If
+        If boardstate(0) = boardstate(4) Then
+            If boardstate(0) = "X" Then
+                priority(8) = 8
+            ElseIf boardstate(0) = "O" Then
+                priority(8) = 9
+            End If
         End If
 
         'set all occupied spaces to 0
@@ -378,6 +621,11 @@ Public Class GameplayForm
         Me.Close()
     End Sub
 
+    Private Sub closing_handler(sender As Object, e As EventArgs) Handles Me.FormClosing
+        threadRunning = False
+        SetupForm.Show()
+    End Sub
+
     Private Sub tile0_Click(sender As Object, e As EventArgs) Handles tile0.Click
         'send the selected player move
         SetMove(New GameMove With {.PlayerSymbol = currentPlayer, .SelectedTile = 0})
@@ -459,4 +707,9 @@ Public Class GameplayForm
         NextMove()
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        moveRover(temp)
+        temp = temp + 1
+        temp = temp Mod 16
+    End Sub
 End Class
