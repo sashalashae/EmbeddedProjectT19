@@ -2,7 +2,13 @@ build/default/production/_ext/1688732426/system_interrupt.o:  \
  ../src/system_config/default/system_interrupt.c  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_common.h  \
  ../src/navthread.h  \
-../src/system_config/default/system_config.h  \
+../src/motor_library.h  \
+ ../src/system_config/default/system_definitions.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_module.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/system/devcon/sys_devcon.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/system/system.h  \
+ ../../../../../../../../../../microchip/harmony/v2_06/framework/system/clk/sys_clk.h  \
+ ../src/system_config/default/system_config.h  \
  ../src/system_config/default/bsp/bsp.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/ports_processor.h  \
@@ -35,11 +41,6 @@ build/default/production/_ext/1688732426/system_interrupt.o:  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Unsupported.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/ports/plib_ports_compatibility.h  \
- ../src/system_config/default/system_definitions.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/system/common/sys_module.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/system/devcon/sys_devcon.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/system/system.h  \
- ../../../../../../../../../../microchip/harmony/v2_06/framework/system/clk/sys_clk.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/plib_osc.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/osc_processor.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/peripheral/osc/processor/osc_p32xxxx.h  \
@@ -243,18 +244,18 @@ build/default/production/_ext/1688732426/system_interrupt.o:  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/osal/osal.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/osal/osal_definitions.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/osal/osal_freertos.h  \
- ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/FreeRTOS.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/FreeRTOS.h  \
  ../src/system_config/default/FreeRTOSConfig.h  \
- ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/projdefs.h  \
- ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/portable.h  \
- ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/deprecated_definitions.h  \
- ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX/portmacro.h  \
- ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
- ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/queue.h  \
- ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/semphr.h  \
- ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/queue.h  \
- ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
- ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/list.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/projdefs.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/portable.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/deprecated_definitions.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX/portmacro.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/queue.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/semphr.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/queue.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/list.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/system/debug/sys_debug.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports.h  \
  ../../../../../../../../../../microchip/harmony/v2_06/framework/system/ports/sys_ports_definitions.h  \
@@ -266,11 +267,10 @@ build/default/production/_ext/1688732426/system_interrupt.o:  \
 ../src/../../../common/debug.h  \
  ../src/../../../common/queue_definitions.h  \
  ../src/../../../common/UART_Defines.h  \
- ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/timers.h  \
- ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/task.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/timers.h  \
+ ../../../../../../third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../src/txthread.h  \
 ../src/../../../common/UART_Defines.h  \
  ../src/rxthread.h  \
 ../src/motorthread.h  \
-../src/motor_library.h  \
  ../src/system_config/default/system_definitions.h 

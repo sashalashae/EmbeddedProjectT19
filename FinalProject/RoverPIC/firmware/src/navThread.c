@@ -54,6 +54,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 #include "navthread.h"
+#include "../../../common/pdStruct.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -113,7 +114,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 void NAVTHREAD_Initialize ( void )
 {
     //initialize queue
-    NavQueue_Init(10);
+    Timer_Init();
+    NavQueue_Init(MAX_MESSAGE_SIZE);
 }
 
 
@@ -127,7 +129,23 @@ void NAVTHREAD_Initialize ( void )
 
 void NAVTHREAD_Tasks ( void )
 {
-    int newMove = 0;
+    QueueMsg fromServer;
+    Position_Data pd;
+    pd.check = 0;
+    pd.flip = 0;
+    
+    while(1)
+    {
+        fromServer = Queue_Receive_FromThread(NavQueue);
+        
+        if(fromServer.source == RxThread)
+        {
+            position_tracker(fromServer.val1, &pd, fromServer.val0);
+            toNextLoc(&pd, fromServer.val0, fromServer.val2);
+        }
+    }
+    
+    /*int newMove = 0;
     QueueMsg move;
     QueueMsg ArmMove;
     move.source = NavigationThread;
@@ -178,7 +196,7 @@ void NAVTHREAD_Tasks ( void )
         {
             ack = Queue_Receive_FromThread(NavQueue);
         }
-    }
+    }*/
 }
 
  
