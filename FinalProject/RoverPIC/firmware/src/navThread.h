@@ -56,10 +56,13 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include "motor_library.h"
 #include "system_config.h"
 #include "system_definitions.h"
+#include "../../../common/debug.h"
+#include "../../../common/UART_Defines.h"
 #include "../../../common/queue_definitions.h"
-#include "motor_library.h"
+#include "timers.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
