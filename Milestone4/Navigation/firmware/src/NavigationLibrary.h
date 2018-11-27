@@ -16,6 +16,8 @@
 #include "../../../common/UART_Defines.h"
 #include "timers.h"
 
+#define ERR_TURN_RIGHT 31
+#define ERR_TURN_LEFT  31
 
 void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos);
 
