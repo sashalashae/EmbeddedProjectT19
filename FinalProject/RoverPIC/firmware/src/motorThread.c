@@ -104,7 +104,7 @@ void MOTORTHREAD_Tasks ( void )
     int32_t prev_left_error = 0;
     int32_t prev_right_error = 0;
     uint32_t expected_val;// = TIMER_100_MS_TRANSITIONS;
-    const uint8_t DUTY_CYCLE = 50;
+    uint8_t duty_cycle;
     const uint8_t DELTA_TIME_MS = ENCODER_PERIOD_MS; // period of timer interrupts
     
     strStruct coefficient_msg = stringToStruct("Coefficients\0", 1);
@@ -140,19 +140,27 @@ void MOTORTHREAD_Tasks ( void )
                 DRV_TMR0_CounterClear();
                 DRV_TMR1_CounterClear();
                 distance_target_val = msg.val1;
+                if(msg.val2)
+                {
+                    duty_cycle = msg.val3 & 0xFF;
+                }
+                else
+                {
+                    duty_cycle = 50;
+                }
                 switch(msg.val0)
                 {
                     case FORWARD_BOTH:
-                        motors_forward(DUTY_CYCLE);
+                        motors_forward(duty_cycle);
                         break;
                     case REVERSE_BOTH:
-                        motors_reverse(DUTY_CYCLE);
+                        motors_reverse(duty_cycle);
                         break;
                     case TURN_RIGHT:
-                        motors_turn_right(DUTY_CYCLE);
+                        motors_turn_right(duty_cycle);
                         break;
                     case TURN_LEFT:
-                        motors_turn_left(DUTY_CYCLE);
+                        motors_turn_left(duty_cycle);
                         break;
                     case STOP:
                         motors_stop();
@@ -175,7 +183,6 @@ void MOTORTHREAD_Tasks ( void )
                     ack_msg.type = AckMsg;
                     ack_msg.source = MovementThread;
                     Queue_Send_FromThread(NavQueue, ack_msg);
-                    //expected_val = TIMER_100_MS_TRANSITIONS;
                 }
                 else if(current_left >= distance_target_val)
                 {
@@ -197,7 +204,7 @@ void MOTORTHREAD_Tasks ( void )
                     int32_t derivative_right_error = (right_error - prev_right_error)/DELTA_TIME_MS;  // derivative
                     prev_right_error = right_error;
                     motors_pid_adjust(left_error, right_error, accumulated_left_error, accumulated_right_error, derivative_left_error, derivative_right_error, KP, KI, KD);
-                    
+                    /*
                     char msg[137] = "{\"Type\":\"Error\",\"Content\":{\"left\":\"+xxxxx\",\"right\":\"+xxxxx\",\"total_l\":\"+xxxxxxx\",\"total_r\":\"+xxxxxxx\",\"KP\":\"xxx\",\"KI\":\"xxx\",\"KD\":\"xxx\"}}\0";
                     
                     if(left_error < 0)
@@ -259,7 +266,7 @@ void MOTORTHREAD_Tasks ( void )
                     msg[131] = ((KD%100)/10) + '0';
                     msg[132] = (KD%10) + '0';
                     TxThreadQueue_Send(stringToStruct(msg, 0));
-                    //expected_val += TIMER_100_MS_TRANSITIONS;
+                    */
                 }
                 break;
             case AsyncStopMsg:

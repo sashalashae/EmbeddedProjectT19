@@ -141,6 +141,8 @@ void NAVTHREAD_Tasks ( void )
         
         move.val0 = FORWARD_BOTH;
         move.val1 = 10*ONE_CM_TRANSITION;
+        move.val2 = true;
+        move.val3 = 80;
         Queue_Send_FromThread(MotorQueue, move);
 
         ack.type = UnknownMsg;
@@ -149,6 +151,7 @@ void NAVTHREAD_Tasks ( void )
             ack = Queue_Receive_FromThread(NavQueue);
         }
         
+        ArmMove.val0 = DrawX;
         Queue_Send_FromThread(ArmQueue, ArmMove);
         ack.type = UnknownMsg;
         while(ack.type != AckMsg)
@@ -158,6 +161,8 @@ void NAVTHREAD_Tasks ( void )
         
         move.val0 = REVERSE_BOTH;
         move.val1 = 10*ONE_CM_TRANSITION;
+        move.val2 = true;
+        move.val3 = 20;
         Queue_Send_FromThread(MotorQueue, move);
         
         ack.type = UnknownMsg;
