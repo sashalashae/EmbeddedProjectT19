@@ -26,7 +26,7 @@ Public Class GameplayForm
     Private boardstate(8) As String
     Private moveNum As Integer
     Private ackCounter As Integer
-    Private moveDone As Boolean
+    Private MoveInProgress As Boolean
     Private difficulty As GameDifficulty
     Private addImage As Boolean
     Private threadRunning As Boolean
@@ -45,6 +45,7 @@ Public Class GameplayForm
         'set number of players and difficulty
         numPlayers = numPlay
         difficulty = diff
+        MoveInProgress = False
 
         beamerBox.Visible = False
         addImage = False
@@ -70,6 +71,8 @@ Public Class GameplayForm
         pollThread.IsBackground = True
         pollThread.Start()
 
+        ackCounter = 0
+
     End Sub
 
     'thread function for polling server
@@ -86,12 +89,11 @@ Public Class GameplayForm
                 Me.Invoke(Sub() beamerBox.Visible = False)
                 pictimer.Reset()
             End If
-            System.Threading.Thread.Sleep(250)
+            System.Threading.Thread.Sleep(500)
         End While
     End Sub
 
     Private Async Sub GetServerInfo()
-        moveDone = True
         Dim statusStr As String = "{""Source"":""GUI"", ""Type"":""Status""}"
         Dim statusMsg As HttpContent = New StringContent(statusStr, Encoding.UTF8, "application/json")
         Dim parser As New JavaScriptSerializer()
@@ -114,9 +116,13 @@ Public Class GameplayForm
             Dim jsonMsg = parser.DeserializeObject(respStr)
             If Convert.ToInt32(jsonMsg("Ackno")) > ackCounter Then
                 ackCounter = Convert.ToInt32(jsonMsg("Ackno"))
-                moveDone = True
+                If MoveInProgress Then
+                    MoveInProgress = False
+                    EnableButtons()
+                    NextMove()
+                End If
             End If
-            roverPos = Convert.ToInt32(jsonMsg("Position"))
+            roverPos = Convert.ToInt32(jsonMsg("RoverPosition"))
             moveRover(roverPos)
             FSRdata = Convert.ToUInt16(jsonMsg("FSR"))
             For i As Integer = 0 To 9
@@ -185,6 +191,11 @@ Public Class GameplayForm
         Dim AIMove As GameMove
         Dim AITile As Button
 
+        If MoveInProgress Then
+            status.Text = "Move in progress"
+            Exit Sub
+        End If
+
         'check for three in a row
         If ThreeInRow() = True Then
             DisableButtons()
@@ -203,8 +214,8 @@ Public Class GameplayForm
         If numPlayers = 1 And currentPlayer = "O" Then
             AIMove = PerformAIMove()
             AITile = Me.Controls.Find("tile" + AIMove.SelectedTile.ToString(), True).FirstOrDefault()
-            AITile.Text = AIMove.PlayerSymbol
-            AITile.Enabled = False
+            Me.Invoke(Sub() AITile.Text = AIMove.PlayerSymbol)
+            Me.Invoke(Sub() AITile.Enabled = False)
             currentPlayer = "X"
             'check for three in a row
             If ThreeInRow() = True Then
@@ -213,11 +224,11 @@ Public Class GameplayForm
                 Exit Sub
             End If
         Else
-            status.Text = "Waiting for player: " + currentPlayer
+            Me.Invoke(Sub() status.Text = "Waiting for player: " + currentPlayer)
         End If
 
         If moveNum = 8 Then
-            status.Text = "Game Over!"
+            Me.Invoke(Sub() status.Text = "Game Over!")
         End If
 
     End Sub
@@ -232,52 +243,52 @@ Public Class GameplayForm
         Dim found As Boolean = False
         If boardstate(0) = boardstate(1) And boardstate(1) = boardstate(2) And boardstate(0) <> "Empty" Then
             found = True
-            tile0.BackColor = Color.LightGreen
-            tile1.BackColor = Color.LightGreen
-            tile2.BackColor = Color.LightGreen
-            status.Text = "Player " + boardstate(0) + " wins!"
+            Me.Invoke(Sub() tile0.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() tile1.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() tile2.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() status.Text = "Player " + boardstate(0) + " wins!")
         ElseIf boardstate(3) = boardstate(4) And boardstate(4) = boardstate(5) And boardstate(5) <> "Empty" Then
             found = True
-            tile3.BackColor = Color.LightGreen
-            tile4.BackColor = Color.LightGreen
-            tile5.BackColor = Color.LightGreen
-            status.Text = "Player " + boardstate(5) + " wins!"
+            Me.Invoke(Sub() tile3.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() tile4.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() tile5.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() status.Text = "Player " + boardstate(5) + " wins!")
         ElseIf boardstate(6) = boardstate(7) And boardstate(7) = boardstate(8) And boardstate(8) <> "Empty" Then
             found = True
-            tile6.BackColor = Color.LightGreen
-            tile7.BackColor = Color.LightGreen
-            tile8.BackColor = Color.LightGreen
-            status.Text = "Player " + boardstate(8) + " wins!"
+            Me.Invoke(Sub() tile6.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() tile7.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() tile8.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() status.Text = "Player " + boardstate(8) + " wins!")
         ElseIf boardstate(0) = boardstate(4) And boardstate(4) = boardstate(8) And boardstate(0) <> "Empty" Then
             found = True
-            tile0.BackColor = Color.LightGreen
-            tile4.BackColor = Color.LightGreen
-            tile8.BackColor = Color.LightGreen
-            status.Text = "Player " + boardstate(0) + " wins!"
+            Me.Invoke(Sub() tile0.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() tile4.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() tile8.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() status.Text = "Player " + boardstate(0) + " wins!")
         ElseIf boardstate(2) = boardstate(4) And boardstate(4) = boardstate(6) And boardstate(2) <> "Empty" Then
             found = True
-            tile2.BackColor = Color.LightGreen
-            tile4.BackColor = Color.LightGreen
-            tile6.BackColor = Color.LightGreen
-            status.Text = "Player " + boardstate(2) + " wins!"
+            Me.Invoke(Sub() tile2.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() tile4.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() tile6.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() status.Text = "Player " + boardstate(2) + " wins!")
         ElseIf boardstate(0) = boardstate(3) And boardstate(3) = boardstate(6) And boardstate(0) <> "Empty" Then
             found = True
-            tile0.BackColor = Color.LightGreen
-            tile3.BackColor = Color.LightGreen
-            tile6.BackColor = Color.LightGreen
-            status.Text = "Player " + boardstate(0) + " wins!"
+            Me.Invoke(Sub() tile0.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() tile3.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() tile6.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() status.Text = "Player " + boardstate(0) + " wins!")
         ElseIf boardstate(1) = boardstate(4) And boardstate(4) = boardstate(7) And boardstate(1) <> "Empty" Then
             found = True
-            tile1.BackColor = Color.LightGreen
-            tile4.BackColor = Color.LightGreen
-            tile7.BackColor = Color.LightGreen
-            status.Text = "Player " + boardstate(1) + " wins!"
+            Me.Invoke(Sub() tile1.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() tile4.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() tile7.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() status.Text = "Player " + boardstate(1) + " wins!")
         ElseIf boardstate(2) = boardstate(5) And boardstate(5) = boardstate(8) And boardstate(5) <> "Empty" Then
             found = True
-            tile2.BackColor = Color.LightGreen
-            tile8.BackColor = Color.LightGreen
-            tile5.BackColor = Color.LightGreen
-            status.Text = "Player " + boardstate(5) + " wins!"
+            Me.Invoke(Sub() tile2.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() tile8.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() tile5.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() status.Text = "Player " + boardstate(5) + " wins!")
         End If
         Return found
     End Function
@@ -588,11 +599,7 @@ Public Class GameplayForm
         boardstate(move.SelectedTile) = move.PlayerSymbol
         SendMoveToServer(move)
         DisableButtons()
-        moveDone = False
-        While Not moveDone
-            System.Threading.Thread.Sleep(100)
-        End While
-        EnableButtons()
+        MoveInProgress = True
     End Sub
 
     Private Async Sub SendMoveToServer(ByVal currentMove As GameMove)
@@ -641,7 +648,7 @@ Public Class GameplayForm
         For i As Integer = 0 To 8
             controlString = "tile" + i.ToString()
             Tile = Me.Controls.Find(controlString, True).FirstOrDefault()
-            Tile.Enabled = False
+            Me.Invoke(Sub() Tile.Enabled = False)
         Next
     End Sub
 
@@ -652,7 +659,7 @@ Public Class GameplayForm
             controlString = "tile" + i.ToString()
             Tile = Me.Controls.Find(controlString, True).FirstOrDefault()
             If Tile.Text = "" Then
-                Tile.Enabled = True
+                Me.Invoke(Sub() Tile.Enabled = True)
             End If
         Next
     End Sub
@@ -664,7 +671,7 @@ Public Class GameplayForm
         Next
 
         ResetTiles()
-
+        MoveInProgress = False
         beamerBox.Visible = False
         addImage = False
         status.Text = "Waiting for player: " + currentPlayer

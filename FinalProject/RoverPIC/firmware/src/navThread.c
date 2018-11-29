@@ -138,7 +138,6 @@ void NAVTHREAD_Tasks ( void )
     while(1)
     {
         fromServer = Queue_Receive_FromThread(NavQueue);
-        
         if(fromServer.source == RxThread)
         {
             position_tracker(fromServer.val1, &pd, fromServer.val0);
