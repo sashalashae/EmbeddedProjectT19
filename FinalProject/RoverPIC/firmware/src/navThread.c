@@ -111,6 +111,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     See prototype in navthread.h.
  */
 
+
 void NAVTHREAD_Initialize ( void )
 {
     //initialize queue

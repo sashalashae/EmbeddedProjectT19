@@ -21,7 +21,7 @@ typedef struct {
     Position prevDbg;
     Direction dir;
     uint8_t check;
-    char beside[2];
+    char beside[3];
     uint8_t flip;
 }Position_Data;
 

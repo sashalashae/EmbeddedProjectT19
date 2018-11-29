@@ -19,6 +19,8 @@
 #define ERR_TURN_RIGHT 31
 #define ERR_TURN_LEFT  31
 
+char* globPos;
+
 void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos);
 
 void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol);

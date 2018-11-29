@@ -1,6 +1,89 @@
 
 #include "NavigationLibrary.h"
 
+void Timer_Init()
+{
+    TimerHandle_t testTimer;
+    
+    testTimer = xTimerCreate("Timer500ms", pdMS_TO_TICKS(500), pdTRUE, ( void * ) 0, Nav_Timer_Cb);
+    
+    xTimerStart(testTimer, 0);
+
+}
+
+void Nav_Timer_Cb(TimerHandle_t xTimer)
+{   
+    strStruct currentMsg;
+    /*currentMsg.str[0] = '{';
+    currentMsg.str[1] = '\"';
+    currentMsg.str[2] = 'S';
+    currentMsg.str[3] = 'o';
+    currentMsg.str[4] = 'u';
+    currentMsg.str[5] = 'r';
+    currentMsg.str[6] = 'c';
+    currentMsg.str[7] = 'e';
+    currentMsg.str[8] = '\"';
+    currentMsg.str[9] = ':';
+    currentMsg.str[10] = '\"';
+    currentMsg.str[11] = 'R';
+    currentMsg.str[12] = 'o';
+    currentMsg.str[13] = 'v';
+    currentMsg.str[14] = 'e'; //"{\"Source\":\"RoverPIC\",\"Ack\":\"\",\"RoverPosition\":\"00\",\"Check\":\"N\"}\0"
+    currentMsg.str[15] = 'r';
+    currentMsg.str[16] = 'P';
+    currentMsg.str[17] = 'I';
+    currentMsg.str[18] = 'C';
+    currentMsg.str[19] = '\"';
+    currentMsg.str[21] = ',';
+    currentMsg.str[22] = '\"';
+    currentMsg.str[23] = 'A';
+    currentMsg.str[24] = 'c';
+    currentMsg.str[25] = 'k';
+    currentMsg.str[26] = '\"';
+    currentMsg.str[27] = ':';
+    currentMsg.str[28] = '\"';
+    currentMsg.str[29] = '\"';
+    currentMsg.str[30] = ',';
+    currentMsg.str[31] = '\"';
+    currentMsg.str[32] = 'R';
+    currentMsg.str[33] = 'o';
+    currentMsg.str[34] = 'v';
+    currentMsg.str[35] = 'e';
+    currentMsg.str[36] = 'r';
+    currentMsg.str[37] = 'P';
+    currentMsg.str[38] = 'o';
+    currentMsg.str[39] = 's';
+    currentMsg.str[40] = 'i';
+    currentMsg.str[41] = 't';//"{\"Source\":\"RoverPIC\",\"Ack\":\"\",\"RoverPosition\":\"00\",\"Check\":\"N\"}\0"
+    currentMsg.str[42] = 'i';
+    currentMsg.str[43] = 'o';
+    currentMsg.str[44] = 'n';
+    currentMsg.str[45] = '\"';
+    currentMsg.str[46] = ':';
+    currentMsg.str[47] = '\"';
+    currentMsg.str[48] = globPos[0];
+    currentMsg.str[49] = globPos[1];
+    currentMsg.str[50] = '\"';
+    currentMsg.str[51] = ',';
+    currentMsg.str[52] = '\"';
+    currentMsg.str[53] = 'C';
+    currentMsg.str[54] = 'h';
+    currentMsg.str[55] = 'e';
+    currentMsg.str[56] = 'c';
+    currentMsg.str[57] = 'k';
+    currentMsg.str[58] = '\"';
+    currentMsg.str[59] = ':';
+    currentMsg.str[60] = '\"';
+    currentMsg.str[61] = 'N';
+    currentMsg.str[62] = '\"';
+    currentMsg.str[63] = '}';
+    currentMsg.str[64] = '\0';
+    currentMsg.get = 1;
+    currentMsg.count = 64;*/
+    currentMsg = stringToStruct("{\"Source\":\"RoverPIC\",\"Ack\":\"\",\"RoverPosition\":\"00\",\"Check\":\"N\"}\0", 1);
+    TxThreadQueue_Send(currentMsg);
+}
+
 void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
     Position_Data pd = *pdToCpy;
     static int initcheck = 1;
@@ -8,7 +91,10 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
     QueueMsg toMotor;
     QueueMsg toArm;
     QueueMsg motorAck;
-
+    
+    motorAck.val2 = false;
+    //motorAck.val3 = 20;
+    
     toMotor.source = NavigationThread;
     toArm.source = NavigationThread;
 
@@ -1108,6 +1194,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
     QueueMsg toMotor;
     QueueMsg toArm;
     motorAck.val2 = false;
+    //motorAck.val3 = 20;
 
     toMotor.source = NavigationThread;
     toArm.source = NavigationThread;
@@ -1118,35 +1205,82 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
     if (initCheck && pd.current_position == bottom_left_corner) {
         initCheck = 0;
     } else {
-        if (pd.current_position == bottom_left_corner || pd.current_position == bottom_right_corner || pd.current_position == top_left_corner || pd.current_position == top_right_corner) {
-            pd.beside[0] = 'Q'; // will never match test
+        if (pd.current_position == bottom_left_corner) {
+            pd.beside[0] = '0'; // will never match test
             pd.beside[1] = '\0';
-        } else if (pd.current_position == bottom_left || pd.current_position == left_bottom) {
-            pd.beside[0] = '0';
+        } 
+        else if(pd.current_position == bottom_right_corner)
+        {
+            pd.beside[0] = '4'; // will never match test
             pd.beside[1] = '\0';
-        } else if (pd.current_position == true_bottom) {
+        }
+        else if(pd.current_position == top_left_corner)
+        {
+            pd.beside[0] = '1'; // will never match test
+            pd.beside[1] = '2';
+            pd.beside[2] = '\0';
+        }
+        else if(pd.current_position == top_right_corner)
+        {
+            pd.beside[0] = '8'; // will never match test
+            pd.beside[1] = '\0';
+            pd.beside[2] = '\0';
+        }
+        else if(pd.current_position == left_bottom)
+        {
+            pd.beside[0] = '1'; // will never match test
+            pd.beside[1] = '5';
+            pd.beside[2] = '\0';
+        }
+        else if(pd.current_position == right_bottom)
+        {
+            pd.beside[0] = '5'; // will never match test
+            pd.beside[1] = '\0';
+            pd.beside[2] = '\0';
+        }
+        else if(pd.current_position == top_left)
+        {
+            pd.beside[0] = '1'; // will never match test
+            pd.beside[1] = '1';
+            pd.beside[2] = '\0';
+        }
+        else if(pd.current_position == right_top)
+        {
+            pd.beside[0] = '7'; // will never match test
+            pd.beside[1] = '\0';
+            pd.beside[2] = '\0';
+        }
+        else if (pd.current_position == bottom_left) {
             pd.beside[0] = '1';
             pd.beside[1] = '\0';
-        } else if (pd.current_position == bottom_right || pd.current_position == right_bottom) {
+        } else if (pd.current_position == true_bottom) {
             pd.beside[0] = '2';
             pd.beside[1] = '\0';
-        } else if (pd.current_position == true_right) {
+        } else if (pd.current_position == bottom_right) {
             pd.beside[0] = '3';
             pd.beside[1] = '\0';
-        } else if (pd.current_position == true_left) {
-            pd.beside[0] = '5';
-            pd.beside[1] = '\0';
-        } else if (pd.current_position == left_top || pd.current_position == top_left) {
+        } else if (pd.current_position == true_right) {
             pd.beside[0] = '6';
             pd.beside[1] = '\0';
+        } else if (pd.current_position == true_left) {
+            pd.beside[0] = '1';
+            pd.beside[1] = '4';
+            pd.beside[2] = '\0';
+        } else if (pd.current_position == left_top) {
+            pd.beside[0] = '1';
+            pd.beside[1] = '3';
+            pd.beside[2] = '\0';
         } else if (pd.current_position == true_top) {
-            pd.beside[0] = '7';
+            pd.beside[0] = '1';
+            pd.beside[1] = '0';
             pd.beside[1] = '\0';
-        } else if (pd.current_position == top_right || pd.current_position == right_top) {
-            pd.beside[0] = '8';
+        } else if (pd.current_position == top_right) {
+            pd.beside[0] = '9';
             pd.beside[1] = '\0';
         }
 
+        globPos = pd.beside;
+        
         dirTravel(&pd, nextPos);
 
         if (pd.dir == stop) {
@@ -1228,8 +1362,18 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                 motorAck.type = UnknownMsg;
                 motorAck.source = UnknownThread;
                 
-                currentMsg = stringToStructValue("{\"Source\":\"RoverPIC\",\"Ack\":\"\",\"RoverPosition\":\"$\",\"Check\":\"Y\"}\0", 1, pd.current_position);
-                TxThreadQueue_Send(currentMsg); //Send Ack
+                
+                QueueMsg checkQ;
+                checkQ.val2 = 0;
+                checkQ = Queue_Receive_FromThread(NavQueue);
+                
+                while(checkQ.val2 != 'P')
+                {
+                    currentMsg = stringToStruct("{\"Source\":\"RoverPIC\",\"Ack\":\"1\",\"RoverPosition\":\"00\"}\0", 0);
+                    TxThreadQueue_Send(currentMsg); //Send Ack
+                    checkQ = Queue_Receive_FromThread(NavQueue);
+                }
+                
             } else if (nextPos == 9) {
                 //Do nothing
                 //currentMsg = stringToStructValue("{\"MoveCmd\":\"stop\",\"ArmCmd\":\"wait\",\"Beside\":\"$\"}\0", 0, pd.beside);
@@ -1271,8 +1415,18 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                     //currentMsg = stringToStructValue("{\"MoveCmd\":\"stop\",\"ArmCmd\":\"drawO\",\"Beside\":\"$\"}\0", 0, pd.beside);
                 }
 
-                currentMsg = stringToStructValue("{\"Source\":\"RoverPIC\",\"Ack\":\"1\",\"RoverPosition\":\"$\",\"Check\":\"Y\"}\0", 1, pd.current_position);
-                TxThreadQueue_Send(currentMsg); //Send Ack
+                QueueMsg checkQ;
+                checkQ.val2 = 0;
+                checkQ = Queue_Receive_FromThread(NavQueue);
+                
+                while(checkQ.val2 != 'P')
+                {
+                    currentMsg = stringToStruct("{\"Source\":\"RoverPIC\",\"Ack\":\"1\",\"RoverPosition\":\"00\"}\0", 0);
+                    TxThreadQueue_Send(currentMsg); //Send Ack
+                    checkQ = Queue_Receive_FromThread(NavQueue);
+                }
+                
+                //volatile int x = 1;
             }
         } else if (pd.dir == forwards) {
             drawcheck0 = 1;

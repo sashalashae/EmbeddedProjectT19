@@ -102,7 +102,8 @@ void RXTHREAD_Tasks ( void )
             }
         }
                 
-        if(checknext && checkFSRs && checkDraw)
+        //if(checknext && checkFSRs && checkDraw)
+        if(checkDraw)
         {
             fromServer.source = RxThread;
             Queue_Send_FromThread(NavQueue, fromServer);
