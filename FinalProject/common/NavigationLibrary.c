@@ -1107,6 +1107,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
     static int drawcheck1 = 1;
     QueueMsg toMotor;
     QueueMsg toArm;
+    motorAck.val2 = false;
 
     toMotor.source = NavigationThread;
     toArm.source = NavigationThread;
@@ -1160,6 +1161,9 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
+                
+                motorAck.type = UnknownMsg;
+                motorAck.source = UnknownThread;
 
                 toMotor.type = CommandMsg;
                 toMotor.val0 = TURN_LEFT;
@@ -1168,6 +1172,9 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
+                
+                motorAck.type = UnknownMsg;
+                motorAck.source = UnknownThread;
 
                 toMotor.type = CommandMsg;
                 toMotor.val0 = FORWARD_BOTH;
@@ -1176,6 +1183,9 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
+                
+                motorAck.type = UnknownMsg;
+                motorAck.source = UnknownThread;
 
                 if (draw) {
                     toArm.type = CommandMsg;
@@ -1183,12 +1193,17 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                     Queue_Send_FromThread(ArmQueue, toArm);
                     while (armAck.source != ArmThread && armAck.type != AckMsg)
                         armAck = Queue_Receive_FromThread(NavQueue);
+                    armAck.type = UnknownMsg;
+                    armAck.source = UnknownThread;
                 } else {
                     toArm.type = CommandMsg;
                     toArm.val0 = DrawO;
                     Queue_Send_FromThread(ArmQueue, toArm);
                     while (armAck.source != ArmThread && armAck.type != AckMsg)
                         armAck = Queue_Receive_FromThread(NavQueue);
+                    
+                    armAck.type = UnknownMsg;
+                    armAck.source = UnknownThread;
                 }
 
                 toMotor.type = CommandMsg;
@@ -1198,6 +1213,9 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
+                
+                motorAck.type = UnknownMsg;
+                motorAck.source = UnknownThread;
 
                 toMotor.type = CommandMsg;
                 toMotor.val0 = TURN_RIGHT;
@@ -1206,7 +1224,11 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
-                currentMsg = stringToStruct("{\"Source\":\"RoverPIC\"}\0", 0);
+                
+                motorAck.type = UnknownMsg;
+                motorAck.source = UnknownThread;
+                
+                currentMsg = stringToStructValue("{\"Source\":\"RoverPIC\",\"Ack\":\"\",\"RoverPosition\":\"$\",\"Check\":\"Y\"}\0", 1, pd.current_position);
                 TxThreadQueue_Send(currentMsg); //Send Ack
             } else if (nextPos == 9) {
                 //Do nothing
@@ -1223,6 +1245,9 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
+                
+                motorAck.type = UnknownMsg;
+                motorAck.source = UnknownThread;
 
                 if (draw) {
                     toArm.type = CommandMsg;
@@ -1230,6 +1255,9 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                     Queue_Send_FromThread(ArmQueue, toArm);
                     while (armAck.source != ArmThread && armAck.type != AckMsg)
                         armAck = Queue_Receive_FromThread(NavQueue);
+                    
+                    armAck.type = UnknownMsg;
+                    armAck.source = UnknownThread;
                     //currentMsg = stringToStructValue("{\"MoveCmd\":\"stop\",\"ArmCmd\":\"drawX\",\"Beside\":\"$\"}\0", 0, pd.beside);
                 } else {
                     toArm.type = CommandMsg;
@@ -1237,10 +1265,13 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                     Queue_Send_FromThread(ArmQueue, toArm);
                     while (armAck.source != ArmThread && armAck.type != AckMsg)
                         armAck = Queue_Receive_FromThread(NavQueue);
+                    
+                    armAck.type = UnknownMsg;
+                    armAck.source = UnknownThread;
                     //currentMsg = stringToStructValue("{\"MoveCmd\":\"stop\",\"ArmCmd\":\"drawO\",\"Beside\":\"$\"}\0", 0, pd.beside);
                 }
 
-                currentMsg = stringToStruct("{\"Source\":\"RoverPIC\"}\0", 0);
+                currentMsg = stringToStructValue("{\"Source\":\"RoverPIC\",\"Ack\":\"1\",\"RoverPosition\":\"$\",\"Check\":\"Y\"}\0", 1, pd.current_position);
                 TxThreadQueue_Send(currentMsg); //Send Ack
             }
         } else if (pd.dir == forwards) {
@@ -1279,6 +1310,9 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                         Queue_Send_FromThread(MotorQueue, toMotor);
                         while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                             motorAck = Queue_Receive_FromThread(NavQueue);
+                        
+                        motorAck.type = UnknownMsg;
+                        motorAck.source = UnknownThread;
 
                         toMotor.type = CommandMsg;
                         toMotor.val0 = TURN_LEFT;
@@ -1287,6 +1321,9 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                         Queue_Send_FromThread(MotorQueue, toMotor);
                         while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                             motorAck = Queue_Receive_FromThread(NavQueue);
+                        
+                        motorAck.type = UnknownMsg;
+                        motorAck.source = UnknownThread;
 
                         toMotor.type = CommandMsg;
                         toMotor.val0 = FORWARD_BOTH;
@@ -1336,6 +1373,9 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                         Queue_Send_FromThread(MotorQueue, toMotor);
                         while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                             motorAck = Queue_Receive_FromThread(NavQueue);
+                        
+                        motorAck.type = UnknownMsg;
+                        motorAck.source = UnknownThread;
 
                         toMotor.type = CommandMsg;
                         toMotor.val0 = TURN_RIGHT;
@@ -1344,6 +1384,9 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                         Queue_Send_FromThread(MotorQueue, toMotor);
                         while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                             motorAck = Queue_Receive_FromThread(NavQueue);
+                        
+                        motorAck.type = UnknownMsg;
+                        motorAck.source = UnknownThread;
 
                         toMotor.type = CommandMsg;
                         toMotor.val0 = REVERSE_BOTH;

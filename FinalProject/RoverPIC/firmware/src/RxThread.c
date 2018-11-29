@@ -84,15 +84,15 @@ void RXTHREAD_Tasks ( void )
             if(str[i] == 'n' && str[i+1] == 'e' && str[i+2] == 'x' && str[i+3] == 't')
             {
                 checknext = 1;
-                fromServer.val0 = str[i+7] & 0b001111;
+                fromServer.val0 = str[i+8] & 0b001111;
             }
             else if(str[i] == 'F' && str[i+1] == 'S' && str[i+2] == 'R' && str[i+3] == 's')
             {
                 checkFSRs = 1;
-                val = ((str[i+9] & 0b001111) * 1000);
-                val = val + ((str[i+10] & 0b001111) * 100);
-                val = val + ((str[i+11] & 0b001111) * 10);
-                val = val + (str[i+12] & 0b001111);
+                val = ((str[i+8] & 0b001111) * 1000);
+                val = val + ((str[i+9] & 0b001111) * 100);
+                val = val + ((str[i+10] & 0b001111) * 10);
+                val = val + (str[i+11] & 0b001111);
                 fromServer.val1 = val;
             }
             else if(str[i] == 'd' && str[i+1] == 'r' && str[i+2] == 'a' && str[i+3] == 'w')
