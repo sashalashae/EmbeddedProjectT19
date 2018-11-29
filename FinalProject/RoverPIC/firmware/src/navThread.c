@@ -134,6 +134,7 @@ void NAVTHREAD_Tasks ( void )
     Position_Data pd;
     pd.check = 0;
     pd.flip = 0;
+    pd.current_position = 50;
     
     while(1)
     {

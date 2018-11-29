@@ -5,7 +5,7 @@ void Timer_Init()
 {
     TimerHandle_t testTimer;
     
-    testTimer = xTimerCreate("Timer500ms", pdMS_TO_TICKS(500), pdTRUE, ( void * ) 0, Nav_Timer_Cb);
+    testTimer = xTimerCreate("Timer250ms", pdMS_TO_TICKS(250), pdTRUE, ( void * ) 0, Nav_Timer_Cb);
     
     xTimerStart(testTimer, 0);
 
@@ -14,7 +14,8 @@ void Timer_Init()
 void Nav_Timer_Cb(TimerHandle_t xTimer)
 {   
     strStruct currentMsg;
-    /*currentMsg.str[0] = '{';
+    
+    currentMsg.str[0] = '{';
     currentMsg.str[1] = '\"';
     currentMsg.str[2] = 'S';
     currentMsg.str[3] = 'o';
@@ -34,53 +35,55 @@ void Nav_Timer_Cb(TimerHandle_t xTimer)
     currentMsg.str[17] = 'I';
     currentMsg.str[18] = 'C';
     currentMsg.str[19] = '\"';
-    currentMsg.str[21] = ',';
-    currentMsg.str[22] = '\"';
-    currentMsg.str[23] = 'A';
-    currentMsg.str[24] = 'c';
-    currentMsg.str[25] = 'k';
-    currentMsg.str[26] = '\"';
-    currentMsg.str[27] = ':';
+    currentMsg.str[20] = ',';
+    currentMsg.str[21] = '\"';
+    currentMsg.str[22] = 'A';
+    currentMsg.str[23] = 'c';
+    currentMsg.str[24] = 'k';
+    currentMsg.str[25] = '\"';
+    currentMsg.str[26] = ':';
+    currentMsg.str[27] = '\"';
     currentMsg.str[28] = '\"';
-    currentMsg.str[29] = '\"';
-    currentMsg.str[30] = ',';
-    currentMsg.str[31] = '\"';
-    currentMsg.str[32] = 'R';
-    currentMsg.str[33] = 'o';
-    currentMsg.str[34] = 'v';
-    currentMsg.str[35] = 'e';
-    currentMsg.str[36] = 'r';
-    currentMsg.str[37] = 'P';
-    currentMsg.str[38] = 'o';
-    currentMsg.str[39] = 's';
-    currentMsg.str[40] = 'i';
-    currentMsg.str[41] = 't';//"{\"Source\":\"RoverPIC\",\"Ack\":\"\",\"RoverPosition\":\"00\",\"Check\":\"N\"}\0"
-    currentMsg.str[42] = 'i';
-    currentMsg.str[43] = 'o';
-    currentMsg.str[44] = 'n';
-    currentMsg.str[45] = '\"';
-    currentMsg.str[46] = ':';
-    currentMsg.str[47] = '\"';
-    currentMsg.str[48] = globPos[0];
-    currentMsg.str[49] = globPos[1];
-    currentMsg.str[50] = '\"';
-    currentMsg.str[51] = ',';
-    currentMsg.str[52] = '\"';
-    currentMsg.str[53] = 'C';
-    currentMsg.str[54] = 'h';
-    currentMsg.str[55] = 'e';
-    currentMsg.str[56] = 'c';
-    currentMsg.str[57] = 'k';
-    currentMsg.str[58] = '\"';
-    currentMsg.str[59] = ':';
-    currentMsg.str[60] = '\"';
-    currentMsg.str[61] = 'N';
-    currentMsg.str[62] = '\"';
-    currentMsg.str[63] = '}';
-    currentMsg.str[64] = '\0';
+    currentMsg.str[29] = ',';
+    currentMsg.str[30] = '\"';
+    currentMsg.str[31] = 'R';
+    currentMsg.str[32] = 'o';
+    currentMsg.str[33] = 'v';
+    currentMsg.str[34] = 'e';
+    currentMsg.str[35] = 'r';
+    currentMsg.str[36] = 'P';
+    currentMsg.str[37] = 'o';
+    currentMsg.str[38] = 's';
+    currentMsg.str[39] = 'i';
+    currentMsg.str[40] = 't';//"{\"Source\":\"RoverPIC\",\"Ack\":\"\",\"RoverPosition\":\"00\",\"Check\":\"N\"}\0"
+    currentMsg.str[41] = 'i';
+    currentMsg.str[42] = 'o';
+    currentMsg.str[43] = 'n';
+    currentMsg.str[44] = '\"';
+    currentMsg.str[45] = ':';
+    currentMsg.str[46] = '\"';
+    
+    currentMsg.str[47] = (globPos / 10) | 0b110000;
+    currentMsg.str[48] = (globPos % 10) | 0b110000;
+    
+    currentMsg.str[49] = '\"';
+    currentMsg.str[50] = ',';
+    currentMsg.str[51] = '\"';
+    currentMsg.str[52] = 'C';
+    currentMsg.str[53] = 'h';
+    currentMsg.str[54] = 'e';
+    currentMsg.str[55] = 'c';
+    currentMsg.str[56] = 'k';
+    currentMsg.str[57] = '\"';
+    currentMsg.str[58] = ':';
+    currentMsg.str[59] = '\"';
+    currentMsg.str[60] = 'N';
+    currentMsg.str[61] = '\"';
+    currentMsg.str[62] = '}';
+    currentMsg.str[63] = '\0';
     currentMsg.get = 1;
-    currentMsg.count = 64;*/
-    currentMsg = stringToStruct("{\"Source\":\"RoverPIC\",\"Ack\":\"\",\"RoverPosition\":\"00\",\"Check\":\"N\"}\0", 1);
+    currentMsg.count = 63;
+    //currentMsg = stringToStruct("{\"Source\":\"RoverPIC\",\"Ack\":\"\",\"RoverPosition\":\"00\",\"Check\":\"N\"}\0", 1);
     TxThreadQueue_Send(currentMsg);
 }
 
@@ -92,8 +95,8 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
     QueueMsg toArm;
     QueueMsg motorAck;
     
-    motorAck.val2 = false;
-    //motorAck.val3 = 20;
+    toMotor.val2 = true;
+    toMotor.val3 = DUTY_CYCLE;
     
     toMotor.source = NavigationThread;
     toArm.source = NavigationThread;
@@ -111,16 +114,16 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             if (FSRs == 0b1100000011 || FSRs == 0b1100000001 || FSRs == 1000000011 || FSRs == 0b1100000010 || FSRs == 0b0100000011) {
                 pd.current_position = bottom_left_corner; //On corner
                 pd.check = 0;
-            } else if (FSRs == 0b0000000010) {
+            } else if (FSRs == 0b0000000010 || FSRs == 0b1100000000 || FSRs == 0b0100000010 || FSRs == 0b0100000001) {
                 pd.current_position = bottom_left_corner;
                 pd.check = 1;
-            } else if (FSRs == 0b0100000000) {
+            } else if (FSRs == 0b0100000000 || FSRs == 0b0000000011 || FSRs == 0b0100000010 || FSRs == 0b1000000010) {
                 pd.current_position = bottom_left_corner;
                 pd.check = 2;
-            } else if (FSRs == 0 && pd.check == 1) {
+            } else if (FSRs == 0 && pd.check == 1 && pd.dir == forwards) {
                 pd.current_position = bottom_left; //Post leaving to the right, yet to hit strip 2
                 pd.check = 0;
-            } else if (FSRs == 0 && pd.check == 2) {
+            } else if (FSRs == 0 && pd.check == 2 && pd.dir == reverse) {
                 pd.current_position = left_bottom; //Post leaving to the top
                 pd.check = 0;
             }
@@ -145,7 +148,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             } else if (FSRs == 0 || FSRs == 0b0000000010) {
                 pd.current_position = bottom_left; //Stay on same side
                 pd.check = 0;
-            } else if (FSRs == 0b0000000011) {
+            } else if (FSRs == 0b0000000011 || FSRs == 0b0000000001) {
                 pd.current_position = bottom_left_corner; // Enter corner
                 pd.check = 0;
             } else if (FSRs == 0b1000000000 || FSRs == 0b1000000100 || FSRs == 0b1000000010) {
@@ -196,7 +199,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             {
                 pd.current_position = true_bottom;
                 pd.check = 1;
-            } else if (FSRs == 0b0000011000) //Has hit FSR 4
+            } else if (FSRs == 0b0000011000 || FSRs == 0b0000010000 || FSRs == 0b1000010000 || FSRs == 0b0100010000) //Has hit FSR 4
             {
                 pd.current_position = bottom_right_corner;
                 pd.check = 0;
@@ -264,7 +267,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             } else if (FSRs == 0 || FSRs == 0b0000001000) {
                 pd.current_position = bottom_right;
                 pd.check = 0;
-            } else if (FSRs == 0b0000011000) {
+            } else if (FSRs == 0b0000011000 || FSRs == 0b0000010000) {
                 pd.current_position = bottom_right_corner;
                 pd.check = 0;
             } else if (FSRs == 0b1000000000 || FSRs == 0b1000001000) {
@@ -299,7 +302,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                 }
                 pd.current_position = true_bottom;
                 pd.check = 1;
-            } else if (FSRs == 0b1000011000) {
+            } else if (FSRs == 0b1000011000 || FSRs == 0b1000010000) {
                 if (pd.dir == forwards) {
                     sendTurnRight();
                 } else if (pd.dir == reverse) {
@@ -307,7 +310,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                 }
                 pd.current_position = bottom_right_corner;
                 pd.check = 0;
-            } else if (FSRs == 0b0100011000) {
+            } else if (FSRs == 0b0100011000 || FSRs == 0b0100010000) {
                 if (pd.dir == forwards) {
                     sendTurnLeft();
                 } else if (pd.dir == reverse) {
@@ -332,16 +335,16 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             if (FSRs == 0b1100011000 || FSRs == 0b1100010000 || FSRs == 0b1000011000 || FSRs == 0b1100001000 || FSRs == 0b0100011000) {
                 pd.current_position = bottom_right_corner; //On all 4
                 pd.check = 0;
-            } else if (FSRs == 0b0000001000) {
+            } else if (FSRs == 0b0000001000 || FSRs == 0b0000011000 || FSRs == 0b0100001000 || FSRs == 0b1000001000) {
                 pd.current_position = bottom_right_corner; //On bottom left side of corner
                 pd.check = 1;
-            } else if (FSRs == 0b0100000000) {
+            } else if (FSRs == 0b0100000000 || FSRs == 0b1100000000 || FSRs == 0b0100010000 || FSRs == 0b0100001000) {
                 pd.current_position = bottom_right_corner; //On right bottom side of corner
                 pd.check = 2;
-            } else if (FSRs == 0 && pd.check == 1) {
+            } else if (FSRs == 0 && pd.check == 1 && pd.dir == reverse) {
                 pd.current_position = bottom_right; //Left the corner to the left
                 pd.check = 0;
-            } else if (FSRs == 0 && pd.check == 2) {
+            } else if (FSRs == 0 && pd.check == 2 && pd.dir == forwards) {
                 pd.current_position = right_bottom; //Left the corner to to top
                 pd.check = 0;
             }
@@ -365,7 +368,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             } else if (FSRs == 0 || FSRs == 0b0100000000) {
                 pd.current_position = right_bottom;
                 pd.check = 0;
-            } else if (FSRs == 0b1100000000) {
+            } else if (FSRs == 0b1100000000 || FSRs == 0b1000000000 || FSRs == 0b1000010000 || FSRs == 0b1000001000) {
                 pd.current_position = bottom_right_corner;
                 pd.check = 0;
             } else if (FSRs == 0b0000010000 || FSRs == 0b0100010000) {
@@ -508,7 +511,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             } else if (FSRs == 0 || FSRs == 0b0001000000) {
                 pd.current_position = right_top;
                 pd.check = 0;
-            } else if (FSRs == 0b0001100000) {
+            } else if (FSRs == 0b0001100000 || FSRs == 0b0000100000) {
                 pd.current_position = top_right_corner;
                 pd.check = 0;
             }
@@ -555,16 +558,16 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             if (FSRs == 0b0001111000 || FSRs == 0b0000111000 || FSRs == 0b0001110000 || FSRs == 0b0001011000 || 0b0001101000) {
                 pd.current_position = top_right_corner;
                 pd.check = 0;
-            } else if (FSRs == 0b0001000000) {
+            } else if (FSRs == 0b0001000000 || FSRs == 0b0001100000 || FSRs == 0b0001001000 || FSRs == 0b0001010000) {
                 pd.current_position = top_right_corner;
                 pd.check = 1;
-            } else if (FSRs == 0b0000001000) {
+            } else if (FSRs == 0b0000001000 || FSRs == 0b0000011000 || FSRs == 0b0000101000 || FSRs == 0b0001001000) {
                 pd.current_position = top_right_corner;
                 pd.check = 2;
-            } else if (FSRs == 0 && pd.check == 2) {
+            } else if (FSRs == 0 && pd.check == 2 && pd.dir == forwards) {
                 pd.current_position = top_right;
                 pd.check = 0;
-            } else if (FSRs == 0 && pd.check == 1) {
+            } else if (FSRs == 0 && pd.check == 1 && pd.dir == reverse) {
                 pd.current_position = right_top;
                 pd.check = 0;
             }
@@ -590,7 +593,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             } else if (FSRs == 0) {
                 pd.current_position = top_right;
                 pd.check = 0;
-            } else if (FSRs == 0b0000011000) {
+            } else if (FSRs == 0b0000011000 || FSRs == 0b0000010000) {
                 pd.current_position = top_right_corner;
                 pd.check = 0;
             }
@@ -648,7 +651,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             } else if (FSRs == 0b0000001000) {
                 pd.current_position = top_right;
                 pd.check = 0;
-            } else if (FSRs == 0b0000011000) {
+            } else if (FSRs == 0b0000011000 || FSRs == 0b0000010000 || FSRs == 0b0000110000 || FSRs == 0b0001010000) {
                 pd.current_position = top_right_corner;
                 pd.check = 0;
             } else if (FSRs == 0b0000100000 || FSRs == 0b0000100100) {
@@ -706,7 +709,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             } else if (FSRs == 0 || FSRs == 0b0000000010) {
                 pd.current_position = top_left;
                 pd.check = 0;
-            } else if (FSRs == 0b0000000011) {
+            } else if (FSRs == 0b0000000011 || FSRs == 0b0000000001) {
                 pd.current_position = top_left_corner;
                 pd.check = 0;
             }
@@ -743,16 +746,16 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             if (FSRs == 0b0001100011 || FSRs == 0b0001100010 || FSRs == 0b0001000011 || FSRs == 0b0000100011 || FSRs == 0b0001100001) {
                 pd.current_position = top_left_corner;
                 pd.check = 0;
-            } else if (FSRs == 0b0001000000) {
+            } else if (FSRs == 0b0001000000 || FSRs == 0b0001100000 || FSRs == 0b0001000010 || FSRs == 0b0001000001) {
                 pd.current_position = top_left_corner;
                 pd.check = 1;
-            } else if (FSRs == 0b0000000010) {
+            } else if (FSRs == 0b0000000010 || FSRs == 0b0000000011 || FSRs == 0b0001000010 || FSRs == 0b0000100010) {
                 pd.current_position = top_left_corner;
                 pd.check = 2;
-            } else if (FSRs == 0 && pd.check == 1) {
+            } else if (FSRs == 0 && pd.check == 1 && pd.dir == forwards) {
                 pd.current_position = left_top;
                 pd.check = 0;
-            } else if (FSRs == 0 && pd.check == 2) {
+            } else if (FSRs == 0 && pd.check == 2 && pd.dir == reverse) {
                 pd.current_position = top_left;
                 pd.check = 0;
             }
@@ -817,7 +820,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             } else if (FSRs == 0) {
                 pd.current_position = true_left;
                 pd.check = 0;
-            } else if (FSRs == 0b1100000000) {
+            } else if (FSRs == 0b1100000000 || FSRs == 0b1000000000 || FSRs == 0b1000000001 || FSRs == 0b1000000010) {
                 pd.current_position = bottom_left_corner;
                 pd.check = 0;
             }
@@ -870,7 +873,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             if (FSRs == 0b0010000000) {
                 pd.current_position = true_left;
                 pd.check = 1;
-            } else if (FSRs == 0b1100000000) {
+            } else if (FSRs == 0b1100000000 || FSRs == 0b1000000000) {
                 pd.current_position = bottom_left_corner;
                 pd.check = 0;
             } else if (FSRs == 0) {
@@ -920,8 +923,8 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             if (pd.dir == forwards) {
                 toMotor.type = CommandMsg;
                 toMotor.val0 = FORWARD_BOTH;
-                toMotor.val1 = 75; // 1 cm
-                toMotor.val2 = 0;
+                toMotor.val1 = SHORT; // 1 cm
+                
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
@@ -929,8 +932,8 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             else if (pd.dir == reverse) {
                 toMotor.type = CommandMsg;
                 toMotor.val0 = REVERSE_BOTH;
-                toMotor.val1 = 75; // 1 cm
-                toMotor.val2 = 0;
+                toMotor.val1 = 75;
+                
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
@@ -961,7 +964,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             toMotor.type = AsyncStopMsg;
             toMotor.val0 = STOP;
             toMotor.val1 = 0;
-            toMotor.val2 = 0;
+            
             Queue_Send_FromThread(MotorQueue, toMotor);
             while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                 motorAck = Queue_Receive_FromThread(NavQueue);
@@ -970,7 +973,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                 toMotor.type = CommandMsg;
                 toMotor.val0 = REVERSE_BOTH;
                 toMotor.val1 = 750; // 10 cm
-                toMotor.val2 = 0;
+                
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
@@ -978,7 +981,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                 toMotor.type = CommandMsg;
                 toMotor.val0 = TURN_RIGHT;
                 toMotor.val1 = 31; // 5 Degrees
-                toMotor.val2 = 0;
+                
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
@@ -987,7 +990,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                 toMotor.type = CommandMsg;
                 toMotor.val0 = FORWARD_BOTH;
                 toMotor.val1 = 750; // 10 cm
-                toMotor.val2 = 0;
+                
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
@@ -995,7 +998,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                 toMotor.type = CommandMsg;
                 toMotor.val0 = TURN_LEFT;
                 toMotor.val1 = 31; // 5 Degrees
-                toMotor.val2 = 0;
+                
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
@@ -1012,7 +1015,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             toMotor.type = AsyncStopMsg;
             toMotor.val0 = STOP;
             toMotor.val1 = 0;
-            toMotor.val2 = 0;
+            
             Queue_Send_FromThread(MotorQueue, toMotor);
             while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                 motorAck = Queue_Receive_FromThread(NavQueue);
@@ -1021,7 +1024,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                 toMotor.type = CommandMsg;
                 toMotor.val0 = REVERSE_BOTH;
                 toMotor.val1 = 750; // 10 cm
-                toMotor.val2 = 0;
+                
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
@@ -1029,7 +1032,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                 toMotor.type = CommandMsg;
                 toMotor.val0 = TURN_LEFT;
                 toMotor.val1 = 31; // 5 Degrees
-                toMotor.val2 = 0;
+                
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
@@ -1039,7 +1042,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                 toMotor.type = CommandMsg;
                 toMotor.val0 = FORWARD_BOTH;
                 toMotor.val1 = 750; // 10 cm
-                toMotor.val2 = 0;
+                
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
@@ -1047,7 +1050,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                 toMotor.type = CommandMsg;
                 toMotor.val0 = TURN_RIGHT;
                 toMotor.val1 = 31; // 5 Degrees
-                toMotor.val2 = 0;
+                
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
@@ -1182,6 +1185,7 @@ void dirTravel(Position_Data * pdToCpy, int nextPos) {
 
 void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
     Position_Data pd = *pdToCpy;
+    globPos = pd.current_position;
     static int initCheck = 1;
     static int firstCorner = 1;
     strStruct currentMsg;
@@ -1193,8 +1197,8 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
     static int drawcheck1 = 1;
     QueueMsg toMotor;
     QueueMsg toArm;
-    motorAck.val2 = false;
-    //motorAck.val3 = 20;
+    toMotor.val2 = true;
+    toMotor.val3 = DUTY_CYCLE;
 
     toMotor.source = NavigationThread;
     toArm.source = NavigationThread;
@@ -1205,7 +1209,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
     if (initCheck && pd.current_position == bottom_left_corner) {
         initCheck = 0;
     } else {
-        if (pd.current_position == bottom_left_corner) {
+        /*if (pd.current_position == bottom_left_corner) {
             pd.beside[0] = '0'; // will never match test
             pd.beside[1] = '\0';
         } 
@@ -1277,9 +1281,9 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
         } else if (pd.current_position == top_right) {
             pd.beside[0] = '9';
             pd.beside[1] = '\0';
-        }
+        }*/
 
-        globPos = pd.beside;
+        //globPos = pd.beside;
         
         dirTravel(&pd, nextPos);
 
@@ -1291,7 +1295,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                 toMotor.type = AsyncStopMsg;
                 toMotor.val0 = STOP;
                 toMotor.val1 = 0;
-                toMotor.val2 = 0;
+                
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
@@ -1301,8 +1305,8 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
 
                 toMotor.type = CommandMsg;
                 toMotor.val0 = TURN_LEFT;
-                toMotor.val1 = 558; // 90 Degrees
-                toMotor.val2 = 0;
+                toMotor.val1 = TURN; // 90 Degrees
+                
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
@@ -1313,7 +1317,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                 toMotor.type = CommandMsg;
                 toMotor.val0 = FORWARD_BOTH;
                 toMotor.val1 = 1875; // 25 cm
-                toMotor.val2 = 0;
+                
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
@@ -1343,7 +1347,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                 toMotor.type = CommandMsg;
                 toMotor.val0 = REVERSE_BOTH;
                 toMotor.val1 = 1875; // 25 cm
-                toMotor.val2 = 0;
+                
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
@@ -1353,8 +1357,8 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
 
                 toMotor.type = CommandMsg;
                 toMotor.val0 = TURN_RIGHT;
-                toMotor.val1 = 558; // 90 Degrees
-                toMotor.val2 = 0;
+                toMotor.val1 = TURN; // 90 Degrees
+                
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
@@ -1385,7 +1389,6 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                 toMotor.type = AsyncStopMsg;
                 toMotor.val0 = STOP;
                 toMotor.val1 = 0;
-                toMotor.val2 = 0;
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                     motorAck = Queue_Receive_FromThread(NavQueue);
@@ -1440,7 +1443,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                     toMotor.type = CommandMsg;
                     toMotor.val0 = FORWARD_BOTH;
                     toMotor.val1 = 750; // 10 cm
-                    toMotor.val2 = 0;
+                    
                     Queue_Send_FromThread(MotorQueue, toMotor);
 
                     //currentMsg = stringToStructValue("{\"MoveCmd\":\"DriveForward10\",\"ArmCmd\":\"wait\",\"Beside\":\"$\"}\0", 0, pd.beside);
@@ -1451,7 +1454,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                         toMotor.type = CommandMsg;
                         toMotor.val0 = FORWARD_BOTH;
                         toMotor.val1 = 750; // 10 cm
-                        toMotor.val2 = 0;
+                        
                         Queue_Send_FromThread(MotorQueue, toMotor);
 
                         //currentMsg = stringToStructValue("{\"MoveCmd\":\"DriveForward10\",\"ArmCmd\":\"wait\",\"Beside\":\"$\"}\0", 0, pd.beside);
@@ -1460,7 +1463,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                         toMotor.type = AsyncStopMsg;
                         toMotor.val0 = STOP;
                         toMotor.val1 = 0;
-                        toMotor.val2 = 0;
+                        
                         Queue_Send_FromThread(MotorQueue, toMotor);
                         while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                             motorAck = Queue_Receive_FromThread(NavQueue);
@@ -1470,8 +1473,8 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
 
                         toMotor.type = CommandMsg;
                         toMotor.val0 = TURN_LEFT;
-                        toMotor.val1 = 558; // 90 Degrees
-                        toMotor.val2 = 0;
+                        toMotor.val1 = TURN; // 90 Degrees
+                        
                         Queue_Send_FromThread(MotorQueue, toMotor);
                         while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                             motorAck = Queue_Receive_FromThread(NavQueue);
@@ -1482,7 +1485,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                         toMotor.type = CommandMsg;
                         toMotor.val0 = FORWARD_BOTH;
                         toMotor.val1 = 750; // 10 cm
-                        toMotor.val2 = 0;
+                        
                         Queue_Send_FromThread(MotorQueue, toMotor);
 
                         //currentMsg = stringToStructValue("{\"MoveCmd\":\"stop, TurnLeft90, DriveForward10\",\"ArmCmd\":\"wait\",\"Beside\":\"$\"}\0", 0, pd.beside);
@@ -1495,8 +1498,8 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
 
                 toMotor.type = CommandMsg;
                 toMotor.val0 = FORWARD_BOTH;
-                toMotor.val1 = 150; // 2 cm
-                toMotor.val2 = 0;
+                toMotor.val1 = SHORT; // 1 cm
+                
                 Queue_Send_FromThread(MotorQueue, toMotor);
 
                 //TxThreadQueue_Send(currentMsg);
@@ -1514,7 +1517,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                         toMotor.type = CommandMsg;
                         toMotor.val0 = REVERSE_BOTH;
                         toMotor.val1 = 750; // 10 cm
-                        toMotor.val2 = 0;
+                        
                         Queue_Send_FromThread(MotorQueue, toMotor);
 
                         pd.flip = 0;
@@ -1523,7 +1526,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                         toMotor.type = AsyncStopMsg;
                         toMotor.val0 = STOP;
                         toMotor.val1 = 0; // Stop
-                        toMotor.val2 = 0;
+                        
                         Queue_Send_FromThread(MotorQueue, toMotor);
                         while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                             motorAck = Queue_Receive_FromThread(NavQueue);
@@ -1533,8 +1536,8 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
 
                         toMotor.type = CommandMsg;
                         toMotor.val0 = TURN_RIGHT;
-                        toMotor.val1 = 558; // 90 Degrees
-                        toMotor.val2 = 0;
+                        toMotor.val1 = TURN; // 90 Degrees
+                        
                         Queue_Send_FromThread(MotorQueue, toMotor);
                         while (motorAck.source != MovementThread && motorAck.type != AckMsg)
                             motorAck = Queue_Receive_FromThread(NavQueue);
@@ -1545,7 +1548,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                         toMotor.type = CommandMsg;
                         toMotor.val0 = REVERSE_BOTH;
                         toMotor.val1 = 750; // 10 cm
-                        toMotor.val2 = 0;
+                        
                         Queue_Send_FromThread(MotorQueue, toMotor);
                     }
                     //TxThreadQueue_Send(currentMsg);   
@@ -1555,8 +1558,8 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                 //currentMsg = stringToStructValue("{\"MoveCmd\":\"DriveBackwards4\",\"ArmCmd\":\"wait\",\"Beside\":\"$\"}\0", 0, pd.beside);
                 toMotor.type = CommandMsg;
                 toMotor.val0 = REVERSE_BOTH;
-                toMotor.val1 = 150; // 2 cm
-                toMotor.val2 = 0;
+                toMotor.val1 = SHORT; // 1 cm
+                
                 Queue_Send_FromThread(MotorQueue, toMotor);
 
                 //TxThreadQueue_Send(currentMsg);
@@ -1573,7 +1576,9 @@ void sendTurnLeft()
     toMotor.type = CommandMsg;
     toMotor.val0 = TURN_LEFT;
     toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-    toMotor.val2 = 0;
+    toMotor.val2 = true;
+    toMotor.val3 = DUTY_CYCLE;
+    
     Queue_Send_FromThread(MotorQueue, toMotor);
     while (motorAck.source != MovementThread && motorAck.type != AckMsg)
     {
@@ -1591,7 +1596,9 @@ void sendTurnRight()
     toMotor.type = CommandMsg;
     toMotor.val0 = TURN_RIGHT;
     toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-    toMotor.val2 = 0;
+    toMotor.val2 = true;
+    toMotor.val3 = DUTY_CYCLE;
+    
     Queue_Send_FromThread(MotorQueue, toMotor);
     while (motorAck.source != MovementThread && motorAck.type != AckMsg)
     {

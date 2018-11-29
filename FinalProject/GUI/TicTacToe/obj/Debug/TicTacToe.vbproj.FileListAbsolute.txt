@@ -12,3 +12,17 @@ C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\obj
 C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\obj\Debug\TicTacToe.xml
 C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\obj\Debug\TicTacToe.pdb
 C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\obj\Debug\TicTacToe.Credits.resources
+C:\microchip\harmony\v2_06\apps\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\bin\Debug\TicTacToe.exe.config
+C:\microchip\harmony\v2_06\apps\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\bin\Debug\TicTacToe.exe
+C:\microchip\harmony\v2_06\apps\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\bin\Debug\TicTacToe.pdb
+C:\microchip\harmony\v2_06\apps\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\bin\Debug\TicTacToe.xml
+C:\microchip\harmony\v2_06\apps\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\obj\Debug\TicTacToe.vbprojAssemblyReference.cache
+C:\microchip\harmony\v2_06\apps\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\obj\Debug\TicTacToe.Credits.resources
+C:\microchip\harmony\v2_06\apps\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\obj\Debug\TicTacToe.GameplayForm.resources
+C:\microchip\harmony\v2_06\apps\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\obj\Debug\TicTacToe.SetupForm.resources
+C:\microchip\harmony\v2_06\apps\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\obj\Debug\TicTacToe.Resources.resources
+C:\microchip\harmony\v2_06\apps\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\obj\Debug\TicTacToe.vbproj.GenerateResource.cache
+C:\microchip\harmony\v2_06\apps\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\obj\Debug\TicTacToe.vbproj.CoreCompileInputs.cache
+C:\microchip\harmony\v2_06\apps\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\obj\Debug\TicTacToe.exe
+C:\microchip\harmony\v2_06\apps\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\obj\Debug\TicTacToe.xml
+C:\microchip\harmony\v2_06\apps\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\obj\Debug\TicTacToe.pdb

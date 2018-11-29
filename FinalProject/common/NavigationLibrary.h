@@ -16,10 +16,13 @@
 #include "../../../common/UART_Defines.h"
 #include "timers.h"
 
-#define ERR_TURN_RIGHT 31
-#define ERR_TURN_LEFT  31
+#define ERR_TURN_RIGHT 50
+#define ERR_TURN_LEFT  50
+#define DUTY_CYCLE     25
+#define SHORT          40
+#define TURN          600
 
-char* globPos;
+int globPos;
 
 void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos);
 
