@@ -46,26 +46,39 @@ Partial Class GameplayForm
         Me.sensor4 = New System.Windows.Forms.Label()
         Me.sensor3 = New System.Windows.Forms.Label()
         Me.sensor2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.beamerBox = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.roverImg = New System.Windows.Forms.PictureBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        CType(Me.beamerBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.roverImg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tile0
         '
-        Me.tile0.Location = New System.Drawing.Point(16, 12)
+        Me.tile0.BackColor = System.Drawing.Color.Transparent
+        Me.tile0.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.tile0.FlatAppearance.BorderSize = 0
+        Me.tile0.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.tile0.Location = New System.Drawing.Point(12, 12)
         Me.tile0.Name = "tile0"
-        Me.tile0.Size = New System.Drawing.Size(75, 75)
+        Me.tile0.Size = New System.Drawing.Size(81, 78)
         Me.tile0.TabIndex = 0
         Me.tile0.TabStop = False
         Me.tile0.Text = "Button1"
-        Me.tile0.UseVisualStyleBackColor = True
+        Me.tile0.UseVisualStyleBackColor = False
         '
         'tile8
         '
-        Me.tile8.Location = New System.Drawing.Point(178, 174)
+        Me.tile8.FlatAppearance.BorderSize = 0
+        Me.tile8.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.tile8.Location = New System.Drawing.Point(181, 179)
         Me.tile8.Name = "tile8"
-        Me.tile8.Size = New System.Drawing.Size(75, 75)
+        Me.tile8.Size = New System.Drawing.Size(73, 73)
         Me.tile8.TabIndex = 2
         Me.tile8.TabStop = False
         Me.tile8.Text = "Button3"
@@ -73,9 +86,11 @@ Partial Class GameplayForm
         '
         'tile7
         '
-        Me.tile7.Location = New System.Drawing.Point(97, 174)
+        Me.tile7.FlatAppearance.BorderSize = 0
+        Me.tile7.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.tile7.Location = New System.Drawing.Point(99, 179)
         Me.tile7.Name = "tile7"
-        Me.tile7.Size = New System.Drawing.Size(75, 75)
+        Me.tile7.Size = New System.Drawing.Size(76, 73)
         Me.tile7.TabIndex = 3
         Me.tile7.TabStop = False
         Me.tile7.Text = "Button4"
@@ -83,9 +98,11 @@ Partial Class GameplayForm
         '
         'tile6
         '
-        Me.tile6.Location = New System.Drawing.Point(16, 174)
+        Me.tile6.FlatAppearance.BorderSize = 0
+        Me.tile6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.tile6.Location = New System.Drawing.Point(12, 179)
         Me.tile6.Name = "tile6"
-        Me.tile6.Size = New System.Drawing.Size(75, 75)
+        Me.tile6.Size = New System.Drawing.Size(81, 73)
         Me.tile6.TabIndex = 4
         Me.tile6.TabStop = False
         Me.tile6.Text = "Button5"
@@ -93,9 +110,11 @@ Partial Class GameplayForm
         '
         'tile5
         '
-        Me.tile5.Location = New System.Drawing.Point(178, 93)
+        Me.tile5.FlatAppearance.BorderSize = 0
+        Me.tile5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.tile5.Location = New System.Drawing.Point(181, 96)
         Me.tile5.Name = "tile5"
-        Me.tile5.Size = New System.Drawing.Size(75, 75)
+        Me.tile5.Size = New System.Drawing.Size(73, 76)
         Me.tile5.TabIndex = 5
         Me.tile5.TabStop = False
         Me.tile5.Text = "Button6"
@@ -103,9 +122,11 @@ Partial Class GameplayForm
         '
         'tile3
         '
-        Me.tile3.Location = New System.Drawing.Point(16, 93)
+        Me.tile3.FlatAppearance.BorderSize = 0
+        Me.tile3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.tile3.Location = New System.Drawing.Point(12, 97)
         Me.tile3.Name = "tile3"
-        Me.tile3.Size = New System.Drawing.Size(75, 75)
+        Me.tile3.Size = New System.Drawing.Size(80, 76)
         Me.tile3.TabIndex = 6
         Me.tile3.TabStop = False
         Me.tile3.Text = "Button7"
@@ -113,9 +134,11 @@ Partial Class GameplayForm
         '
         'tile4
         '
-        Me.tile4.Location = New System.Drawing.Point(97, 93)
+        Me.tile4.FlatAppearance.BorderSize = 0
+        Me.tile4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.tile4.Location = New System.Drawing.Point(99, 97)
         Me.tile4.Name = "tile4"
-        Me.tile4.Size = New System.Drawing.Size(75, 75)
+        Me.tile4.Size = New System.Drawing.Size(76, 76)
         Me.tile4.TabIndex = 7
         Me.tile4.TabStop = False
         Me.tile4.Text = "Button8"
@@ -123,9 +146,11 @@ Partial Class GameplayForm
         '
         'tile2
         '
-        Me.tile2.Location = New System.Drawing.Point(178, 12)
+        Me.tile2.FlatAppearance.BorderSize = 0
+        Me.tile2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.tile2.Location = New System.Drawing.Point(180, 12)
         Me.tile2.Name = "tile2"
-        Me.tile2.Size = New System.Drawing.Size(75, 75)
+        Me.tile2.Size = New System.Drawing.Size(74, 78)
         Me.tile2.TabIndex = 8
         Me.tile2.TabStop = False
         Me.tile2.Text = "Button9"
@@ -133,9 +158,11 @@ Partial Class GameplayForm
         '
         'tile1
         '
-        Me.tile1.Location = New System.Drawing.Point(97, 12)
+        Me.tile1.FlatAppearance.BorderSize = 0
+        Me.tile1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.tile1.Location = New System.Drawing.Point(99, 12)
         Me.tile1.Name = "tile1"
-        Me.tile1.Size = New System.Drawing.Size(75, 75)
+        Me.tile1.Size = New System.Drawing.Size(76, 78)
         Me.tile1.TabIndex = 9
         Me.tile1.TabStop = False
         Me.tile1.Text = "Button10"
@@ -162,7 +189,7 @@ Partial Class GameplayForm
         '
         'resetButton
         '
-        Me.resetButton.Location = New System.Drawing.Point(97, 329)
+        Me.resetButton.Location = New System.Drawing.Point(97, 332)
         Me.resetButton.Name = "resetButton"
         Me.resetButton.Size = New System.Drawing.Size(75, 42)
         Me.resetButton.TabIndex = 12
@@ -268,6 +295,61 @@ Partial Class GameplayForm
         Me.sensor2.Size = New System.Drawing.Size(7, 300)
         Me.sensor2.TabIndex = 24
         '
+        'Label3
+        '
+        Me.Label3.BackColor = System.Drawing.Color.Black
+        Me.Label3.Location = New System.Drawing.Point(13, 90)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(240, 6)
+        Me.Label3.TabIndex = 27
+        Me.Label3.Text = "Label3"
+        '
+        'Label5
+        '
+        Me.Label5.BackColor = System.Drawing.Color.Black
+        Me.Label5.Location = New System.Drawing.Point(13, 173)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(240, 6)
+        Me.Label5.TabIndex = 29
+        Me.Label5.Text = "Label5"
+        '
+        'Label6
+        '
+        Me.Label6.BackColor = System.Drawing.Color.Black
+        Me.Label6.Location = New System.Drawing.Point(93, 12)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(6, 240)
+        Me.Label6.TabIndex = 30
+        Me.Label6.Text = "Label6"
+        '
+        'Label4
+        '
+        Me.Label4.BackColor = System.Drawing.Color.Black
+        Me.Label4.Location = New System.Drawing.Point(175, 12)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(6, 240)
+        Me.Label4.TabIndex = 31
+        Me.Label4.Text = "Label4"
+        '
+        'beamerBox
+        '
+        Me.beamerBox.Image = Global.TicTacToe.My.Resources.Resources.beamer
+        Me.beamerBox.Location = New System.Drawing.Point(57, 29)
+        Me.beamerBox.Name = "beamerBox"
+        Me.beamerBox.Size = New System.Drawing.Size(498, 268)
+        Me.beamerBox.TabIndex = 32
+        Me.beamerBox.TabStop = False
+        Me.beamerBox.Visible = False
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.TicTacToe.My.Resources.Resources.logo
+        Me.PictureBox1.Location = New System.Drawing.Point(473, 324)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(100, 49)
+        Me.PictureBox1.TabIndex = 26
+        Me.PictureBox1.TabStop = False
+        '
         'roverImg
         '
         Me.roverImg.Image = Global.TicTacToe.My.Resources.Resources.rover
@@ -277,21 +359,18 @@ Partial Class GameplayForm
         Me.roverImg.TabIndex = 25
         Me.roverImg.TabStop = False
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(435, 339)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 26
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'GameplayForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(593, 378)
-        Me.Controls.Add(Me.Button1)
+        Me.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.ClientSize = New System.Drawing.Size(595, 383)
+        Me.Controls.Add(Me.beamerBox)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.roverImg)
         Me.Controls.Add(Me.sensor2)
         Me.Controls.Add(Me.sensor3)
@@ -317,8 +396,13 @@ Partial Class GameplayForm
         Me.Controls.Add(Me.tile7)
         Me.Controls.Add(Me.tile8)
         Me.Controls.Add(Me.tile0)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximumSize = New System.Drawing.Size(611, 422)
+        Me.MinimumSize = New System.Drawing.Size(611, 422)
         Me.Name = "GameplayForm"
         Me.Text = "Rover Tic-Tac-Toe"
+        CType(Me.beamerBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.roverImg, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -350,5 +434,10 @@ Partial Class GameplayForm
     Friend WithEvents sensor3 As Label
     Friend WithEvents sensor2 As Label
     Friend WithEvents roverImg As PictureBox
-    Friend WithEvents Button1 As Button
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents beamerBox As PictureBox
 End Class

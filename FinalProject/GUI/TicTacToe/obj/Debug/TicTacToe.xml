@@ -22,6 +22,16 @@ TicTacToe
   resource lookups using this strongly typed resource class.
 </summary>
 </member>
+<member name="P:TicTacToe.My.Resources.Resources.beamer">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:TicTacToe.My.Resources.Resources.logo">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:TicTacToe.My.Resources.Resources.rover">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.

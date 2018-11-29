@@ -11,3 +11,4 @@ C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\obj
 C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\obj\Debug\TicTacToe.exe
 C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\obj\Debug\TicTacToe.xml
 C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\obj\Debug\TicTacToe.pdb
+C:\Users\nolan\Desktop\Dropbox\EmbeddedProjectT19\FinalProject\GUI\TicTacToe\obj\Debug\TicTacToe.Credits.resources

@@ -28,11 +28,13 @@ Public Class GameplayForm
     Private ackCounter As Integer
     Private moveDone As Boolean
     Private difficulty As GameDifficulty
+    Private addImage As Boolean
     Private threadRunning As Boolean
-
-    Private temp As Integer
+    Private addImageStartTime As DateTime
 
     Public Sub New(ByVal numPlay As Integer, ByVal diff As GameDifficulty)
+
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -43,6 +45,9 @@ Public Class GameplayForm
         'set number of players and difficulty
         numPlayers = numPlay
         difficulty = diff
+
+        beamerBox.Visible = False
+        addImage = False
 
         'reset all tiles
         ResetTiles()
@@ -65,15 +70,23 @@ Public Class GameplayForm
         pollThread.IsBackground = True
         pollThread.Start()
 
-        temp = 0
-
     End Sub
 
     'thread function for polling server
     Private Sub statusPoll()
+        Dim pictimer As New Stopwatch
         While threadRunning
             GetServerInfo()
-            System.Threading.Thread.Sleep(500)
+            If addImage Then
+                addPicture()
+                addImage = False
+                pictimer.Start()
+            End If
+            If pictimer.ElapsedMilliseconds > 4800 Then
+                Me.Invoke(Sub() beamerBox.Visible = False)
+                pictimer.Reset()
+            End If
+            System.Threading.Thread.Sleep(250)
         End While
     End Sub
 
@@ -175,6 +188,7 @@ Public Class GameplayForm
         'check for three in a row
         If ThreeInRow() = True Then
             DisableButtons()
+            addImage = True
             Exit Sub
         End If
 
@@ -195,6 +209,7 @@ Public Class GameplayForm
             'check for three in a row
             If ThreeInRow() = True Then
                 DisableButtons()
+                addPicture()
                 Exit Sub
             End If
         Else
@@ -205,6 +220,12 @@ Public Class GameplayForm
             status.Text = "Game Over!"
         End If
 
+    End Sub
+
+    Private Sub addPicture()
+        If numPlayers = 1 And Not status.Text.IndexOf("X") = -1 Then
+            Me.Invoke(Sub() beamerBox.Visible = True)
+        End If
     End Sub
 
     Private Function ThreeInRow() As Boolean
@@ -279,21 +300,23 @@ Public Class GameplayForm
             myControlToFind.Text = ""
             myControlToFind.Enabled = True
             myControlToFind.Font = New Font("Comic Sans MS", 36, FontStyle.Bold)
+            myControlToFind.BackColor = Color.Transparent
         Next
     End Sub
 
     Public Function PerformAIMove() As GameMove
         Dim AIMove As GameMove
+        Dim randomMove As New List(Of Integer)
         'AI is always player 2 and O
         AIMove.PlayerSymbol = "O"
         'For easy pick random available space
         If difficulty = GameDifficulty.Easy Then
             For i As Integer = 0 To 8
                 If boardstate(i) = "Empty" Then
-                    AIMove.SelectedTile = i
-                    Exit For
+                    randomMove.Add(i)
                 End If
             Next
+            AIMove.SelectedTile = randomMove(New Random().Next(0, randomMove.Count - 1))
         End If
         'For hard pick tile based on priority logic
         If difficulty = GameDifficulty.Hard Then
@@ -305,7 +328,8 @@ Public Class GameplayForm
 
     Private Function GetAIMove() As Integer
         Dim priority(8) As Integer
-        Dim maxPri, maxInd As Integer
+        Dim maxPri As Integer
+        Dim maxList As New List(Of Integer)
         Dim i As Integer
 
         'set all tiles to 1
@@ -321,14 +345,28 @@ Public Class GameplayForm
 
         'block forks
         If boardstate(0) = "X" Or boardstate(2) = "X" Or boardstate(6) = "X" Or boardstate(8) = "X" Then
-            priority(1) = 6
-            priority(7) = 6
-            priority(3) = 6
-            priority(5) = 6
+            priority(1) = 5
+            priority(7) = 5
+            priority(3) = 5
+            priority(5) = 5
         End If
 
-        'set center tile to 7
-        priority(4) = 7
+        'set center tile to 5
+        priority(4) = 6
+
+        'set corner with two adjacent x to 7
+        If boardstate(1) = "X" And boardstate(3) = "X" Then
+            priority(0) = 7
+        End If
+        If boardstate(1) = "X" And boardstate(5) = "X" Then
+            priority(2) = 7
+        End If
+        If boardstate(3) = "X" And boardstate(7) = "X" Then
+            priority(6) = 7
+        End If
+        If boardstate(5) = "X" And boardstate(7) = "X" Then
+            priority(8) = 7
+        End If
 
         'set win condition spaces to 9, block win to 8
         'tile 0
@@ -525,15 +563,19 @@ Public Class GameplayForm
         Next
 
         'get index of max priority
-        maxInd = 0
         maxPri = 0
         For i = 0 To 8
             If priority(i) > maxPri Then
+                maxList.Clear()
+                maxList.Add(i)
                 maxPri = priority(i)
-                maxInd = i
+            ElseIf priority(i) = maxPri Then
+                maxList.Add(i)
             End If
         Next
-        Return maxInd
+
+        'get random
+        Return maxList(New Random().Next(0, maxList.Count - 1))
 
     End Function
 
@@ -616,9 +658,17 @@ Public Class GameplayForm
     End Sub
 
     Private Sub resetButton_Click(sender As Object, e As EventArgs) Handles resetButton.Click
-        threadRunning = False
-        SetupForm.Show()
-        Me.Close()
+        currentPlayer = "X"
+        For i As Integer = 0 To 8
+            boardstate(i) = "Empty"
+        Next
+
+        ResetTiles()
+
+        beamerBox.Visible = False
+        addImage = False
+        status.Text = "Waiting for player: " + currentPlayer
+
     End Sub
 
     Private Sub closing_handler(sender As Object, e As EventArgs) Handles Me.FormClosing
@@ -707,9 +757,4 @@ Public Class GameplayForm
         NextMove()
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        moveRover(temp)
-        temp = temp + 1
-        temp = temp Mod 16
-    End Sub
 End Class
