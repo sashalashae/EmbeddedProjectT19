@@ -89,7 +89,7 @@ Public Class GameplayForm
                 Me.Invoke(Sub() beamerBox.Visible = False)
                 pictimer.Reset()
             End If
-            System.Threading.Thread.Sleep(500)
+            System.Threading.Thread.Sleep(250)
         End While
     End Sub
 
@@ -114,7 +114,7 @@ Public Class GameplayForm
         Try
             'Parse JSON message
             Dim jsonMsg = parser.DeserializeObject(respStr)
-            If Convert.ToInt32(jsonMsg("Ackno")) > ackCounter Then
+            If Not Convert.ToInt32(jsonMsg("Ackno")) = ackCounter Then
                 ackCounter = Convert.ToInt32(jsonMsg("Ackno"))
                 If MoveInProgress Then
                     MoveInProgress = False
@@ -271,7 +271,7 @@ Public Class GameplayForm
             Me.Invoke(Sub() tile4.BackColor = Color.LightGreen)
             Me.Invoke(Sub() tile6.BackColor = Color.LightGreen)
             Me.Invoke(Sub() status.Text = "Player " + boardstate(2) + " wins!")
-        ElseIf boardstate(0) = boardstate(3) And boardstate(3) = boardstate(6) And boardstate(0) <> "Empty" Then
+        ElseIf boardstate(0) = boardstate(5) And boardstate(5) = boardstate(6) And boardstate(0) <> "Empty" Then
             found = True
             Me.Invoke(Sub() tile0.BackColor = Color.LightGreen)
             Me.Invoke(Sub() tile3.BackColor = Color.LightGreen)
@@ -283,12 +283,12 @@ Public Class GameplayForm
             Me.Invoke(Sub() tile4.BackColor = Color.LightGreen)
             Me.Invoke(Sub() tile7.BackColor = Color.LightGreen)
             Me.Invoke(Sub() status.Text = "Player " + boardstate(1) + " wins!")
-        ElseIf boardstate(2) = boardstate(5) And boardstate(5) = boardstate(8) And boardstate(5) <> "Empty" Then
+        ElseIf boardstate(2) = boardstate(3) And boardstate(3) = boardstate(8) And boardstate(5) <> "Empty" Then
             found = True
             Me.Invoke(Sub() tile2.BackColor = Color.LightGreen)
             Me.Invoke(Sub() tile8.BackColor = Color.LightGreen)
             Me.Invoke(Sub() tile5.BackColor = Color.LightGreen)
-            Me.Invoke(Sub() status.Text = "Player " + boardstate(5) + " wins!")
+            Me.Invoke(Sub() status.Text = "Player " + boardstate(3) + " wins!")
         End If
         Return found
     End Function
@@ -366,16 +366,16 @@ Public Class GameplayForm
         priority(4) = 6
 
         'set corner with two adjacent x to 7
-        If boardstate(1) = "X" And boardstate(3) = "X" Then
+        If boardstate(1) = "X" And boardstate(5) = "X" Then
             priority(0) = 7
         End If
-        If boardstate(1) = "X" And boardstate(5) = "X" Then
+        If boardstate(1) = "X" And boardstate(3) = "X" Then
             priority(2) = 7
         End If
-        If boardstate(3) = "X" And boardstate(7) = "X" Then
+        If boardstate(5) = "X" And boardstate(7) = "X" Then
             priority(6) = 7
         End If
-        If boardstate(5) = "X" And boardstate(7) = "X" Then
+        If boardstate(7) = "X" And boardstate(3) = "X" Then
             priority(8) = 7
         End If
 
@@ -388,10 +388,10 @@ Public Class GameplayForm
                 priority(0) = 9
             End If
         End If
-        If boardstate(3) = boardstate(6) Then
-            If boardstate(3) = "X" Then
+        If boardstate(5) = boardstate(6) Then
+            If boardstate(5) = "X" Then
                 priority(0) = 8
-            ElseIf boardstate(3) = "O" Then
+            ElseIf boardstate(5) = "O" Then
                 priority(0) = 9
             End If
         End If
@@ -427,10 +427,10 @@ Public Class GameplayForm
                 priority(2) = 9
             End If
         End If
-        If boardstate(5) = boardstate(8) Then
-            If boardstate(5) = "X" Then
+        If boardstate(3) = boardstate(8) Then
+            If boardstate(3) = "X" Then
                 priority(2) = 8
-            ElseIf boardstate(5) = "O" Then
+            ElseIf boardstate(3) = "O" Then
                 priority(2) = 9
             End If
         End If
@@ -443,17 +443,17 @@ Public Class GameplayForm
         End If
 
         'tile3
-        If boardstate(0) = boardstate(6) Then
-            If boardstate(0) = "X" Then
+        If boardstate(2) = boardstate(8) Then
+            If boardstate(2) = "X" Then
                 priority(3) = 8
-            ElseIf boardstate(0) = "O" Then
+            ElseIf boardstate(2) = "O" Then
                 priority(3) = 9
             End If
         End If
-        If boardstate(4) = boardstate(5) Then
-            If boardstate(4) = "X" Then
+        If boardstate(5) = boardstate(4) Then
+            If boardstate(5) = "X" Then
                 priority(3) = 8
-            ElseIf boardstate(4) = "O" Then
+            ElseIf boardstate(5) = "O" Then
                 priority(3) = 9
             End If
         End If
@@ -489,23 +489,23 @@ Public Class GameplayForm
         End If
 
         'tile5
-        If boardstate(2) = boardstate(8) Then
-            If boardstate(2) = "X" Then
+        If boardstate(0) = boardstate(6) Then
+            If boardstate(0) = "X" Then
                 priority(5) = 8
-            ElseIf boardstate(2) = "O" Then
+            ElseIf boardstate(0) = "O" Then
                 priority(5) = 9
             End If
         End If
-        If boardstate(3) = boardstate(4) Then
-                If boardstate(3) = "X" Then
-                    priority(5) = 8
-                ElseIf boardstate(3) = "O" Then
-                    priority(5) = 9
-                End If
+        If boardstate(4) = boardstate(3) Then
+            If boardstate(4) = "X" Then
+                priority(5) = 8
+            ElseIf boardstate(4) = "O" Then
+                priority(5) = 9
             End If
+        End If
 
-            'tile6
-            If boardstate(0) = boardstate(3) Then
+        'tile6
+        If boardstate(0) = boardstate(5) Then
             If boardstate(0) = "X" Then
                 priority(6) = 8
             ElseIf boardstate(0) = "O" Then
@@ -544,7 +544,7 @@ Public Class GameplayForm
         End If
 
         'tile8
-        If boardstate(2) = boardstate(5) Then
+        If boardstate(2) = boardstate(3) Then
             If boardstate(2) = "X" Then
                 priority(8) = 8
             ElseIf boardstate(2) = "O" Then
