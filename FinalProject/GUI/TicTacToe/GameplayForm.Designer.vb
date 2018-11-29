@@ -112,9 +112,9 @@ Partial Class GameplayForm
         '
         Me.tile5.FlatAppearance.BorderSize = 0
         Me.tile5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.tile5.Location = New System.Drawing.Point(180, 97)
+        Me.tile5.Location = New System.Drawing.Point(12, 97)
         Me.tile5.Name = "tile5"
-        Me.tile5.Size = New System.Drawing.Size(73, 76)
+        Me.tile5.Size = New System.Drawing.Size(81, 76)
         Me.tile5.TabIndex = 5
         Me.tile5.TabStop = False
         Me.tile5.Text = "Button6"
@@ -124,9 +124,9 @@ Partial Class GameplayForm
         '
         Me.tile3.FlatAppearance.BorderSize = 0
         Me.tile3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.tile3.Location = New System.Drawing.Point(12, 97)
+        Me.tile3.Location = New System.Drawing.Point(180, 97)
         Me.tile3.Name = "tile3"
-        Me.tile3.Size = New System.Drawing.Size(80, 76)
+        Me.tile3.Size = New System.Drawing.Size(73, 76)
         Me.tile3.TabIndex = 6
         Me.tile3.TabStop = False
         Me.tile3.Text = "Button7"
@@ -334,7 +334,7 @@ Partial Class GameplayForm
         'beamerBox
         '
         Me.beamerBox.Image = Global.TicTacToe.My.Resources.Resources.beamer
-        Me.beamerBox.Location = New System.Drawing.Point(35, 34)
+        Me.beamerBox.Location = New System.Drawing.Point(44, 29)
         Me.beamerBox.Name = "beamerBox"
         Me.beamerBox.Size = New System.Drawing.Size(498, 268)
         Me.beamerBox.TabIndex = 32
