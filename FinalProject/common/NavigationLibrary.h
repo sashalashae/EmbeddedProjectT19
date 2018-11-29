@@ -27,5 +27,9 @@ void dirTravel(Position_Data * pdToCpy, int nextPos);
 
 void Nav_Timer_Cb(TimerHandle_t xTimer);
 
+void sendTurnLeft();
+
+void sendTurnRight();
+
 #endif	/* NAVIGATIONLIBRARY_H */
 

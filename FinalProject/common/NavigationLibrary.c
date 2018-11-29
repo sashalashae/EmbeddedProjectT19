@@ -12,7 +12,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
     toMotor.source = NavigationThread;
     toArm.source = NavigationThread;
 
-    if ((FSRs == 0b1100000011 || FSRs == 0b0000000011) && initcheck) {
+    if ((FSRs == 0b1100000011 || FSRs == 0b0000000011 || FSRs == 0b0000000010) && initcheck) {
         initcheck = 0;
         pd.current_position = bottom_left_corner;
         dirTravel(&pd, nextPos);
@@ -64,21 +64,9 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                 pd.check = 0;
             } else if (FSRs == 0b1000000000 || FSRs == 0b1000000100 || FSRs == 0b1000000010) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position = bottom_left;
                 pd.check = 0;
@@ -86,21 +74,9 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                     pd.check = 1;
             } else if (FSRs == 0b0100000000 || FSRs == 0b0100000100 || FSRs == 0b0100000010) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position = bottom_left;
                 pd.check = 0;
@@ -140,21 +116,9 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                 pd.check = 0;
             } else if (FSRs == 0b1000000000 || FSRs == 0b1000000100) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position = true_bottom;
                 pd.check = 0;
@@ -162,21 +126,9 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                     pd.check = 1;
             } else if (FSRs == 0b0100000000 || FSRs == 0b0100000100) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position = true_bottom;
                 pd.check = 0;
@@ -184,41 +136,17 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                     pd.check = 1;
             } else if (FSRs == 0b1000001000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position = bottom_right;
                 pd.check = 0;
             } else if (FSRs == 0b0100001000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position = bottom_right;
                 pd.check = 0;
@@ -255,121 +183,49 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                 pd.check = 0;
             } else if (FSRs == 0b1000000000 || FSRs == 0b1000001000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position = bottom_right;
                 pd.check = 0;
             } else if (FSRs == 0b1000000100) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position = true_bottom;
                 pd.check = 1;
             } else if (FSRs == 0b0100000000 || FSRs == 0b0100001000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position = bottom_right;
                 pd.check = 0;
             } else if (FSRs == 0b0100000100) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position = true_bottom;
                 pd.check = 1;
             } else if (FSRs == 0b1000011000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position = bottom_right_corner;
                 pd.check = 0;
             } else if (FSRs == 0b0100011000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position = bottom_right_corner;
                 pd.check = 0;
@@ -428,121 +284,49 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                 pd.check = 0;
             } else if (FSRs == 0b0000010000 || FSRs == 0b0100010000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                   sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position = right_bottom;
                 pd.check = 0;
             } else if (FSRs == 0b0010010000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position = true_right;
                 pd.check = 1;
             } else if (FSRs == 0b0000001000 || FSRs == 0b0100001000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position = right_bottom;
                 pd.check = 0;
             } else if (FSRs == 0b0010001000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position = true_right;
                 pd.check = 1;
             } else if (FSRs == 0b1100010000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position = bottom_right_corner;
                 pd.check = 0;
             } else if (FSRs == 0b1100001000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position = bottom_right_corner;
                 pd.check = 0;
@@ -575,21 +359,9 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             }
             else if (FSRs == 0b0000010000 || 0b0010010000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position = true_right;
                 pd.check = 0;
@@ -597,41 +369,17 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                     pd.check = 1;
             } else if (FSRs == 0b0100010000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position = right_bottom;
                 pd.check = 0;
             } else if (FSRs == 0b0000001000 || 0b0010001000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position = true_right;
                 pd.check = 0;
@@ -639,21 +387,9 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                     pd.check = 1;
             } else if (FSRs == 0b0100001000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position = right_bottom;
                 pd.check = 0;
@@ -692,21 +428,9 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             }
             else if (FSRs == 0b0000010000 || FSRs == 0b0010010000 || FSRs == 0b0001010000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position = right_top;
                 pd.check = 0;
@@ -714,21 +438,9 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                     pd.check = 1;
             } else if (FSRs == 0b0000001000 || FSRs == 0b0010001000 || FSRs == 0b0001001000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position = right_top;
                 pd.check = 0;
@@ -798,81 +510,33 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             }
             else if (FSRs == 0b0000100000 || FSRs == 0b0000101000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position = top_right;
                 pd.check = 0;
             } else if (FSRs == 0b0000100100) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position = true_top;
                 pd.check = 1;
             } else if (FSRs == 0b0001000000 || FSRs == 0b0001001000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position = top_right;
                 pd.check = 0;
             } else if (FSRs == 0b0001000100) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position = true_top;
                 pd.check = 1;
@@ -903,21 +567,9 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                 pd.check = 0;
             } else if (FSRs == 0b0000100000 || FSRs == 0b0000100100) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position = true_top;
                 pd.check = 0;
@@ -925,41 +577,17 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                     pd.check = 1;
             } else if (FSRs == 0b0000101000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position = top_right;
                 pd.check = 0;
             } else if (FSRs == 0b0001000000 || FSRs == 0b0001000100) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position = true_top;
                 pd.check = 0;
@@ -967,21 +595,9 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                     pd.check = 1;
             } else if (FSRs == 0b0001001000) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position = top_right;
                 pd.check = 0;
@@ -1010,21 +626,9 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             }
             else if (FSRs == 0b0000100000 || FSRs == 0b0000100100 || FSRs == 0b0000100010) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position == top_left;
                 pd.check = 0;
@@ -1032,21 +636,9 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                     pd.check = 1;
             } else if (FSRs == 0b0001000000 || FSRs == 0b0001000100 || FSRs == 0b0001000010) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position == top_left;
                 pd.check = 0;
@@ -1102,21 +694,9 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             }
             else if (FSRs == 0b0000000001 || FSRs == 0b0010000001 || FSRs == 0b0001000001) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position = left_top;
                 pd.check = 0;
@@ -1124,21 +704,9 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                     pd.check = 1;
             } else if (FSRs == 0b0000000010 || FSRs == 0b0010000010 || FSRs == 0b0001000010) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position = left_top;
                 pd.check = 0;
@@ -1169,21 +737,9 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             }
             else if (FSRs == 0b0000000001 || FSRs == 0b0010000001) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position = true_left;
                 pd.check = 0;
@@ -1191,41 +747,17 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                     pd.check = 1;
             } else if (FSRs == 0b0100000001) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position = left_bottom;
                 pd.check = 0;
             } else if (FSRs == 0b0000000010 || FSRs == 0b0010000010) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position = true_left;
                 pd.check = 0;
@@ -1233,21 +765,9 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                     pd.check = 1;
             } else if (FSRs == 0b0100000010) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position = left_bottom;
                 pd.check = 0;
@@ -1272,81 +792,33 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
                 pd.check = 0;
             } else if (FSRs == 0b0000000001 || FSRs == 0b0100000001) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position = left_bottom;
                 pd.check = 0;
             } else if (FSRs == 0b0010000001) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 }
                 pd.current_position = true_left;
                 pd.check = 1;
             } else if (FSRs == 0b0000000010 || FSRs == 0b0100000010) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position = left_bottom;
                 pd.check = 0;
             } else if (FSRs == 0b0010000010) {
                 if (pd.dir == forwards) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_LEFT;
-                    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnLeft();
                 } else if (pd.dir == reverse) {
-                    toMotor.type = CommandMsg;
-                    toMotor.val0 = TURN_RIGHT;
-                    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-                    toMotor.val2 = 0;
-                    Queue_Send_FromThread(MotorQueue, toMotor);
-                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-                        motorAck = Queue_Receive_FromThread(NavQueue);
+                    sendTurnRight();
                 }
                 pd.current_position = true_left;
                 pd.check = 1;
@@ -1896,3 +1368,38 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
     }
 }
 
+void sendTurnLeft()
+{
+    QueueMsg toMotor;
+    QueueMsg motorAck;
+
+    toMotor.type = CommandMsg;
+    toMotor.val0 = TURN_LEFT;
+    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
+    toMotor.val2 = 0;
+    Queue_Send_FromThread(MotorQueue, toMotor);
+    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+    {
+        motorAck = Queue_Receive_FromThread(NavQueue);
+    }
+    motorAck.type = UnknownMsg;
+    motorAck.source = UnknownThread;
+}
+
+void sendTurnRight()
+{
+    QueueMsg toMotor;
+    QueueMsg motorAck;
+
+    toMotor.type = CommandMsg;
+    toMotor.val0 = TURN_RIGHT;
+    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
+    toMotor.val2 = 0;
+    Queue_Send_FromThread(MotorQueue, toMotor);
+    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+    {
+        motorAck = Queue_Receive_FromThread(NavQueue);
+    }
+    motorAck.type = UnknownMsg;
+    motorAck.source = UnknownThread;
+}
