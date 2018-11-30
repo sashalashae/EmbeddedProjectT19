@@ -227,7 +227,7 @@ Public Class GameplayForm
             Me.Invoke(Sub() status.Text = "Waiting for player: " + currentPlayer)
         End If
 
-        If moveNum = 8 Then
+        If moveNum = 9 Then
             Me.Invoke(Sub() status.Text = "Game Over!")
         End If
 
