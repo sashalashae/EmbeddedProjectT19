@@ -1,5 +1,5 @@
-build/default/production/_ext/1688732426/rtos_hooks.o:  \
- ../src/system_config/default/rtos_hooks.c  \
+build/default/production/_ext/1294454783/heap_1.o:  \
+ ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/portable/MemMang/heap_1.c  \
  ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/FreeRTOS.h  \
  ../src/system_config/default/FreeRTOSConfig.h  \
  ../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include/projdefs.h  \

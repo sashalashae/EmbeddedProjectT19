@@ -6,7 +6,7 @@
 #     Harmony version: 2.06
 #
 #
-# from $HARMONY_VERSION_PATH\apps\EmbeddedProjectT19\FinalProject\RoverPIC\firmware\RoverPIC.hconfig
+# from C:\Backup\2018_Fall\ECE4534\EmbeddedProjectT19\FinalProject\RoverPIC\firmware\RoverPIC.hconfig
 #
 CONFIG_APP_INSTANCES=5
 #
@@ -43,7 +43,7 @@ CONFIG_APP_TASK_SIZE_IDX4=2048
 CONFIG_APP_TASK_PRIORITY_IDX4=2
 CONFIG_APP_TASK_USE_DELAY_IDX4=n
 #
-# from $HARMONY_VERSION_PATH\apps\EmbeddedProjectT19\FinalProject\RoverPIC\firmware\RoverPIC.hconfig
+# from C:\Backup\2018_Fall\ECE4534\EmbeddedProjectT19\FinalProject\RoverPIC\firmware\RoverPIC.hconfig
 #
 CONFIG_USE_EXCEPTION_HANDLER=y
 CONFIG_EXCEPTION_USE_SYS_DEBUG=y

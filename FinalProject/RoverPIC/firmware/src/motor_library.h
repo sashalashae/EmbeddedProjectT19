@@ -59,6 +59,10 @@ typedef enum
     REVERSE_BOTH,
     TURN_RIGHT,
     TURN_LEFT,
+    RIGHT_FORWARD,
+    RIGHT_REVERSE,
+    LEFT_FORWARD,
+    LEFT_REVERSE,
     STOP
 } movement_type_t;
 

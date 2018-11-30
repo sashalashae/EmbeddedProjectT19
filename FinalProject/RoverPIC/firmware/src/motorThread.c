@@ -95,7 +95,8 @@ void MOTORTHREAD_Tasks ( void )
     DRV_TMR0_Start();
     DRV_TMR1_Start();
     
-    uint32_t distance_target_val = 0;
+    uint32_t distance_target_val_right = 0;
+    uint32_t distance_target_val_left = 0;
     QueueMsg ack_msg;
     uint32_t current_left;
     uint32_t current_right;
@@ -139,7 +140,8 @@ void MOTORTHREAD_Tasks ( void )
                 motors_stop();
                 DRV_TMR0_CounterClear();
                 DRV_TMR1_CounterClear();
-                distance_target_val = msg.val1;
+                distance_target_val_right = msg.val1;
+                distance_target_val_left = msg.val1;
                 if(msg.val2)
                 {
                     duty_cycle = msg.val3 & 0xFF;
@@ -162,9 +164,30 @@ void MOTORTHREAD_Tasks ( void )
                     case TURN_LEFT:
                         motors_turn_left(duty_cycle);
                         break;
+                    case RIGHT_FORWARD:
+                        motor_right(FORWARD, duty_cycle);
+                        motor_left_stop();
+                        distance_target_val_left = 0;
+                        break;
+                    case RIGHT_REVERSE:
+                        motor_right(REVERSE, duty_cycle);
+                        motor_left_stop();
+                        distance_target_val_left = 0;
+                        break;
+                    case LEFT_FORWARD:
+                        motor_left(FORWARD, duty_cycle);
+                        motor_right_stop();
+                        distance_target_val_right = 0;
+                        break;
+                    case LEFT_REVERSE:
+                        motor_left(REVERSE, duty_cycle);
+                        motor_right_stop();
+                        distance_target_val_right = 0;
+                        break;
                     case STOP:
                         motors_stop();
-                        distance_target_val = 0;
+                        distance_target_val_right = 0;
+                        distance_target_val_left = 0;
                         break;
                 }
                 running = true;
@@ -172,7 +195,7 @@ void MOTORTHREAD_Tasks ( void )
             case TimerMsg:
                 current_left = DRV_TMR0_CounterValueGet();
                 current_right = DRV_TMR1_CounterValueGet();
-                if(current_left >= distance_target_val && current_right >= distance_target_val)
+                if(current_left >= distance_target_val_left && current_right >= distance_target_val_right)
                 {
                     motors_stop();
                     accumulated_left_error = 0;
@@ -184,11 +207,11 @@ void MOTORTHREAD_Tasks ( void )
                     ack_msg.source = MovementThread;
                     Queue_Send_FromThread(NavQueue, ack_msg);
                 }
-                else if(current_left >= distance_target_val)
+                else if(current_left >= distance_target_val_left)
                 {
                     motor_left_stop();
                 }
-                else if(current_right >= distance_target_val)
+                else if(current_right >= distance_target_val_right)
                 {
                     motor_right_stop();
                 }

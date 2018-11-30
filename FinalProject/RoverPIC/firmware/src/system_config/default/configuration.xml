@@ -273,7 +273,7 @@
         <Name dnOrder="0">drv_tmr_static.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/default/framework/driver/tmr</Path>
         <Checksum dnOrder="2">DA8B92ECCB270627686EB2ED733F7CF2</Checksum>
-        <ProjectFileChecksum dnOrder="3">C64C82E1C51BAB3F4BA4DC12B0E21AE1</ProjectFileChecksum>
+        <ProjectFileChecksum dnOrder="3">C1B3936ABE2FC9872CAA8D927A02DC17</ProjectFileChecksum>
       </Template>
       <Template dnOrder="4">
         <Name dnOrder="0">motorThread.c</Name>
@@ -334,7 +334,7 @@
         <Name dnOrder="0">system_interrupt.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
         <Checksum dnOrder="2">2C2546C6236CA7F25DB9427D04E16252</Checksum>
-        <ProjectFileChecksum dnOrder="3">E9115494F7100516DC66DD2506990A29</ProjectFileChecksum>
+        <ProjectFileChecksum dnOrder="3">A32674A239CF0763D73D146DE9A1F9BC</ProjectFileChecksum>
       </Template>
       <Template dnOrder="17">
         <Name dnOrder="0">TxThread.h</Name>
@@ -344,7 +344,7 @@
         <Name dnOrder="0">drv_usart_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/driver/usart/src</Path>
         <Checksum dnOrder="2">0CA32CD53D2E70BAB81257B15034B3C0</Checksum>
-        <ProjectFileChecksum dnOrder="3">D955A3942876247FFBDCEBAB62738AB8</ProjectFileChecksum>
+        <ProjectFileChecksum dnOrder="3">2AD0BC6AC7C458F9BD8B8F2F2BB51E76</ProjectFileChecksum>
       </Template>
       <Template dnOrder="19">
         <Name dnOrder="0">system_init.c</Name>
@@ -383,7 +383,7 @@
         <Name dnOrder="0">system_tasks.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
         <Checksum dnOrder="2">4C420D6FB0D1B1841C492FDC24D20229</Checksum>
-        <ProjectFileChecksum dnOrder="3">F74DFB39B83741F028B9AABAB6DE2341</ProjectFileChecksum>
+        <ProjectFileChecksum dnOrder="3">0D60BED21FDF727CC333CAD1E86EF985</ProjectFileChecksum>
       </Template>
       <Template dnOrder="27">
         <Name dnOrder="0">sys_devcon_pic32mx.c</Name>
@@ -426,25 +426,25 @@
     </Templates>
     <CompilerItems dnOrder="2">
       <C32-AS dnOrder="0">
-        <Include dnOrder="0" value="../../../../../../third_party/rtos/FreeRTOS/Source/include"/>
-        <Include dnOrder="1" value="../../../../../../third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX"/>
+        <Include dnOrder="0" value="../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include"/>
+        <Include dnOrder="1" value="../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX"/>
         <Include dnOrder="2" value="../src/system_config/default"/>
       </C32-AS>
       <C32 dnOrder="1">
-        <Include dnOrder="0" value="C:\microchip\harmony\v2_06\apps\EmbeddedProjectT19\FinalProject\RoverPIC\firmware\src"/>
-        <Include dnOrder="1" value="C:\microchip\harmony\v2_06\apps\EmbeddedProjectT19\FinalProject\RoverPIC\firmware\src\system_config\default"/>
-        <Include dnOrder="2" value="C:\microchip\harmony\v2_06\apps\EmbeddedProjectT19\FinalProject\RoverPIC\firmware\src\default"/>
+        <Include dnOrder="0" value="C:\Backup\2018_Fall\ECE4534\EmbeddedProjectT19\FinalProject\RoverPIC\firmware\src"/>
+        <Include dnOrder="1" value="C:\Backup\2018_Fall\ECE4534\EmbeddedProjectT19\FinalProject\RoverPIC\firmware\src\system_config\default"/>
+        <Include dnOrder="2" value="C:\Backup\2018_Fall\ECE4534\EmbeddedProjectT19\FinalProject\RoverPIC\firmware\src\default"/>
         <Include dnOrder="3" value="C:\microchip\harmony\v2_06\framework"/>
-        <Include dnOrder="4" value="C:\microchip\harmony\v2_06\apps\EmbeddedProjectT19\FinalProject\RoverPIC\firmware\src\system_config\default\framework"/>
+        <Include dnOrder="4" value="C:\Backup\2018_Fall\ECE4534\EmbeddedProjectT19\FinalProject\RoverPIC\firmware\src\system_config\default\framework"/>
         <Include dnOrder="5" value="../src/system_config/default/bsp"/>
-        <Include dnOrder="6" value="../../../../../../third_party/rtos/FreeRTOS/Source/include"/>
-        <Include dnOrder="7" value="../../../../../../third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX"/>
+        <Include dnOrder="6" value="../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/include"/>
+        <Include dnOrder="7" value="../../../../../../../../microchip/harmony/v2_06/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX"/>
         <Include dnOrder="8" value="../src/system_config/default"/>
         <Define dnOrder="9" value="__XC"/>
       </C32>
     </CompilerItems>
     <Libraries dnOrder="3">
-      <Library dnOrder="0" value="../../../../../../bin/framework/peripheral/PIC32MX795F512L_peripherals.a"/>
+      <Library dnOrder="0" value="../../../../../../../../microchip/harmony/v2_06/bin/framework/peripheral/PIC32MX795F512L_peripherals.a"/>
     </Libraries>
   </Manifest>
 </Configuration>
