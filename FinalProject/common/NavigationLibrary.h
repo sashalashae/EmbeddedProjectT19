@@ -16,11 +16,12 @@
 #include "../../../common/UART_Defines.h"
 #include "timers.h"
 
-#define ERR_TURN_RIGHT 50
-#define ERR_TURN_LEFT  50
-#define DUTY_CYCLE     25
-#define SHORT          40
-#define TURN          600
+#define ERR_TURN_RIGHT 40
+#define ERR_TURN_LEFT  40
+#define DUTY_CYCLE     50
+#define SHORT          20
+#define TURN_LEFT_NORMAL     595
+#define TURN_RIGHT_NORMAL    605
 
 int globPos;
 

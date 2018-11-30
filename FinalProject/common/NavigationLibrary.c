@@ -1284,13 +1284,125 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
         }*/
 
         //globPos = pd.beside;
-        
+        Direction prevDir = pd.dir;
         dirTravel(&pd, nextPos);
+        
+        if(nextPos == 2 && pd.dir == forwards && pd.current_position == true_bottom)
+        {
+            toMotor.type = AsyncStopMsg;
+            toMotor.val0 = STOP;
+            toMotor.val1 = 0;
 
+            Queue_Send_FromThread(MotorQueue, toMotor);
+            while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+                motorAck = Queue_Receive_FromThread(NavQueue);
+
+            motorAck.type = UnknownMsg;
+            motorAck.source = UnknownThread;
+                
+            toMotor.type = CommandMsg;
+            toMotor.val0 = FORWARD_BOTH;
+            toMotor.val1 = 1125; // 15 cm
+
+            Queue_Send_FromThread(MotorQueue, toMotor);
+            while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+                motorAck = Queue_Receive_FromThread(NavQueue);
+
+            motorAck.type = UnknownMsg;
+            motorAck.source = UnknownThread;
+            
+            pd.dir = stop;
+            pd.current_position = bottom_right;
+            *pdToCpy = pd;
+        }
+        else if(nextPos == 0 && pd.dir == forwards && pd.current_position == true_left)
+        {
+            toMotor.type = AsyncStopMsg;
+            toMotor.val0 = STOP;
+            toMotor.val1 = 0;
+
+            Queue_Send_FromThread(MotorQueue, toMotor);
+            while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+                motorAck = Queue_Receive_FromThread(NavQueue);
+
+            motorAck.type = UnknownMsg;
+            motorAck.source = UnknownThread;
+                
+            toMotor.type = CommandMsg;
+            toMotor.val0 = FORWARD_BOTH;
+            toMotor.val1 = 1125; // 15 cm
+
+            Queue_Send_FromThread(MotorQueue, toMotor);
+            while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+                motorAck = Queue_Receive_FromThread(NavQueue);
+
+            motorAck.type = UnknownMsg;
+            motorAck.source = UnknownThread;
+            
+            pd.dir = stop;
+            pd.current_position = left_bottom;
+            *pdToCpy = pd;
+        }
+        else if(nextPos == 8 && pd.dir == reverse && pd.current_position == true_top)
+        {
+            toMotor.type = AsyncStopMsg;
+            toMotor.val0 = STOP;
+            toMotor.val1 = 0;
+
+            Queue_Send_FromThread(MotorQueue, toMotor);
+            while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+                motorAck = Queue_Receive_FromThread(NavQueue);
+
+            motorAck.type = UnknownMsg;
+            motorAck.source = UnknownThread;
+                
+            toMotor.type = CommandMsg;
+            toMotor.val0 = REVERSE_BOTH;
+            toMotor.val1 = 1125; // 15 cm
+
+            Queue_Send_FromThread(MotorQueue, toMotor);
+            while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+                motorAck = Queue_Receive_FromThread(NavQueue);
+
+            motorAck.type = UnknownMsg;
+            motorAck.source = UnknownThread;
+            
+            pd.dir = stop;
+            pd.current_position = top_right;
+            *pdToCpy = pd;
+        }
+        else if(nextPos == 2 && pd.dir == reverse && pd.current_position == true_right)
+        {
+            toMotor.type = AsyncStopMsg;
+            toMotor.val0 = STOP;
+            toMotor.val1 = 0;
+
+            Queue_Send_FromThread(MotorQueue, toMotor);
+            while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+                motorAck = Queue_Receive_FromThread(NavQueue);
+
+            motorAck.type = UnknownMsg;
+            motorAck.source = UnknownThread;
+                
+            toMotor.type = CommandMsg;
+            toMotor.val0 = REVERSE_BOTH;
+            toMotor.val1 = 1125; // 15 cm
+
+            Queue_Send_FromThread(MotorQueue, toMotor);
+            while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+                motorAck = Queue_Receive_FromThread(NavQueue);
+
+            motorAck.type = UnknownMsg;
+            motorAck.source = UnknownThread;
+            
+            pd.dir = stop;
+            pd.current_position = right_bottom;
+            *pdToCpy = pd;
+        }
         if (pd.dir == stop) {
             if (nextPos == 4 && drawcheck0) {
                 drawcheck0 = 0;
-                drawcheck1 = 1;
+                drawcheck1 = 0;
 
                 toMotor.type = AsyncStopMsg;
                 toMotor.val0 = STOP;
@@ -1305,7 +1417,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
 
                 toMotor.type = CommandMsg;
                 toMotor.val0 = TURN_LEFT;
-                toMotor.val1 = TURN; // 90 Degrees
+                toMotor.val1 = TURN_LEFT_NORMAL; // 90 Degrees
                 
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
@@ -1357,7 +1469,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
 
                 toMotor.type = CommandMsg;
                 toMotor.val0 = TURN_RIGHT;
-                toMotor.val1 = TURN; // 90 Degrees
+                toMotor.val1 = TURN_RIGHT_NORMAL; // 90 Degrees
                 
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
@@ -1384,7 +1496,6 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                 //TxThreadQueue_Send(currentMsg);
             } else if (drawcheck1) {
                 drawcheck1 = 0;
-                drawcheck0 = 1;
 
                 toMotor.type = AsyncStopMsg;
                 toMotor.val0 = STOP;
@@ -1396,6 +1507,33 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                 motorAck.type = UnknownMsg;
                 motorAck.source = UnknownThread;
 
+                if(prevDir == forwards && (pd.current_position == true_right || pd.current_position == true_top))
+                {
+                    toMotor.type = CommandMsg;
+                    toMotor.val0 = REVERSE_BOTH;
+                    toMotor.val1 = 225; // 2 cm
+
+                    Queue_Send_FromThread(MotorQueue, toMotor);
+                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+                        motorAck = Queue_Receive_FromThread(NavQueue);
+
+                    motorAck.type = UnknownMsg;
+                    motorAck.source = UnknownThread;
+                }
+                if(prevDir == reverse && (pd.current_position == true_left || pd.current_position == true_bottom))
+                {
+                    toMotor.type = CommandMsg;
+                    toMotor.val0 = FORWARD_BOTH;
+                    toMotor.val1 = 225; // 3 cm
+
+                    Queue_Send_FromThread(MotorQueue, toMotor);
+                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+                        motorAck = Queue_Receive_FromThread(NavQueue);
+
+                    motorAck.type = UnknownMsg;
+                    motorAck.source = UnknownThread;
+                }
+                
                 if (draw) {
                     toArm.type = CommandMsg;
                     toArm.val0 = DrawX;
@@ -1473,7 +1611,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
 
                         toMotor.type = CommandMsg;
                         toMotor.val0 = TURN_LEFT;
-                        toMotor.val1 = TURN; // 90 Degrees
+                        toMotor.val1 = TURN_LEFT_NORMAL; // 90 Degrees
                         
                         Queue_Send_FromThread(MotorQueue, toMotor);
                         while (motorAck.source != MovementThread && motorAck.type != AckMsg)
@@ -1536,7 +1674,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
 
                         toMotor.type = CommandMsg;
                         toMotor.val0 = TURN_RIGHT;
-                        toMotor.val1 = TURN; // 90 Degrees
+                        toMotor.val1 = TURN_RIGHT_NORMAL; // 90 Degrees
                         
                         Queue_Send_FromThread(MotorQueue, toMotor);
                         while (motorAck.source != MovementThread && motorAck.type != AckMsg)
@@ -1573,11 +1711,23 @@ void sendTurnLeft()
     QueueMsg toMotor;
     QueueMsg motorAck;
 
+    toMotor.val2 = true;
+    toMotor.val3 = DUTY_CYCLE;
+    
+    toMotor.type = AsyncStopMsg;
+    toMotor.val0 = STOP;
+    toMotor.val1 = 0;
+
+    Queue_Send_FromThread(MotorQueue, toMotor);
+    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+        motorAck = Queue_Receive_FromThread(NavQueue);
+    
+    motorAck.type = UnknownMsg;
+    motorAck.source = UnknownThread;
+    
     toMotor.type = CommandMsg;
     toMotor.val0 = TURN_LEFT;
     toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-    toMotor.val2 = true;
-    toMotor.val3 = DUTY_CYCLE;
     
     Queue_Send_FromThread(MotorQueue, toMotor);
     while (motorAck.source != MovementThread && motorAck.type != AckMsg)
@@ -1593,11 +1743,23 @@ void sendTurnRight()
     QueueMsg toMotor;
     QueueMsg motorAck;
 
+    toMotor.val2 = true;
+    toMotor.val3 = DUTY_CYCLE;
+    
+    toMotor.type = AsyncStopMsg;
+    toMotor.val0 = STOP;
+    toMotor.val1 = 0;
+
+    Queue_Send_FromThread(MotorQueue, toMotor);
+    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+        motorAck = Queue_Receive_FromThread(NavQueue);
+    
+    motorAck.type = UnknownMsg;
+    motorAck.source = UnknownThread;
+    
     toMotor.type = CommandMsg;
     toMotor.val0 = TURN_RIGHT;
     toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-    toMotor.val2 = true;
-    toMotor.val3 = DUTY_CYCLE;
     
     Queue_Send_FromThread(MotorQueue, toMotor);
     while (motorAck.source != MovementThread && motorAck.type != AckMsg)
