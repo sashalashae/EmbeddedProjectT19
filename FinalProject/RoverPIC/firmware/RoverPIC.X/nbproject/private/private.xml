@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/FinalProject/RoverPIC/firmware/src/motor_library.c</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/FinalProject/RoverPIC/firmware/src/arm_library.c</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/FinalProject/RoverPIC/firmware/src/navThread.c</file>
@@ -25,6 +26,10 @@
             <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/FinalProject/common/get_timer.c</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/FinalProject/common/UART_Defines.h</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/EmbeddedProjectT19/FinalProject/RoverPIC/firmware/src/navThread.h</file>
+=======
+            <file>file:/C:/Users/nolan/Desktop/Dropbox/EmbeddedProjectT19/FinalProject/RoverPIC/firmware/src/arm_library.c</file>
+            <file>file:/C:/Users/nolan/Desktop/Dropbox/EmbeddedProjectT19/FinalProject/common/debug.c</file>
+>>>>>>> b0b4a2b3b1c8a78eb390ba45ccb0d348fa1fa599
         </group>
     </open-files>
 </project-private>
