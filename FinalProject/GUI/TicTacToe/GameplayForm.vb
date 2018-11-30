@@ -271,7 +271,7 @@ Public Class GameplayForm
             Me.Invoke(Sub() tile4.BackColor = Color.LightGreen)
             Me.Invoke(Sub() tile6.BackColor = Color.LightGreen)
             Me.Invoke(Sub() status.Text = "Player " + boardstate(2) + " wins!")
-        ElseIf boardstate(0) = boardstate(3) And boardstate(5) = boardstate(6) And boardstate(0) <> "Empty" Then
+        ElseIf boardstate(0) = boardstate(5) And boardstate(5) = boardstate(6) And boardstate(0) <> "Empty" Then
             found = True
             Me.Invoke(Sub() tile0.BackColor = Color.LightGreen)
             Me.Invoke(Sub() tile5.BackColor = Color.LightGreen)
@@ -283,7 +283,7 @@ Public Class GameplayForm
             Me.Invoke(Sub() tile4.BackColor = Color.LightGreen)
             Me.Invoke(Sub() tile7.BackColor = Color.LightGreen)
             Me.Invoke(Sub() status.Text = "Player " + boardstate(1) + " wins!")
-        ElseIf boardstate(2) = boardstate(5) And boardstate(3) = boardstate(8) And boardstate(3) <> "Empty" Then
+        ElseIf boardstate(2) = boardstate(3) And boardstate(3) = boardstate(8) And boardstate(3) <> "Empty" Then
             found = True
             Me.Invoke(Sub() tile2.BackColor = Color.LightGreen)
             Me.Invoke(Sub() tile8.BackColor = Color.LightGreen)
@@ -356,13 +356,39 @@ Public Class GameplayForm
 
         'block forks
         If boardstate(0) = "X" Or boardstate(2) = "X" Or boardstate(6) = "X" Or boardstate(8) = "X" Then
-            priority(1) = 5
-            priority(7) = 5
-            priority(3) = 5
-            priority(5) = 5
+            priority(1) = 4
+            priority(7) = 4
+            priority(3) = 4
+            priority(5) = 4
         End If
 
-        'set center tile to 5
+        'corners with win potential
+        If (boardstate(6) = "O" Or boardstate(6) = "Empty") And (boardstate(5) = "O" Or boardstate(5) = "Empty") Then
+            priority(0) = 5
+        End If
+        If (boardstate(1) = "O" Or boardstate(1) = "Empty") And (boardstate(2) = "O" Or boardstate(2) = "Empty") Then
+            priority(0) = 5
+        End If
+        If (boardstate(0) = "O" Or boardstate(0) = "Empty") And (boardstate(1) = "O" Or boardstate(1) = "Empty") Then
+            priority(2) = 5
+        End If
+        If (boardstate(8) = "O" Or boardstate(8) = "Empty") And (boardstate(3) = "O" Or boardstate(3) = "Empty") Then
+            priority(2) = 5
+        End If
+        If (boardstate(3) = "O" Or boardstate(3) = "Empty") And (boardstate(2) = "O" Or boardstate(2) = "Empty") Then
+            priority(8) = 5
+        End If
+        If (boardstate(6) = "O" Or boardstate(6) = "Empty") And (boardstate(7) = "O" Or boardstate(7) = "Empty") Then
+            priority(8) = 5
+        End If
+        If (boardstate(7) = "O" Or boardstate(7) = "Empty") And (boardstate(8) = "O" Or boardstate(8) = "Empty") Then
+            priority(6) = 5
+        End If
+        If (boardstate(5) = "O" Or boardstate(5) = "Empty") And (boardstate(0) = "O" Or boardstate(0) = "Empty") Then
+            priority(6) = 5
+        End If
+
+        'set center tile to 6
         priority(4) = 6
 
         'set corner with two adjacent x to 7
