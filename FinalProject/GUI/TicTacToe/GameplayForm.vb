@@ -271,10 +271,10 @@ Public Class GameplayForm
             Me.Invoke(Sub() tile4.BackColor = Color.LightGreen)
             Me.Invoke(Sub() tile6.BackColor = Color.LightGreen)
             Me.Invoke(Sub() status.Text = "Player " + boardstate(2) + " wins!")
-        ElseIf boardstate(0) = boardstate(3) And boardstate(3) = boardstate(6) And boardstate(0) <> "Empty" Then
+        ElseIf boardstate(0) = boardstate(3) And boardstate(5) = boardstate(6) And boardstate(0) <> "Empty" Then
             found = True
             Me.Invoke(Sub() tile0.BackColor = Color.LightGreen)
-            Me.Invoke(Sub() tile3.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() tile5.BackColor = Color.LightGreen)
             Me.Invoke(Sub() tile6.BackColor = Color.LightGreen)
             Me.Invoke(Sub() status.Text = "Player " + boardstate(0) + " wins!")
         ElseIf boardstate(1) = boardstate(4) And boardstate(4) = boardstate(7) And boardstate(1) <> "Empty" Then
@@ -283,11 +283,11 @@ Public Class GameplayForm
             Me.Invoke(Sub() tile4.BackColor = Color.LightGreen)
             Me.Invoke(Sub() tile7.BackColor = Color.LightGreen)
             Me.Invoke(Sub() status.Text = "Player " + boardstate(1) + " wins!")
-        ElseIf boardstate(2) = boardstate(5) And boardstate(5) = boardstate(8) And boardstate(5) <> "Empty" Then
+        ElseIf boardstate(2) = boardstate(5) And boardstate(3) = boardstate(8) And boardstate(3) <> "Empty" Then
             found = True
             Me.Invoke(Sub() tile2.BackColor = Color.LightGreen)
             Me.Invoke(Sub() tile8.BackColor = Color.LightGreen)
-            Me.Invoke(Sub() tile5.BackColor = Color.LightGreen)
+            Me.Invoke(Sub() tile3.BackColor = Color.LightGreen)
             Me.Invoke(Sub() status.Text = "Player " + boardstate(3) + " wins!")
         End If
         Return found
