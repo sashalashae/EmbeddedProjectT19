@@ -142,7 +142,7 @@ void NAVTHREAD_Tasks ( void )
         if(fromServer.source == RxThread)
         {
             position_tracker(fromServer.val1, &pd, fromServer.val0);
-            toNextLoc(&pd, fromServer.val0, fromServer.val2);
+            toNextLoc(&pd, fromServer.val0, fromServer.val2, fromServer.val1);
         }
     }
     

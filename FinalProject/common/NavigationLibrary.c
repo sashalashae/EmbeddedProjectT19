@@ -5,7 +5,7 @@ void Timer_Init()
 {
     TimerHandle_t testTimer;
     
-    testTimer = xTimerCreate("Timer250ms", pdMS_TO_TICKS(250), pdTRUE, ( void * ) 0, Nav_Timer_Cb);
+    testTimer = xTimerCreate("Timer500ms", pdMS_TO_TICKS(500), pdTRUE, ( void * ) 0, Nav_Timer_Cb);
     
     xTimerStart(testTimer, 0);
 
@@ -101,7 +101,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
     toMotor.source = NavigationThread;
     toArm.source = NavigationThread;
 
-    if ((FSRs == 0b1100000011 || FSRs == 0b0000000011 || FSRs == 0b0000000010) && initcheck) {
+    if ((FSRs == 0b1100000011 || FSRs == 0b0000000011) && initcheck) {
         initcheck = 0;
         pd.current_position = bottom_left_corner;
         dirTravel(&pd, nextPos);
@@ -111,19 +111,20 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
     switch (pd.current_position) {
         case bottom_left_corner:
             dbgOutputLoc(LOC_BOTTOM_LEFT_CORNER);
-            if (FSRs == 0b1100000011 || FSRs == 0b1100000001 || FSRs == 1000000011 || FSRs == 0b1100000010 || FSRs == 0b0100000011) {
+            FSRs = FSRs & 0b1100000011;
+            if (FSRs == 0b1100000011) { // || FSRs == 0b1100000001 || FSRs == 1000000011 || FSRs == 0b1100000010 || FSRs == 0b0100000011
                 pd.current_position = bottom_left_corner; //On corner
                 pd.check = 0;
-            } else if (FSRs == 0b0000000010 || FSRs == 0b1100000000 || FSRs == 0b0100000010 || FSRs == 0b0100000001) {
+            } else if ((FSRs == 0b0000000010 || FSRs == 0b0000000011 || FSRs == 0b0100000010 || FSRs == 0b1000000010 || FSRs == 0b1000000011 || FSRs == 0b0100000011) && pd.dir == forwards) {
                 pd.current_position = bottom_left_corner;
                 pd.check = 1;
-            } else if (FSRs == 0b0100000000 || FSRs == 0b0000000011 || FSRs == 0b0100000010 || FSRs == 0b1000000010) {
+            } else if ((FSRs == 0b0100000000 || FSRs == 0b1100000000 || FSRs == 0b0100000010 || FSRs == 0b1000000010 || FSRs == 0b1100000010 || FSRs == 0b1100000001) && pd.dir == reverse) {
                 pd.current_position = bottom_left_corner;
                 pd.check = 2;
-            } else if (FSRs == 0 && pd.check == 1 && pd.dir == forwards) {
+            } else if ((FSRs == 0 || FSRs == 0b1000000000 || FSRs == 0b0100000000) && pd.check == 1 && pd.dir == forwards) {
                 pd.current_position = bottom_left; //Post leaving to the right, yet to hit strip 2
                 pd.check = 0;
-            } else if (FSRs == 0 && pd.check == 2 && pd.dir == reverse) {
+            } else if ((FSRs == 0 || FSRs == 0b0000000010 || FSRs == 0b0000000001) && pd.check == 2 && pd.dir == reverse) {
                 pd.current_position = left_bottom; //Post leaving to the top
                 pd.check = 0;
             }
@@ -139,6 +140,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             break;
         case bottom_left:
             dbgOutputLoc(LOC_BOTTOM_LEFT);
+            FSRs = FSRs & 0b1100000111;
             if (FSRs == 0b0000000100) {
                 pd.current_position = bottom_left; //Hit strip 2
                 pd.check = 1;
@@ -184,6 +186,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             break;
         case true_bottom:
             dbgOutputLoc(LOC_TRUE_BOTTOM);
+            FSRs = FSRs & 0b1100011100;
             if (FSRs == 0 && pd.dir == reverse && pd.check) //Is back on bottom left
             {
                 pd.current_position = bottom_left;
@@ -261,6 +264,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             break;
         case bottom_right:
             dbgOutputLoc(LOC_BOTTOM_RIGHT);
+            FSRs = FSRs & 0b1100011100;
             if (FSRs == 0b0000000100) {
                 pd.current_position = true_bottom;
                 pd.check = 1;
@@ -332,19 +336,20 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             break;
         case bottom_right_corner:
             dbgOutputLoc(LOC_BOTTOM_RIGHT_CORNER);
-            if (FSRs == 0b1100011000 || FSRs == 0b1100010000 || FSRs == 0b1000011000 || FSRs == 0b1100001000 || FSRs == 0b0100011000) {
+            FSRs = FSRs & 0b1100011000;
+            if (FSRs == 0b1100011000) { // || FSRs == 0b1100010000 || FSRs == 0b1000011000 || FSRs == 0b1100001000 || FSRs == 0b0100011000
                 pd.current_position = bottom_right_corner; //On all 4
                 pd.check = 0;
-            } else if (FSRs == 0b0000001000 || FSRs == 0b0000011000 || FSRs == 0b0100001000 || FSRs == 0b1000001000) {
+            } else if ((FSRs == 0b0000001000 || FSRs == 0b0000011000 || FSRs == 0b0100001000 || FSRs == 0b1000001000 || FSRs == 0b0100011000 || FSRs == 0b1000011000) && pd.dir == reverse) {
                 pd.current_position = bottom_right_corner; //On bottom left side of corner
                 pd.check = 1;
-            } else if (FSRs == 0b0100000000 || FSRs == 0b1100000000 || FSRs == 0b0100010000 || FSRs == 0b0100001000) {
+            } else if ((FSRs == 0b0100000000 || FSRs == 0b1100000000 || FSRs == 0b0100010000 || FSRs == 0b0100001000 || FSRs == 0b1100010000 || FSRs == 0b1100001000) && pd.dir == forwards) {
                 pd.current_position = bottom_right_corner; //On right bottom side of corner
                 pd.check = 2;
-            } else if (FSRs == 0 && pd.check == 1 && pd.dir == reverse) {
+            } else if ((FSRs == 0 || FSRs == 0b1000000000 || FSRs == 0b0100000000) && pd.check == 1 && pd.dir == reverse) {
                 pd.current_position = bottom_right; //Left the corner to the left
                 pd.check = 0;
-            } else if (FSRs == 0 && pd.check == 2 && pd.dir == forwards) {
+            } else if ((FSRs == 0 || FSRs == 0b0000001000 || FSRs == 0b0000010000) && pd.check == 2 && pd.dir == forwards) {
                 pd.current_position = right_bottom; //Left the corner to to top
                 pd.check = 0;
             }
@@ -362,6 +367,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             break;
         case right_bottom:
             dbgOutputLoc(LOC_RIGHT_BOTTOM);
+            FSRs = FSRs & 0b1110011000;
             if (FSRs == 0b0010000000) {
                 pd.current_position = true_right;
                 pd.check = 1;
@@ -433,6 +439,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             break;
         case true_right:
             dbgOutputLoc(LOC_TRUE_RIGHT);
+            FSRs = FSRs & 0b0110011000;
             if (FSRs == 0b0010000000) {
                 pd.current_position = true_right;
                 pd.check = 1;
@@ -502,6 +509,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             break;
         case right_top:
             dbgOutputLoc(LOC_RIGHT_TOP);
+            FSRs = FSRs & 0b0011111000;
             if (FSRs == 0b0010000000) {
                 pd.current_position = right_top;
                 pd.check = 1;
@@ -555,19 +563,20 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             break;
         case top_right_corner:
             dbgOutputLoc(LOC_TOP_RIGHT_CORNER);
-            if (FSRs == 0b0001111000 || FSRs == 0b0000111000 || FSRs == 0b0001110000 || FSRs == 0b0001011000 || 0b0001101000) {
+            FSRs = FSRs & 0b0001111000;
+            if (FSRs == 0b0001111000) { // || FSRs == 0b0000111000 || FSRs == 0b0001110000 || FSRs == 0b0001011000 || 0b0001101000
                 pd.current_position = top_right_corner;
                 pd.check = 0;
-            } else if (FSRs == 0b0001000000 || FSRs == 0b0001100000 || FSRs == 0b0001001000 || FSRs == 0b0001010000) {
+            } else if ((FSRs == 0b0001000000 || FSRs == 0b0001100000 || FSRs == 0b0001001000 || FSRs == 0b0001010000 || FSRs == 0b0001110000 || FSRs == 0b0001101000) && pd.dir == reverse) {
                 pd.current_position = top_right_corner;
                 pd.check = 1;
-            } else if (FSRs == 0b0000001000 || FSRs == 0b0000011000 || FSRs == 0b0000101000 || FSRs == 0b0001001000) {
+            } else if ((FSRs == 0b0000001000 || FSRs == 0b0000011000 || FSRs == 0b0000101000 || FSRs == 0b0001001000 || FSRs == 0b0001011000|| FSRs == 0b0000111000) && pd.dir == forwards) {
                 pd.current_position = top_right_corner;
                 pd.check = 2;
-            } else if (FSRs == 0 && pd.check == 2 && pd.dir == forwards) {
+            } else if ((FSRs == 0 || FSRs == 0b0001000000 || FSRs == 0b0000100000) && pd.check == 2 && pd.dir == forwards) {
                 pd.current_position = top_right;
                 pd.check = 0;
-            } else if (FSRs == 0 && pd.check == 1 && pd.dir == reverse) {
+            } else if ((FSRs == 0 || FSRs == 0b0000010000 || FSRs == 0b0000001000) && pd.check == 1 && pd.dir == reverse) {
                 pd.current_position = right_top;
                 pd.check = 0;
             }
@@ -584,6 +593,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             break;
         case top_right:
             dbgOutputLoc(LOC_TOP_RIGHT);
+            FSRs = FSRs & 0b0001111100;
             if (FSRs == 0b0000000100) {
                 pd.current_position = true_top;
                 pd.check = 1;
@@ -639,6 +649,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             break;
         case true_top:
             dbgOutputLoc(LOC_TRUE_TOP);
+            FSRs = FSRs & 0b0001111100;
             if (FSRs == 0b0000000100) {
                 pd.current_position = true_top;
                 pd.check = 1;
@@ -700,6 +711,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             break;
         case top_left:
             dbgOutputLoc(LOC_TOP_LEFT);
+            FSRs = FSRs & 0b0001100111;
             if (FSRs == 0b0000000100) {
                 pd.current_position = top_left;
                 pd.check = 1;
@@ -743,19 +755,20 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             break;
         case top_left_corner:
             dbgOutputLoc(LOC_TOP_LEFT_CORNER);
-            if (FSRs == 0b0001100011 || FSRs == 0b0001100010 || FSRs == 0b0001000011 || FSRs == 0b0000100011 || FSRs == 0b0001100001) {
+            FSRs = FSRs & 0b00011000011;
+            if (FSRs == 0b0001100011) { // || FSRs == 0b0001100010 || FSRs == 0b0001000011 || FSRs == 0b0000100011 || FSRs == 0b0001100001
                 pd.current_position = top_left_corner;
                 pd.check = 0;
-            } else if (FSRs == 0b0001000000 || FSRs == 0b0001100000 || FSRs == 0b0001000010 || FSRs == 0b0001000001) {
+            } else if ((FSRs == 0b0001000000 || FSRs == 0b0001100000 || FSRs == 0b0001000010 || FSRs == 0b0001000001 || FSRs == 0b0001100010 || FSRs == 0b0001100001) && pd.dir == forwards) {
                 pd.current_position = top_left_corner;
                 pd.check = 1;
-            } else if (FSRs == 0b0000000010 || FSRs == 0b0000000011 || FSRs == 0b0001000010 || FSRs == 0b0000100010) {
+            } else if ((FSRs == 0b0000000010 || FSRs == 0b0000000011 || FSRs == 0b0001000010 || FSRs == 0b0000100010 || FSRs == 0b0001000011 || FSRs == 0b0000100011) && pd.dir == reverse) {
                 pd.current_position = top_left_corner;
                 pd.check = 2;
-            } else if (FSRs == 0 && pd.check == 1 && pd.dir == forwards) {
+            } else if ((FSRs == 0 || FSRs == 0b0000000010 || FSRs == 0b0000000001) && pd.check == 1 && pd.dir == forwards) {
                 pd.current_position = left_top;
                 pd.check = 0;
-            } else if (FSRs == 0 && pd.check == 2 && pd.dir == reverse) {
+            } else if ((FSRs == 0 || FSRs == 0b0001000000 || FSRs == 0b0000100000) && pd.check == 2 && pd.dir == reverse) {
                 pd.current_position = top_left;
                 pd.check = 0;
             }
@@ -768,6 +781,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             break;
         case left_top:
             dbgOutputLoc(LOC_LEFT_TOP);
+            FSRs = FSRs & 0b0011100011;
             if (FSRs == 0b0010000000) {
                 pd.current_position = left_top;
                 pd.check = 1;
@@ -811,6 +825,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             break;
         case true_left:
             dbgOutputLoc(LOC_TRUE_LEFT);
+            FSRs = FSRs & 0b1110000011;
             if (FSRs == 0b0010000000) {
                 pd.current_position = true_left;
                 pd.check = 1;
@@ -870,6 +885,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             break;
         case left_bottom:
             dbgOutputLoc(LOC_LEFT_BOTTOM);
+            FSRs = FSRs & 0b1110000011;
             if (FSRs == 0b0010000000) {
                 pd.current_position = true_left;
                 pd.check = 1;
@@ -972,7 +988,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             if (pd.dir == forwards) {
                 toMotor.type = CommandMsg;
                 toMotor.val0 = REVERSE_BOTH;
-                toMotor.val1 = 750; // 10 cm
+                toMotor.val1 = FROM_CORNER; // 10 cm
                 
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
@@ -989,7 +1005,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             } else if (pd.dir == reverse) {
                 toMotor.type = CommandMsg;
                 toMotor.val0 = FORWARD_BOTH;
-                toMotor.val1 = 750; // 10 cm
+                toMotor.val1 = FROM_CORNER; // 10 cm
                 
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
@@ -1023,7 +1039,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             if (pd.dir == forwards) {
                 toMotor.type = CommandMsg;
                 toMotor.val0 = REVERSE_BOTH;
-                toMotor.val1 = 750; // 10 cm
+                toMotor.val1 = FROM_CORNER; // 10 cm
                 
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
@@ -1041,7 +1057,7 @@ void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos) {
             } else if (pd.dir == reverse) {
                 toMotor.type = CommandMsg;
                 toMotor.val0 = FORWARD_BOTH;
-                toMotor.val1 = 750; // 10 cm
+                toMotor.val1 = FROM_CORNER; // 10 cm
                 
                 Queue_Send_FromThread(MotorQueue, toMotor);
                 while (motorAck.source != MovementThread && motorAck.type != AckMsg)
@@ -1183,7 +1199,7 @@ void dirTravel(Position_Data * pdToCpy, int nextPos) {
     *pdToCpy = pd;
 }
 
-void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
+void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol, uint16_t FSRs) {
     Position_Data pd = *pdToCpy;
     globPos = pd.current_position;
     static int initCheck = 1;
@@ -1194,96 +1210,27 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
     QueueMsg motorAck;
     QueueMsg armAck;
     static int drawcheck0 = 1;
-    static int drawcheck1 = 1;
     QueueMsg toMotor;
     QueueMsg toArm;
     toMotor.val2 = true;
     toMotor.val3 = DUTY_CYCLE;
-
+    static int prevPos;
+    static int checkDisplacement = 0;
+    
     toMotor.source = NavigationThread;
     toArm.source = NavigationThread;
 
     if (symbol == 'X')
         draw = 1;
+    
+    if(prevPos != nextPos)
+        drawcheck0 = 1;
+    prevPos = nextPos;
+    
 
     if (initCheck && pd.current_position == bottom_left_corner) {
         initCheck = 0;
     } else {
-        /*if (pd.current_position == bottom_left_corner) {
-            pd.beside[0] = '0'; // will never match test
-            pd.beside[1] = '\0';
-        } 
-        else if(pd.current_position == bottom_right_corner)
-        {
-            pd.beside[0] = '4'; // will never match test
-            pd.beside[1] = '\0';
-        }
-        else if(pd.current_position == top_left_corner)
-        {
-            pd.beside[0] = '1'; // will never match test
-            pd.beside[1] = '2';
-            pd.beside[2] = '\0';
-        }
-        else if(pd.current_position == top_right_corner)
-        {
-            pd.beside[0] = '8'; // will never match test
-            pd.beside[1] = '\0';
-            pd.beside[2] = '\0';
-        }
-        else if(pd.current_position == left_bottom)
-        {
-            pd.beside[0] = '1'; // will never match test
-            pd.beside[1] = '5';
-            pd.beside[2] = '\0';
-        }
-        else if(pd.current_position == right_bottom)
-        {
-            pd.beside[0] = '5'; // will never match test
-            pd.beside[1] = '\0';
-            pd.beside[2] = '\0';
-        }
-        else if(pd.current_position == top_left)
-        {
-            pd.beside[0] = '1'; // will never match test
-            pd.beside[1] = '1';
-            pd.beside[2] = '\0';
-        }
-        else if(pd.current_position == right_top)
-        {
-            pd.beside[0] = '7'; // will never match test
-            pd.beside[1] = '\0';
-            pd.beside[2] = '\0';
-        }
-        else if (pd.current_position == bottom_left) {
-            pd.beside[0] = '1';
-            pd.beside[1] = '\0';
-        } else if (pd.current_position == true_bottom) {
-            pd.beside[0] = '2';
-            pd.beside[1] = '\0';
-        } else if (pd.current_position == bottom_right) {
-            pd.beside[0] = '3';
-            pd.beside[1] = '\0';
-        } else if (pd.current_position == true_right) {
-            pd.beside[0] = '6';
-            pd.beside[1] = '\0';
-        } else if (pd.current_position == true_left) {
-            pd.beside[0] = '1';
-            pd.beside[1] = '4';
-            pd.beside[2] = '\0';
-        } else if (pd.current_position == left_top) {
-            pd.beside[0] = '1';
-            pd.beside[1] = '3';
-            pd.beside[2] = '\0';
-        } else if (pd.current_position == true_top) {
-            pd.beside[0] = '1';
-            pd.beside[1] = '0';
-            pd.beside[1] = '\0';
-        } else if (pd.current_position == top_right) {
-            pd.beside[0] = '9';
-            pd.beside[1] = '\0';
-        }*/
-
-        //globPos = pd.beside;
         Direction prevDir = pd.dir;
         dirTravel(&pd, nextPos);
         
@@ -1302,7 +1249,10 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                 
             toMotor.type = CommandMsg;
             toMotor.val0 = FORWARD_BOTH;
-            toMotor.val1 = 1125; // 15 cm
+            if(checkDisplacement)
+                toMotor.val1 = 900;
+            else            
+                toMotor.val1 = 1125; // 15 cm
 
             Queue_Send_FromThread(MotorQueue, toMotor);
             while (motorAck.source != MovementThread && motorAck.type != AckMsg)
@@ -1330,7 +1280,10 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                 
             toMotor.type = CommandMsg;
             toMotor.val0 = FORWARD_BOTH;
-            toMotor.val1 = 1125; // 15 cm
+            if(checkDisplacement)
+                toMotor.val1 = 900;
+            else            
+                toMotor.val1 = 1125; // 15 cm
 
             Queue_Send_FromThread(MotorQueue, toMotor);
             while (motorAck.source != MovementThread && motorAck.type != AckMsg)
@@ -1358,7 +1311,10 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                 
             toMotor.type = CommandMsg;
             toMotor.val0 = REVERSE_BOTH;
-            toMotor.val1 = 1125; // 15 cm
+            if(checkDisplacement)
+                toMotor.val1 = 900;
+            else            
+                toMotor.val1 = 1125; // 15 cm
 
             Queue_Send_FromThread(MotorQueue, toMotor);
             while (motorAck.source != MovementThread && motorAck.type != AckMsg)
@@ -1386,7 +1342,10 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                 
             toMotor.type = CommandMsg;
             toMotor.val0 = REVERSE_BOTH;
-            toMotor.val1 = 1125; // 15 cm
+            if(checkDisplacement)
+                toMotor.val1 = 900;
+            else            
+                toMotor.val1 = 1125; // 15 cm
 
             Queue_Send_FromThread(MotorQueue, toMotor);
             while (motorAck.source != MovementThread && motorAck.type != AckMsg)
@@ -1399,10 +1358,105 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
             pd.current_position = right_bottom;
             *pdToCpy = pd;
         }
+        else if(pd.dir == forwards && ((nextPos == 1 && pd.current_position == bottom_left && (FSRs == 0b0000000100 || FSRs == 0b1000000100 || FSRs == 0b0100000100)) 
+                || (nextPos == 8 && pd.current_position == true_right && (FSRs == 0b0010000000 || FSRs == 0b0010001000 || FSRs == 0b0010010000)) 
+                || (nextPos == 6 && pd.current_position == true_top && (FSRs == 0b0000000100 || FSRs == 0b0000100100 || FSRs == 0b0001000100)) 
+                || (nextPos == 5 && pd.current_position == left_top && (FSRs == 0b0010000000 || FSRs == 0b0010000001 || FSRs == 0b0010000010))))
+        {
+            checkDisplacement = 1;
+            
+            toMotor.type = AsyncStopMsg;
+            toMotor.val0 = STOP;
+            toMotor.val1 = 0;
+
+            Queue_Send_FromThread(MotorQueue, toMotor);
+            while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+                motorAck = Queue_Receive_FromThread(NavQueue);
+
+            motorAck.type = UnknownMsg;
+            motorAck.source = UnknownThread;
+            
+            toMotor.type = CommandMsg;
+            toMotor.val0 = FORWARD_BOTH;
+            toMotor.val1 = FROM_INTERMEDIATE_FSR; // 9 cm
+
+            Queue_Send_FromThread(MotorQueue, toMotor);
+            while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+                motorAck = Queue_Receive_FromThread(NavQueue);
+
+            motorAck.type = UnknownMsg;
+            motorAck.source = UnknownThread;
+            
+            if(nextPos == 1)
+            {
+                pd.current_position = true_bottom;
+            }
+            else if(nextPos == 8)
+            {
+                pd.current_position = right_top;
+            }
+            else if(nextPos == 6)
+            {
+                pd.current_position = top_left;
+            }
+            else if(nextPos == 5)
+            {
+                pd.current_position = true_left;
+            }
+            pd.dir = stop;
+            *pdToCpy = pd;
+        }
+        else if(pd.dir == reverse && ((nextPos == 6 && pd.current_position == true_left && (FSRs == 0b0010000000 || FSRs == 0b0010000001 || FSRs == 0b0010000010)) 
+                || (nextPos == 7 && pd.current_position == top_left && (FSRs == 0b0000000100 || FSRs == 0b0000100100 || FSRs == 0b0001000100)) 
+                || (nextPos == 3 && pd.current_position == right_top && (FSRs == 0b0010000000 || FSRs == 0b0010001000 || FSRs == 0b0010010000)) 
+                || (nextPos == 0 && pd.current_position == true_bottom && (FSRs == 0b0000000100 || FSRs == 0b1000000100 || FSRs == 0b0100000100))))
+        {
+            checkDisplacement = 1;
+            
+            toMotor.type = AsyncStopMsg;
+            toMotor.val0 = STOP;
+            toMotor.val1 = 0;
+
+            Queue_Send_FromThread(MotorQueue, toMotor);
+            while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+                motorAck = Queue_Receive_FromThread(NavQueue);
+
+            motorAck.type = UnknownMsg;
+            motorAck.source = UnknownThread;
+            
+            toMotor.type = CommandMsg;
+            toMotor.val0 = REVERSE_BOTH;
+            toMotor.val1 = FROM_INTERMEDIATE_FSR; // 9 cm
+
+            Queue_Send_FromThread(MotorQueue, toMotor);
+            while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+                motorAck = Queue_Receive_FromThread(NavQueue);
+
+            motorAck.type = UnknownMsg;
+            motorAck.source = UnknownThread;
+            
+            if(nextPos == 6)
+            {
+                pd.current_position = left_top;
+            }
+            else if(nextPos == 7)
+            {
+                pd.current_position = true_top;
+            }
+            else if(nextPos == 3)
+            {
+                pd.current_position = true_right;
+            }
+            else if(nextPos == 0)
+            {
+                pd.current_position = left_bottom;
+            }
+            pd.dir = stop;
+            *pdToCpy = pd;
+        }
         if (pd.dir == stop) {
             if (nextPos == 4 && drawcheck0) {
                 drawcheck0 = 0;
-                drawcheck1 = 0;
 
                 toMotor.type = AsyncStopMsg;
                 toMotor.val0 = STOP;
@@ -1494,8 +1548,8 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                 //Do nothing
                 //currentMsg = stringToStructValue("{\"MoveCmd\":\"stop\",\"ArmCmd\":\"wait\",\"Beside\":\"$\"}\0", 0, pd.beside);
                 //TxThreadQueue_Send(currentMsg);
-            } else if (drawcheck1) {
-                drawcheck1 = 0;
+            } else if (drawcheck0) {
+                drawcheck0 = 0;
 
                 toMotor.type = AsyncStopMsg;
                 toMotor.val0 = STOP;
@@ -1571,7 +1625,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
             }
         } else if (pd.dir == forwards) {
             drawcheck0 = 1;
-            drawcheck1 = 1;
+            checkDisplacement = 0;
             if (pd.current_position == 0 || pd.current_position == 4 || pd.current_position == 8 || pd.current_position == 12) {
 
                 if (firstCorner) {
@@ -1580,9 +1634,15 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
 
                     toMotor.type = CommandMsg;
                     toMotor.val0 = FORWARD_BOTH;
-                    toMotor.val1 = 750; // 10 cm
+                    toMotor.val1 = FROM_CORNER; // 10 cm
                     
                     Queue_Send_FromThread(MotorQueue, toMotor);
+                    
+                    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+                        motorAck = Queue_Receive_FromThread(NavQueue);
+
+                    motorAck.type = UnknownMsg;
+                    motorAck.source = UnknownThread;
 
                     //currentMsg = stringToStructValue("{\"MoveCmd\":\"DriveForward10\",\"ArmCmd\":\"wait\",\"Beside\":\"$\"}\0", 0, pd.beside);
                     //TxThreadQueue_Send(currentMsg);
@@ -1591,9 +1651,15 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                     if (pd.flip) {
                         toMotor.type = CommandMsg;
                         toMotor.val0 = FORWARD_BOTH;
-                        toMotor.val1 = 750; // 10 cm
+                        toMotor.val1 = FROM_CORNER; // 10 cm
                         
                         Queue_Send_FromThread(MotorQueue, toMotor);
+                        
+                        while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+                            motorAck = Queue_Receive_FromThread(NavQueue);
+                        
+                        motorAck.type = UnknownMsg;
+                        motorAck.source = UnknownThread;
 
                         //currentMsg = stringToStructValue("{\"MoveCmd\":\"DriveForward10\",\"ArmCmd\":\"wait\",\"Beside\":\"$\"}\0", 0, pd.beside);
                         pd.flip = 0;
@@ -1622,10 +1688,15 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
 
                         toMotor.type = CommandMsg;
                         toMotor.val0 = FORWARD_BOTH;
-                        toMotor.val1 = 750; // 10 cm
+                        toMotor.val1 = FROM_CORNER; // 10 cm
                         
                         Queue_Send_FromThread(MotorQueue, toMotor);
 
+                        while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+                            motorAck = Queue_Receive_FromThread(NavQueue);
+                        
+                        motorAck.type = UnknownMsg;
+                        motorAck.source = UnknownThread;
                         //currentMsg = stringToStructValue("{\"MoveCmd\":\"stop, TurnLeft90, DriveForward10\",\"ArmCmd\":\"wait\",\"Beside\":\"$\"}\0", 0, pd.beside);
                     }
                     //TxThreadQueue_Send(currentMsg);
@@ -1644,7 +1715,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
             }
         } else {
             drawcheck0 = 1;
-            drawcheck1 = 1;
+            checkDisplacement = 0;
             if (pd.current_position == 0 || pd.current_position == 4 || pd.current_position == 8 || pd.current_position == 12) {
 
                 if (turnCheck) {
@@ -1654,9 +1725,15 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
                         //currentMsg = stringToStructValue("{\"MoveCmd\":\"DriveBackwards10\",\"ArmCmd\":\"wait\",\"Beside\":\"$\"}\0", 0, pd.beside);
                         toMotor.type = CommandMsg;
                         toMotor.val0 = REVERSE_BOTH;
-                        toMotor.val1 = 750; // 10 cm
+                        toMotor.val1 = FROM_CORNER; // 10 cm
                         
                         Queue_Send_FromThread(MotorQueue, toMotor);
+                        
+                        while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+                            motorAck = Queue_Receive_FromThread(NavQueue);
+                        
+                        motorAck.type = UnknownMsg;
+                        motorAck.source = UnknownThread;
 
                         pd.flip = 0;
                     } else {
@@ -1685,9 +1762,15 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol) {
 
                         toMotor.type = CommandMsg;
                         toMotor.val0 = REVERSE_BOTH;
-                        toMotor.val1 = 750; // 10 cm
+                        toMotor.val1 = FROM_CORNER; // 10 cm
                         
                         Queue_Send_FromThread(MotorQueue, toMotor);
+                        
+                        while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+                            motorAck = Queue_Receive_FromThread(NavQueue);
+                        
+                        motorAck.type = UnknownMsg;
+                        motorAck.source = UnknownThread;
                     }
                     //TxThreadQueue_Send(currentMsg);   
                 }

@@ -148,7 +148,7 @@ void motors_pid_adjust(int32_t left_error, int32_t right_error, int32_t total_le
 {
     dbgOutputLoc(LOC_PID_ADJUST_START);
     // left Proportional, Integral, Derivative
-    OC2RS += (left_error * kp) + (total_left_error * ki) + (derivative_left_error * kd) + 100;
+    OC2RS += (left_error * kp) + (total_left_error * ki) + (derivative_left_error * kd) + 150;
     // right Proportional, Integral, Derivative
     OC1RS += (right_error * kp) + (total_right_error * ki) + (derivative_right_error * kd);
     dbgOutputLoc(LOC_PID_ADJUST_END);

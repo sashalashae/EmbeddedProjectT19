@@ -16,18 +16,20 @@
 #include "../../../common/UART_Defines.h"
 #include "timers.h"
 
-#define ERR_TURN_RIGHT 40
-#define ERR_TURN_LEFT  40
+#define ERR_TURN_RIGHT 31
+#define ERR_TURN_LEFT  31
 #define DUTY_CYCLE     50
 #define SHORT          20
-#define TURN_LEFT_NORMAL     595
-#define TURN_RIGHT_NORMAL    605
+#define TURN_LEFT_NORMAL     600
+#define TURN_RIGHT_NORMAL    600
+#define FROM_CORNER 770
+#define FROM_INTERMEDIATE_FSR 600
 
 int globPos;
 
 void position_tracker(uint16_t FSRs, Position_Data * pdToCpy, int nextPos);
 
-void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol);
+void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol, uint16_t FSRs);
 
 void dirTravel(Position_Data * pdToCpy, int nextPos);
 
