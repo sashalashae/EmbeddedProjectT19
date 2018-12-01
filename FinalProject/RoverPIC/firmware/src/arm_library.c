@@ -744,9 +744,9 @@ void resetArm(ArmCalibration cal)
     //define movement
     ArmMovement returnToDefault;
     returnToDefault.destination = defaultPosition;
-    returnToDefault.baseSpeed = degreesPerSecToMoveSpeed(cal, BaseServo, 25);
-    returnToDefault.lowerJointSpeed = degreesPerSecToMoveSpeed(cal, LowerServo, 30);
-    returnToDefault.upperJointSpeed = degreesPerSecToMoveSpeed(cal, UpperServo, 25);
+    returnToDefault.baseSpeed = degreesPerSecToMoveSpeed(cal, BaseServo, 45);
+    returnToDefault.lowerJointSpeed = degreesPerSecToMoveSpeed(cal, LowerServo, 45);
+    returnToDefault.upperJointSpeed = degreesPerSecToMoveSpeed(cal, UpperServo, 35);
     
     //Move arm to default position
     setArmPosition(returnToDefault);

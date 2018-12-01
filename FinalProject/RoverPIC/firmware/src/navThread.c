@@ -131,6 +131,13 @@ void NAVTHREAD_Initialize ( void )
 void NAVTHREAD_Tasks ( void )
 {
     QueueMsg fromServer;
+    QueueMsg toArm;
+    toArm.source = NavigationThread;
+    toArm.type = CommandMsg;
+    toArm.val0 = ResetArm;
+    
+    Queue_Send_FromThread(ArmQueue, toArm);
+    
     Position_Data pd;
     pd.check = 0;
     pd.flip = 0;

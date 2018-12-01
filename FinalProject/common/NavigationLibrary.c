@@ -4,11 +4,20 @@
 void Timer_Init()
 {
     TimerHandle_t testTimer;
+    TimerHandle_t dumbTimer;
     
     testTimer = xTimerCreate("Timer500ms", pdMS_TO_TICKS(500), pdTRUE, ( void * ) 0, Nav_Timer_Cb);
+    dumbTimer = xTimerCreate("TimerForIdiots", pdMS_TO_TICKS(5000), pdTRUE, ( void * ) 0, Dumb_Timer_Cb);
     
     xTimerStart(testTimer, 0);
+    xTimerStart(dumbTimer, 0);
 
+}
+
+void Dumb_Timer_Cb(TimerHandle_t xTimer)
+{
+    dumbLeft = 0;
+    dumbRight = 0;
 }
 
 void Nav_Timer_Cb(TimerHandle_t xTimer)
@@ -1234,7 +1243,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol, uint16_t F
         Direction prevDir = pd.dir;
         dirTravel(&pd, nextPos);
         
-        if(nextPos == 2 && pd.dir == forwards && pd.current_position == true_bottom)
+        if((nextPos == 2 || nextPos == 4) && pd.dir == forwards && pd.current_position == true_bottom)
         {
             toMotor.type = AsyncStopMsg;
             toMotor.val0 = STOP;
@@ -1250,9 +1259,9 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol, uint16_t F
             toMotor.type = CommandMsg;
             toMotor.val0 = FORWARD_BOTH;
             if(checkDisplacement)
-                toMotor.val1 = 900;
+                toMotor.val1 = DISPLACED;
             else            
-                toMotor.val1 = 1125; // 15 cm
+                toMotor.val1 = INTER_LONG; // 15 cm
 
             Queue_Send_FromThread(MotorQueue, toMotor);
             while (motorAck.source != MovementThread && motorAck.type != AckMsg)
@@ -1265,7 +1274,7 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol, uint16_t F
             pd.current_position = bottom_right;
             *pdToCpy = pd;
         }
-        else if(nextPos == 0 && pd.dir == forwards && pd.current_position == true_left)
+        else if((nextPos == 0 || nextPos == 4) && pd.dir == forwards && pd.current_position == true_left)
         {
             toMotor.type = AsyncStopMsg;
             toMotor.val0 = STOP;
@@ -1281,9 +1290,9 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol, uint16_t F
             toMotor.type = CommandMsg;
             toMotor.val0 = FORWARD_BOTH;
             if(checkDisplacement)
-                toMotor.val1 = 900;
+                toMotor.val1 = DISPLACED;
             else            
-                toMotor.val1 = 1125; // 15 cm
+                toMotor.val1 = INTER_LONG; // 15 cm
 
             Queue_Send_FromThread(MotorQueue, toMotor);
             while (motorAck.source != MovementThread && motorAck.type != AckMsg)
@@ -1312,9 +1321,9 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol, uint16_t F
             toMotor.type = CommandMsg;
             toMotor.val0 = REVERSE_BOTH;
             if(checkDisplacement)
-                toMotor.val1 = 900;
+                toMotor.val1 = DISPLACED;
             else            
-                toMotor.val1 = 1125; // 15 cm
+                toMotor.val1 = INTER_LONG;
 
             Queue_Send_FromThread(MotorQueue, toMotor);
             while (motorAck.source != MovementThread && motorAck.type != AckMsg)
@@ -1343,9 +1352,9 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol, uint16_t F
             toMotor.type = CommandMsg;
             toMotor.val0 = REVERSE_BOTH;
             if(checkDisplacement)
-                toMotor.val1 = 900;
+                toMotor.val1 = DISPLACED;
             else            
-                toMotor.val1 = 1125; // 15 cm
+                toMotor.val1 = INTER_LONG; // 15 cm
 
             Queue_Send_FromThread(MotorQueue, toMotor);
             while (motorAck.source != MovementThread && motorAck.type != AckMsg)
@@ -1643,6 +1652,13 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol, uint16_t F
 
                     motorAck.type = UnknownMsg;
                     motorAck.source = UnknownThread;
+                    
+                    pd.current_position++;
+                    if(pd.current_position > 15)
+                        pd.current_position = 0;
+                    else if(pd.current_position < 0)
+                        pd.current_position = 15;
+                    *pdToCpy = pd;
 
                     //currentMsg = stringToStructValue("{\"MoveCmd\":\"DriveForward10\",\"ArmCmd\":\"wait\",\"Beside\":\"$\"}\0", 0, pd.beside);
                     //TxThreadQueue_Send(currentMsg);
@@ -1660,9 +1676,17 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol, uint16_t F
                         
                         motorAck.type = UnknownMsg;
                         motorAck.source = UnknownThread;
+                        
+                        pd.flip = 0;
+                        
+                        pd.current_position++;
+                        if(pd.current_position > 15)
+                            pd.current_position = 0;
+                        else if(pd.current_position < 0)
+                            pd.current_position = 15;
+                        *pdToCpy = pd;
 
                         //currentMsg = stringToStructValue("{\"MoveCmd\":\"DriveForward10\",\"ArmCmd\":\"wait\",\"Beside\":\"$\"}\0", 0, pd.beside);
-                        pd.flip = 0;
                     } else {
                         toMotor.type = AsyncStopMsg;
                         toMotor.val0 = STOP;
@@ -1697,6 +1721,13 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol, uint16_t F
                         
                         motorAck.type = UnknownMsg;
                         motorAck.source = UnknownThread;
+                        
+                        pd.current_position++;
+                        if(pd.current_position > 15)
+                            pd.current_position = 0;
+                        else if(pd.current_position < 0)
+                            pd.current_position = 15;
+                        *pdToCpy = pd;
                         //currentMsg = stringToStructValue("{\"MoveCmd\":\"stop, TurnLeft90, DriveForward10\",\"ArmCmd\":\"wait\",\"Beside\":\"$\"}\0", 0, pd.beside);
                     }
                     //TxThreadQueue_Send(currentMsg);
@@ -1736,6 +1767,14 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol, uint16_t F
                         motorAck.source = UnknownThread;
 
                         pd.flip = 0;
+                        
+                        pd.current_position--;
+                        if(pd.current_position > 15)
+                            pd.current_position = 0;
+                        else if(pd.current_position < 0)
+                            pd.current_position = 15;
+                        *pdToCpy = pd;
+                        
                     } else {
                         //currentMsg = stringToStructValue("{\"MoveCmd\":\"stop, TurnRight90, DriveBackward10\",\"ArmCmd\":\"wait\",\"Beside\":\"$\"}\0", 0, pd.beside);
                         toMotor.type = AsyncStopMsg;
@@ -1771,6 +1810,17 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol, uint16_t F
                         
                         motorAck.type = UnknownMsg;
                         motorAck.source = UnknownThread;
+                        
+                        
+                        if(pd.current_position == bottom_left_corner)
+                            pd.current_position = left_bottom;
+                        else if(pd.current_position == bottom_right_corner)
+                            pd.current_position = bottom_right;
+                        else if(pd.current_position == top_right_corner)
+                            pd.current_position = right_top;
+                        else if(pd.current_position == top_left_corner)
+                            pd.current_position = top_left;
+                        *pdToCpy = pd;
                     }
                     //TxThreadQueue_Send(currentMsg);   
                 }
@@ -1791,64 +1841,72 @@ void toNextLoc(Position_Data * pdToCpy, int nextPos, uint32_t symbol, uint16_t F
 
 void sendTurnLeft()
 {
-    QueueMsg toMotor;
-    QueueMsg motorAck;
-
-    toMotor.val2 = true;
-    toMotor.val3 = DUTY_CYCLE;
-    
-    toMotor.type = AsyncStopMsg;
-    toMotor.val0 = STOP;
-    toMotor.val1 = 0;
-
-    Queue_Send_FromThread(MotorQueue, toMotor);
-    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-        motorAck = Queue_Receive_FromThread(NavQueue);
-    
-    motorAck.type = UnknownMsg;
-    motorAck.source = UnknownThread;
-    
-    toMotor.type = CommandMsg;
-    toMotor.val0 = TURN_LEFT;
-    toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
-    
-    Queue_Send_FromThread(MotorQueue, toMotor);
-    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+    if(dumbLeft < 3)
     {
-        motorAck = Queue_Receive_FromThread(NavQueue);
+        dumbLeft++;
+        QueueMsg toMotor;
+        QueueMsg motorAck;
+
+        toMotor.val2 = true;
+        toMotor.val3 = DUTY_CYCLE;
+
+        toMotor.type = AsyncStopMsg;
+        toMotor.val0 = STOP;
+        toMotor.val1 = 0;
+
+        Queue_Send_FromThread(MotorQueue, toMotor);
+        while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+            motorAck = Queue_Receive_FromThread(NavQueue);
+
+        motorAck.type = UnknownMsg;
+        motorAck.source = UnknownThread;
+
+        toMotor.type = CommandMsg;
+        toMotor.val0 = TURN_LEFT;
+        toMotor.val1 = ERR_TURN_LEFT; // 5 Degrees
+
+        Queue_Send_FromThread(MotorQueue, toMotor);
+        while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+        {
+            motorAck = Queue_Receive_FromThread(NavQueue);
+        }
+        motorAck.type = UnknownMsg;
+        motorAck.source = UnknownThread;
     }
-    motorAck.type = UnknownMsg;
-    motorAck.source = UnknownThread;
 }
 
 void sendTurnRight()
 {
-    QueueMsg toMotor;
-    QueueMsg motorAck;
-
-    toMotor.val2 = true;
-    toMotor.val3 = DUTY_CYCLE;
-    
-    toMotor.type = AsyncStopMsg;
-    toMotor.val0 = STOP;
-    toMotor.val1 = 0;
-
-    Queue_Send_FromThread(MotorQueue, toMotor);
-    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
-        motorAck = Queue_Receive_FromThread(NavQueue);
-    
-    motorAck.type = UnknownMsg;
-    motorAck.source = UnknownThread;
-    
-    toMotor.type = CommandMsg;
-    toMotor.val0 = TURN_RIGHT;
-    toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
-    
-    Queue_Send_FromThread(MotorQueue, toMotor);
-    while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+    if(dumbRight < 3)
     {
-        motorAck = Queue_Receive_FromThread(NavQueue);
+        dumbRight++;
+        QueueMsg toMotor;
+        QueueMsg motorAck;
+
+        toMotor.val2 = true;
+        toMotor.val3 = DUTY_CYCLE;
+
+        toMotor.type = AsyncStopMsg;
+        toMotor.val0 = STOP;
+        toMotor.val1 = 0;
+
+        Queue_Send_FromThread(MotorQueue, toMotor);
+        while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+            motorAck = Queue_Receive_FromThread(NavQueue);
+
+        motorAck.type = UnknownMsg;
+        motorAck.source = UnknownThread;
+
+        toMotor.type = CommandMsg;
+        toMotor.val0 = TURN_RIGHT;
+        toMotor.val1 = ERR_TURN_RIGHT; // 5 Degrees
+
+        Queue_Send_FromThread(MotorQueue, toMotor);
+        while (motorAck.source != MovementThread && motorAck.type != AckMsg)
+        {
+            motorAck = Queue_Receive_FromThread(NavQueue);
+        }
+        motorAck.type = UnknownMsg;
+        motorAck.source = UnknownThread;
     }
-    motorAck.type = UnknownMsg;
-    motorAck.source = UnknownThread;
 }
