@@ -216,7 +216,6 @@ Public Class GameplayForm
             AITile = Me.Controls.Find("tile" + AIMove.SelectedTile.ToString(), True).FirstOrDefault()
             Me.Invoke(Sub() AITile.Text = AIMove.PlayerSymbol)
             Me.Invoke(Sub() AITile.Enabled = False)
-            currentPlayer = "X"
             'check for three in a row
             If ThreeInRow() = True Then
                 DisableButtons()
@@ -714,7 +713,6 @@ Public Class GameplayForm
         SetMove(New GameMove With {.PlayerSymbol = currentPlayer, .SelectedTile = 0})
         tile0.Enabled = False
         tile0.Text = currentPlayer
-        'Move to next move
         NextMove()
     End Sub
 
@@ -723,7 +721,6 @@ Public Class GameplayForm
         SetMove(New GameMove With {.PlayerSymbol = currentPlayer, .SelectedTile = 1})
         tile1.Enabled = False
         tile1.Text = currentPlayer
-        'Move to next move
         NextMove()
     End Sub
 
@@ -732,7 +729,6 @@ Public Class GameplayForm
         SetMove(New GameMove With {.PlayerSymbol = currentPlayer, .SelectedTile = 2})
         tile2.Enabled = False
         tile2.Text = currentPlayer
-        'Move to next move
         NextMove()
     End Sub
 
@@ -741,7 +737,6 @@ Public Class GameplayForm
         SetMove(New GameMove With {.PlayerSymbol = currentPlayer, .SelectedTile = 3})
         tile3.Enabled = False
         tile3.Text = currentPlayer
-        'Move to next move
         NextMove()
     End Sub
 
@@ -750,7 +745,6 @@ Public Class GameplayForm
         SetMove(New GameMove With {.PlayerSymbol = currentPlayer, .SelectedTile = 4})
         tile4.Enabled = False
         tile4.Text = currentPlayer
-        'Move to next move
         NextMove()
     End Sub
 
@@ -759,7 +753,6 @@ Public Class GameplayForm
         SetMove(New GameMove With {.PlayerSymbol = currentPlayer, .SelectedTile = 5})
         tile5.Enabled = False
         tile5.Text = currentPlayer
-        'Move to next move
         NextMove()
     End Sub
 
@@ -768,7 +761,6 @@ Public Class GameplayForm
         SetMove(New GameMove With {.PlayerSymbol = currentPlayer, .SelectedTile = 6})
         tile6.Enabled = False
         tile6.Text = currentPlayer
-        'Move to next move
         NextMove()
     End Sub
 
@@ -777,7 +769,6 @@ Public Class GameplayForm
         SetMove(New GameMove With {.PlayerSymbol = currentPlayer, .SelectedTile = 7})
         tile7.Enabled = False
         tile7.Text = currentPlayer
-        'Move to next move
         NextMove()
     End Sub
 
@@ -786,7 +777,6 @@ Public Class GameplayForm
         SetMove(New GameMove With {.PlayerSymbol = currentPlayer, .SelectedTile = 8})
         tile8.Enabled = False
         tile8.Text = currentPlayer
-        'Move to next move
         NextMove()
     End Sub
 
