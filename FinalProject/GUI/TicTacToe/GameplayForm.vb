@@ -123,6 +123,7 @@ Public Class GameplayForm
                 End If
             End If
             roverPos = Convert.ToInt32(jsonMsg("RoverPosition"))
+            roverPos = 3
             moveRover(roverPos)
             FSRdata = Convert.ToUInt16(jsonMsg("FSR"))
             For i As Integer = 0 To 9
