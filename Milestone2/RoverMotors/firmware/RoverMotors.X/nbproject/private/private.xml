@@ -2,18 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Backup/2018_Fall/ECE4534/EmbeddedProjectT19/Milestone2/RoverMotors/firmware/src/test_thread.c</file>
-            <file>file:/C:/Backup/2018_Fall/ECE4534/EmbeddedProjectT19/Milestone2/RoverMotors/firmware/src/motor_thread.c</file>
-            <file>file:/C:/Backup/2018_Fall/ECE4534/EmbeddedProjectT19/Milestone2/RoverMotors/firmware/src/system_config/default/system_interrupt.c</file>
-            <file>file:/C:/Backup/2018_Fall/ECE4534/EmbeddedProjectT19/Milestone2/RoverMotors/firmware/src/test_thread.h</file>
-            <file>file:/C:/Backup/2018_Fall/ECE4534/EmbeddedProjectT19/Milestone2/RoverMotors/firmware/src/system_config/default/framework/driver/tmr/src/drv_tmr_static.c</file>
-            <file>file:/C:/Backup/2018_Fall/ECE4534/EmbeddedProjectT19/Milestone2/RoverMotors/firmware/src/test_queue.c</file>
-            <file>file:/C:/Backup/2018_Fall/ECE4534/EmbeddedProjectT19/Milestone2/RoverMotors/firmware/src/motor_library.h</file>
-            <file>file:/C:/Backup/2018_Fall/ECE4534/EmbeddedProjectT19/Milestone2/RoverMotors/firmware/src/motor_thread.h</file>
-            <file>file:/C:/Backup/2018_Fall/ECE4534/EmbeddedProjectT19/Milestone2/RoverMotors/firmware/src/debug.h</file>
-            <file>file:/C:/Backup/2018_Fall/ECE4534/EmbeddedProjectT19/Milestone2/RoverMotors/firmware/src/test_queue.h</file>
-            <file>file:/C:/Backup/2018_Fall/ECE4534/EmbeddedProjectT19/Milestone2/RoverMotors/firmware/src/motor_library.c</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

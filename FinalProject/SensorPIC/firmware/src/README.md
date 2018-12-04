@@ -1,1 +1,0 @@
-Please reference these files for Milestone 4 - will make integration much easier
