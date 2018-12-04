@@ -56,7 +56,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "txthread.h"
 #include "system_definitions.h"
 
-static int configArray[11];
+static int configArray[11] = {0,0,0,0,0,0,0,0,0,0,0};
 static int flag = 0;
 
 // *****************************************************************************
@@ -149,14 +149,21 @@ void IntHandlerDrvAdc(void)
     
     //Send ISR start message over GPIO
     dbgOutputLoc(LOC_ADC_ISR_Q_START);
-    if(flag == 0){
+    if(flag < 4){
         int i;
         for(i = 0; i<11; i++)
         {
-            configArray[i] = DRV_ADC_SamplesRead(i);
+            configArray[i] += DRV_ADC_SamplesRead(i);
         }
-        flag = 1;
+        if(flag == 3)
+        {
+            for(i = 0; i<11; i++)
+            {
+                configArray[i] = configArray[i] >> 2;
+            }
         }
+        flag++;
+    }
     //Read in value from the ADC
     sensorValue = FSRsRead(configArray);//ReadADCData(0);
     
